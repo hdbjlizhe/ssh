@@ -1,0 +1,28 @@
+#数据源配置
+spring:
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/ssh?useSSL=false
+    username: root
+    password: root
+    tomcat:
+      max-active: 100
+      max-idle: 200
+      initial-size: 20
+#jpa设置
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5Dialect
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+#模板thymeleaf设置 
+  thymeleaf:
+    cache: false
+  mvc:
+    view:
+      prefix: /
+      suffix: .html
+#自定义参数
+message:
+  welcome: 欢迎
