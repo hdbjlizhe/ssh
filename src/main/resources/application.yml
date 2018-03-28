@@ -19,6 +19,7 @@ spring:
 #模板thymeleaf设置 
   thymeleaf:
     cache: false
+#MVC设置
   mvc:
     view:
       prefix: /

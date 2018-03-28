@@ -1,18 +1,25 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
     <title>Title</title>
     <link href="css/bootstrap-combined.min.css" rel="stylesheet">
-    
-    <script type="text/javascript" src="js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/jquery-2.0.0.min.js"></script>
+        
+    <script type="text/javascript" src="js/jquery.min.js"></script><!-- 1.9.1 -->
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>   
 </head>
 <body>
-    <p th:text="'Hello, ' + ${welcome}" ></p>
-   <div class="container">
+	<div style="background:black;height:50px">
+    	<p th:text="'Hello, ' + ${welcome}" ></p>
+   	</div>
+  
+  <div class="container">
 	<div class="row">
 		<div class="span12">
-			<ul class="nav nav-tabs">
+			<ul class="nav nav-pills">
 				<li class="active">
 					<a href="#">首页</a>
 				</li>
@@ -44,7 +51,7 @@
 			</ul>
 			<div class="carousel slide" id="carousel-421558">
 				<ol class="carousel-indicators">
-					<li class="active" data-slide-to="0" data-target="#carousel-421558">
+					<li data-slide-to="0" data-target="#carousel-421558">
 					</li>
 					<li data-slide-to="1" data-target="#carousel-421558">
 					</li>
@@ -52,7 +59,7 @@
 					</li>
 				</ol>
 				<div class="carousel-inner">
-					<div class="item active">
+					<div class="item next left">
 						<img alt="" src="imgs/1.jpg" />
 						<div class="carousel-caption">
 							<h4>
@@ -74,7 +81,7 @@
 							</p>
 						</div>
 					</div>
-					<div class="item">
+					<div class="item active left">
 						<img alt="" src="imgs/3.jpg" />
 						<div class="carousel-caption">
 							<h4>
