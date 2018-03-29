@@ -34,7 +34,10 @@ public class WebSecurityConfig implements WebMvcConfigurer {
         addInterceptor.excludePathPatterns("/error");
         addInterceptor.excludePathPatterns("/login**");
         addInterceptor.excludePathPatterns("/index");
-
+        addInterceptor.excludePathPatterns("/css/*");
+        addInterceptor.excludePathPatterns("/fonts/*");
+        addInterceptor.excludePathPatterns("/imgs/*");
+        addInterceptor.excludePathPatterns("/js/*");
         // 拦截配置
         addInterceptor.addPathPatterns("/**");
     }
