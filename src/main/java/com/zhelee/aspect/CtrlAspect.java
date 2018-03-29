@@ -27,7 +27,7 @@ public class CtrlAspect {
 	
 	private final static Logger logger= LoggerFactory.getLogger(CtrlAspect.class);
 	
-	@Pointcut("execution(* com.zhelee.info.controllers.HelloController.*(..))")
+	@Pointcut("execution(* com.zhelee.info.controllers.*.*(..))")
 	public void log(){
 		
 	}	
