@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>月报系统</title>
+
+<meta name="keywords" content="keyword1,keyword2,keyword3">
+<meta name="description" content="this is my page">
+<meta name="content-type" content="text/html; charset=UTF-8">
+
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+<script type="text/javascript" src="bootstrap.min.js"></script>
+
+</head>
+<form>
+	<div id="report">
+		<table border="1">
+			<tr>
+				<th>用户名</th>
+				<th>邮箱</th>
+				<th>管理员</th>
+			</tr>
+			<tr th:each="user,userStat : ${list}">
+				<td th:text="${user.userName}">Onions</td>
+				<td th:text="${user.email}">test@test.com.cn</td>
+				<td th:text="${user.isAdmin}">yes</td>
+			</tr>
+		</table>
+
+	</div>
+</form>
+</html>
