@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class HelloController {
@@ -16,16 +17,6 @@ public class HelloController {
 	public String index(Model model){
 		model.addAttribute("welcome", hello);
 		return "index";
-	}
-	//登录
-	@GetMapping("/login")
-	public String login(){
-		return "login";
-	}
-	//注册
-	@GetMapping("/register")
-	public String register(){
-		return "register";
 	}
 	//党务模块
 	@GetMapping("/party")

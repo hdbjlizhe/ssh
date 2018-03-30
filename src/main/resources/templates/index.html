@@ -13,7 +13,7 @@
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
 </head>
 <body>
-	<div class="navbar navbar-inverse navbar-fixed-top">
+	<div class="navbar navbar-inverse">
 		
 		<div class="navbar-inner">
 			
@@ -28,10 +28,17 @@
 				<img class="nav" alt="brand" src="imgs/zhelee_logo_flat.png">
 				<a class="brand" href="#">信息服务中心</a>				
 				<div class="nav-collapse collapse">
-					<p class="navbar-text pull-right">
-						<a href="/login" class="navbar-link">登录</a> <span></span>
+					<p th:if="${session.user}!=null" class="navbar-text pull-right">
+						<a class="navbar-link" th:text="${session.user}" href="/detail"></a>
+						<span>|</span>
+						<a class="navbar-link" href="/logout">退出</a>
+					</p>
+					<p th:if="${session.user}==null" class="navbar-text pull-right">
+						<a href="/login" class="navbar-link">登录</a> 
+						<span>|</span>
 						<a href="/register" class="navbar-link">注册</a>
 					</p>
+										
 					<ul class="nav">
 						<li class="active"><a href="/index">首页</a></li>						
 						<li><a href="/party">党务工作</a></li>
@@ -50,12 +57,6 @@
 	<div class="container">
 		<div class="row">
 			<div class="span12">
-
-				<div class="navbar">
-					<div class="navbar-inner">
-						<!-- 空着 -->
-					</div>
-				</div>
 
 				<div class="carousel slide" id="carousel-421558">
 					<ol class="carousel-indicators">

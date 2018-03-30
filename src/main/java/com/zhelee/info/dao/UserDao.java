@@ -5,8 +5,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.zhelee.info.entities.User;
+
 @Repository
 public class UserDao {
+
+	
 //	@Modifying
 //	@Query("update User u set u.userName = ?1 where c.id = ?2")
 //	int modifyByIdAndUserId(String  userName, Long id);
@@ -19,5 +23,4 @@ public class UserDao {
 //	@Transactional(timeout = 10)
 //	@Query("select u from User u where u.emailAddress = ?1")
 //	User findByEmailAddress(String emailAddress);
-//
 }

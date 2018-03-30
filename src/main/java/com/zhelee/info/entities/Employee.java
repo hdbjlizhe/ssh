@@ -2,6 +2,7 @@ package com.zhelee.info.entities;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -41,6 +42,12 @@ public class Employee {
 	@ManyToOne
 	private EduLevel inServiceEdu; // 在职学历
 	private Date createTime; // 创建时间
+	
+	public Employee() {
+		super();
+		this.setIsFormal(true);
+		this.setIsMale(true);
+	}
 
 	public Integer getId() {
 		return id;

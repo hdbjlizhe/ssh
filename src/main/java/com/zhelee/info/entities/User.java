@@ -3,6 +3,7 @@ package com.zhelee.info.entities;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,22 +12,26 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.zhelee.utils.UserUtil;
+
 @Entity
 @Table(name = "user")
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private int id;	
+	@Column(unique=true)//唯一
 	private String portrait; // uuid
+	@Column(unique=true)//唯一
 	private String username; // User Name
+	@Column(unique=true)//唯一
 	private String mobile; // Mobile Number
+	@Column(unique=true)//唯一
 	private String email; // Email
 	private String password; // Password
-
 	// 角色
 	@OneToMany
 	private Set<Role> roles = new HashSet<Role>();
-
 	// 员工
 	@OneToOne
 	private Employee employee; // ��ϸ��Ϣ
@@ -99,6 +104,23 @@ public class User {
 	public String toString() {
 		return "User [id=" + id + ", portrait=" + portrait + ", username=" + username + ", mobile=" + mobile
 				+ ", email=" + email + ", password=" + password + ", roles=" + roles + ", employee=" + employee + "]";
+	}
+
+	//根据account类型分别设置
+	public void setAcount(String account) {
+		
+		int userIdKind=UserUtil.getUserIdKind(account);
+		
+		if(userIdKind==UserUtil.USER_EMAIL) {
+			setEmail(account);
+		}else if (userIdKind==UserUtil.USER_MOBILE) {
+			setMobile(account);
+		}else if(userIdKind==UserUtil.USER_NAME){
+			setUsername(account);
+		}else if(userIdKind==UserUtil.USER_ERROR){
+			return;
+		}
+		
 	}
 
 }

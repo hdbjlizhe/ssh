@@ -12,6 +12,18 @@
   </head>
   
   <body>
-    This is my HTML page. <br>
+    <h1>This is my Register page.</h1> 
+    <br>
+    
+    	<form action="/register" method="post">
+    		<label>用户名：</label>
+    		<input type="text" name="account"/>
+    		<label>密码：</label>
+    		<input type="password" name="password">
+    		<input type="checkbox" name="agreed"><p>同意注册协议</p>
+    		<button type="reset">重置</button>
+    		<button type="submit">注册</button> 
+    	</form>
+  
   </body>
 </html>
