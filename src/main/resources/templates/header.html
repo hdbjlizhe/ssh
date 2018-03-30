@@ -1,4 +1,41 @@
-<div style="background:#000000;height:20px;">
-	
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+</head>
+<body>
+	<div class="navbar navbar-inverse navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container">
+				<button type="button" class="btn btn-navbar" data-toggle="collapse"
+					data-target=".nav-collapse">
+					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<img class="nav" alt="brand" src="imgs/zhelee_logo_flat.png">
+				<a class="brand" href="#">信息服务中心</a>
+				<div class="nav-collapse collapse">
+					<p th:if="${session.user}!=null" class="navbar-text pull-right">
+						<a class="navbar-link" th:text="${session.user}" href="/detail"></a>
+						<span>|</span> <a class="navbar-link" href="/logout">退出</a>
+					</p>
+					<p th:if="${session.user}==null" class="navbar-text pull-right">
+						<a href="/login" class="navbar-link">登录</a> <span>|</span> <a
+							href="/register" class="navbar-link">注册</a>
+					</p>
 
-</div>
+					<ul class="nav">
+						<li class="active"><a href="/index">首页</a></li>
+						<li><a href="/party">党务工作</a></li>
+						<li><a href="/office">公文往来</a></li>
+						<li><a href="/daily">日常工作</a></li>
+						<li><a href="/personel">人事管理</a></li>
+						<li><a href="/policy">政策收集</a></li>
+						<li><a href="/activity">活动通知</a></li>
+					</ul>
+				</div>
+				<!--/.nav-collapse -->
+			</div>
+		</div>
+	</div>
+</body>
+</html>
