@@ -6,8 +6,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.ui.Model;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -56,8 +54,11 @@ public class WebSecurityConfig implements WebMvcConfigurer {
 				return true;
 			}
 			// 非登录用户， 跳转登录
-			String url = "/login";
-			response.sendRedirect(url);
+			//String url = "/login";显示权限不足
+			response.getWriter().write("<script language=\"javascript\">alert('\\u6743\\u9650\\u4e0d\\u8db3')</script>");
+			//返回原来页面
+			response.getWriter().write("<script language=\"javascript\">window.history.back(-1);</script>");
+			//response.sendRedirect(url);
 			return false;
 		}
 	}

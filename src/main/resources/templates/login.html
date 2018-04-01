@@ -57,9 +57,11 @@ body {
 				placeholder="UserName/Tel./Email"> 
 			<input name="password"
 				type="password" class="form-control" placeholder="Password">
-			<label class="form-control"> 
-				<input type="checkbox" value="remember-me">记住我
-			</label>
+			<div class="checkbox">
+				<label> 
+					<input type="checkbox" value="remember-me">记住我
+				</label>
+			</div>
 			<button class="btn btn-primary" type="submit">重置</button>
 			<button class="btn btn-primary pull-right" type="submit">登录</button>
 			<label th:text="${message}"></label>
