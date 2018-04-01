@@ -2,6 +2,7 @@ package com.zhelee.info.controllers;
 
 import static org.hamcrest.CoreMatchers.nullValue;
 
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.zhelee.config.WebSecurityConfig;
@@ -86,5 +88,16 @@ public class UserController {
 			return "register";
 		}
 		return "login";
+	}
+	//Ajax-检查用户名是否可用
+	@PostMapping(value="/user-validateAccount")
+	@ResponseBody//返回jason数据
+	public String ajaxAccountValidate(@RequestParam("account") String account) {
+		
+		if(userService.findByAcount(account) != null){
+			return "0";
+		}else{
+			return "1";
+		}		
 	}
 }

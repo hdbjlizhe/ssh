@@ -1,29 +1,83 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>register.html</title>
-	
-    <meta name="keywords" content="keyword1,keyword2,keyword3">
-    <meta name="description" content="this is my page">
-    <meta name="content-type" content="text/html; charset=UTF-8">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>注册</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<meta name="author" content="">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
     
-    <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
 
-  </head>
-  
-  <body>
-    <h1>This is my Register page.</h1> 
-    <br>
-    
-    	<form action="/register" method="post">
-    		<label>用户名：</label>
-    		<input type="text" name="account"/>
-    		<label>密码：</label>
-    		<input type="password" name="password">
-    		<input type="checkbox" name="agreed"><p>同意注册协议</p>
-    		<button type="reset">重置</button>
-    		<button type="submit">注册</button> 
-    	</form>
+<style type="text/css">
+body {padding-top: 60px;}
+</style>
+
+<!-- Ajax 注册的用户名是否可用 -->
+<script type="text/javascript">
+$(function(){
+	$(":input[name=account]").change(function(){
+		var val = $(this).val();//获取输入值
+		val = $.trim(val);	//去掉两端的空格
+		var $this = $(this);	//
+		debugger
+		if(val != ""){//值不为空
+			//把当前节点后面的所有 font 兄弟节点删除
+			$this.nextAll("font").remove();
+			
+			var url = "/user-validateAccount";
+			var args = {"account":val, "time":new Date()};
+			$.post(url, args, function(data){
+				//表示可用
+				if(data == "1"){
+					$this.after("<font color='green'>账户可用!</font>");
+				}
+				//不可用
+				else if(data == "0"){
+					$this.after("<font color='red'>账户不可用!</font>");						
+				}
+				//服务器错误
+				else{
+					alert("服务器错误!");
+				}
+			});
+		}else{
+			alert("账户不能为空");
+			$(this).val("");
+			$this.focus();
+		}
+	});
+})
+</script>
+
+</head>
+
+<body>
+	
+	<div th:include="/header::html">
+	</div>
+	
+	<div class="container">
+
+		<form class="form-signin" action="/register" method="post">
+			<h2 class="">Please Register</h2>
+			<input name="account" type="text" placeholder="UserName/Tel./Email">
+			<br>
+			<input name="password"
+				type="password" class="input-block-level" placeholder="Password">
+			<label class="checkbox"> 
+				<input type="checkbox" value="remember-me"> 注册协议
+			</label>
+			<button class="btn btn-large btn-primary" type="submit">Reset</button>
+			<button class="btn btn-large btn-primary pull-right" type="submit">Register</button>
+		</form>
+
+	</div>
+	
+	<div class="footer" th:include="/footer::html">
+	</div>
   
   </body>
 </html>

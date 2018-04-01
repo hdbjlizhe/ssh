@@ -1,18 +1,30 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>daily.html</title>
-	
-    <meta name="keywords" content="keyword1,keyword2,keyword3">
-    <meta name="description" content="this is my page">
-    <meta name="content-type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link type="text/css" href="/css/bootstrap-responsive.css" rel="stylesheet">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>日常工作</title>
 
-  </head>
-  
-  <body>
-    This is my daily page. <br>
-    
-  </body>
+<meta name="keywords" content="keyword1,keyword2,keyword3">
+<meta name="description" content="this is my page">
+<meta name="content-type" content="text/html; charset=UTF-8">
+<!-- bootstrap移动设备优先 -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link type="text/css" href="/css/bootstrap.min.css" rel="stylesheet">
+<style type="text/css">
+body{padding-top:60px;}
+</style>
+</head>
+
+<body>
+	<!-- 引入header -->
+	<div th:include="header::html"></div>
+	
+	<div class="container">
+	<!-- body -->
+	<a href="/monthly-report">月报填报</a>
+	
+	</div>
+
+	<!-- 引入footer -->
+	<div th:include="footer::html"></div>
+</body>
 </html>

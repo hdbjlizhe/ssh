@@ -8,7 +8,7 @@
 <meta name="author" content="">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-<link href="/css/bootstrap.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 <style type="text/css">
 body {
 	padding-top: 40px;
@@ -41,25 +41,28 @@ body {
 	padding: 7px 9px;
 }
 </style>
+
 </head>
 
 <body>
 	
-	<div class="container" th:include="/header::html">
+	<div th:include="/header::html">
 	</div>
 	
 	<div class="container">
 
 		<form class="form-signin" action="/login" method="post">
-			<h2 class="form-signin-heading">Please sign in</h2>
-			<input name="account" type="text" class="input-block-level"
+			<h2>请登录</h2>
+			<input name="account" type="text" class="form-control"
 				placeholder="UserName/Tel./Email"> 
 			<input name="password"
-				type="password" class="input-block-level" placeholder="Password">
-			<label class="checkbox"> 
-				<input type="checkbox" value="remember-me"> Remember me
+				type="password" class="form-control" placeholder="Password">
+			<label class="form-control"> 
+				<input type="checkbox" value="remember-me">记住我
 			</label>
-			<button class="btn btn-large btn-primary" type="submit">Sign in</button>
+			<button class="btn btn-primary" type="submit">重置</button>
+			<button class="btn btn-primary pull-right" type="submit">登录</button>
+			<label th:text="${message}"></label>
 		</form>
 
 	</div>
