@@ -1,4 +1,4 @@
-package com.zhelee.config;
+package com.zhelee.asynctasks;
 
 import java.util.concurrent.Future;
 
@@ -12,8 +12,7 @@ import org.springframework.stereotype.Component;
 public class AsyncTask {
 
 	public static final Logger logger = LoggerFactory.getLogger(AsyncTask.class);
-	
-	
+		
 	//发送短信
 	@Async
 	public Future<Boolean> sendMsg() throws Exception{
@@ -41,6 +40,13 @@ public class AsyncTask {
 		Thread.sleep(1000);
 		long end=System.currentTimeMillis();
 		logger.info("App推送任务耗时："+(end-start)+" 毫秒");
+		return new AsyncResult<Boolean>(true);
+	}
+	
+	//同步FTP服务器
+	@Async
+	public Future<Boolean> syncFtpBaseFile() throws Exception{
+		logger.info("App推送任务耗时："+" 毫秒");
 		return new AsyncResult<Boolean>(true);
 	}
 	

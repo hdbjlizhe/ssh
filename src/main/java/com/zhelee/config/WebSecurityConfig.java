@@ -55,7 +55,7 @@ public class WebSecurityConfig implements WebMvcConfigurer {
 			}
 			// 非登录用户， 跳转登录
 			//String url = "/login";显示权限不足
-			response.getWriter().write("<script language=\"javascript\">alert('\\u6743\\u9650\\u4e0d\\u8db3')</script>");
+			response.getWriter().write("<script language=\"javascript\">alert('\\u6743\\u9650\\u4e0d\\u8db3,\\u8bf7\\u767b\\u5f55')</script>");
 			//返回原来页面
 			response.getWriter().write("<script language=\"javascript\">window.history.back(-1);</script>");
 			//response.sendRedirect(url);

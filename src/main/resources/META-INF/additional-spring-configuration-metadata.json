@@ -1,5 +1,27 @@
-{"properties": [{
-  "name": "message.welcome",
-  "type": "java.lang.String",
-  "description": "A description for 'message.welcome'"
-}]}
+{"properties": [
+  {
+    "name": "message.welcome",
+    "type": "java.lang.String",
+    "description": "A description for 'message.welcome'"
+  },
+  {
+    "name": "ftp-server.host",
+    "type": "java.lang.String",
+    "description": "A description for 'ftp-server.host'"
+  },
+  {
+    "name": "ftp-server.port",
+    "type": "java.lang.String",
+    "description": "A description for 'ftp-server.port'"
+  },
+  {
+    "name": "ftp-server.user-name",
+    "type": "java.lang.String",
+    "description": "A description for 'ftp-server.user-name'"
+  },
+  {
+    "name": "ftp-server.password",
+    "type": "java.lang.String",
+    "description": "A description for 'ftp-server.password'"
+  }
+]}

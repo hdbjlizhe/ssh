@@ -68,11 +68,19 @@
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 		</dependency>
+		<!-- sitemesh依赖 -->
 		<dependency>
     		<groupId>org.sitemesh</groupId>
     		<artifactId>sitemesh</artifactId>
     		<version>3.0.1</version>
 		</dependency>
+		<!-- commons-net FTP资料库工具类使用-->
+		<dependency>
+		    <groupId>commons-net</groupId>
+		    <artifactId>commons-net</artifactId>
+		    <version>3.6</version>
+		</dependency>
+		
 	</dependencies>
 	<build>
 		<plugins>

@@ -1,4 +1,4 @@
-package com.zhelee.config;
+package com.zhelee.global;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
