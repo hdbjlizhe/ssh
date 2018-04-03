@@ -7,77 +7,101 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    
+
 <link href="css/bootstrap.min.css" rel="stylesheet">
-<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
 
 <style type="text/css">
-body {padding-top: 60px;}
+body {
+	padding-top: 60px;
+}
 </style>
-
-<!-- Ajax 注册的用户名是否可用 -->
-<script type="text/javascript">
-$(function(){
-	$(":input[name=account]").change(function(){
-		var val = $(this).val();//获取输入值
-		val = $.trim(val);	//去掉两端的空格
-		var $this = $(this);	//
-		debugger
-		if(val != ""){//值不为空
-			//把当前节点后面的所有 font 兄弟节点删除
-			$this.nextAll("font").remove();
-			
-			var url = "/user-validateAccount";
-			var args = {"account":val, "time":new Date()};
-			$.post(url, args, function(data){
-				//表示可用
-				if(data == "1"){
-					$this.after("<font color='green'>账户可用!</font>");
-				}
-				//不可用
-				else if(data == "0"){
-					$this.after("<font color='red'>账户不可用!</font>");						
-				}
-				//服务器错误
-				else{
-					alert("服务器错误!");
-				}
-			});
-		}else{
-			alert("账户不能为空");
-			$(this).val("");
-			$this.focus();
-		}
-	});
-})
-</script>
-
 </head>
 
 <body>
-	
-	<div th:include="/header::html">
-	</div>
-	
+
+	<div th:include="/header::html"></div>
+
 	<div class="container">
 
-		<form class="form-signin" action="/register" method="post">
-			<h2 class="">Please Register</h2>
-			<input name="account" type="text" placeholder="UserName/Tel./Email">
-			<br>
-			<input name="password"
-				type="password" class="input-block-level" placeholder="Password">
-			<label class="checkbox"> 
-				<input type="checkbox" value="remember-me"> 注册协议
-			</label>
-			<button class="btn btn-large btn-primary" type="submit">Reset</button>
-			<button class="btn btn-large btn-primary pull-right" type="submit">Register</button>
+		<form action="/register" method="post">
+			<h2 th:text="#{msg.register.title}">Please Register</h2>
+			<input id="account" name="account" type="text"
+				placeholder="UserName/Tel./Email" class="form-control"> <br>
+			<input id="password" name="password" type="password"
+				class="form-control" placeholder="Password">
+			<div class="checkbox">
+				<label> <input type="checkbox"
+					th:text="#{msg.register.protocol}">
+				</label>
+			</div>
+			<button id="btn-reset" class="btn btn-large btn-primary"
+				type="submit">Reset</button>
+			<button id="btn-submit" class="btn btn-large btn-primary pull-right"
+				type="submit">Register</button>
 		</form>
 
 	</div>
+
+	<div class="footer" th:include="/footer::html"></div>
+	<!-- 引入js文件 -->
+	<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="js/source-not-open.js"></script>
+	<!-- Ajax 注册的用户名是否可用 -->
+	<script type="text/javascript">
+		$(function() {
+			$(":input[name=account]").change(function() {
+				var val = $(this).val(); //获取输入值
+				val = $.trim(val); //去掉两端的空格
+				var $this = $(this); //
+				debugger
+				if (val != "") { //值不为空
+					//把当前节点后面的所有 font 兄弟节点删除
+					$this.nextAll("font").remove();
 	
-	<div class="footer" th:include="/footer::html">
-	</div>
-  
-  </body>
+					var url = "/user-validateAccount";
+					var args = {
+						"account" : val,
+						"time" : new Date()
+					};
+					$.post(url, args, function(data) {
+						//表示可用
+						if (data == "1") {
+							$this.after("<font color='green'>账户可用!</font>");
+						}
+						//不可用
+						else if (data == "0") {
+							$this.after("<font color='red'>账户不可用!</font>");
+						}
+						//服务器错误
+						else {
+							alert("服务器错误!");
+						}
+					});
+				} else {
+					alert("账户不能为空");
+					$(this).val("");
+					$this.focus();
+				}
+			});
+		})
+	</script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("#btn-submit").click(function() {
+				debugger
+				var account = $("#account").val();
+				var password = $("#password").val();
+				if (account == null || account == "") {
+					alert("Account should not be empty");
+					$("#account").focus();
+					return false;
+				} else if (password == null || password == "") {
+					alert("Password should not be empty");
+					$("#password").focus();
+					return false;
+				}
+			});
+		});
+	</script>
+</body>
 </html>

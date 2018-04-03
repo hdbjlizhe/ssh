@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
   <head>
     <title>footer.html</title>
 	
@@ -13,7 +13,7 @@
   
   <body>
     	<div class="footer">
-		<p class="text-center">&copy; 信息服务中心 2018</p>
+		<p class="text-center" th:utext="#{msg.copyright}">&copy; 信息服务中心 2018</p>
 		</div>
   </body>
 </html>

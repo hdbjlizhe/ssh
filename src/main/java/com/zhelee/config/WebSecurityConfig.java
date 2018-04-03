@@ -30,6 +30,7 @@ public class WebSecurityConfig implements WebMvcConfigurer {
 	public void addInterceptors(InterceptorRegistry registry) {
 		InterceptorRegistration addInterceptor = registry.addInterceptor(getSecurityInterceptor());
 		// 排除配置
+		addInterceptor.excludePathPatterns("/");
 		addInterceptor.excludePathPatterns("/error");
 		addInterceptor.excludePathPatterns("/login**");
 		addInterceptor.excludePathPatterns("/index");
@@ -43,6 +44,13 @@ public class WebSecurityConfig implements WebMvcConfigurer {
 		addInterceptor.addPathPatterns("/**");
 	}
 
+	
+	/**
+	 * 
+	 * 内部类
+	 * @author Lee
+	 *
+	 */
 	private class SecurityInterceptor extends HandlerInterceptorAdapter {
 		
 		@Override

@@ -10,6 +10,7 @@ import org.apache.commons.net.PrintCommandListener;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
 import org.apache.commons.net.ftp.FTPReply;
+import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -58,15 +59,10 @@ public class FtpBaseFileUtil {
 
 	/**
 	 * 登陆FTP服务器
-	 * 
-	 * @param host:
-	 *            FTPServer IP地址
-	 * @param port:
-	 *            FTPServer 端口
-	 * @param username:
-	 *            FTPServer 登陆用户名
-	 * @param password:
-	 *            FTPServer 登陆密码
+	 * @param host:FTPServer IP地址
+	 * @param port:FTPServer 端口
+	 * @param username:FTPServer 登陆用户名
+	 * @param password:FTPServer 登陆密码
 	 * @return boolean: 是否登录成功
 	 * @throws IOException
 	 */
@@ -88,7 +84,6 @@ public class FtpBaseFileUtil {
 
 	/**
 	 * 关闭数据链接
-	 * 
 	 * @throws IOException
 	 */
 	public void disConnection() throws IOException {
@@ -98,40 +93,9 @@ public class FtpBaseFileUtil {
 	}
 
 	/**
-	 * 递归遍历出目录下面所有文件
-	 * 
-	 * @param pathName
-	 * 需要遍历的目录，必须以"/"开始和结束
-	 * @throws UnsupportedEncodingException
-	 * @throws IOException
-	 */
-	public void list(String remotePath) throws UnsupportedEncodingException, IOException {
-
-		if (remotePath.startsWith("/") && remotePath.endsWith("/")) {
-			ftp.changeWorkingDirectory(new String(remotePath.getBytes("GBK"), "ISO-8859-1"));
-			FTPFile[] files = ftp.listFiles(remotePath); // 查找所有文件
-			for (FTPFile file : files) {
-				// 去除无效文件
-				if (".".equals(file.getName()) || "..".equals(file.getName()))
-					continue;
-				if (file.isFile()) {
-					ftpBaseFiles.add(FTPFile2FtpBaseFile(file, remotePath));
-					logger.info(FTPFile2FtpBaseFile(file, remotePath).toString());
-				} else if (file.isDirectory()) {
-					String currDirPath = remotePath + file.getName() + "/";
-					list(currDirPath);
-				}
-			}
-		}
-	}
-
-	/**
 	 * 递归遍历目录下面指定的文件名
-	 * 
-	 * @param pathName
-	 *            需要遍历的目录，必须以"/"开始和结束
-	 * @param ext
-	 *            文件的扩展名
+	 * @param pathName：需要遍历的目录，必须以"/"开始和结束
+	 * @param ext： 文件的扩展名
 	 * @throws IOException
 	 */
 	public void list(String pathName, String ext) throws IOException {
@@ -142,11 +106,13 @@ public class FtpBaseFileUtil {
 			this.ftp.changeWorkingDirectory(directory);
 			FTPFile[] files = this.ftp.listFiles();
 			for (FTPFile file : files) {
+				//去除无效文件
 				if (".".equals(file.getName()) || "..".equals(file.getName()))
 					continue;
 				if (file.isFile()) {
-					if (file.getName().endsWith(ext)) {
-						ftpBaseFiles.add(FTPFile2FtpBaseFile(file, directory));
+					//当为*号时,全适配
+					if ("*".equals(ext)||file.getName().endsWith(ext)){
+						ftpBaseFiles.add(FTPFile2FtpBaseFile(file,directory));
 					}
 				} else if (file.isDirectory()) {
 					list(directory + file.getName() + "/", ext);
@@ -184,17 +150,8 @@ public class FtpBaseFileUtil {
 	}
 	
 	//列出指定目录的所有的文件（含子目录）
-	public List<FtpBaseFile> listAll(String path) throws IOException{
-		// 1.登录FTP服务器
-		if (!login(this.host, this.port, this.userName, this.password)) {
-			logger.info("FTPServer登录不成功");
-			return null;
-		}
-		// 2.list()
-		this.list(path);
-		// 3.关闭FTP服务器
-		this.disConnection();
-		return this.ftpBaseFiles;
+	public List<FtpBaseFile> listAll() throws IOException{
+		return listAll("/", "*");
 	}
-	
+
 }

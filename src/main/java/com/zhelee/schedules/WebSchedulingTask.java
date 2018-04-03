@@ -40,7 +40,7 @@ public class WebSchedulingTask {
 	public void syncFtpBase() throws UnsupportedEncodingException, IOException{
 		FtpBaseFileUtil ftpBaseFileUtil=new FtpBaseFileUtil(false);
 		//准备要存储的数据
-		List<FtpBaseFile> ftpBaseFiles=ftpBaseFileUtil.listAll("/");
+		List<FtpBaseFile> ftpBaseFiles=ftpBaseFileUtil.listAll();
 		//清空数据库表ftpbasefile
 		ftpBaseFileService.deleteAll();
 		//存储数据库表ftpbasefile
