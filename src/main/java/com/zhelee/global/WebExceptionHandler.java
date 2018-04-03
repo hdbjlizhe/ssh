@@ -5,7 +5,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.servlet.ModelAndView;
-
+/**
+ * 统一异常处理类
+ * @author Lee
+ */
 @ControllerAdvice
 public class WebExceptionHandler {
 	

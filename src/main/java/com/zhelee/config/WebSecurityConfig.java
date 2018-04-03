@@ -40,6 +40,7 @@ public class WebSecurityConfig implements WebMvcConfigurer {
 		addInterceptor.excludePathPatterns("/imgs/*");
 		addInterceptor.excludePathPatterns("/js/*");
 		addInterceptor.excludePathPatterns("/user-validateAccount");
+		addInterceptor.excludePathPatterns("/about");
 		// 拦截配置
 		addInterceptor.addPathPatterns("/**");
 	}
@@ -47,7 +48,7 @@ public class WebSecurityConfig implements WebMvcConfigurer {
 	
 	/**
 	 * 
-	 * 内部类
+	 * 内部类,安全拦截器
 	 * @author Lee
 	 *
 	 */

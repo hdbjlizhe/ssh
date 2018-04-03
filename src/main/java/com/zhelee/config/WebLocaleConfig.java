@@ -13,8 +13,6 @@ import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
 @Configuration
-@EnableAutoConfiguration
-@ComponentScan
 public class WebLocaleConfig implements WebMvcConfigurer {
 
     @Bean
@@ -37,4 +35,5 @@ public class WebLocaleConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(localeChangeInterceptor());
     }
+
 }

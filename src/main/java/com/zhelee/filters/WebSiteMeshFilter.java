@@ -1,4 +1,4 @@
-package com.zhelee.config;
+package com.zhelee.filters;
 
 import org.sitemesh.builder.SiteMeshFilterBuilder;
 import org.sitemesh.config.ConfigurableSiteMeshFilter;
@@ -7,10 +7,11 @@ import org.sitemesh.content.tagrules.html.DivExtractingTagRuleBundle;
 public class WebSiteMeshFilter extends ConfigurableSiteMeshFilter {
 	@Override
 	protected void applyCustomConfiguration(SiteMeshFilterBuilder builder) {
-		builder.addDecoratorPath("/null", "/decorator.html")
-				// Map decorators to path patterns.
-				.addDecoratorPath("/strategy/**", "/WEB-INF/views/decorators/decorator.jsp")
-				// Exclude path from decoration.
+				//添加装饰路径
+		builder.addDecoratorPath("/*", "/decorator.html")
+			   .addDecoratorPath("/strategy/**", "/decorator.html")
+				//排除装饰路径
+			   .addExcludedPath("/static/**")
 				.addExcludedPath("/login/**")
 				.addExcludedPath("/main/**")
 				.addExcludedPath("/popup/**");

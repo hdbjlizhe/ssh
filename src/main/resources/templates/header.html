@@ -11,7 +11,7 @@
 
 <!-- 导航栏 -->
 	<nav class="navbar navbar-inverse navbar-fixed-top">
-		<div class="container-fluid">
+		<div class="container-fluid">			
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle collapsed"
 					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
@@ -20,9 +20,9 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<img class="navbar-brand" src="imgs/zhelee_logo_flat.png"/>
+				<img class="nav navbar-nav" src="imgs/zhelee_logo_flat.png"/>
 				<a class="navbar-brand" href="/" th:text="#{msg.brand}">信息服务中心</a>
-				<ul class="nav  navbar-nav">
+				<ul class="nav navbar-nav">
 					<li class="active"><a href="/index" th:text="#{msg.menu.home}">首页</a></li>
 					<li><a href="/party" th:text="#{msg.menu.party}">党务工作</a></li>
 					<li><a href="/office" th:text="#{msg.menu.office}">公文往来</a></li>
@@ -50,14 +50,13 @@
 					<a href="/login" class="navbar-link" th:text="#{msg.login}">登录</a> <span>|</span> <a
 						href="/register" class="navbar-link" th:text="#{msg.register}">注册</a>
 				</div>			
-
+				<!-- 
 				<form class="navbar-form navbar-right">
 					<input type="text" class="form-control" th:placeholder="#{msg.search}">
 				</form>
+				 -->
 			</div>
 		</div>
 	</nav>
-	<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
-	<script type="text/javascript" src="js/source-not-open.js"></script>
 </body>
 </html>

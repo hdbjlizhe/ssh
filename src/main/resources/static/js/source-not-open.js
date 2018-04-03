@@ -22,15 +22,6 @@
          return false;
 	}
  	 //5.禁止页面内的文本被选取
-     //document.onselectstart=new Function('event.returnValue=false;');
-     if(document.all)
-     { 
-    	 debugger
-        document.onselectstart= function(){return false;}; //for ie
-     }
-     else
-     { 	 document.onmousedown= function(){return false;};
-    	 document.onmouseup= function(){return true;};
-     }
+     document.onselectstart=new Function('event.returnValue=false;');
 
 }
