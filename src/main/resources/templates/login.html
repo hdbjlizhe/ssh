@@ -11,7 +11,7 @@
 <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 <style type="text/css">
 body {
-	padding-top: 40px;
+	padding-top: 60px;
 }
 </style>
 
@@ -34,8 +34,8 @@ body {
 				<label> <input type="checkbox" th:text="#{msg.login.rememberme}">
 				</label>
 			</div>
-			<button id="btn-reset" class="btn btn-primary" type="submit">重置</button>
-			<button id="btn-submit" class="btn btn-primary pull-right" type="submit">登录</button>
+			<button id="btn-reset" class="btn btn-primary" type="reset" th:text="#{msg.reset}">Reset</button>
+			<button id="btn-submit" class="btn btn-primary pull-right" type="submit" th:text="#{msg.login}">登录</button>
 			<label th:text="${message}"></label>
 		</form>
 
