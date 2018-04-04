@@ -48,7 +48,7 @@ public class WebSecurityConfig implements WebMvcConfigurer {
 		addInterceptor.excludePathPatterns("/about");
 		//装饰器
 		addInterceptor.excludePathPatterns("/decorator");
-		// 拦截配置
+		//拦截配置
 		addInterceptor.addPathPatterns("/**");
 	}
 
