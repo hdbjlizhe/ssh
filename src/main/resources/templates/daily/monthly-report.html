@@ -1,526 +1,504 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta name="keywords" content="keyword1,keyword2,keyword3">
-<meta name="description" content="this is my page">
-<meta name="content-type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
 <title>月报系统</title>
-<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-<script type="text/javascript" src="/js/jquery-3.3.1.min.js"></script>
-
-<!-- 根据左侧按钮控制显示 -->
-<script type="text/javascript">
-	$(document).ready(function() {
-		$("table").hide();
-		$("#party").show();
-		$("button.list-group-item").click(function() {
-			var btnId = $(this).attr("id");
-			var tableId = btnId.substr(btnId.lastIndexOf("_") + 1);
-			$("table").hide();
-			$("#" + tableId).show();
-		});
-	});
-</script>
-
 </head>
-<!-- 网页头 -->
-<div th:include="/header::html" style="margin-bottom: 70px;"></div>
+<body>
+	<div class="container-fluid">
+		<div class="col-md-3 sidebar">
+			<div class="list-group">
+				<button id="btn_menu" type="button" class="list-group-item active">
+					<h4>目录</h4>
+				</button>
+				<button id="btn_party" class="list-group-item">党务工作</button>
+				<button id="btn_office" class="list-group-item">往来公文</button>
+				<button id="btn_affairs" class="list-group-item">例会</button>
+				<button id="btn_news" class="list-group-item">新闻发布</button>
+				<button id="btn_website" class="list-group-item">局官网政策维护</button>
+				<button id="btn_nongovern" class="list-group-item">民间投资平台</button>
+				<button id="btn_maintenance" class="list-group-item">软硬件维护</button>
+				<button id="btn_database" class="list-group-item">“产业招商精准招商”资料库</button>
+				<button id="btn_security" class="list-group-item">网络与信息安全</button>
+				<button id="btn_photo" class="list-group-item">摄影摄像</button>
+			</div>
+		</div>
+		<div class="col-md-9">
 
-<div class="container-fluid">
-	<div class="col-md-3 sidebar">
-		<div class="list-group">
-			<button id="btn_menu" type="button" class="list-group-item active">
-			<h4>目录</h4>
-			</button>
-			<button id="btn_party" class="list-group-item">党务工作</button>
-			<button id="btn_office" class="list-group-item">往来公文</button>
-			<button id="btn_affairs" class="list-group-item">例会</button>
-			<button id="btn_news" class="list-group-item">新闻发布</button>
-			<button id="btn_website" class="list-group-item">局官网政策维护</button>
-			<button id="btn_nongovern" class="list-group-item">民间投资平台</button>
-			<button id="btn_maintenance" class="list-group-item">软硬件维护</button>
-			<button id="btn_database" class="list-group-item">“产业招商精准招商”资料库</button>
-			<button id="btn_security" class="list-group-item">网络与信息安全</button>
-			<button id="btn_photo" class="list-group-item">摄影摄像</button>
+			<!-- 下拉列表框-月份 -->
+			
+			<label class="list-group-item active">
+				选择月份
+			</label>
+			<select class="list-group-item active">			
+					<option>1月份</option>
+					<option>2月份</option>
+					<option>3月份</option>
+					<option>4月份</option>
+					<option>5月份</option>
+					<option>6月份</option>
+					<option>7月份</option>
+					<option>8月份</option>
+					<option>9月份</option>
+					<option>10月份</option>
+					<option>11月份</option>
+					<option>12月份</option>
+			</select>		
+			
+
+			<!-- 党务工作  -->
+			<form action="" method="post">
+				<table id="party" class="table table-condensed">
+					<tr>
+						<td colspan=4><p class="text-center">
+							<h4>党务工作</h4></td>
+					</tr>
+					<tr>
+						<td>理论学习（次）</td>
+						<td><input id="party_study" name="party_study" type="number"></td>
+						<td><p class="text-error">说明：填写数字或自动获取</p></td>
+						<td><a class="btn btn-primary" href="">自动获取</a></td>
+					</tr>
+					<tr>
+						<td>党务会议（次）</td>
+						<td><input id="party_meeting" name="party_meeting"
+							type="number"></td>
+						<td><p class="text-error">说明：填写数字或自动获取</p></td>
+						<td><a class="btn btn-primary" href="">自动获取</a></td>
+					</tr>
+					<tr>
+						<td>党组织活动（次）</td>
+						<td><input id="party_activities" name="party_activities"
+							type="number"></td>
+						<td><p class="text-error">说明：填写数字或自动获取</p></td>
+						<td><a class="btn btn-primary" href="">自动获取</a></td>
+					</tr>
+					<tr>
+						<td colspan=4>
+							<button type="reset" class="btn btn-default">重置</button> <span></span>
+							<button type="submit" class="btn btn-default">提交</button>
+						</td>
+					</tr>
+				</table>
+			</form>
+			<!-- 往来公文 -->
+			<form action="" method="post">
+				<table id="office" class="table table-condensed">
+					<tr>
+						<td colspan=4><h4>公文往来</h4></td>
+					</tr>
+					<tr>
+						<td>处理公文（项）</td>
+						<td><input id="office_docs" name="office_docs" type="number"></td>
+						<td><p class="text-error">说明：填写数字或自动获取</p></td>
+						<td><a class="btn btn-primary" href="">自动获取</a></td>
+
+					</tr>
+					<tr>
+						<td>配合相关处室完成工作及方案（项）</td>
+						<td><input id="office_docs" name="office_docs" type="number"></td>
+						<td><p class="text-error">说明：填写数字或自动获取</p></td>
+						<td><a class="btn btn-primary" href="">自动获取</a></td>
+
+					</tr>
+					<tr>
+						<td colspan=4>
+							<button type="reset" class="btn btn-default">重置</button> <span></span>
+							<button type="submit" class="btn btn-default">提交</button>
+						</td>
+					</tr>
+				</table>
+			</form>
+
+			<!-- 例会 -->
+			<form action="" method="post">
+				<table id="affairs" class="table table-condensed">
+					<tr>
+						<td colspan=4><h4>例会</h4></td>
+					</tr>
+					<tr>
+						<td>例会（次）</td>
+						<td><input id="affairs_num" name="affairs_num" type="number"></td>
+						<td><p class="text-error">说明：填写数字或自动获取</p></td>
+						<td><a class="btn btn-primary" href="">自动获取</a></td>
+
+					</tr>
+					<tr>
+						<td colspan=4>
+							<button type="reset" class="btn btn-default">重置</button> <span></span>
+							<button type="submit" class="btn btn-default">提交</button>
+						</td>
+					</tr>
+				</table>
+			</form>
+
+			<!-- 原创新闻发布-->
+			<form action="" method="post">
+				<table id="news" class="table table-condensed">
+					<tr>
+						<td colspan=4><h4>新闻发布</h4></td>
+					</tr>
+					<tr>
+						<td>微信原创</td>
+						<td><input id="news_webchat_original" name="news_webchat"
+							type="number"></td>
+						<td><p class="text-error">说明：填写数字或自动获取</p></td>
+						<td><a class="btn btn-primary" href="">自动获取</a></td>
+
+					</tr>
+					<tr>
+						<td>微信转发</td>
+						<td><input id="news_webchat_transpond" name="news_webchat"
+							type="number"></td>
+						<td><p class="text-error">说明：填写数字或自动获取</p></td>
+						<td><a class="btn btn-primary" href="">自动获取</a></td>
+
+					</tr>
+					<tr>
+						<td>微博原创</td>
+						<td><input id="news_weibo_original" name="news_weibo"
+							type="number"></td>
+						<td><p class="text-error">说明：填写数字或自动获取</p></td>
+						<td><a class="btn btn-primary" href="">自动获取</a></td>
+					</tr>
+					<tr>
+						<td>微博转发</td>
+						<td><input id="news_weibo_transpond" name="news_weibo"
+							type="number"></td>
+						<td><p class="text-error">说明：填写数字或自动获取</p></td>
+						<td><a class="btn btn-primary" href="">自动获取</a></td>
+					</tr>
+					<tr>
+						<td>今日头条原创</td>
+						<td><input id="news_toutiao_original" name="news_toutiao"
+							type="number"></td>
+						<td><p class="text-error">说明：填写数字或自动获取</p></td>
+						<td><a class="btn btn-primary" href="">自动获取</a></td>
+
+					</tr>
+					<tr>
+						<td>今日头条转发</td>
+						<td><input id="news_toutiao_transpond" name="news_toutiao"
+							type="number"></td>
+						<td><p class="text-error">说明：填写数字或自动获取</p></td>
+						<td><a class="btn btn-primary" href="">自动获取</a></td>
+					</tr>
+
+					<tr>
+						<td>内部公告栏</td>
+						<td><input id="news_board" name="news_board" type="number"></td>
+						<td><p class="text-error">说明：填写数字或自动获取</p></td>
+						<td><a class="btn btn-primary" href="">自动获取</a></td>
+					</tr>
+					<tr>
+						<td>局官网工作动态及通知公告</td>
+						<td><input id="news_website" name="news_website"
+							type="number"></td>
+						<td><p class="text-error">说明：填写数字或自动获取</p></td>
+						<td><a class="btn btn-primary" href=" ">自动获取</a></td>
+
+					</tr>
+					<tr>
+						<td colspan=4>
+							<button type="reset" class="btn btn-default">重置</button> <span></span>
+							<button type="submit" class="btn btn-default">提交</button>
+						</td>
+					</tr>
+				</table>
+			</form>
+
+			<!-- 局官网政策维护 -->
+			<form action="" method="post">
+				<table id="website" class="table table-condensed">
+					<tr>
+						<td colspan=4><h4>局官网政策维护</h4></td>
+					</tr>
+					<tr>
+						<td>机构概况</td>
+						<td><input id="website_profile" name="website_profile"
+							type="number"></td>
+						<td><p class="text-error">说明：填写数字或自动获取</p></td>
+						<td><a class="btn btn-primary" href="">自动获取</a></td>
+
+					</tr>
+					<tr>
+						<td>投资北京知识</td>
+						<td><input id="website_investbeijing"
+							name="website_investbeijing" type="number"></td>
+						<td><p class="text-error">说明：填写数字或自动获取</p></td>
+						<td><a class="btn btn-primary" href="">自动获取</a></td>
+
+					</tr>
+					<tr>
+						<td>投资咨询咨询互动</td>
+						<td><input id="website_interaction"
+							name="website_interaction" type="number"></td>
+						<td><p class="text-error">说明：填写数字或自动获取</p></td>
+						<td><a class="btn btn-primary" href="">自动获取</a></td>
+
+					</tr>
+					<tr>
+						<td>办事事项</td>
+						<td><input id="website_matters" name="website_matters"
+							type="number"></td>
+						<td><p class="text-error">说明：填写数字或自动获取</p></td>
+						<td><a class="btn btn-primary" href="">自动获取</a></td>
+
+					</tr>
+					<tr>
+						<td>党工团机构</td>
+						<td><input id="website_party" name="website_party"
+							type="number"></td>
+						<td><p class="text-error">说明：填写数字或自动获取</p></td>
+						<td><a class="btn btn-primary" href="">自动获取</a></td>
+
+					</tr>
+					<tr>
+						<td>信息公开</td>
+						<td><input id="website_info" name="website_info"
+							type="number"></td>
+						<td><p class="text-error">说明：填写数字或自动获取</p></td>
+						<td><a class="btn btn-primary" href="">自动获取</a></td>
+
+					</tr>
+					<tr>
+						<td colspan=4>
+							<button type="reset" class="btn btn-default">重置</button> <span></span>
+							<button type="submit" class="btn btn-default">提交</button>
+						</td>
+					</tr>
+				</table>
+			</form>
+
+			<!-- 民间投资平台维护 -->
+			<form action="" method="post">
+				<table id="nongovern" class="table table-condensed">
+					<tr>
+						<td colspan=4><h4>民间投资平台维护</h4></td>
+					</tr>
+					<tr>
+						<td>发展规划</td>
+						<td><input id="nongovern_develop_planning"
+							name="nongovern_develop_planning" type="number"></td>
+						<td><p class="text-error">说明：填写数字或自动获取</p></td>
+						<td><a class="btn btn-primary" href="">自动获取</a></td>
+
+					</tr>
+					<tr>
+						<td>投资政策</td>
+						<td><input id="nongovern_invest_policy"
+							name="nongovern_invest_policy" type="number"></td>
+						<td><p class="text-error">说明：填写数字或自动获取</p></td>
+						<td><a class="btn btn-primary" href="">自动获取</a></td>
+
+					</tr>
+					<tr>
+						<td>行政许可</td>
+						<td><input id="nongovern_authority_license"
+							name="nongovern_authority_license" type="number"></td>
+						<td><p class="text-error">说明：填写数字或自动获取</p></td>
+						<td><a class="btn btn-primary" href="">自动获取</a></td>
+
+					</tr>
+					<tr>
+						<td>市场准入</td>
+						<td><input id="nongovern_market_access"
+							name="nongovern_market_access" type="number"></td>
+						<td><p class="text-error">说明：填写数字或自动获取</p></td>
+						<td><a class="btn btn-primary" href="">自动获取</a></td>
+
+					</tr>
+					<tr>
+						<td>投资机会</td>
+						<td><input id="nongovern_invest_opportunity"
+							name="nongovern_invest_opportunity" type="number"></td>
+						<td><p class="text-error">说明：填写数字或自动获取</p></td>
+						<td><a class="btn btn-primary" href="">自动获取</a></td>
+
+					</tr>
+					<tr>
+						<td>投资服务</td>
+						<td><input id="nongovern_invest_service"
+							name="nongovern_invest_service" type="number"></td>
+						<td><p class="text-error">说明：填写数字或自动获取</p></td>
+						<td><a class="btn btn-primary" href="">自动获取</a></td>
+					</tr>
+					<tr>
+						<td colspan=4>
+							<button type="reset" class="btn btn-default">重置</button> <span></span>
+							<button type="submit" class="btn btn-default">提交</button>
+						</td>
+					</tr>
+				</table>
+			</form>
+
+			<!-- 软硬件维护 -->
+			<form action="" method="post">
+				<table id="maintenance" class="table table-condensed">
+					<tr>
+						<td colspan=4><h4>软硬件维护</h4></td>
+					</tr>
+					<tr>
+						<td>办公设备维修（人次）</td>
+						<td><input id="maintenance_hardware_num"
+							name="maintenance_service_num" type="number"></td>
+						<td><p class="text-error">说明：填写数字或自动获取</p></td>
+						<td><a class="btn btn-primary" href="">自动获取</a></td>
+					</tr>
+					<tr>
+						<td>软件及系统问题（人次）</td>
+						<td><input id="maintenance_software_num"
+							name="maintenance_service_num" type="number"></td>
+						<td><p class="text-error">说明：填写数字或自动获取</p></td>
+						<td><a class="btn btn-primary" href="">自动获取</a></td>
+					</tr>
+					<tr>
+						<td colspan=4>
+							<button type="reset" class="btn btn-default">重置</button> <span></span>
+							<button type="submit" class="btn btn-default">提交</button>
+						</td>
+					</tr>
+				</table>
+			</form>
+
+			<!-- "产业招商精准招商资料库" -->
+			<form action="" method="post">
+				<table id="database" class="table table-condensed">
+					<tr>
+						<td colspan=4><h4>“产业招商精准招商”资料库</h4></td>
+					</tr>
+					<tr>
+						<td>本月新增（条）数</td>
+						<td><input id="database_new_num" name="database_new_num"
+							type="number"></td>
+						<td><p class="text-error">说明：填写数字或自动获取</p></td>
+						<td><a class="btn btn-primary" href="/database/getnew">自动获取</a></td>
+					</tr>
+					<tr>
+						<td colspan=4>
+							<button type="reset" class="btn btn-default">重置</button> <span></span>
+							<button type="submit" class="btn btn-default">提交</button>
+						</td>
+					</tr>
+				</table>
+			</form>
+
+
+			<!-- 网络与信息安全 -->
+			<form action="" method="post">
+				<table id="security" class="table table-condensed">
+					<tr>
+						<td colspan=4><h4>网络与信息安全</h4></td>
+					</tr>
+					<tr>
+						<td>阻断 网站安全攻击（次）</td>
+						<td><input id="security_attack_block"
+							name="security_attack_block" type="number"></td>
+						<td><p class="text-error">说明：填写数字或自动获取</p></td>
+						<td><a class="btn btn-primary" href="/database/getnew">自动获取</a></td>
+					</tr>
+					<tr>
+						<td>系统加固（条）</td>
+						<td><input id="security_system_reinforce"
+							name="security_attack_block" type="number"></td>
+						<td><p class="text-error">说明：填写数字或自动获取</p></td>
+						<td><a class="btn btn-primary" href="/database/getnew">自动获取</a></td>
+					</tr>
+					<tr>
+						<td>安全通报（份）</td>
+						<td><input id="security_safety_message"
+							name="security_attack_block" type="number"></td>
+						<td><p class="text-error">说明：填写数字或自动获取</p></td>
+						<td><a class="btn btn-primary" href="/database/getnew">自动获取</a></td>
+					</tr>
+					<tr>
+						<td>漏洞扫描（次）</td>
+						<td><input id="security_vulnerability_scanning"
+							name="security_attack_block" type="number"></td>
+						<td><p class="text-error">说明：填写数字或自动获取</p></td>
+						<td><a class="btn btn-primary" href="/database/getnew">自动获取</a></td>
+					</tr>
+					<tr>
+						<td>发现漏洞（个）</td>
+						<td><input id="security_bugs_number"
+							name="security_bugs_number" type="number"></td>
+						<td><p class="text-error">说明：填写数字或自动获取</p></td>
+						<td><a class="btn btn-primary" href="/database/getnew">自动获取</a></td>
+					</tr>
+					<tr>
+						<td>修复网站故障（次）</td>
+						<td><input id="security_website_trouble"
+							name="security_website_trouble" type="number"></td>
+						<td><p class="text-error">说明：填写数字或自动获取</p></td>
+						<td><a class="btn btn-primary" href="/database/getnew">自动获取</a></td>
+					</tr>
+					<tr>
+						<td>全局性网络故障（次）</td>
+						<td><input id="security_global_trouble"
+							name="security_global_trouble" type="number"></td>
+						<td><p class="text-error">说明：填写数字或自动获取</p></td>
+						<td><a class="btn btn-primary" href="/database/getnew">自动获取</a></td>
+					</tr>
+					<tr>
+						<td colspan=4>
+							<button type="reset" class="btn btn-default">重置</button> <span></span>
+							<button type="submit" class="btn btn-default">提交</button>
+						</td>
+					</tr>
+				</table>
+			</form>
+
+			<!-- 摄影摄像 -->
+			<form action="" method="post">
+				<table id="photo" class="table table-condensed">
+					<tr>
+						<td colspan=4><h4>摄影摄像</h4></td>
+					</tr>
+					<tr>
+						<td>会议摄影（次）</td>
+						<td><input id="photo_meeting_num" name="photo_meeting_num"
+							type="number"></td>
+						<td><p class="text-error">说明：填写数字或自动获取</p></td>
+						<td><a class="btn btn-primary" href="">自动获取</a></td>
+					</tr>
+					<tr>
+						<td>照片资料（次）</td>
+						<td><input id="photo_jgp_num" name="photo_meeting_num"
+							type="number"></td>
+						<td><p class="text-error">说明：填写数字或自动获取</p></td>
+						<td><a class="btn btn-primary" href="">自动获取</a></td>
+					</tr>
+					<tr>
+						<td>影像资料（段）</td>
+						<td><input id="photo_video_num" name="photo_video_num"
+							type="number"></td>
+						<td><p class="text-error">说明：填写数字或自动获取</p></td>
+						<td><a class="btn btn-primary" href="">自动获取</a></td>
+					</tr>
+					<tr>
+						<td colspan=4>
+							<button type="reset" class="btn btn-default">重置</button> <span></span>
+							<button type="submit" class="btn btn-default">提交</button>
+						</td>
+					</tr>
+				</table>
+			</form>
+
 		</div>
 	</div>
-	<div class="col-md-9">
 
-		<!-- 下拉列表框-月份 -->
-		<div class="dropdown list-group-item active">
-			<button class="btn btn-default dropdown-toggle"
-				id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
-				aria-expanded="true">
-				选择月份 <span class="caret"></span>
-			</button>
-			<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-				<li><a href="#">1月份</a></li>
-				<li><a href="#">2月份</a></li>
-				<li><a href="#">3月份</a></li>
-				<li><a href="#">4月份</a></li>
-				<li><a href="#">5月份</a></li>
-				<li><a href="#">6月份</a></li>
-				<li role="separator" class="divider"></li>
-				<li><a href="#">7月份</a></li>
-				<li><a href="#">8月份</a></li>
-				<li><a href="#">9月份</a></li>
-				<li><a href="#">10月份</a></li>
-				<li><a href="#">11月份</a></li>
-				<li><a href="#">12月份</a></li>
-			</ul>
-		</div>	
-		
-		<!-- 党务工作  -->
-		<form action="" method="post">
-			<table id="party" class="table table-condensed">
-				<tr>
-					<td colspan=4><p class="text-center"><h4>党务工作
-						</h4>
-					</td>
-				</tr>
-				<tr>
-					<td>理论学习（次）</td>
-					<td><input id="party_study" name="party_study"
-						type="number"></td>
-					<td><p class="text-error">说明：填写数字或自动获取</p></td>
-					<td><a class="btn btn-primary" href="">自动获取</a></td>
-				</tr>
-				<tr>
-					<td>党务会议（次）</td>
-					<td><input id="party_meeting" name="party_meeting"
-						type="number"></td>
-					<td><p class="text-error">说明：填写数字或自动获取</p></td>
-					<td><a class="btn btn-primary" href="">自动获取</a></td>
-				</tr>
-				<tr>
-					<td>党组织活动（次）</td>
-					<td><input id="party_activities" name="party_activities"
-						type="number"></td>
-					<td><p class="text-error">说明：填写数字或自动获取</p></td>
-					<td><a class="btn btn-primary" href="">自动获取</a></td>
-				</tr>
-				<tr>
-					<td colspan=4>
-						<button type="reset" class="btn btn-default">重置</button> <span></span>
-						<button type="submit" class="btn btn-default">提交</button>
-					</td>
-				</tr>
-			</table>
-		</form>
-		<!-- 往来公文 -->
-		<form action="" method="post">
-			<table id="office" class="table table-condensed">
-				<tr>
-					<td colspan=4><h4>公文往来</h4></td>
-				</tr>
-				<tr>
-					<td>处理公文（项）</td>
-					<td><input id="office_docs" name="office_docs" type="number"
-						></td>
-					<td><p class="text-error">说明：填写数字或自动获取</p></td>
-					<td><a class="btn btn-primary" href="">自动获取</a></td>
-
-				</tr>
-				<tr>
-					<td>配合相关处室完成工作及方案（项）</td>
-					<td><input id="office_docs" name="office_docs" type="number"
-						></td>
-					<td><p class="text-error">说明：填写数字或自动获取</p></td>
-					<td><a class="btn btn-primary" href="">自动获取</a></td>
-
-				</tr>
-				<tr>
-					<td colspan=4>
-						<button type="reset" class="btn btn-default">重置</button> <span></span>
-						<button type="submit" class="btn btn-default">提交</button>
-					</td>
-				</tr>
-			</table>
-		</form>
-
-		<!-- 例会 -->
-		<form action="" method="post">
-			<table id="affairs" class="table table-condensed">
-				<tr>
-					<td colspan=4><h4>例会</h4></td>
-				</tr>
-				<tr>
-					<td>例会（次）</td>
-					<td><input id="affairs_num" name="affairs_num" type="number"
-						></td>
-					<td><p class="text-error">说明：填写数字或自动获取</p></td>
-					<td><a class="btn btn-primary" href="">自动获取</a></td>
-
-				</tr>
-				<tr>
-					<td colspan=4>
-						<button type="reset" class="btn btn-default">重置</button> <span></span>
-						<button type="submit" class="btn btn-default">提交</button>
-					</td>
-				</tr>
-			</table>
-		</form>
-
-		<!-- 原创新闻发布-->
-		<form action="" method="post">
-			<table id="news" class="table table-condensed">
-				<tr>
-					<td colspan=4><h4>新闻发布</h4></td>
-				</tr>
-				<tr>
-					<td>微信原创</td>
-					<td><input id="news_webchat_original" name="news_webchat" type="number"
-						></td>
-					<td><p class="text-error">说明：填写数字或自动获取</p></td>
-					<td><a class="btn btn-primary" href="">自动获取</a></td>
-
-				</tr>
-				<tr>
-					<td>微信转发</td>
-					<td><input id="news_webchat_transpond" name="news_webchat" type="number"
-						></td>
-					<td><p class="text-error">说明：填写数字或自动获取</p></td>
-					<td><a class="btn btn-primary" href="">自动获取</a></td>
-
-				</tr>
-				<tr>
-					<td>微博原创</td>
-					<td><input id="news_weibo_original" name="news_weibo" type="number"
-						></td>
-					<td><p class="text-error">说明：填写数字或自动获取</p></td>
-					<td><a class="btn btn-primary" href="">自动获取</a></td>
-				</tr>
-				<tr>
-					<td>微博转发</td>
-					<td><input id="news_weibo_transpond" name="news_weibo" type="number"
-						></td>
-					<td><p class="text-error">说明：填写数字或自动获取</p></td>
-					<td><a class="btn btn-primary" href="">自动获取</a></td>
-				</tr>
-				<tr>
-					<td>今日头条原创</td>
-					<td><input id="news_toutiao_original" name="news_toutiao" type="number"
-						></td>
-					<td><p class="text-error">说明：填写数字或自动获取</p></td>
-					<td><a class="btn btn-primary" href="">自动获取</a></td>
-
-				</tr>
-				<tr>
-					<td>今日头条转发</td>
-					<td><input id="news_toutiao_transpond" name="news_toutiao" type="number"
-						></td>
-					<td><p class="text-error">说明：填写数字或自动获取</p></td>
-					<td><a class="btn btn-primary" href="">自动获取</a></td>
-				</tr>
-				
-				<tr>
-					<td>内部公告栏</td>
-					<td><input id="news_board" name="news_board" type="number"
-						></td>
-					<td><p class="text-error">说明：填写数字或自动获取</p></td>
-					<td><a class="btn btn-primary" href="">自动获取</a></td>
-				</tr>
-				<tr>
-					<td>局官网工作动态及通知公告</td>
-					<td><input id="news_website" name="news_website" type="number"
-						></td>
-					<td><p class="text-error">说明：填写数字或自动获取</p></td>
-					<td><a class="btn btn-primary" href=" ">自动获取</a></td>
-
-				</tr>
-				<tr>
-					<td colspan=4>
-						<button type="reset" class="btn btn-default">重置</button> <span></span>
-						<button type="submit" class="btn btn-default">提交</button>
-					</td>
-				</tr>
-			</table>
-		</form>
-
-		<!-- 局官网政策维护 -->
-		<form action="" method="post">
-			<table id="website" class="table table-condensed">
-				<tr>
-					<td colspan=4><h4>局官网政策维护</h4></td>
-				</tr>
-				<tr>
-					<td>机构概况</td>
-					<td><input id="website_profile" name="website_profile"
-						type="number" ></td>
-					<td><p class="text-error">说明：填写数字或自动获取</p></td>
-					<td><a class="btn btn-primary" href="">自动获取</a></td>
-
-				</tr>
-				<tr>
-					<td>投资北京知识</td>
-					<td><input id="website_investbeijing"
-						name="website_investbeijing" type="number" ></td>
-					<td><p class="text-error">说明：填写数字或自动获取</p></td>
-					<td><a class="btn btn-primary" href="">自动获取</a></td>
-
-				</tr>
-				<tr>
-					<td>投资咨询咨询互动</td>
-					<td><input id="website_interaction" name="website_interaction"
-						type="number" ></td>
-					<td><p class="text-error">说明：填写数字或自动获取</p></td>
-					<td><a class="btn btn-primary" href="">自动获取</a></td>
-
-				</tr>
-				<tr>
-					<td>办事事项</td>
-					<td><input id="website_matters" name="website_matters"
-						type="number"></td>
-					<td><p class="text-error">说明：填写数字或自动获取</p></td>
-					<td><a class="btn btn-primary" href="">自动获取</a></td>
-
-				</tr>
-				<tr>
-					<td>党工团机构</td>
-					<td><input id="website_party" name="website_party" type="number"
-						></td>
-					<td><p class="text-error">说明：填写数字或自动获取</p></td>
-					<td><a class="btn btn-primary" href="">自动获取</a></td>
-
-				</tr>
-				<tr>
-					<td>信息公开</td>
-					<td><input id="website_info" name="website_info" type="number"
-						></td>
-					<td><p class="text-error">说明：填写数字或自动获取</p></td>
-					<td><a class="btn btn-primary" href="">自动获取</a></td>
-
-				</tr>
-				<tr>
-					<td colspan=4>
-						<button type="reset" class="btn btn-default">重置</button> <span></span>
-						<button type="submit" class="btn btn-default">提交</button>
-					</td>
-				</tr>
-			</table>
-		</form>
-
-		<!-- 民间投资平台维护 -->
-		<form action="" method="post">
-			<table id="nongovern" class="table table-condensed">
-				<tr>
-					<td colspan=4><h4>民间投资平台维护</h4></td>
-				</tr>
-				<tr>
-					<td>发展规划</td>
-					<td><input id="nongovern_develop_planning"
-						name="nongovern_develop_planning" type="number"
-						></td>
-					<td><p class="text-error">说明：填写数字或自动获取</p></td>
-					<td><a class="btn btn-primary" href="">自动获取</a></td>
-
-				</tr>
-				<tr>
-					<td>投资政策</td>
-					<td><input id="nongovern_invest_policy"
-						name="nongovern_invest_policy" type="number" ></td>
-					<td><p class="text-error">说明：填写数字或自动获取</p></td>
-					<td><a class="btn btn-primary" href="">自动获取</a></td>
-
-				</tr>
-				<tr>
-					<td>行政许可</td>
-					<td><input id="nongovern_authority_license"
-						name="nongovern_authority_license" type="number"
-						></td>
-					<td><p class="text-error">说明：填写数字或自动获取</p></td>
-					<td><a class="btn btn-primary" href="">自动获取</a></td>
-
-				</tr>
-				<tr>
-					<td>市场准入</td>
-					<td><input id="nongovern_market_access"
-						name="nongovern_market_access" type="number" ></td>
-					<td><p class="text-error">说明：填写数字或自动获取</p></td>
-					<td><a class="btn btn-primary" href="">自动获取</a></td>
-
-				</tr>
-				<tr>
-					<td>投资机会</td>
-					<td><input id="nongovern_invest_opportunity"
-						name="nongovern_invest_opportunity" type="number"
-						></td>
-					<td><p class="text-error">说明：填写数字或自动获取</p></td>
-					<td><a class="btn btn-primary" href="">自动获取</a></td>
-
-				</tr>
-				<tr>
-					<td>投资服务</td>
-					<td><input id="nongovern_invest_service"
-						name="nongovern_invest_service" type="number"></td>
-					<td><p class="text-error">说明：填写数字或自动获取</p></td>
-					<td><a class="btn btn-primary" href="">自动获取</a></td>
-				</tr>
-				<tr>
-					<td colspan=4>
-						<button type="reset" class="btn btn-default">重置</button> <span></span>
-						<button type="submit" class="btn btn-default">提交</button>
-					</td>
-				</tr>
-			</table>
-		</form>
-
-		<!-- 软硬件维护 -->
-		<form action="" method="post">
-			<table id="maintenance" class="table table-condensed">
-				<tr>
-					<td colspan=4><h4>软硬件维护</h4></td>
-				</tr>
-				<tr>
-					<td>办公设备维修（人次）</td>
-					<td><input id="maintenance_hardware_num"
-						name="maintenance_service_num" type="number"></td>
-					<td><p class="text-error">说明：填写数字或自动获取</p></td>
-					<td><a class="btn btn-primary" href="">自动获取</a></td>
-				</tr>
-				<tr>
-					<td>软件及系统问题（人次）</td>
-					<td><input id="maintenance_software_num"
-						name="maintenance_service_num" type="number"></td>
-					<td><p class="text-error">说明：填写数字或自动获取</p></td>
-					<td><a class="btn btn-primary" href="">自动获取</a></td>
-				</tr>
-				<tr>
-					<td colspan=4>
-						<button type="reset" class="btn btn-default">重置</button> <span></span>
-						<button type="submit" class="btn btn-default">提交</button>
-					</td>
-				</tr>
-			</table>
-		</form>
-
-		<!-- "产业招商精准招商资料库" -->
-		<form action="" method="post">
-			<table id="database" class="table table-condensed">
-				<tr>
-					<td colspan=4><h4>“产业招商精准招商”资料库</h4></td>
-				</tr>
-				<tr>
-					<td>本月新增（条）数</td>
-					<td><input id="database_new_num"
-						name="database_new_num" type="number"></td>
-					<td><p class="text-error">说明：填写数字或自动获取</p></td>
-					<td><a class="btn btn-primary" href="/database/getnew">自动获取</a></td>
-				</tr>
-				<tr>
-					<td colspan=4>
-						<button type="reset" class="btn btn-default">重置</button> <span></span>
-						<button type="submit" class="btn btn-default">提交</button>
-					</td>
-				</tr>
-			</table>
-		</form>
-
-
-		<!-- 网络与信息安全 -->
-		<form action="" method="post">
-			<table id="security" class="table table-condensed">
-				<tr>
-					<td colspan=4><h4>网络与信息安全</h4></td>
-				</tr>
-				<tr>
-					<td>阻断 网站安全攻击（次）</td>
-					<td><input id="security_attack_block"
-						name="security_attack_block" type="number"></td>
-					<td><p class="text-error">说明：填写数字或自动获取</p></td>
-					<td><a class="btn btn-primary" href="/database/getnew">自动获取</a></td>
-				</tr>
-				<tr>
-					<td>系统加固（条）</td>
-					<td><input id="security_system_reinforce"
-						name="security_attack_block" type="number"></td>
-					<td><p class="text-error">说明：填写数字或自动获取</p></td>
-					<td><a class="btn btn-primary" href="/database/getnew">自动获取</a></td>
-				</tr>
-				<tr>
-					<td>安全通报（份）</td>
-					<td><input id="security_safety_message"
-						name="security_attack_block" type="number" ></td>
-					<td><p class="text-error">说明：填写数字或自动获取</p></td>
-					<td><a class="btn btn-primary" href="/database/getnew">自动获取</a></td>
-				</tr>
-				<tr>
-					<td>漏洞扫描（次）</td>
-					<td><input id="security_vulnerability_scanning"
-						name="security_attack_block" type="number" ></td>
-					<td><p class="text-error">说明：填写数字或自动获取</p></td>
-					<td><a class="btn btn-primary" href="/database/getnew">自动获取</a></td>
-				</tr>
-				<tr>
-					<td>发现漏洞（个）</td>
-					<td><input id="security_bugs_number"
-						name="security_bugs_number" type="number"></td>
-					<td><p class="text-error">说明：填写数字或自动获取</p></td>
-					<td><a class="btn btn-primary" href="/database/getnew">自动获取</a></td>
-				</tr>
-				<tr>
-					<td>修复网站故障（次）</td>
-					<td><input id="security_website_trouble"
-						name="security_website_trouble" type="number"></td>
-					<td><p class="text-error">说明：填写数字或自动获取</p></td>
-					<td><a class="btn btn-primary" href="/database/getnew">自动获取</a></td>
-				</tr>
-				<tr>
-					<td>全局性网络故障（次）</td>
-					<td><input id="security_global_trouble"
-						name="security_global_trouble" type="number"></td>
-					<td><p class="text-error">说明：填写数字或自动获取</p></td>
-					<td><a class="btn btn-primary" href="/database/getnew">自动获取</a></td>
-				</tr>
-				<tr>
-					<td colspan=4>
-						<button type="reset" class="btn btn-default">重置</button> <span></span>
-						<button type="submit" class="btn btn-default">提交</button>
-					</td>
-				</tr>
-			</table>
-		</form>
-
-		<!-- 摄影摄像 -->
-		<form action="" method="post">
-			<table id="photo" class="table table-condensed">
-				<tr>
-					<td colspan=4><h4>摄影摄像</h4></td>
-				</tr>
-				<tr>
-					<td>会议摄影（次）</td>
-					<td><input id="photo_meeting_num"
-						name="photo_meeting_num" type="number"></td>
-					<td><p class="text-error">说明：填写数字或自动获取</p></td>
-					<td><a class="btn btn-primary" href="">自动获取</a></td>
-				</tr>
-				<tr>
-					<td>照片资料（次）</td>
-					<td><input id="photo_jgp_num"
-						name="photo_meeting_num" type="number"></td>
-					<td><p class="text-error">说明：填写数字或自动获取</p></td>
-					<td><a class="btn btn-primary" href="">自动获取</a></td>
-				</tr>
-				<tr>
-					<td>影像资料（段）</td>
-					<td><input id="photo_video_num"
-						name="photo_video_num" type="number"></td>
-					<td><p class="text-error">说明：填写数字或自动获取</p></td>
-					<td><a class="btn btn-primary" href="">自动获取</a></td>
-				</tr>
-				<tr>
-					<td colspan=4>
-						<button type="reset" class="btn btn-default">重置</button> <span></span>
-						<button type="submit" class="btn btn-default">提交</button>
-					</td>
-				</tr>
-			</table>
-		</form>
-
-	</div>
-</div>
-
-<!-- 网页脚 -->
-<div th:include="/footer::html"></div>
-
+	<!-- 根据左侧按钮控制显示 -->
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("table").hide();
+			$("#party").show();
+			$("button.list-group-item").click(function() {
+				var btnId = $(this).attr("id");
+				var tableId = btnId.substr(btnId.lastIndexOf("_") + 1);
+				$("table").hide();
+				$("#" + tableId).show();
+			});
+		});
+	</script>
+</body>
 </html>

@@ -1,12 +1,5 @@
 package com.zhelee.info.controllers;
 
-import static org.hamcrest.CoreMatchers.nullValue;
-
-import java.io.InputStream;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.zhelee.config.WebSecurityConfig;
-import com.zhelee.info.domain.Result;
-import com.zhelee.info.entities.Employee;
 import com.zhelee.info.entities.User;
-import com.zhelee.info.repository.UserRepository;
 import com.zhelee.info.services.UserService;
 import com.zhelee.utils.ResultUtil;
 
@@ -49,7 +39,7 @@ public class UserController {
             return "redirect:/index";
         }else {//用户不存在
 			model.addAttribute("result",ResultUtil.error("用户名或密码错误"));
-			return "redirect:/login";
+			return "login";
 		}
 	}
 	

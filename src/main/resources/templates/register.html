@@ -1,26 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>注册</title>
+<title th:text="#{msg.register}">注册</title>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="">
-<meta name="author" content="">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-
-<link href="css/bootstrap.min.css" rel="stylesheet">
-
-<style type="text/css">
-body {
-	padding-top: 60px;
-}
-</style>
 </head>
 
 <body>
-
-	<div th:include="/header::html"></div>
-
 	<div class="container">
 
 		<form action="/register" method="post">
@@ -42,10 +27,6 @@ body {
 
 	</div>
 
-	<div class="footer" th:include="/footer::html"></div>
-	<!-- 引入js文件 -->
-	<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
-	<script type="text/javascript" src="js/source-not-open.js"></script>
 	<!-- Ajax 注册的用户名是否可用 -->
 	<script type="text/javascript">
 		$(function() {

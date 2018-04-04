@@ -1,12 +1,18 @@
 package com.zhelee.asynctasks;
 
+import java.util.List;
 import java.util.concurrent.Future;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Component;
+
+import com.zhelee.info.domain.FtpBaseFile;
+import com.zhelee.info.services.FtpBaseFileService;
+import com.zhelee.utils.FtpBaseFileUtil;
 
 @Component
 public class AsyncTask {
@@ -44,9 +50,16 @@ public class AsyncTask {
 	}
 	
 	//同步FTP服务器
+	@Autowired
+	FtpBaseFileUtil ftpBaseFileUtil;
+	@Autowired
+	private FtpBaseFileService ftpBaseFileService;
 	@Async
 	public Future<Boolean> syncFtpBaseFile() throws Exception{
-		logger.info("App推送任务耗时："+" 毫秒");
+		logger.info("同步FTP服务器开始...");
+		List<FtpBaseFile> ftpBaseFiles=ftpBaseFileUtil.listAll();
+		ftpBaseFileService.addAll(ftpBaseFiles);
+		logger.info("同步FTP服务器结束...");
 		return new AsyncResult<Boolean>(true);
 	}
 	

@@ -31,16 +31,23 @@ public class WebSecurityConfig implements WebMvcConfigurer {
 		InterceptorRegistration addInterceptor = registry.addInterceptor(getSecurityInterceptor());
 		// 排除配置
 		addInterceptor.excludePathPatterns("/");
-		addInterceptor.excludePathPatterns("/error");
-		addInterceptor.excludePathPatterns("/login**");
 		addInterceptor.excludePathPatterns("/index");
+		//错误页面
+		addInterceptor.excludePathPatterns("/error");
+		//注册及登录
+		addInterceptor.excludePathPatterns("/login**");
 		addInterceptor.excludePathPatterns("/register");
+		//静态资源
 		addInterceptor.excludePathPatterns("/css/*");
 		addInterceptor.excludePathPatterns("/fonts/*");
 		addInterceptor.excludePathPatterns("/imgs/*");
 		addInterceptor.excludePathPatterns("/js/*");
+		//Ajax 用户账户检查是否重复
 		addInterceptor.excludePathPatterns("/user-validateAccount");
+		//关于
 		addInterceptor.excludePathPatterns("/about");
+		//装饰器
+		addInterceptor.excludePathPatterns("/decorator");
 		// 拦截配置
 		addInterceptor.addPathPatterns("/**");
 	}

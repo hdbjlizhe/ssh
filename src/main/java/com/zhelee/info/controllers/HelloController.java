@@ -25,18 +25,17 @@ public class HelloController {
 	private MessageSource messageSource;
 	
 	//首页
-	@RequestMapping("/")
-	public String home(Model model){
+	@RequestMapping(value={"/","/index"})
+	public String index(Model model){
 		Locale locale = LocaleContextHolder.getLocale();
 		String msg = messageSource.getMessage("hello",null,locale);
 		logger.info(msg);
 		return "index";
 	}
-	//首页
-	@RequestMapping("/index")
-	public String index(Model model){
-		Locale locale = LocaleContextHolder.getLocale();
-		return "index";
+	//sitemesh装饰页面
+	@RequestMapping("/decorator")
+	public String decorate(){
+		return "/decorators/decorator-default";
 	}
 	//党务模块
 	@GetMapping("/party")

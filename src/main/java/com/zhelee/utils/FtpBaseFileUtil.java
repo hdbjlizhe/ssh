@@ -2,7 +2,6 @@ package com.zhelee.utils;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,10 +9,11 @@ import org.apache.commons.net.PrintCommandListener;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
 import org.apache.commons.net.ftp.FTPReply;
-import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
 import com.zhelee.info.domain.FtpBaseFile;
 
 /**
@@ -21,6 +21,7 @@ import com.zhelee.info.domain.FtpBaseFile;
  * 
  * @author
  */
+@Component
 public class FtpBaseFileUtil {
 
 	private static Logger logger = LoggerFactory.getLogger(FtpBaseFileUtil.class);
@@ -45,6 +46,9 @@ public class FtpBaseFileUtil {
 	 *            是否打印与FTPServer的交互命令
 	 * @return
 	 */
+	public FtpBaseFileUtil(){
+		this(false);
+	}
 	public FtpBaseFileUtil(boolean isPrintCommmand) {
 		//初始化FTPClient
 		ftp = new FTPClient();
@@ -66,7 +70,7 @@ public class FtpBaseFileUtil {
 	 * @return boolean: 是否登录成功
 	 * @throws IOException
 	 */
-	public boolean login(String host, int port, String username, String password) throws IOException {
+	private boolean login(String host, int port, String username, String password) throws IOException {
 
 		this.ftp.connect(host, port);
 
@@ -86,7 +90,7 @@ public class FtpBaseFileUtil {
 	 * 关闭数据链接
 	 * @throws IOException
 	 */
-	public void disConnection() throws IOException {
+	private void disConnection() throws IOException {
 		if (this.ftp.isConnected()) {
 			this.ftp.disconnect();
 		}
@@ -98,7 +102,7 @@ public class FtpBaseFileUtil {
 	 * @param ext： 文件的扩展名
 	 * @throws IOException
 	 */
-	public void list(String pathName, String ext) throws IOException {
+	private void list(String pathName, String ext) throws IOException {
 
 		if (pathName.startsWith("/") && pathName.endsWith("/")) {
 			String directory = pathName;
@@ -122,7 +126,7 @@ public class FtpBaseFileUtil {
 	}
 	
 	// org.apache.commons.net.ftp.FTPFile转成自定义的FtpBaseFile
-	public FtpBaseFile FTPFile2FtpBaseFile(FTPFile ftpFile, String filePath) {
+	private FtpBaseFile FTPFile2FtpBaseFile(FTPFile ftpFile, String filePath) {
 		FtpBaseFile ftpBaseFile = new FtpBaseFile();
 		// 文件名
 		ftpBaseFile.setName(ftpFile.getName().substring(0, ftpFile.getName().lastIndexOf(".")));
