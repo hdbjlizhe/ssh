@@ -36,7 +36,7 @@ message:
   
 #产业招商精准招商FTP资料库
 ftpServer:
-  host: 10.151.148.185
+  host: 10.151.248.185
   port: 21
   userName: chanyechu
   password: chanyechu

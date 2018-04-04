@@ -57,7 +57,8 @@ public class AsyncTask {
 	@Async
 	public Future<Boolean> syncFtpBaseFile() throws Exception{
 		logger.info("同步FTP服务器开始...");
-		List<FtpBaseFile> ftpBaseFiles=ftpBaseFileUtil.listAll();
+		List<FtpBaseFile> ftpBaseFiles=ftpBaseFileUtil.listAll("/","pdf");
+		ftpBaseFileService.deleteAll();//删除全部记录
 		ftpBaseFileService.addAll(ftpBaseFiles);
 		logger.info("同步FTP服务器结束...");
 		return new AsyncResult<Boolean>(true);
