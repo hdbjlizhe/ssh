@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.zhelee.aspect.CtrlAspect;
 import com.zhelee.info.entities.Employee;
 import com.zhelee.info.entities.User;
 import com.zhelee.info.repository.EmployeeRepository;
@@ -16,7 +15,7 @@ import com.zhelee.utils.UserUtil;
 @Service
 public class UserService{
 	
-	private final static Logger logger= LoggerFactory.getLogger(CtrlAspect.class);
+	private final static Logger logger= LoggerFactory.getLogger(UserService.class);
 		
 	@Autowired
 	private UserRepository userRepository;//与数据库交互
