@@ -33,7 +33,7 @@ spring:
 #自定义参数
 message:
   welcome: 欢迎
-  
+
 #产业招商精准招商FTP资料库
 ftpServer:
   host: 10.151.248.185

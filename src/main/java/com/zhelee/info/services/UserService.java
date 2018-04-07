@@ -14,7 +14,7 @@ import com.zhelee.info.repository.UserRepository;
 import com.zhelee.utils.UserUtil;
 
 @Service
-public class UserService {
+public class UserService{
 	
 	private final static Logger logger= LoggerFactory.getLogger(CtrlAspect.class);
 		
@@ -29,7 +29,7 @@ public class UserService {
 	 * @param account
 	 * @return
 	 */
-	public User findByAcount(String account) {
+	public User findByAcount(String account){
 		int userKind=UserUtil.getUserIdKind(account);
 		//如果用户类型错误，则返回
 		if(userKind==UserUtil.USER_ERROR){
@@ -69,7 +69,8 @@ public class UserService {
 	 * @param password
 	 * @return
 	 */
-	public User findByAccountAndPassword(String account,String password){
+	public User findByAccountAndPassword(String account,String password){		
+		
 		//获取登录账户的类型（用户名、Email、手机号）
 		int userKind=UserUtil.getUserIdKind(account);
 		//用户类型错误时
@@ -86,7 +87,8 @@ public class UserService {
 		}//使用用户名登录
 		else{
 			resUser=userRepository.findByUserNameAndPassword(account,password);
-		}		
+		}
+		logger.info("通过帐户和密码查到了用户");
 		return resUser;
 	}
 }

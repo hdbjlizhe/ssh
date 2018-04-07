@@ -1,21 +1,28 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>about.html</title>
-	
-    <meta name="keywords" content="keyword1,keyword2,keyword3">
-    <meta name="description" content="this is my page">
-    <meta name="content-type" content="text/html; charset=UTF-8">
-    
-    <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>about.html</title>
 
-  </head>
-  
-  <body>
-    <a>简介</a>北京市投资促进局下属规范事业单位，承担局信息化建设，电子政务的技术性、事务性工作，开展投资信息的汇集、整理、发布、服务、交流等工作。
-    <a>职责分工</a>
-    <a>岗位设置</a>
-    <a>联系方式</a>
-    <script type="text/javascript" src="js/source-not-open.js"></script>
-  </body>
+<meta name="keywords" content="keyword1,keyword2,keyword3">
+<meta name="description" content="this is my page">
+<meta name="content-type" content="text/html; charset=UTF-8">
+
+<!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+
+</head>
+
+<body>
+	<left> 
+		<ul class="nav nav-sidebar">
+			<li><a href="" th:text="#{msg.about.abstract}">简介</a></li>
+			<li><a href="" th:text="#{msg.about.duties}">职责分工</a></li>
+			<li><a href="" th:text="#{msg.about.post}">岗位设置</a></li>
+			<li><a href="" th:text="#{msg.about.contact}">联系方式</a></li>
+		</ul>
+	</left>
+	<right>
+		<p>北京市投资促进局下属事业单位，承担局信息化建设，电子政务的技术性、事务性工作，开展投资信息的汇集、整理、发布、服务、交流等工作。
+		</p>
+	</right>
+</body>
 </html>

@@ -1,22 +1,28 @@
 package com.zhelee.info.entities;
 
-import java.util.HashSet;
-import java.util.Set;
-
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.zhelee.utils.UserUtil;
 
+/**
+ *使用JPA定义用户。实现UserDetails接口，用户实体即为springSecurity所使用的用户。
+ * @author Lee
+ *
+ */
 @Entity
 @Table(name = "user")
-public class User {
+public class User{
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;	
@@ -29,12 +35,21 @@ public class User {
 	@Column(unique=true)//唯一
 	private String email; // Email
 	private String password; // Password
-	// 角色
-	@OneToMany
-	private Set<Role> roles = new HashSet<Role>();
-	// 员工
+	private Boolean accountNonExpired=true;//账户是否未过期
+	private Boolean accountNonLocked=true;//账户未被锁定
+	private Boolean credentialsNonExpired=true;//证书未过期
+	private Boolean enabled=true;//账户是否可用
+	
+	//FetchType.EAGER：急加载。在加载一个实体的时候，
+	//其中定义是急加载的的属性(property)和字段(field)
+	//会立即从数据库中加载 
+    //CascadeType:级联更新
+    @ManyToMany(cascade = {CascadeType.REFRESH}, fetch = FetchType.EAGER)
+    private List<Role> roles;
+	
+    // 员工
 	@OneToOne
-	private Employee employee; // ��ϸ��Ϣ
+	private Employee employee;
 
 	public int getId() {
 		return id;
@@ -84,11 +99,11 @@ public class User {
 		this.password = password;
 	}
 
-	public Set<Role> getRoles() {
+	public List<Role> getRoles() {
 		return roles;
 	}
 
-	public void setRoles(Set<Role> roles) {
+	public void setRoles(List<Role> roles) {
 		this.roles = roles;
 	}
 
@@ -100,10 +115,32 @@ public class User {
 		this.employee = employee;
 	}
 
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", portrait=" + portrait + ", username=" + username + ", mobile=" + mobile
-				+ ", email=" + email + ", password=" + password + ", roles=" + roles + ", employee=" + employee + "]";
+	public void setAccountNonExpired(Boolean accountNonExpired) {
+		if(accountNonExpired==null)
+			this.accountNonExpired=true;
+		else
+			this.accountNonExpired = accountNonExpired;
+	}
+
+	public void setAccountNonLocked(Boolean accountNonLocked) {
+		if(accountNonLocked==null)
+			this.accountNonLocked=true;
+		else 
+			this.accountNonLocked = accountNonLocked;
+	}
+
+	public void setCredentialsNonExpired(Boolean credentialsNonExpired) {
+		if(credentialsNonExpired==null)
+			this.credentialsNonExpired=true;
+		else 
+			this.credentialsNonExpired = credentialsNonExpired;
+	}
+
+	public void setEnabled(Boolean enabled) {
+		if(enabled==null)
+			this.enabled=true;
+		else
+			this.enabled = enabled;
 	}
 
 	//根据account类型分别设置
@@ -123,4 +160,21 @@ public class User {
 		
 	}
 
+	public Boolean getAccountNonExpired() {
+		return accountNonExpired;
+	}
+
+	public Boolean getAccountNonLocked() {
+		return accountNonLocked;
+	}
+
+	public Boolean getCredentialsNonExpired() {
+		return credentialsNonExpired;
+	}
+
+	public Boolean getEnabled() {
+		return enabled;
+	}
+
+	
 }

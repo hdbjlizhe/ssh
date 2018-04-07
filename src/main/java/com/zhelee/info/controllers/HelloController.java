@@ -32,11 +32,6 @@ public class HelloController {
 		logger.info(msg);
 		return "index";
 	}
-	//sitemesh装饰页面
-	@RequestMapping("/decorator")
-	public String decorate(){
-		return "/decorators/decorator-default";
-	}
 	//党务模块
 	@GetMapping("/party")
 	public String party(){
@@ -67,9 +62,9 @@ public class HelloController {
 	public String activity(){
 		return "activity/activity";
 	}
-	//admin
-	@GetMapping("/admin")
-	public String admin() {
-		return "admin/admin";
+	//About
+	@GetMapping("/about")
+	public String about() {
+		return "about";
 	}
 }
