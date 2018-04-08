@@ -25,7 +25,7 @@ public class AdminController {
 	public String syncFtp(){
 		Future<Boolean> aFuture;
 		try {
-			aFuture = asyncTask.syncFtpBaseFile();
+			aFuture = asyncTask.syncFtpBase();
 			while (!aFuture.isDone()) {
 				if(aFuture.isDone()){
 					log.info("同步完毕");

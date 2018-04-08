@@ -55,9 +55,9 @@ public class AsyncTask {
 	@Autowired
 	private FtpBaseFileService ftpBaseFileService;
 	@Async
-	public Future<Boolean> syncFtpBaseFile() throws Exception{
+	public Future<Boolean> syncFtpBase() throws Exception{
 		logger.info("同步FTP服务器开始...");
-		List<FtpBaseFile> ftpBaseFiles=ftpBaseFileUtil.listAll("/","pdf");
+		List<FtpBaseFile> ftpBaseFiles=ftpBaseFileUtil.listAll();
 		ftpBaseFileService.deleteAll();//删除全部记录
 		ftpBaseFileService.addAll(ftpBaseFiles);
 		logger.info("同步FTP服务器结束...");

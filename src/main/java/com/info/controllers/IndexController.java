@@ -52,6 +52,11 @@ public class IndexController {
     public String login(){
         return "login";
     }
+    
+    @GetMapping("/login-error")
+    public String loginError(){
+        return "login";
+    }
 
     @GetMapping("/CSRFTest")
     public String product(){
