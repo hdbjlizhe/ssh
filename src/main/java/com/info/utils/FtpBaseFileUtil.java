@@ -1,7 +1,5 @@
 package com.info.utils;
 
-import static org.hamcrest.CoreMatchers.nullValue;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;

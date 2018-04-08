@@ -1,4 +1,4 @@
-package com.info.entities;
+package com.info.domain.entity;
 
 import java.util.Date;
 
@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 @Entity
-@Table(name="experience")
+@Table(name="e_experience")
 public class Experience {
 
 	@Id

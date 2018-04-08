@@ -1,4 +1,4 @@
-package com.zhelee.info.controllers;
+package com.info.controllers;
 
 import java.util.concurrent.Future;
 
@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.zhelee.asynctasks.AsyncTask;
+import com.info.asyntasks.AsyncTask;
 
 @RestController
 @RequestMapping("tasks")

@@ -8,8 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.info.entities.Department;
-import com.info.services.DepartmentService;
+import com.info.domain.entity.Department;
+import com.info.service.DepartmentService;
 
 @Controller
 public class DailyController {

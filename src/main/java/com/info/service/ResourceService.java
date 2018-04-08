@@ -1,12 +1,12 @@
-package com.info.services;
+package com.info.service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.info.entities.Resource;
-import com.info.repository.ResourceRepository;
+import com.info.domain.entity.Resource;
+import com.info.domain.repository.ResourceRepository;
 
 @Service
 public class ResourceService {

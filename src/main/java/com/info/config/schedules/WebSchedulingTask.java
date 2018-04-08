@@ -11,7 +11,7 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 
 import com.info.domain.FtpBaseFile;
-import com.info.services.FtpBaseFileService;
+import com.info.service.FtpBaseFileService;
 import com.info.utils.FtpBaseFileUtil;
 /**
  * 

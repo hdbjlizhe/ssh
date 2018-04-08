@@ -1,4 +1,4 @@
-package com.info.services;
+package com.info.service;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.info.domain.FtpBaseFile;
-import com.info.repository.FtpBaseFileRepository;
+import com.info.domain.repository.FtpBaseFileRepository;
 
 @Service
 public class FtpBaseFileService {

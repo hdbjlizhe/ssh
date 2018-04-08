@@ -1,4 +1,4 @@
-package com.info.entities;
+package com.info.domain.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="department")
+@Table(name="e_department")
 public class Department {
 	
 	@Id

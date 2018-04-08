@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="ftpbasefile")
+@Table(name="f_ftpbase")
 public class FtpBaseFile {
 	
 	@Id

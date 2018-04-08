@@ -1,4 +1,4 @@
-package com.zhelee.info.controllers;
+package com.info.controllers;
 
 import java.util.List;
 import java.util.concurrent.Future;
@@ -9,11 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import com.zhelee.asynctasks.AsyncTask;
-import com.zhelee.info.entities.Privilege;
-import com.zhelee.info.entities.Resource;
-import com.zhelee.info.services.PrivilegeService;
-import com.zhelee.info.services.ResourceService;
+import com.info.asyntasks.AsyncTask;
+import com.info.domain.entity.Resource;
+import com.info.service.ResourceService;
 
 @Controller
 public class AdminController {
@@ -42,16 +40,5 @@ public class AdminController {
 	
 	@Autowired
 	private ResourceService resourceService;
-	@Autowired
-	private PrivilegeService privilegeService;
-	
-	@RequestMapping("/admin")
-	public String admin(Model model) {
-		List<Resource> resources=resourceService.findAll();
-		List<Privilege> privileges=privilegeService.findAll();
-		model.addAttribute("resources",resources);
-		model.addAttribute("privileges", privileges);
-		
-		return "admin/admin";
-	}
+
 }

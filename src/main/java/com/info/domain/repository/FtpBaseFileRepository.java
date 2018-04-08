@@ -1,4 +1,4 @@
-package com.info.repository;
+package com.info.domain.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

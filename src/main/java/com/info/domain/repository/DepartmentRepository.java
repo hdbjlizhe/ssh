@@ -1,7 +1,7 @@
-package com.info.repository;
+package com.info.domain.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.info.entities.Department;
+import com.info.domain.entity.Department;
 
 public interface DepartmentRepository extends JpaRepository<Department, Integer> {}

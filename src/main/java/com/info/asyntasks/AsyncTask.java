@@ -11,7 +11,7 @@ import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Component;
 
 import com.info.domain.FtpBaseFile;
-import com.info.services.FtpBaseFileService;
+import com.info.service.FtpBaseFileService;
 import com.info.utils.FtpBaseFileUtil;
 
 @Component
