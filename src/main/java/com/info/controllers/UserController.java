@@ -50,7 +50,7 @@ public class UserController {
     public ModelAndView registra(@Valid RegistraFormDTO registraFormDTO, BindingResult result, WebRequest request){
         // 校验表单字段
         if (result.hasErrors()){
-            return  new ModelAndView("regist","message",result.getFieldError());
+            return new ModelAndView("regist","message",result.getFieldError());
         }
         // 保存注册信息
         User user = new User();
