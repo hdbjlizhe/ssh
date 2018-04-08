@@ -9,6 +9,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Component;
+
 @Component
 public class MyJavaMailSender extends JavaMailSenderImpl {
 
@@ -25,7 +26,6 @@ public class MyJavaMailSender extends JavaMailSenderImpl {
 	@Override
 	public MimeMessage createMimeMessage() {
 		return super.createMimeMessage();
-		//return null;
 	}
 
 	@Override

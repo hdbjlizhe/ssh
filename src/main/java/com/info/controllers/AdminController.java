@@ -11,7 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.info.asyntasks.AsyncTask;
 import com.info.domain.entity.Resource;
-import com.info.service.ResourceService;
+import com.info.service.impl.ResourceService;
 
 @Controller
 public class AdminController {

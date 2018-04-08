@@ -9,7 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.info.domain.entity.Department;
-import com.info.service.DepartmentService;
+import com.info.service.impl.DepartmentService;
 
 @Controller
 public class DailyController {

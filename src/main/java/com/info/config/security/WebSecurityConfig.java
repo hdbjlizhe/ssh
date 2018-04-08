@@ -44,9 +44,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapterImpl {
 	
 	public static final Logger logger=LoggerFactory.getLogger(WebSecurityConfig.class);
 
-	public static final String SESSION_KEY = "user";
-	
-
 	@Autowired
 	private IUserService userService;
 
