@@ -14,5 +14,9 @@ public interface IUserService extends UserDetailsService{
     ValidateToken findValidateToken(String token);
     //保存注册用户
     void saveRegistratedUser(User user);
+    //用户名查找用户
+    User findByUsername(String username);
+    //邮箱查找用户
+    User findByEmail(String email);
 
 }

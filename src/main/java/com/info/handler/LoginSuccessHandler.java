@@ -43,6 +43,8 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
         System.out.println("IP信息 :"+authentication.getDetails());
 
         System.out.println("是否被授权 :"+authentication.isAuthenticated());
+        
+        System.out.println("Session:"+request.getSession().toString());
 
         //登录成功后跳转到默认对应的页面
         String targetUrl = "/home";
@@ -57,4 +59,25 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
         }
         redirectStrategy.sendRedirect(request,response,targetUrl);
     }
+    
+    //获取登录的IP地址
+    public String getIpAddress(HttpServletRequest request){      
+        String ip = request.getHeader("x-forwarded-for");      
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {      
+            ip = request.getHeader("Proxy-Client-IP");      
+        }      
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {      
+            ip = request.getHeader("WL-Proxy-Client-IP");      
+        }      
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {      
+            ip = request.getHeader("HTTP_CLIENT_IP");      
+        }      
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {      
+            ip = request.getHeader("HTTP_X_FORWARDED_FOR");      
+        }      
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {      
+            ip = request.getRemoteAddr();      
+        }      
+        return ip;      
+    } 
 }

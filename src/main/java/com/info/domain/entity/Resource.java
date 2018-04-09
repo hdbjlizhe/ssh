@@ -12,7 +12,7 @@ import java.util.Set;
 public class Resource {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;			//资源ID
 	private String resource;	//资源名称
 	private String description;	//资源描述

@@ -12,7 +12,7 @@ public class RememeberMe {
 	@NotNull
 	private String username;
 	@Id
-	private String serie;
+	private String series;
 	@NotNull
 	private String token;
 	@NotNull
@@ -24,11 +24,11 @@ public class RememeberMe {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	public String getSerie() {
-		return serie;
+	public String getSeries() {
+		return series;
 	}
 	public void setSerie(String serie) {
-		this.serie = serie;
+		this.series = serie;
 	}
 	public String getToken() {
 		return token;

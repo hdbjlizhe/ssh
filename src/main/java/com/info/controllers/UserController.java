@@ -46,11 +46,13 @@ public class UserController {
     private ApplicationEventPublisher eventPublisher;
 
     // 注册
-    @PostMapping("/registra")
-    public ModelAndView registra(@Valid RegistraFormDTO registraFormDTO, BindingResult result, WebRequest request){
+    @RequestMapping("/register")
+    public String register(@Valid RegistraFormDTO registraFormDTO, BindingResult result, WebRequest request,Model model){
         // 校验表单字段
         if (result.hasErrors()){
-            return new ModelAndView("regist","message",result.getFieldError());
+        	log.info(result.getFieldError().toString());
+        	model.addAttribute("message", result.getFieldError());
+            return "redirect:/register";
         }
         // 保存注册信息
         User user = new User();
@@ -61,18 +63,21 @@ public class UserController {
         // 发布邮箱验证事件
         String appUrl = request.getContextPath();
         if (registrated == null){
-            return  new ModelAndView("regist","message","该邮箱已经注册！！！");
+        	model.addAttribute("message", "该邮箱已注册");
+            return  "redirect:/register";
         }
         try {
+        	//注册完成事件
             eventPublisher.publishEvent(new OnRegistrationCompleteEvent(user,appUrl));
         }catch (Exception e){
-            log.debug(e.getMessage());
-            return  new ModelAndView("regist","message","请确认邮箱状态是否正常！！！");
+            log.info(e.getMessage());
+            model.addAttribute("message", "请确认邮箱状态是否正常");
+            return  "redirect:/register";
         }
-        return new ModelAndView("redirect:/login");
+        return "redirect:/login";
     }
     /**
-     * 邮箱验证
+     *  邮箱验证
      *  1、判断token是否存在
      *  2、判断是否过期
      */
@@ -81,16 +86,38 @@ public class UserController {
         ValidateToken validateToken = userService.findValidateToken(token);
         if (validateToken == null) {
             model.addAttribute("message","请求地址中的Token不存在");
-            return "redirect:/regist";
+            return "redirect:/register";
         }
         if (validateToken.getExpiryDate().getTime()- DateTime.now().getMillis()<0){
             model.addAttribute("message","请求地址中的Token已过期");
-            return "redirect:/regist";
+            return "redirect:/register";
         }
         User user = validateToken.getUser();
         user.setEnabled(true);
         userService.saveRegistratedUser(user);
         return "redirect:/login";
+    }
+    
+    //Ajax检查用户名是否可用 true表示可用，false表示不可用   
+    @PostMapping("/validateUserName")
+    public Boolean validateUserName(String username){
+    	if(userService.findByUsername(username)!=null){
+    		return false;
+    	}
+    	else {
+			return true;
+		}
+    }
+    
+    //Ajax检查用户名是否可用 true表示可用，false表示不可用   
+    @PostMapping("/validateEmail")
+    public Boolean validateEmail(String email){
+    	if(userService.findByEmail(email)!=null){
+    		return false;
+    	}
+    	else {
+			return true;
+		}
     }
 
 }

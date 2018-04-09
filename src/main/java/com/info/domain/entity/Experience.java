@@ -13,7 +13,7 @@ import javax.persistence.Table;
 public class Experience {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;					//������id
 	private Date startTime;
 	private Date endTime;

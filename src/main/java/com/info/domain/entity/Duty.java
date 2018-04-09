@@ -11,7 +11,7 @@ import javax.persistence.Table;
 public class Duty {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;	
 	private String dutyName;
 	private String description;

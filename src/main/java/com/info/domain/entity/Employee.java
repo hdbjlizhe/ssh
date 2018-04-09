@@ -14,7 +14,7 @@ import javax.persistence.Table;
 public class Employee {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id; // 用户ID-对应User.id
 	private String name; // 真实姓名
 	@ManyToOne

@@ -10,7 +10,7 @@ import javax.persistence.Table;
 @Table(name="e_rank")
 public class Rank {
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	private String rankName;
 	private String description;

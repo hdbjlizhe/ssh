@@ -10,10 +10,20 @@
 
 		<form action="/register" method="post">
 			<h2 th:text="#{msg.register.title}">Please Register</h2>
-			<input id="account" name="account" type="text"
+			<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+			
+			<label th:text="msg.register.username">UserName:</label>
+			<input id="username" name="username" type="text"
 				placeholder="UserName/Tel./Email" class="form-control"> <br>
+				
+			<label th:text="msg.register.password">Password:</label>
 			<input id="password" name="password" type="password"
-				class="form-control" placeholder="Password">
+				class="form-control" placeholder="Password"><br>
+				
+			<label th:text="msg.register.email">Email:</label>
+			<input id="email" name="email" type="email"
+				class="form-control" placeholder="Email">
+			<label class="text-warning">请确保邮箱正确，注册成功后要到邮箱确认</label><br>
 			<div class="checkbox">
 				<label> <input type="checkbox"
 					th:text="#{msg.register.protocol}">
@@ -23,14 +33,14 @@
 				type="submit" th:text="#{msg.reset}">Reset</button>
 			<button id="btn-submit" class="btn btn-large btn-primary pull-right"
 				type="submit" th:text="#{msg.register}">Register</button>
-		</form>
-
+		</form>		
+		<th:block th:text="${message}">异常信息</th:block>
 	</div>
 
 	<!-- Ajax 注册的用户名是否可用 -->
 	<script type="text/javascript">
-		$(function() {
-			$(":input[name=account]").change(function() {
+	$(document).ready(function() {
+			$(":input[name=username]").change(function() {
 				var val = $(this).val(); //获取输入值
 				val = $.trim(val); //去掉两端的空格
 				var $this = $(this); //
@@ -39,18 +49,57 @@
 					//把当前节点后面的所有 font 兄弟节点删除
 					$this.nextAll("font").remove();
 	
-					var url = "/user-validateAccount";
+					var url = "/validateUserName";
 					var args = {
-						"account" : val,
+						"username" : val,
 						"time" : new Date()
 					};
 					$.post(url, args, function(data) {
 						//表示可用
-						if (data == "1") {
+						if (data == true) {
 							$this.after("<font color='green'>账户可用!</font>");
 						}
 						//不可用
-						else if (data == "0") {
+						else if (data == false) {
+							$this.after("<font color='red'>账户不可用!</font>");
+						}
+						//服务器错误
+						else {
+							alert("服务器错误!");
+						}
+					});
+				} else {
+					alert("账户不能为空");
+					$(this).val("");
+					$this.focus();
+				}
+			});
+		})
+	</script>
+	
+	<script type="text/javascript">
+	$(document).ready(function() {
+			$(":input[name=email]").change(function() {
+				var val = $(this).val(); //获取输入值
+				val = $.trim(val); //去掉两端的空格
+				var $this = $(this); //
+				debugger
+				if (val != "") { //值不为空
+					//把当前节点后面的所有 font 兄弟节点删除
+					$this.nextAll("font").remove();
+	
+					var url = "/validateEmail";
+					var args = {
+						"email" : val,
+						"time" : new Date()
+					};
+					$.post(url, args, function(data) {
+						//表示可用
+						if (data == true) {
+							$this.after("<font color='green'>账户可用!</font>");
+						}
+						//不可用
+						else if (data == false) {
 							$this.after("<font color='red'>账户不可用!</font>");
 						}
 						//服务器错误
@@ -70,13 +119,18 @@
 		$(document).ready(function() {
 			$("#btn-submit").click(function() {
 				debugger
-				var account = $("#account").val();
+				var account = $("#username").val();
 				var password = $("#password").val();
+				var email=$("#email").val();
 				if (account == null || account == "") {
-					alert("Account should not be empty");
-					$("#account").focus();
+					alert("username should not be empty");
+					$("#username").focus();
 					return false;
 				} else if (password == null || password == "") {
+					alert("Password should not be empty");
+					$("#password").focus();
+					return false;
+				}else if (email == null || email == "") {
 					alert("Password should not be empty");
 					$("#password").focus();
 					return false;

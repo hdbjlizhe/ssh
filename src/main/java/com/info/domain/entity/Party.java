@@ -10,7 +10,7 @@ import javax.persistence.Table;
 @Table(name="e_party")
 public class Party {
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	private String partyName;
 	private String description;

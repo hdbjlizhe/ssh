@@ -12,7 +12,7 @@ import java.util.Set;
 public class Role {
 	//角色ID
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     //角色ID
     private String roleName;	
