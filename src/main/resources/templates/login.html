@@ -16,14 +16,15 @@
 	            <div>
 	            	<label th:text="#{msg.login.email}">email</label>
 	            	<input type="email" name="username" class="form-control"/>
-	            </div>  
+	            </div>
+	            <br>  
 	            <div>
 	            	<label th:text="#{msg.login.password}"> Password:  </label>
 	            	<input type="password" name="password" class="form-control"/>
-	            	<label>密码应该在6位到32位之间</label>       
 	            </div>
+	            <br>
 	            <div>
-	            	<input type="submit" value="Sign In" th:text="#{msg.login.submit}" class="form-control"/>
+	            	<input type="submit" value="Sign In" th:value="#{msg.login.submit}" class="form-control"/>
 	            </div>  
 	            <input type="checkbox" name="remember-me" value="true" th:checked="checked"/><p>Remember me</p> 
 	            <!--注释掉可测试CSRF防御-->
