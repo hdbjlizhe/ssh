@@ -1,6 +1,6 @@
 package com.info.config.security;
 
-import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.security.web.util.matcher.RequestMatcher;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,7 +12,6 @@ import java.util.Set;
  *  自定义CSRF匹配，排除不需要CSRF防御的资源，比如给第三方开放的接口
  *  默认使用的是DefaultRequiresCsrfMatcher
  */
-@Slf4j
 public class CSRFSecurityRequestMatcher implements RequestMatcher {
 
     private final HashSet<String> allowedMethods = new HashSet<String>(

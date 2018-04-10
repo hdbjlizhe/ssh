@@ -1,12 +1,9 @@
 package com.info.domain.entity;
 
-import lombok.Data;
-
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
-@Data
 @Entity
 @Table(name = "t_resource")
 public class Resource {

@@ -1,7 +1,5 @@
 package com.info.controllers;
 
-
-import lombok.extern.slf4j.Slf4j;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,11 +28,9 @@ import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 @Controller
-@Slf4j
 public class UserController {
 	
 	private static final Logger log = LoggerFactory.getLogger(UserController.class);
-
 
     @Autowired
     private IUserService userService;
@@ -64,7 +60,7 @@ public class UserController {
         String appUrl = request.getContextPath();
         if (registrated == null){
         	model.addAttribute("message", "该邮箱已注册");
-            return  "redirect:/register";
+            return  "register";
         }
         try {
         	//注册完成事件
@@ -72,7 +68,7 @@ public class UserController {
         }catch (Exception e){
             log.info(e.getMessage());
             model.addAttribute("message", "请确认邮箱状态是否正常");
-            return  "redirect:/register";
+            return  "redirect:/login";
         }
         return "redirect:/login";
     }

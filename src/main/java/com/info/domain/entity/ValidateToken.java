@@ -1,6 +1,5 @@
 package com.info.domain.entity;
 
-import lombok.Data;
 import org.joda.time.DateTime;
 
 import javax.persistence.*;
@@ -9,7 +8,6 @@ import java.util.Date;
 /**
  *  与注册用户一一对应
  */
-@Data
 @Entity
 @Table(name = "t_validatetoken")
 public class ValidateToken {

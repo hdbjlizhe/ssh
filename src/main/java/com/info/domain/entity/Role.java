@@ -1,12 +1,19 @@
 package com.info.domain.entity;
 
-import lombok.Data;
-
-import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
-@Data
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+import javax.persistence.JoinColumn;
+
 @Entity
 @Table(name = "t_role")
 public class Role {
@@ -26,8 +33,8 @@ public class Role {
                     CascadeType.MERGE
             })
     @JoinTable(name = "t_role_resources",
-            joinColumns = { @JoinColumn(name = "roles_id") },
-            inverseJoinColumns = { @JoinColumn(name = "resources_id") })
+            joinColumns = {@JoinColumn(name = "roles_id") },
+            inverseJoinColumns = {@JoinColumn(name = "resources_id") })
     private Set<Resource> resources = new HashSet<>();
 
 	public Long getId() {
