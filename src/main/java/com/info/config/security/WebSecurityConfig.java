@@ -41,7 +41,6 @@ import java.util.Set;
 
 @Configuration
 @EnableWebSecurity
-@ComponentScan
 public class WebSecurityConfig extends WebSecurityConfigurerAdapterImpl {
 	
 	public static final Logger logger=LoggerFactory.getLogger(WebSecurityConfig.class);
@@ -57,20 +56,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapterImpl {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {	
 		http
-				// .addFilterBefore(myFilterSecurityInterceptor,
+				//.addFilterBefore(filterSecurityInterceptor(),
 				// FilterSecurityInterceptor.class)//在正确的位置添加我们自定义的过滤器
 				// 重新添加拥有自己属性的过滤器;
 				/**
 				 * 不使用自定义过滤器类的话，可以直接使用默认实现的类，并提供自定义的属性
 				 */
-				//.addFilter(filterSecurityInterceptor())
+				.addFilter(filterSecurityInterceptor())
 				.authorizeRequests()
 				// 路径/index不需要验证
 				.antMatchers("/index","/","/decorator*","/js/**","/imgs/**","/css/**","/register").permitAll()
 				// 任何请求都需要授权
 				.anyRequest().authenticated()
 				.and()
-				.formLogin()
+			.formLogin()
 				.loginPage("/login")//之所以加true是因为 th:if{param.error}会去读取浏览器地址携带的参数，有了true之后，if就成立，所以后面的th:text就能执行。
 				.permitAll()// 表示“/login”和“/login-error”放行
 				// 登录失败处理
@@ -78,21 +77,21 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapterImpl {
 				// 登录成功处理
 				.successHandler(loginSuccessHandler())
 				.and()
-				.logout()
+			.logout()
 				.logoutSuccessUrl("/")
 				.permitAll()
 				// 注销后使session相关信息无效
 				.invalidateHttpSession(true)
 				.and()
 				// 开启rememberme功能：验证，登录成功后，关闭页面，直接访问登陆后可以访问的页面
-				.rememberMe()
+			.rememberMe()
 				// 持久化到数据库 如果不需要持久化到数据库，直接注释掉即可
 				.rememberMeServices(new PersistentTokenBasedRememberMeServices("MySpringSecurityCookie", userService,
 						persistentTokenRepository()))
 				// 设置有效时间(一周)
 				.tokenValiditySeconds(7 * 24 * 60 * 60)
 				.and()
-				.csrf()
+			.csrf()
 				// 自定义匹配器，方便排除那些不需要csrf防御的地址
 				.requireCsrfProtectionMatcher(csrfSecurityRequestMatcher())
 				.csrfTokenRepository(new HttpSessionCsrfTokenRepository());

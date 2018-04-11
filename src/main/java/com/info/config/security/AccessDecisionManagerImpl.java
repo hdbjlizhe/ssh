@@ -1,5 +1,7 @@
 package com.info.config.security;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.access.AccessDecisionManager;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.access.ConfigAttribute;
@@ -17,6 +19,10 @@ import java.util.Iterator;
  */
 @Component
 public class AccessDecisionManagerImpl implements AccessDecisionManager {
+	
+	
+	private static final Logger log = LoggerFactory.getLogger(AccessDecisionManagerImpl.class);
+
 
     public void decide( Authentication authentication, Object object, Collection<ConfigAttribute> configAttributes) throws AccessDeniedException, InsufficientAuthenticationException{
         if( configAttributes == null ) {
@@ -26,8 +32,10 @@ public class AccessDecisionManagerImpl implements AccessDecisionManager {
         while( iterator.hasNext()){
             ConfigAttribute configAttribute = iterator.next();
             String needRole = ((SecurityConfig)configAttribute).getAttribute();
+            log.info("AccessDecisionManage:"+needRole);
             //grantedAuthority 为用户所被赋予的权限。 needRole 为访问相应的资源应该具有的权限。
             for( GrantedAuthority grantedAuthority: authentication.getAuthorities()){
+            	log.info(grantedAuthority.getAuthority().trim());
                 if(needRole.trim().equals(grantedAuthority.getAuthority().trim())){
                     return;
                 }
@@ -41,6 +49,7 @@ public class AccessDecisionManagerImpl implements AccessDecisionManager {
          * 这可以是一个简单的“拒绝访问”页上，如一个JSP，或者它可以是更复杂的处理程序，如一个MVC的控制器。
          * 当然，你可以自己实现接口，并使用自己的实现。
          */
+        log.info("AccessDecisonManagerImpl抛出权限不足的异常");
         throw new AccessDeniedException("权限不足");
     }
 

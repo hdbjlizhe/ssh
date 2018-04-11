@@ -1,5 +1,7 @@
 package com.info.config.security;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.access.SecurityConfig;
@@ -22,6 +24,10 @@ import java.util.*;
  */
 @Component
 public class FilterInvocationSecurityMetadataSourceImpl implements FilterInvocationSecurityMetadataSource {
+	
+	
+	private static final Logger log = LoggerFactory.getLogger(FilterInvocationSecurityMetadataSourceImpl.class);
+
 
     @Autowired
     private RoleRepository  roleRepository;
@@ -35,7 +41,7 @@ public class FilterInvocationSecurityMetadataSourceImpl implements FilterInvocat
     private void loadResourceDefine() {
         // 在Web服务器启动时，提取系统中的所有权限。
         List<Role> roleList =roleRepository.findAll();
-
+        log.info("数据库上所有的角色："+roleList.toString());
         List<String> roleNameList = new ArrayList<String>();
         if(roleList!=null && roleList.size()>0) {
             for (Role role : roleList) {
@@ -76,6 +82,8 @@ public class FilterInvocationSecurityMetadataSourceImpl implements FilterInvocat
                 }
             }
         }
+        log.info("resourceMap里存储的是某资源 可以被哪些角色进入，例如：<resource,List<Role>>");
+        log.info("角色资源对照表："+resourceMap.toString());
 
     }
 
@@ -83,6 +91,10 @@ public class FilterInvocationSecurityMetadataSourceImpl implements FilterInvocat
     public Collection<ConfigAttribute> getAttributes(Object object) throws IllegalArgumentException {
         // object 是一个URL，被用户请求的url。
         FilterInvocation filterInvocation = (FilterInvocation) object;
+        log.info("请求地址:"+filterInvocation.getRequestUrl());
+        
+        Collection<ConfigAttribute> collection=new LinkedList<>();
+             
         if (resourceMap == null) {
             loadResourceDefine();
         }
@@ -92,10 +104,15 @@ public class FilterInvocationSecurityMetadataSourceImpl implements FilterInvocat
             // 优化请求路径后面带参数的部分
             RequestMatcher requestMatcher = new AntPathRequestMatcher(resURL);
             if(requestMatcher.matches(filterInvocation.getHttpRequest())) {
+            	log.info("检查请求的地址，哪些角色可以访问");
                 return resourceMap.get(resURL);
             }
         }
-        return null;
+        //不能返回null,返回null的话，AccessDecisionManagerImpl就不会起作用。返回一个默认角色
+        ConfigAttribute configAttribute=new SecurityConfig("user");
+        collection.add(configAttribute);
+        
+        return collection;
     }
 
     @Override
