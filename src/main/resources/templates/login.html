@@ -24,7 +24,8 @@
 	            </div>
 	            <br>
 	            <div>
-	            	<input type="submit" value="Sign In" th:value="#{msg.login.submit}" class="form-control"/>
+	            	<input type="submit" value="Sign In" th:value="#{msg.login.reset}" class="btn btn-large btn-primary"/>
+	            	<input type="submit" value="Sign In" th:value="#{msg.login.submit}" class="btn btn-large btn-primary pull-right"/>
 	            </div>  
 	            <input type="checkbox" name="remember-me" value="true" th:checked="checked"/><p>Remember me</p> 
 	            <!--注释掉可测试CSRF防御-->

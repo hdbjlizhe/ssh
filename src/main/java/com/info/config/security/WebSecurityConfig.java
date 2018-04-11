@@ -70,6 +70,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapterImpl {
 				// 任何请求都需要授权
 				.anyRequest().authenticated()
 				.and()
+			
 			.formLogin()
 				.loginPage("/login").permitAll()// 表示“/login”和“/login-error”放行
 				// 登录失败处理
