@@ -56,7 +56,7 @@ public class IndexController {
     //管理员页面
     @RequestMapping(value = {"/admin"})
     public String admin(){
-        return "admin";
+        return "admin/admin";
     }
     //普通用户页面
     @RequestMapping(value = {"/user"})

@@ -5,13 +5,18 @@
 <meta name="description" content="this is my page">
 <meta name="content-type" content="text/html; charset=UTF-8">
 <!-- Bootstrap:移动设备适配 -->
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <!-- SiteMesh:Title -->
-<title><sitemesh:write property='title'/></title>
+<title><sitemesh:write property='title' /></title>
 <!-- Bootstrap:CSS -->
 <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-<!-- 顶部有菜单栏，内容下移40px避开 -->
-<style type="text/css">body{padding-top:60px;}</style>
+<!-- 顶部有菜单栏，内容下移60px避开 -->
+<style type="text/css">
+body {
+	padding-top: 50px;
+}
+</style>
 <!-- 放在最后会使页面加载速度更快 -->
 <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
@@ -19,16 +24,34 @@
 <script type="text/javascript" src="js/source-not-open.js"></script>
  -->
 <!-- Sitemeah:head -->
-<sitemesh:write property="head"/>
+<sitemesh:write property="head" />
 </head>
 
 <body>
 	<!-- 引入header -->
 	<div th:include="header::body"></div>
-	
-	<!-- Sitemesh:body -->
-	<sitemesh:write property="body"/>
-	
+
+	<!-- Body -->
+	<div class="container-fluid">
+
+		<div class="row">
+			<!-- Right SideBar -->
+			<div class="col-md-10 col-md-push-2" >
+				<!-- Sitemesh:right -->
+				<div class="row">
+					<sitemesh:write property="right" />
+				</div>
+			</div>
+			<!-- Left SideBar -->
+			<div class="col-md-2 col-md-pull-10" style="background-color:#08c596;">
+				<!-- Sitemesh:left -->
+				<sitemesh:write property="left" />
+			</div>
+		</div>
+	</div>
+
+
+
 	<!-- 引入footer -->
 	<div th:include="footer::body"></div>
 

@@ -1,4 +1,4 @@
-package com.info.config.security;
+package com.info.config;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,6 +26,10 @@ import org.springframework.security.web.authentication.rememberme.PersistentToke
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 
+import com.info.config.security.AccessDecisionManagerImpl;
+import com.info.config.security.CSRFSecurityRequestMatcher;
+import com.info.config.security.FilterInvocationSecurityMetadataSourceImpl;
+import com.info.config.security.WebSecurityConfigurerAdapterImpl;
 import com.info.handler.LoginFailureHandler;
 import com.info.handler.LoginSuccessHandler;
 import com.info.service.IUserService;

@@ -9,38 +9,44 @@
 	<!--  左侧数据 -->
 	<left>
 	<ul class="list-group">
-		<li class="list-group-item active" th:text="#{msg.management.backstage}">后台管理</li>
+		<li class="list-group-item active"
+			th:text="#{msg.management.backstage}">后台管理</li>
 		<li class="list-group-item"><span class="badge">新</span><a
 			href="/resource" th:text="#{msg.management.resource}">资源管理</a></li>
-		<li class="list-group-item"><a href="/privilege"  th:text="#{msg.management.privilege}">权限管理</a></li>
-		<li class="list-group-item"><a href="/role" th:text="#{msg.management.role}">角色管理</a></li>
-		<li class="list-group-item"><a href="/user" th:text="#{msg.management.user}">用户管理</a></li>
-		<li class="list-group-item active" th:text="#{msg.management.ftpbase}">资料库管理</li>
-		<li class="list-group-item"><a href="/syncftp"  th:text="#{msg.management.syncftpbase}">同步FTP服务器和本地数据库</a></li>
+		<li class="list-group-item"><a href="/privilege"
+			th:text="#{msg.management.privilege}">权限管理</a></li>
+		<li class="list-group-item"><a href="/role"
+			th:text="#{msg.management.role}">角色管理</a></li>
+		<li class="list-group-item"><a href="/user"
+			th:text="#{msg.management.user}">用户管理</a></li>
+		<li class="list-group-item" th:text="#{msg.management.ftpbase}">资料库管理</li>
+		<li class="list-group-item"><a href="/syncftp"
+			th:text="#{msg.management.syncftpbase}">同步FTP服务器和本地数据库</a></li>
 	</ul>
 	</left>
+	
+	
 	<!-- 右侧数据 -->
 	<right> <!-- 资源管理 -->
-	
 	<div class="bg-primary">添加资源</div>
 	<br>
-	<form action="/resource/add"  class="form-inline">
-		<label th:text="#{msg.resource.uri}"></label>
-		<input name="uri" type="text" class="form-control">
-		<label th:text="#{msg.resource.description}"></label>
-		<input name="description" type="text" class="form-control">
-		<label th:text="#{msg.resource.privilege}"></label>
-		<select name="privilegeId" class="form-control" 
-				th:filed="*{privilege}" 
-				th:remove="all-but-first">
-			<option th:each="privilege:${privileges}"
-				th:value="${privilege.id}" th:text="${privilege.name}">
+	<form action="/resource/add" class="form-inline">
+		<label th:text="#{msg.resource.uri}"></label> <input name="uri"
+			type="text" class="form-control"> <label
+			th:text="#{msg.resource.description}"></label> <input
+			name="description" type="text" class="form-control"> <label
+			th:text="#{msg.resource.privilege}"></label> <select
+			name="privilegeId" class="form-control" th:filed="*{privilege}"
+			th:remove="all-but-first">
+			<option th:each="privilege:${privileges}" th:value="${privilege.id}"
+				th:text="${privilege.name}">
 			<option>
 		</select>
-		<button class="form-control" type="submit" th:text="#{msg.resource.add}">添加新资源</button>
+		<button class="form-control" type="submit"
+			th:text="#{msg.resource.add}">添加新资源</button>
 	</form>
 	<br>
-	
+
 	<table class="table table-striped">
 		<caption class="bg-primary">资源管理</caption>
 		<thead>
@@ -48,25 +54,28 @@
 				<td th:text="#{msg.resource.id}">ID</td>
 				<td th:text="#{msg.resource.uri}">URI</td>
 				<td th:text="#{msg.resource.description}">描述</td>
-				<td th:text="#{msg.resource.privilege}">所属权限</td>
+				<td th:text="#{msg.resource.role}">所属角色</td>
+				<td th:text="#{msg.resource.method}">处理方法</td>
 				<td th:text="#{msg.resource.update}">修改</td>
 				<td th:text="#{msg.resource.delete}">删除</td>
 			</tr>
 		</thead>
 		<tr th:each="resource : ${resources}">
-				<td th:text="${resource.id}">id</td>
-				<td><input name="uri" type="text" th:value="${resource.uri}" class="form-control"></td>
-				<td><input name="description" type="text"
-					th:value="${resource.description}"  class="form-control"></td>
-	 			<td><select th:filed="*{privilege}" th:remove="all-but-first" class="form-control">
-						<option th:each="privilege:${privileges}"
-							th:value="${privilege.id}" th:text="${privilege.name}">
-						<option>
-				</select></td>
-				<td><a th:href="@{/resource/update/{id}(id=${resource.id})}" 
-						th:text="#{msg.resource.update}">保存修改</a></td>
-				<td><a th:href="@{/resource/delete/{id}(id=${resource.id})}"
-						th:text="#{msg.resource.delete}">删除</a></td>
+			<td th:text="${resource.id}">id</td>
+			<td><input name="uri" type="text" th:value="${resource.uri}"
+				class="form-control"></td>
+			<td><input name="description" type="text"
+				th:value="${resource.description}" class="form-control"></td>
+			<td><select th:filed="*{role}" th:remove="all-but-first"
+				class="form-control">
+					<option th:each="privilege:${roles}"
+						th:value="${role.id}" th:text="${role.name}">
+					<option>
+			</select></td>
+			<td><a th:href="@{/resource/update/{id}(id=${resource.id})}"
+				th:text="#{msg.resource.update}">保存修改</a></td>
+			<td><a th:href="@{/resource/delete/{id}(id=${resource.id})}"
+				th:text="#{msg.resource.delete}">删除</a></td>
 		</tr>
 
 		<tr>

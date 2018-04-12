@@ -32,16 +32,16 @@ body {
 	<div th:include="header::body"></div>
 
 	<!-- Body -->
-	<div class="container">
+	<div class="container-fluid">
 
 		<div class="row">
 			<!-- Right SideBar -->
-			<div class="col-md-9 col-md-push-3">
+			<div class="col-md-10 col-md-push-2">
 				<!-- Sitemesh:right -->
 				<sitemesh:write property="right" />
 			</div>
 			<!-- Left SideBar -->
-			<div class="col-md-3 col-md-pull-9">
+			<div class="col-md-2 col-md-pull-10">
 				<!-- Sitemesh:left -->
 				<sitemesh:write property="left" />
 			</div>

@@ -14,4 +14,13 @@ public class DecoratorController {
 	public String about() {
 		return "/decorators/about";
 	}
+	@GetMapping("/decorators/party")
+	public String party() {
+		return "/decorators/party";
+	}
+	@GetMapping("/decorators/office")
+	public String office() {
+		return "/decorators/office";
+	}
+	
 }
