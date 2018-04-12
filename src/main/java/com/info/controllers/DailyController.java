@@ -24,4 +24,5 @@ public class DailyController {
 		model.addAttribute("departments",departments);
 		return "daily/monthly-report";
 	}
+	
 }

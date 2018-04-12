@@ -12,11 +12,10 @@
   </head>
   
   <body>
-    This is my error page. <br>
-    <h1 class="text-error">发生错误</h1>
-    <div th:text="${url}"></div>
-    <div th:text="${exception.message}"></div>
     
+    <h1 class="text-error">发生错误</h1>
+    <div th:if="${url}"><p th:text="${url}"></p></div>
+    <div th:if="${exception.message}"><p th:text="${exception.message}"></p></div>  
     
     <script type="text/javascript" src="js/source-not-open.js"></script>
   </body>

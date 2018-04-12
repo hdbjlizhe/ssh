@@ -1,5 +1,6 @@
 package com.info.controllers;
 
+import org.apache.catalina.startup.HomesUserDatabase;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -9,9 +10,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class IndexController {
 	
 	//首页
-	@RequestMapping(value={"/","/index"})
+	@RequestMapping("/index")
 	public String index(){
 		return "index";
+	}
+	@RequestMapping("/")
+	public String home() {
+		return "redirect:/index";
 	}
 	//党务模块
 	@GetMapping("/party")
@@ -48,11 +53,6 @@ public class IndexController {
 	public String about() {
 		return "about";
 	}
-	//HOME页面
-    @RequestMapping(value = {"/home"})
-    public String home(){
-        return "home";
-    }
     //管理员页面
     @RequestMapping(value = {"/admin"})
     public String admin(){

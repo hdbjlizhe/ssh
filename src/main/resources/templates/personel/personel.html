@@ -1,40 +1,21 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-  <head>
-    <title>人事管理</title>
-	
-    <meta name="keywords" content="keyword1,keyword2,keyword3">
-    <meta name="description" content="this is my page">
-    <meta name="content-type" content="text/html; charset=UTF-8">
-    <!-- bootstrap移动设备优先 -->
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <!--  引入样式文件 -->
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-    <!-- 引入JQuery文件 -->
-    <script type="text/javascript" src="js/jquery-3.3.2.min.js"></script>
-    <!--  -->
-	<style type="text/css">
-	body{padding-top:60px;}
-	.text-white{
-		color:white;
-	}
-	
-	</style>
-	
-  </head>
-  
-  <body>
-   	<!-- 引入header -->
-	<div th:include="header::html"></div>
-	
-	<!-- body -->
-	<div class="container">
-	
-		<a href="">人事管理页面</a>
-	
-	</div>
+<head>
+<title>人事管理</title>
+<meta charset="UTF-8">
+</head>
 
-	<!-- 引入footer -->
-	<div th:include="footer::html"></div>
-  </body>
+<body>
+	<left>
+		<ul class="list-group">
+		<li class="list-group-item active">人事管理</li>
+		<li class="list-group-item"><a href="">干部管理页面</a></li>
+		<li class="list-group-item"><a href="">请销假及外出报备</a></li>
+		</ul>
+	</left>
+	
+	<right>
+	
+	</right>
+</body>
 </html>
