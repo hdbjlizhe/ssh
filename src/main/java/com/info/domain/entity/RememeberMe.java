@@ -1,5 +1,6 @@
 package com.info.domain.entity;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -8,7 +9,11 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name="persistent_logins")
-public class RememeberMe {
+public class RememeberMe implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4578575034524182660L;
 	@NotNull
 	private String username;
 	@Id

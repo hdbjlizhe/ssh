@@ -1,13 +1,12 @@
 package com.info.event.listener;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.core.env.Environment;
-//import org.springframework.mail.javamail.*;
-//import org.springframework.mail.*;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Component;
 
 import com.info.domain.entity.User;
@@ -15,10 +14,7 @@ import com.info.domain.entity.ValidateToken;
 import com.info.event.OnRegistrationCompleteEvent;
 import com.info.service.IUserService;
 
-import java.io.InputStream;
 import java.util.UUID;
-
-import javax.mail.internet.MimeMessage;
 
 /**
  *  1、生成并保存邮箱验证令牌
@@ -26,9 +22,11 @@ import javax.mail.internet.MimeMessage;
  */
 @Component
 public class RegistrationListener implements ApplicationListener<OnRegistrationCompleteEvent> {
-
+	
+	private static final Logger log = LoggerFactory.getLogger(RegistrationListener.class);
+	
     @Autowired
-    private MyJavaMailSender mailSender;
+    private JavaMailSenderImpl mailSender;
 
     @Autowired
     private IUserService userService;
@@ -46,10 +44,12 @@ public class RegistrationListener implements ApplicationListener<OnRegistrationC
 
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setSubject("注册确认邮件");
-        mailMessage.setText("http://localhost:80"+appurl+"/registationConfirm?token="+token);
+        mailMessage.setText("http://localhost:8080"+appurl+"/registationConfirm?token="+token);
         mailMessage.setTo(user.getEmail());
         mailMessage.setFrom(environment.getProperty("mail.from.addr"));
-
+        
+        log.info(mailMessage.toString());
+        log.info(mailSender.toString());
         mailSender.send(mailMessage);
     }
 }

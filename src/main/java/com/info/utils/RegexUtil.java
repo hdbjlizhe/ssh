@@ -71,9 +71,9 @@ public class RegexUtil {
 //	1 Email地址：^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$
 	public final static String REGEX_EMAIL="^\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$";
 //	2 域名：[a-zA-Z0-9][-a-zA-Z0-9]{0,62}(/.[a-zA-Z0-9][-a-zA-Z0-9]{0,62})+/.?
-//
+	public final static String REGEX_DOMAIN_NAME="[a-zA-Z0-9][-a-zA-Z0-9]{0,62}(/.[a-zA-Z0-9][-a-zA-Z0-9]{0,62})+/.?";
 //	3 InternetURL：[a-zA-z]+://[^\s]* 或 ^http://([\w-]+\.)+[\w-]+(/[\w-./?%&=]*)?$
-//
+	public final static String REGEX_INTERNET_URL="[a-zA-z]+://[^\\s]* 或 ^http://([\\w-]+\\.)+[\\w-]+(/[\\w-./?%&=]*)?$";
 //	4 手机号码：^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\d{8}$
 	public final static String REGEX_MOBILE="^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\\d{8}$";
 //	5 电话号码("XXX-XXXXXXX"、"XXXX-XXXXXXXX"、"XXX-XXXXXXX"、"XXX-XXXXXXXX"、"XXXXXXX"和"XXXXXXXX)：^(\(\d{3,4}-)|\d{3.4}-)?\d{7,8}$
@@ -87,15 +87,15 @@ public class RegexUtil {
 //	9 帐号是否合法(字母开头，允许5-16字节，允许字母数字下划线)：^[a-zA-Z][a-zA-Z0-9_]{4,15}$
 	public final static String REGEX_USERNAME="^[a-zA-Z][a-zA-Z0-9_]{4,15}$";
 //	10 密码(以字母开头，长度在6~18之间，只能包含字母、数字和下划线)：^[a-zA-Z]\w{5,17}$
-//
+	public final static String REGEX_PASSWORD="^[a-zA-Z]\\w{5,17}$";
 //	11 强密码(必须包含大小写字母和数字的组合，不能使用特殊字符，长度在8-10之间)：^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,10}$
-//
+	public final static String REGEX_PASSWORD_STRONG="^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,10}$";
 //	12 日期格式：^\d{4}-\d{1,2}-\d{1,2}
-//
+	public final static String REGEX_DATE="^\\d{4}-\\d{1,2}-\\d{1,2}";
 //	13 一年的12个月(01～09和1～12)：^(0?[1-9]|1[0-2])$
-//
+	public final static String REGEX_MONTH="^(0?[1-9]|1[0-2])$";
 //	14 一个月的31天(01～09和1～31)：^((0?[1-9])|((1|2)[0-9])|30|31)$
-//
+	public final static String REGEX_DAY="^((0?[1-9])|((1|2)[0-9])|30|31)$";
 //	15 钱的输入格式：
 //
 //	16 1.有四种钱的表示形式我们可以接受:"10000.00" 和 "10,000.00", 和没有 "分" 的 "10000" 和 "10,000"：^[1-9][0-9]*$
@@ -129,10 +129,11 @@ public class RegexUtil {
 //	30 首尾空白字符的正则表达式：^\s*|\s*$或(^\s*)|(\s*$) (可以用来删除行首行尾的空白字符(包括空格、制表符、换页符等等)，非常有用的表达式)
 //
 //	31 腾讯QQ号：[1-9][0-9]{4,} (腾讯QQ号从10000开始)
-//
+	public final static String REGEX_QQ="[1-9][0-9]{4,}";
 //	32 中国邮政编码：[1-9]\d{5}(?!\d) (中国邮政编码为6位数字)
-//
+	public final static String REGEX_POST_CODE="[1-9]\\d{5}(?!\\d)";
 //	33 IP地址：\d+\.\d+\.\d+\.\d+ (提取IP地址时有用)
-//
+	public final static String REGEX_IPV4_ADDRESS="\\d+\\.\\d+\\.\\d+\\.\\d+";
 //	34 IP地址：((?:(?:25[0-5]|2[0-4]\\d|[01]?\\d?\\d)\\.){3}(?:25[0-5]|2[0-4]\\d|[01]?\\d?\\d))
+	public final static String REGEX_IPV6_ADDRESS="((?:(?:25[0-5]|2[0-4]\\\\d|[01]?\\\\d?\\\\d)\\\\.){3}(?:25[0-5]|2[0-4]\\\\d|[01]?\\\\d?\\\\d))";
 }

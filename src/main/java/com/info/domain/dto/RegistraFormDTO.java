@@ -1,13 +1,15 @@
 package com.info.domain.dto;
 
 import javax.validation.constraints.NotNull;
-import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.NotEmpty;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Email;
+//import org.hibernate.validator.constraints.Email;
+//import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.constraints.Size;
 
 /**
- *  注册表单数据传输对象
+ *  注册表单-数据传输对象
  */
 public class RegistraFormDTO {
 
@@ -18,14 +20,14 @@ public class RegistraFormDTO {
 
     @NotEmpty
     @NotNull
-    @Size(min = 6,max = 32)
+    @Size(min = 6,max = 32,message="密码长度应该在6-32之间")
     private String password;
 
     @NotEmpty
     @NotNull
-    @Email
+    @Email(message="邮箱格式不正确")
     private String email;
-
+        
 	public String getUsername() {
 		return username;
 	}
@@ -49,6 +51,4 @@ public class RegistraFormDTO {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
-
 }

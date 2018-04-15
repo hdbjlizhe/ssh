@@ -1,4 +1,6 @@
+#########################################################################
 #数据源配置
+#########################################################################
 spring:
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
@@ -29,12 +31,41 @@ spring:
     basename: static/i18n/messages
     cache-duration: 3600
     encoding: UTF-8
-    
+#配置邮箱服务
+  mail: 
+    host: smtp.163.com
+    username: hdbjlizhe@163.com
+    password: hdlizhe850318
+    port: 465
+    protocol: smtp
+    test-connection: true 
+    properties:
+      mail: 
+        debug: true
+        host: smtp.163.com
+        transport: 
+          protocol: smtp
+        smtp: 
+          auth: true
+          port: 465
+          timeout: 600000
+          socketFactory:
+            port: 465
+            class: javax.net.ssl.SSLSocketFactory
+          starttls: 
+            enable: true
+            required: true
+#########################################################################    
 #自定义参数
+#########################################################################
 message:
   welcome: 欢迎
-
+mail: 
+  from: 
+    addr: hdbjlizhe@163.com   #邮件发送地址
+#########################################################################
 #产业招商精准招商FTP资料库
+#########################################################################
 ftpServer:
   host: 10.151.248.185
   port: 21

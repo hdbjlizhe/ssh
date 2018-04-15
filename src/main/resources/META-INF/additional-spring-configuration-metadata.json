@@ -23,5 +23,45 @@
     "name": "ftp-server.password",
     "type": "java.lang.String",
     "description": "A description for 'ftp-server.password'"
+  },
+  {
+    "name": "mail.from.addr",
+    "type": "java.lang.String",
+    "description": "A description for 'mail.from.addr'"
+  },
+  {
+    "name": "mail.smtp.auth",
+    "type": "java.lang.String",
+    "description": "A description for 'mail.smtp.auth'"
+  },
+  {
+    "name": "mail.smtp.starttls.enable",
+    "type": "java.lang.String",
+    "description": "A description for 'mail.smtp.starttls.enable'"
+  },
+  {
+    "name": "mail.smtp.timeout",
+    "type": "java.lang.String",
+    "description": "A description for 'mail.smtp.timeout'"
+  },
+  {
+    "name": "mail.host",
+    "type": "java.lang.String",
+    "description": "A description for 'mail.host'"
+  },
+  {
+    "name": "mail.port",
+    "type": "java.lang.String",
+    "description": "A description for 'mail.port'"
+  },
+  {
+    "name": "mail.username",
+    "type": "java.lang.String",
+    "description": "A description for 'mail.username'"
+  },
+  {
+    "name": "mail.password",
+    "type": "java.lang.String",
+    "description": "A description for 'mail.password'"
   }
 ]}

@@ -4,10 +4,10 @@ import com.info.utils.RegexUtil;
 
 public class UserUtil {
 	
-	public final static int USER_ERROR=-1;
-	public final static int USER_NAME = 0; // 用户名
-	public final static int USER_MOBILE = 1; // 手机号
-	public final static int USER_EMAIL = 2; // Email
+	public final static int USER_ERROR=-1;		// 用户错误
+	public final static int USER_NAME = 0; 		// 用户名
+	public final static int USER_MOBILE = 1; 	// 手机号
+	public final static int USER_EMAIL = 2; 	// Email
 
 	/**
 	 * 通过用户ID获取用户ID的种类，用户名：手机号：Email

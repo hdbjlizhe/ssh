@@ -2,24 +2,24 @@ package com.info.domain;
 
 import java.util.Date;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name="f_ftpbase")
 public class FtpBaseFile {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;//文件ID
-	@Column(nullable=false)
+	@NotNull
 	private String name;//文件名
 	private String path;//文件路径
-	private Date uploadTime;//修改时间
+	private Date uploadTime;//上传时间
 	private String extension;//扩展名
 	
 	public Integer getId() {

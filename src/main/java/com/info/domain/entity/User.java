@@ -11,9 +11,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- *  这里不能使用lombok  @Data注解
- *      否则会出现@ManyToMany死循环导致内存溢出
- *      否则就是org.hibernate.LazyInitializationException: failed to lazily initialize a collection of role: cn.geekview.domain.entity.User.roles, could not initialize proxy - no Session
+ *  这里不能使用lombok  @Data注解 否则会出现@ManyToMany死循环导致内存溢出
+ *  否则就是org.hibernate.LazyInitializationException: failed to lazily initialize a collection of role: cn.geekview.domain.entity.User.roles, could not initialize proxy - no Session
  *
  */
 @Entity
@@ -34,14 +33,30 @@ public class User implements UserDetails{
     private String password;
 
     private String email;
+    
+    private String mobile;
+    
+    private Boolean accountNonExpired;//账户未过期
+    
+    private Boolean accountNonLocked;//账记未被锁定
+    
+    private Boolean credentialsNonExpired;//证书未过期
 
     /*
         AbstractUserDetailsAuthenticationProvider的私有内部类DefaultPreAuthenticationChecks会对用户是否可用进行校验
      */
     private boolean enabled;
+    
+    @OneToOne
+    
+    private Employee employee;//对应个人具体信息
 
     public User(){
         this.enabled = false;
+        this.accountNonExpired=false;
+        this.accountNonLocked=false;
+        this.credentialsNonExpired=false;
+        //this.employee=new Employee();
     }
 
     /**
@@ -65,18 +80,27 @@ public class User implements UserDetails{
 
     @Override
     public boolean isAccountNonExpired() {
-        return true;
+        return accountNonExpired;
     }
+    public void setAccountNonExpired(Boolean accountNonExpired) {
+		this.accountNonExpired = accountNonExpired;
+	}
 
     @Override
     public boolean isAccountNonLocked() {
-        return true;
+        return accountNonLocked;
     }
+    public void setAccountNonLocked(Boolean accountNonLocked) {
+		this.accountNonLocked = accountNonLocked;
+	}
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return true;
+        return credentialsNonExpired;
     }
+    public void setCredentialsNonExpired(Boolean credentialsNonExpired) {
+		this.credentialsNonExpired = credentialsNonExpired;
+	}
 
     public Long getId() {
         return id;
@@ -128,4 +152,22 @@ public class User implements UserDetails{
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }
+
+	public String getMobile() {
+		return mobile;
+	}
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+
+	public void setEmployee(Employee employee) {
+		this.employee=employee;
+	}
+	
+	public Employee getEmployeee() {
+		return employee;
+	}
+    
+    
 }

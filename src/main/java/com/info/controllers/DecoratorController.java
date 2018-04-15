@@ -22,5 +22,9 @@ public class DecoratorController {
 	public String office() {
 		return "/decorators/office";
 	}
+	@GetMapping("/decorators/cms")
+	public String cms() {
+		return "/decorators/cms";
+	}
 	
 }

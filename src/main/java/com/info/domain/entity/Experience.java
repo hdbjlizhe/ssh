@@ -1,5 +1,6 @@
 package com.info.domain.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -10,11 +11,15 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 @Entity
 @Table(name="e_experience")
-public class Experience {
+public class Experience implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5826825377367927112L;
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Integer id;					//������id
+	private Long id;					//������id
 	private Date startTime;
 	private Date endTime;
 	private String jobContent;
@@ -22,10 +27,10 @@ public class Experience {
 	@ManyToOne
 	private Employee employee; 		//���һ
 	
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public Date getStartTime() {

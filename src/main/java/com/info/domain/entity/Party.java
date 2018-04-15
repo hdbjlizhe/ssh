@@ -1,5 +1,7 @@
 package com.info.domain.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -8,18 +10,22 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="e_party")
-public class Party {
+public class Party implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7072047757264565917L;
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Integer id;
+	private Long id;
 	private String partyName;
 	private String description;
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

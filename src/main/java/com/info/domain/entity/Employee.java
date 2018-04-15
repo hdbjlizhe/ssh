@@ -1,5 +1,6 @@
 package com.info.domain.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -11,11 +12,15 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="e_employee")
-public class Employee {
+public class Employee implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6740414617028525960L;
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Integer id; // 用户ID-对应User.id
+	private Long id; // 用户ID-对应User.id
 	private String name; // 真实姓名
 	@ManyToOne
 	private Department department; // 所在部门
@@ -48,11 +53,11 @@ public class Employee {
 		this.setIsMale(true);
 	}
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
