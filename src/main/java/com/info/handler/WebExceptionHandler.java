@@ -1,4 +1,4 @@
-package com.info.config.global;
+package com.info.handler;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
