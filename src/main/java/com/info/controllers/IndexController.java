@@ -25,7 +25,7 @@ public class IndexController {
 		return "index";
 	}
 	//错误处理
-	@RequestMapping("/error")
+	@GetMapping("/error")
 	public String Error() {
 		return "error";
 	}
