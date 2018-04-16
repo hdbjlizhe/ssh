@@ -53,9 +53,9 @@ public class User implements UserDetails{
 
     public User(){
         this.enabled = false;
-        this.accountNonExpired=false;
-        this.accountNonLocked=false;
-        this.credentialsNonExpired=false;
+        this.accountNonExpired=true;	//账户未过期
+        this.accountNonLocked=true;		//账户未被锁
+        this.credentialsNonExpired=true;//授权证书过期
         //this.employee=new Employee();
     }
 

@@ -10,6 +10,8 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.info.utils.LocaleUtil;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class DemoApplicationTests {
@@ -32,5 +34,10 @@ public class DemoApplicationTests {
 		message.setSubject("主题：简单邮件");
 		message.setText("简单邮件内容");
 		mailSender.send(message);
+	}
+	
+	@Test
+	public void testLocaleUtil() {
+		log.info(LocaleUtil.getAttribute("msg.mail.confirm"));
 	}
 }

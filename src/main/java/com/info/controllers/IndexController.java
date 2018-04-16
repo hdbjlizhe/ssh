@@ -1,6 +1,7 @@
 package com.info.controllers;
 
-import org.apache.catalina.startup.HomesUserDatabase;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -9,14 +10,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class IndexController {
 	
+	
+	private static final Logger log = LoggerFactory.getLogger(IndexController.class);
+
+	
 	//首页
+	@RequestMapping("/")
+	public String home() {
+		return "redirect:/index";
+	}
+	
 	@RequestMapping("/index")
 	public String index(){
 		return "index";
 	}
-	@RequestMapping("/")
-	public String home() {
-		return "redirect:/index";
+	//错误处理
+	@RequestMapping("/error")
+	public String Error() {
+		return "error";
 	}
 	//党务模块
 	@GetMapping("/party")
@@ -53,26 +64,6 @@ public class IndexController {
 	public String about() {
 		return "about";
 	}
-    //管理员页面
-    @RequestMapping(value = {"/admin"})
-    public String admin(){
-        return "admin/admin";
-    }
-    //普通用户页面
-    @RequestMapping(value = {"/user"})
-    public String user(){
-        return "user";
-    }
-    //VIP用户页面
-    @RequestMapping(value = {"/vip"})
-    public String vip(){
-        return "vip";
-    }
-    //超级用户页面
-    @RequestMapping(value = {"/super"})
-    public String superm(){
-        return "super";
-    }
     //拒绝登录页面
     @RequestMapping(value = {"/deny"})
     public String deny(){
@@ -83,7 +74,7 @@ public class IndexController {
     public String regist(){
         return "register";
     }
-    //登录页面
+    //Get请求的登录页面
     @GetMapping("/login")
     public String login(){
         return "login";

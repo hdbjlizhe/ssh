@@ -17,10 +17,11 @@ public class WebExceptionHandler {
 	private final static Logger logger=LoggerFactory.getLogger(WebExceptionHandler.class);
 	
 	private static final String ERROR_VIEW = "error";
+	//private static final String ERROR_VIEW = "deny";
 	
 	//错误处理函数
 	public Object errorHandler(HttpServletRequest request, HttpServletResponse response, Exception e) throws Exception {
-		logger.info("异常处理函数");
+		logger.info("统一的异常处理函数");
 		//e.printStackTrace();
 		if (isAjax(request)) {
 			return response;

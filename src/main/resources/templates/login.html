@@ -11,7 +11,10 @@
 	        </div>  
 	        <div th:if="${param.logout}">  
 	            You have been logged out.  
-	        </div>  
+	        </div>
+	        <div th:if="${message}" style="color:red">  
+	            <p th:text="${message}"></p> 
+	        </div>   
 	        <form th:action="@{/login}" method="post" class="form">  
 	            <div>
 	            	<label th:text="#{msg.login.email}">email</label>
@@ -23,16 +26,25 @@
 	            	<input type="password" name="password" class="form-control"/>
 	            </div>
 	            <br>
+	            <input type="checkbox" name="remember-me" value="true" th:checked="checked" th:text="#{msg.login.rememberme}"/>
+	            <br><br>
 	            <div>
 	            	<input type="submit" value="Sign In" th:value="#{msg.login.reset}" class="btn btn-large btn-primary"/>
 	            	<input type="submit" value="Sign In" th:value="#{msg.login.submit}" class="btn btn-large btn-primary pull-right"/>
 	            </div>  
-	            <input type="checkbox" name="remember-me" value="true" th:checked="checked"/><p>Remember me</p> 
+	            
 	            <!--注释掉可测试CSRF防御-->
 	        	<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" /> 
 	        </form>
-	        
+	        <br>
+	        <div class="row">
+		        <div class="col-xs-6 col-md-3 text-center"><img alt="支付宝登录" src="imgs/icon_alipay_256.png"></div>
+		        <div class="col-xs-6 col-md-3 text-center"><img alt="QQ登录" src="imgs/icon_qq_256.png"></div>
+		        <div class="col-xs-6 col-md-3 text-center"><img alt="微信登录" src="imgs/icon_webchat_256.png"></div>
+		        <div class="col-xs-6 col-md-3 text-center"><img alt="微博登录" src="imgs/icon_weibo_256.png"></div>
+		    </div>	        
 	        <th:block th:text="${#httpServletRequest.session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION')}"></th:block>
          </div>
+         <br>
     </body>  
 </html>  

@@ -13,6 +13,7 @@ import com.info.domain.entity.User;
 import com.info.domain.entity.ValidateToken;
 import com.info.event.OnRegistrationCompleteEvent;
 import com.info.service.IUserService;
+import com.info.utils.LocaleUtil;
 
 import java.util.UUID;
 
@@ -40,10 +41,11 @@ public class RegistrationListener implements ApplicationListener<OnRegistrationC
         String appurl = event.getAppUrl();
         String token = UUID.randomUUID().toString();
         ValidateToken validateToken = new ValidateToken(user,token);
-        userService.saveValidateToken(validateToken);
-
+        userService.saveValidateToken(validateToken);//存储Token
+        log.info("存到数据库的validateToken是："+token);
         SimpleMailMessage mailMessage = new SimpleMailMessage();
-        mailMessage.setSubject("注册确认邮件");
+        //mailMessage.setSubject("注册确认邮件");
+        mailMessage.setSubject("注册确认信息");
         mailMessage.setText("http://localhost:8080"+appurl+"/registationConfirm?token="+token);
         mailMessage.setTo(user.getEmail());
         mailMessage.setFrom(environment.getProperty("mail.from.addr"));

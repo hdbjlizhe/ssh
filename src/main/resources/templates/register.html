@@ -7,9 +7,12 @@
 
 <body>
 	<div class="container">
+		 <div th:if="${message}" style="color:red">  
+	            <p th:text="${message}"></p> 
+	     </div> 
 		<form action="/register" method="post">
 			<h2 th:text="#{msg.register.title}">Please Register</h2>
-			<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+			<input th:id="${_csrf.parameterName}" type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 			
 			<label th:text="#{msg.register.username}">UserName:</label>
 			<input id="username" name="username" type="text"
@@ -18,7 +21,7 @@
 			<label th:text="#{msg.register.password}">Password:</label>
 			<input id="password" name="password" type="password"
 				class="form-control" placeholder="Password">
-			<label>密码应该在6位到32位之间</label> <br>
+			<label class="text-warning">密码应该在6位到32位之间</label> <br>
 				
 			<label th:text="#{msg.register.email}">Email:</label>
 			<input id="email" name="email" type="email"
@@ -33,29 +36,39 @@
 				type="submit" th:text="#{msg.reset}">Reset</button>
 			<button id="btn-submit" class="btn btn-large btn-primary pull-right"
 				type="submit" th:text="#{msg.register}">Register</button>
-		</form>		
+		</form>
+		<br>
+        <div class="row">
+	        <div class="col-xs-6 col-md-3 text-center"><img alt="支付宝登录" src="imgs/icon_alipay_256.png"></div>
+	        <div class="col-xs-6 col-md-3 text-center"><img alt="QQ登录" src="imgs/icon_qq_256.png"></div>
+	        <div class="col-xs-6 col-md-3 text-center"><img alt="微信登录" src="imgs/icon_webchat_256.png"></div>
+	        <div class="col-xs-6 col-md-3 text-center"><img alt="微博登录" src="imgs/icon_weibo_256.png"></div>
+	    </div>	
 		<th:block th:text="${message}">异常信息</th:block>
 	</div>
 
 	<!-- Ajax 注册的用户名是否可用 -->
 	<script type="text/javascript">
 	$(document).ready(function() {
-			$(":input[name=username]").change(function() {
-				var val = $(this).val(); //获取输入值
+			//用户名修改事件
+			$(":input[name='username']").change(function() {
+											
+				var val = $(this).val(); //获取输入值				
 				val = $.trim(val); //去掉两端的空格
 				var $this = $(this); //
 				debugger
 				if (val != "") { //值不为空
 					//把当前节点后面的所有 font 兄弟节点删除
 					$this.nextAll("font").remove();
-	
 					var url = "/validateUserName";
 					var args = {
 						"username" : val,
-						"time" : new Date()
+						"time" : new Date(),
+						"_csrf" : $(":input[name='_csrf']").val()
 					};
 					$.post(url, args, function(data) {
-						//表示可用
+						debugger
+						//表示可用						
 						if (data == true) {
 							$this.after("<font color='green'>账户可用!</font>");
 						}
@@ -74,11 +87,8 @@
 					$this.focus();
 				}
 			});
-		})
-	</script>
-	
-	<script type="text/javascript">
-	$(document).ready(function() {
+
+			//Email修改事件
 			$(":input[name=email]").change(function() {
 				var val = $(this).val(); //获取输入值
 				val = $.trim(val); //去掉两端的空格
@@ -91,7 +101,8 @@
 					var url = "/validateEmail";
 					var args = {
 						"email" : val,
-						"time" : new Date()
+						"time" : new Date(),
+						"_csrf" : $(":input[name='_csrf']").val()
 					};
 					$.post(url, args, function(data) {
 						//表示可用
@@ -113,10 +124,8 @@
 					$this.focus();
 				}
 			});
-		})
-	</script>
-	<script type="text/javascript">
-		$(document).ready(function() {
+
+			//提交按钮事件
 			$("#btn-submit").click(function() {
 				debugger
 				var account = $("#username").val();
@@ -136,7 +145,7 @@
 					return false;
 				}
 			});
-		});
+		})
 	</script>
 </body>
 </html>
