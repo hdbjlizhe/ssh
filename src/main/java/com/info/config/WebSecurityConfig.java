@@ -83,7 +83,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapterImpl {
 				.successHandler(loginSuccessHandler())
 				.and()
 			.logout()
-				.logoutSuccessUrl("/").permitAll()
+				.logoutSuccessUrl("/index").permitAll()
 				// 注销后使session相关信息无效
 				.invalidateHttpSession(true)
 				.and()

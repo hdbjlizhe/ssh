@@ -1,13 +1,10 @@
 package com.info.handler;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
-import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
-
 import com.info.domain.entity.User;
 
 import javax.servlet.ServletException;
@@ -47,7 +44,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
         System.out.println("Session:"+request.getSession().toString());
 
         //登录成功后跳转到默认对应的页面
-        String targetUrl = "/home";
+        String targetUrl = "/index";
         for (GrantedAuthority grantedAuthority : authentication.getAuthorities()) {
             String roleName = grantedAuthority.getAuthority();
             switch (roleName){

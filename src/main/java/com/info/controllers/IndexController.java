@@ -9,10 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class IndexController {
-	
-	
+		
 	private static final Logger log = LoggerFactory.getLogger(IndexController.class);
-
 	
 	//首页
 	@RequestMapping("/")
