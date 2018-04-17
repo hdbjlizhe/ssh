@@ -1,22 +1,22 @@
 package com.info.utils;
 
-import com.info.domain.JsonResult;
+import com.info.domain.Result;
 
 public class ResultUtil {
 	
 	public final static Integer RESULT_SUCCESS=0;
 	public final static Integer RESULT_ERROR=-1;
 	
-	public static JsonResult<Object> success(Object data){
-		JsonResult<Object> result=new JsonResult<Object>();
+	public static Result<Object> success(Object data){
+		Result<Object> result=new Result<Object>();
 		result.setCode(RESULT_SUCCESS);
 		result.setMsg("成功");
 		result.setData(data);
 		return result; 
 	}
 	
-	public static JsonResult<Object> error(String msg){
-		JsonResult<Object> result=new JsonResult<Object>();
+	public static Result<Object> error(String msg){
+		Result<Object> result=new Result<Object>();
 		result.setCode(RESULT_ERROR);
 		result.setMsg(msg);
 		result.setData(null);
@@ -28,7 +28,7 @@ public class ResultUtil {
      * 提供给部分不需要出參的接口
      * @return
      */
-    public static JsonResult<Object> success(){
+    public static Result<Object> success(){
         return success(null);
     }
 
@@ -38,8 +38,8 @@ public class ResultUtil {
      * @param msg
      * @return
      */
-    public static JsonResult<Object> error(Integer code,String msg){
-        JsonResult<Object> result = new JsonResult<Object>();
+    public static Result<Object> error(Integer code,String msg){
+        Result<Object> result = new Result<Object>();
         result.setCode(code);
         result.setMsg(msg);
         result.setData(null);

@@ -17,7 +17,9 @@ public class WebSiteMeshFilterCustomTag implements TagRuleBundle {
 		defaultState.addRule("top",
 				new ExportTagToContentRule(siteMeshContext, contentProperty.getChild("top"), false));
 		defaultState.addRule("bottom",
-				new ExportTagToContentRule(siteMeshContext, contentProperty.getChild("bottom"), false));	}
+				new ExportTagToContentRule(siteMeshContext, contentProperty.getChild("bottom"), false));
+		defaultState.addRule("middle",
+				new ExportTagToContentRule(siteMeshContext, contentProperty.getChild("middle"), false));}
 
 	@Override
 	public void cleanUp(State defaultState, ContentProperty contentProperty, SiteMeshContext siteMeshContext) {

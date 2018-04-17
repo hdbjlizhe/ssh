@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.sun.mail.iap.Protocol;
+
 @Controller
 public class IndexController {
 		
@@ -71,6 +73,11 @@ public class IndexController {
     @GetMapping("/register")
     public String regist(){
         return "register";
+    }
+    //注册协议
+    @GetMapping("/protocol")
+    public String Protocol() {
+    	return "protocol";
     }
     //Get请求的登录页面
     @GetMapping("/login")

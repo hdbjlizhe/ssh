@@ -8,7 +8,7 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <!-- SiteMesh:Title -->
-<title><sitemesh:write property='title' /></title>
+<title><sitemesh:write property='title'/></title>
 <!-- Bootstrap:CSS -->
 <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 <!-- 顶部有菜单栏，内容下移60px避开 -->
@@ -35,16 +35,22 @@ body {
 	<div class="container-fluid">
 
 		<div class="row">
-			<!-- Right SideBar -->
-			<div class="col-md-10 col-md-push-2">
-				<!-- Sitemesh:right -->
-				<sitemesh:write property="right" />
-			</div>
-			<!-- Left SideBar -->
-			<div class="col-md-2 col-md-pull-10">
+		
+			<div class="col-xs-6 col-md-2 text-center" style="">
 				<!-- Sitemesh:left -->
 				<sitemesh:write property="left" />
 			</div>
+			
+			<div class="col-xs-6 col-md-8">
+				<!-- Sitemesh:middle -->
+				<sitemesh:write property="middle" />
+			</div>
+			
+			<div class="col-xs-6 col-md-2 text-center">
+				<!-- Sitemesh:right -->
+				<sitemesh:write property="right" />
+			</div>		
+			
 		</div>
 	</div>
 

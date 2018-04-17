@@ -1,19 +1,35 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-  <head>
-    <title>footer.html</title>
-	
-    <meta name="keywords" content="keyword1,keyword2,keyword3">
-    <meta name="description" content="this is my page">
-    <meta name="content-type" content="text/html; charset=UTF-8">
-    
-    <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+<head>
+<title>footer.html</title>
+<meta charset="utf-8">
+</head>
 
-  </head>
-  
-  <body>
-    	<div class="footer">
-		<p class="text-center" th:utext="#{msg.copyright}">&copy; 信息服务中心 2018</p>
-		</div>
-  </body>
+<body>
+
+	<br>
+	<div style="border-top: solid 1px #cccccc;margin: 20px;"></div>
+	<br>
+	<div class="footer text-center">
+		<a target="_blank" href="https://account.aliyun.com/login/login.htm?
+				spm=5176.8006371.388261.7.6ea67e63yE3U4y
+				&qrCodeFirst=false&oauth_callback=
+				https%3A%2F%2Fwanwang.aliyun.com%2F%3Futm_medium%3Dtext%
+				26utm_source%3Dbdbrandww%26utm_campaign%3Dbdbrand
+				%26utm_content%3Dse_103066">阿里云域名管理</a>
+		<span>|</span>
+		<a target="_blank" href="http://121.43.68.40/boxpro/custom/pucha">政府网站报送系统</a>
+		<span>|</span>
+		<a target="_blank" href="https://www.beian.gov.cn/portal/index.do">公安部备案管理</a>
+		<span>|</span>
+		<a target="_blank" href="http://www.miibeian.gov.cn/publish/query/indexFirst.action">ICP备案查询</a>
+		<span>|</span>
+		<a target="_blank" href="https://10.151.248.5/">网康智能流量管理系统</a>
+	</div>
+	<br>
+	<div class="footer">
+		<p class="text-center" th:utext="#{msg.copyright}">&copy; 信息服务中心
+			2018</p>
+	</div>
+</body>
 </html>

@@ -22,14 +22,20 @@
 			<input id="password" name="password" type="password"
 				class="form-control" placeholder="Password">
 			<label class="text-warning">密码应该在6位到32位之间</label> <br>
+			
+			<label th:text="#{msg.register.password2}">Password:</label>
+			<input id="password2" name="password2" type="password"
+				class="form-control" placeholder="Password Again">
+			<label class="text-warning">密码应该在6位到32位之间</label> <br>
 				
 			<label th:text="#{msg.register.email}">Email:</label>
 			<input id="email" name="email" type="email"
 				class="form-control" placeholder="Email">
 			<label class="text-warning">请确保邮箱正确，注册成功后要到邮箱确认</label><br>
 			<div class="checkbox">
-				<label> <input type="checkbox"
-					th:text="#{msg.register.protocol}">
+				<label> 
+					<input type="checkbox" id="checkbox" name="checkbox" checked="checked">
+					<a href="/protocol" th:text="#{msg.register.protocol}" ></a>
 				</label>
 			</div>
 			<button id="btn-reset" class="btn btn-large btn-primary"

@@ -10,8 +10,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -19,8 +17,6 @@ import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.WebAttributes;
 import org.springframework.security.web.access.AccessDeniedHandlerImpl;
 import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
-import org.springframework.security.web.authentication.Http403ForbiddenEntryPoint;
-import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
@@ -59,10 +55,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapterImpl {
 	}
 
 	@Override
-	protected void configure(HttpSecurity http) throws Exception {	
+	protected void configure(HttpSecurity http) throws Exception {
+		
+		String[] strNoAuthentication= {
+				"/index",
+				"/",
+				"/decorator*",
+				"/js/**",
+				"/imgs/**",
+				"/css/**",
+				"/register"	
+		};
+		
 		http
-				// .addFilterBefore(myFilterSecurityInterceptor,
-				// FilterSecurityInterceptor.class)//在正确的位置添加我们自定义的过滤器
+				// .addFilterBefore(myFilterSecurityInterceptor,// FilterSecurityInterceptor.class)//在正确的位置添加我们自定义的过滤器
 				// 重新添加拥有自己属性的过滤器;
 				/**
 				 * 不使用自定义过滤器类的话，可以直接使用默认实现的类，并提供自定义的属性
@@ -70,13 +76,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapterImpl {
 			.addFilter(filterSecurityInterceptor())
 			.authorizeRequests()
 				// 路径/index不需要验证
-				.antMatchers("/index","/","/decorator*","/js/**","/imgs/**","/css/**","/register").permitAll()
+				.antMatchers(strNoAuthentication).permitAll()
 				// 任何请求都需要授权
 				.anyRequest().authenticated()
 				.and()
 			
 			.formLogin()
-				.loginPage("/login").permitAll()// 表示“/login”和“/login-error”放行
+				// 表示“/login”和“/login-error”放行
+				.loginPage("/login").permitAll()
 				// 登录失败处理
 				.failureHandler(loginFailureHandler())
 				// 登录成功处理

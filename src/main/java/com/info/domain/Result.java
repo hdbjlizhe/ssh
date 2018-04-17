@@ -1,6 +1,6 @@
 package com.info.domain;
 
-public class JsonResult<T>  {
+public class Result<T>  {
 	private Integer code;//结果码
 	private String msg;		//结果信息
 	private T data;		//结果数据

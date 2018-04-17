@@ -27,6 +27,10 @@ public class RegistraFormDTO {
     @NotNull
     @Email(message="邮箱格式不正确")
     private String email;
+    
+    @NotEmpty
+    @NotNull
+    private boolean checkbox;
         
 	public String getUsername() {
 		return username;
@@ -51,4 +55,13 @@ public class RegistraFormDTO {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
+	public boolean getCheckbox() {
+		return checkbox;
+	}
+
+	public void setCheckbox(boolean checkbox) {
+		this.checkbox = checkbox;
+	}
+	
 }

@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import com.info.domain.JsonResult;
+import com.info.domain.Result;
 import com.info.handler.WebExceptionHandler;
 
 /**
@@ -34,7 +34,7 @@ public class CtrlAspect {
 	private final static Logger logger= LoggerFactory.getLogger(CtrlAspect.class);
 	
 	@Autowired
-    private WebExceptionHandler exceptionHandle;
+    private WebExceptionHandler exceptionHandler;
 	
 	@Pointcut("execution(* com.info.controllers.*.*(..))")
 	public void log(){
@@ -58,20 +58,20 @@ public class CtrlAspect {
 		logger.info("class_method_attrs={}",joinPoint.getArgs());
 	}
 	
-	@Around("log()")
-    public Object doAround(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
-        JsonResult<Object> result = null;
-        try {
-
-        } catch (Exception e) {
-            //return exceptionHandle.exceptionGet(e);
-        }
-        if(result == null){
-            return proceedingJoinPoint.proceed();
-        }else {
-            return result;
-        }
-    }
+//	@Around("log()")
+//    public Object doAround(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
+//        Result<Object> result = null;
+//        try {
+//
+//        } catch (Exception e) {
+//            //return exceptionHandle.exceptionGet(e);
+//        }
+//        if(result == null){
+//            return proceedingJoinPoint.proceed();
+//        }else {
+//            return result;
+//        }
+//    }
 
     @AfterReturning(pointcut = "log()",returning = "object")//打印输出结果
     public void doAfterReturing(Object object){
