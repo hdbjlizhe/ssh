@@ -1,21 +1,27 @@
 package com.info.domain.entity;
 
-import lombok.Data;
 
 import javax.persistence.*;
+
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-@Data
+
 @Entity
 @Table(name = "t_resource")
-public class Resource {
+public class Resource implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1937359425030984861L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;			//资源ID
-	private String resource;	//资源名称
+	private String uri;			//资源名称
 	private String description;	//资源描述
+	private String methodPath;	//对应的方法
 
 	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE }, mappedBy = "resources")
 	private Set<Role> roles = new HashSet<>();
@@ -44,12 +50,26 @@ public class Resource {
 		this.roles = roles;
 	}
 
-	public String getResource() {
-		return resource;
+	public String getUri() {
+		return uri;
 	}
 
-	public void setResource(String resource) {
-		this.resource = resource;
+	public void setUri(String uri) {
+		this.uri = uri;
 	}
 
+	public String getMethodPath() {
+		return methodPath;
+	}
+
+	public void setMethodPath(String methodPath) {
+		this.methodPath = methodPath;
+	}
+
+	@Override
+	public String toString() {
+		return "Resource [id=" + id + ", uri=" + uri + ", description=" + description + ", methodPath=" + methodPath
+				+ ", roles=" + roles + "]";
+	}
+	
 }

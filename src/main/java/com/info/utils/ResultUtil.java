@@ -21,5 +21,28 @@ public class ResultUtil {
 		result.setMsg(msg);
 		result.setData(null);
 		return result;
-	} 
+	}
+	
+
+    /**
+     * 提供给部分不需要出參的接口
+     * @return
+     */
+    public static JsonResult<Object> success(){
+        return success(null);
+    }
+
+    /**
+     * 自定义错误信息
+     * @param code
+     * @param msg
+     * @return
+     */
+    public static JsonResult<Object> error(Integer code,String msg){
+        JsonResult<Object> result = new JsonResult<Object>();
+        result.setCode(code);
+        result.setMsg(msg);
+        result.setData(null);
+        return result;
+    }
 }

@@ -1,15 +1,18 @@
 package com.info.domain.entity;
 
-import lombok.Data;
-
 import javax.persistence.*;
+
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-@Data
 @Entity
 @Table(name = "t_role")
-public class Role {
+public class Role implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5177183417411561996L;
 	//角色ID
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

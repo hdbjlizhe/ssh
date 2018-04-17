@@ -55,7 +55,7 @@ public class FilterInvocationSecurityMetadataSourceImpl implements FilterInvocat
             List<Resource>  resourceList = resourceRepository.findByRoleName(roleName);
             if(resourceList!=null && resourceList.size()>0) {//如果不加判断，这里如果 resourceRepository.findByRoleName(roleName);为null.则会报错
                 for(Resource resource :resourceList){
-                    urlList.add(resource.getResource());
+                    urlList.add(resource.getUri());
                 }
             }
             for (String res : urlList) {

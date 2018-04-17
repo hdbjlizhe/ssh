@@ -20,5 +20,17 @@ public class ResourceService {
 	public List<Resource> findAll() {
 		return resourceRepository.findAll();
 	}
+
+	public List<Resource> findByUri(String url) {
+		return resourceRepository.findByUri(url);
+	}
+
+	public Resource save(Resource resource) {
+		return resourceRepository.save(resource);
+	}
+
+	public List<Resource> findByResourceString(String url) {
+		return resourceRepository.findByUri(url);
+	}
 	
 }

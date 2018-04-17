@@ -6,7 +6,6 @@ import com.info.domain.repository.UserRepository;
 import com.info.domain.repository.ValidateTokenRepository;
 import com.info.service.IUserService;
 
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,7 +15,6 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 
 @Service
-@Slf4j
 @Transactional
 public class UserServiceImpl implements IUserService {
 

@@ -6,7 +6,12 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.info.domain.JsonResult;
+import com.info.utils.ResultUtil;
 /**
  * 统一异常处理类
  * @author Lee
@@ -20,6 +25,7 @@ public class WebExceptionHandler {
 	//private static final String ERROR_VIEW = "deny";
 	
 	//错误处理函数
+	@ExceptionHandler(value = Exception.class)
 	public Object errorHandler(HttpServletRequest request, HttpServletResponse response, Exception e) throws Exception {
 		logger.info("统一的异常处理函数");
 		//e.printStackTrace();
@@ -39,4 +45,5 @@ public class WebExceptionHandler {
 		return (request.getHeader("X-Requested-With") != null
 				&& "XMLHttpRequest".equals(request.getHeader("X-Requested-With").toString()));
 	}
+
 }
