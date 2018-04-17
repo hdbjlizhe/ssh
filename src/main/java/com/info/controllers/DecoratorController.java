@@ -26,5 +26,10 @@ public class DecoratorController {
 	public String cms() {
 		return "/decorators/cms";
 	}
+	@GetMapping("/decorators/report")
+	public String report() {
+		return "/decorators/report";
+	}
+	
 	
 }

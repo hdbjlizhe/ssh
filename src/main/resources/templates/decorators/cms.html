@@ -62,9 +62,10 @@ header {
 }
 
 aside {
+	padding-top:20px;
 	width: 17%;
 	position: fixed;
-	top: 50px;
+	top: 51px;
 	left: 0;
 	bottom: 0;
 	background-color:#333333;
@@ -102,9 +103,6 @@ aside {
 	<section id="main">
 		<div id="con">
 			<sitemesh:write property="right" />
-			<div style="height: 800px;">content1</div>
-			<div style="height: 400px;">content1</div>
-			<div style="height: 200px;">content1</div>
 			<!-- 引入footer -->
 			<div th:include="footer::body"></div>
 		</div>
