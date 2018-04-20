@@ -13,7 +13,7 @@ public class WebSiteMeshFilter extends ConfigurableSiteMeshFilter {
 		builder.addDecoratorPath("/index", "/decorators/default")
 			   .addDecoratorPath("/*", "/decorators/default")
 			   .addDecoratorPath("/about", "/decorators/about")
-			   .addDecoratorPath("/admin", "/decorators/about")
+			   .addDecoratorPath("/admin", "/decorators/cms")
 			   .addDecoratorPath("/party", "/decorators/party")
 			   .addDecoratorPath("/office", "/decorators/cms")
 			   .addDecoratorPath("/monthly-report","/decorators/report")

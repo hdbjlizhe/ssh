@@ -3,10 +3,8 @@ package com.info.aspect;
 import javax.servlet.http.HttpServletRequest;
 
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.AfterReturning;
-import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
@@ -17,8 +15,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import com.info.domain.Result;
 import com.info.handler.WebExceptionHandler;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * 
@@ -27,6 +26,7 @@ import com.info.handler.WebExceptionHandler;
  * @author lizhe
  *
  */
+
 @Aspect
 @Component
 public class CtrlAspect {
@@ -83,8 +83,4 @@ public class CtrlAspect {
 		logger.info(joinPoint.getSignature().getDeclaringTypeName()+"方法执行完毕");
 	}
 	
-	@AfterReturning(returning="object",pointcut="log()")
-	public void doAfterReturning(Object object){
-		logger.info("response={}",object);
-	}
 }

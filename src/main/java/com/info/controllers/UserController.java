@@ -52,7 +52,8 @@ public class UserController {
         	//mav.setViewName("redirect:/register");      	
         	model.addFlashAttribute("message", result.getFieldError());
             return "redirect:/register";
-        }else if(!registraFormDTO.getCheckbox()) {
+        }else if(!"on".equals(registraFormDTO.getCheckbox())) {
+        	log.info(registraFormDTO.getCheckbox().toString());
         	model.addFlashAttribute("message", "您未同意注册协议");
         	return "redirect:/register";
         }

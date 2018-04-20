@@ -18,7 +18,7 @@
 		<button id="btn_website" class="list-group-item">局官网政策维护</button>
 		<button id="btn_nongovern" class="list-group-item">民间投资平台</button>
 		<button id="btn_maintenance" class="list-group-item">软硬件维护</button>
-		<button id="btn_database" class="list-group-item">“产业招商精准招商”资料库</button>
+		<button id="btn_fbase" class="list-group-item">“产业招商精准招商”资料库</button>
 		<button id="btn_security" class="list-group-item">网络与信息安全</button>
 		<button id="btn_photo" class="list-group-item">摄影摄像</button>
 	</div>
@@ -30,25 +30,25 @@
 		<div class="list-group-item active">选择月份</div>
 		<div class="list-group-item">
 			<select class="form-control">
-				<option>1月份</option>
-				<option>2月份</option>
-				<option>3月份</option>
-				<option>4月份</option>
-				<option>5月份</option>
-				<option>6月份</option>
-				<option>7月份</option>
-				<option>8月份</option>
-				<option>9月份</option>
-				<option>10月份</option>
-				<option>11月份</option>
-				<option>12月份</option>
+				<option>1</option>
+				<option>2</option>
+				<option>3</option>
+				<option>4</option>
+				<option>5</option>
+				<option>6</option>
+				<option>7</option>
+				<option>8</option>
+				<option>9</option>
+				<option>10</option>
+				<option>11</option>
+				<option>12</option>
 			</select>
 		</div>
 	</div>
 	<br>
 
 	<!-- 党务工作  -->
-	<form action="" method="post">
+	<form action="/monthReport/party" method="post">
 		<table id="party" class="table table-condensed">
 			<tr>
 				<td colspan=4><p class="text-center">
@@ -56,20 +56,21 @@
 			</tr>
 			<tr>
 				<td>理论学习（次）</td>
-				<td><input id="party_study" name="party_study" type="number"></td>
+				<td><input id="partyStudy" name="partyStudy" type="number" 
+				th:text="${monthreport.partyStudy}"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
 				<td><a class="btn btn-primary" href="">自动获取</a></td>
 			</tr>
 			<tr>
 				<td>党务会议（次）</td>
-				<td><input id="party_meeting" name="party_meeting"
-					type="number"></td>
+				<td><input id="partyMeeting" name="partyMeeting"
+					th:text="${partyMeeting}" type="number"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
 				<td><a class="btn btn-primary" href="">自动获取</a></td>
 			</tr>
 			<tr>
 				<td>党组织活动（次）</td>
-				<td><input id="party_activities" name="party_activities"
+				<td><input id="partyActivity" name="partyActivity"
 					type="number"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
 				<td><a class="btn btn-primary" href="">自动获取</a></td>
@@ -84,21 +85,21 @@
 	</form>
 
 	<!-- 往来公文 -->
-	<form action="" method="post">
+	<form action="/monthReport/office" method="post">
 		<table id="office" class="table table-condensed">
 			<tr>
 				<td colspan=4><h4>公文往来</h4></td>
 			</tr>
 			<tr>
 				<td>处理公文（项）</td>
-				<td><input id="office_docs" name="office_docs" type="number"></td>
+				<td><input id="docOffice" name="docOffice" type="number"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
 				<td><a class="btn btn-primary" href="">自动获取</a></td>
 
 			</tr>
 			<tr>
 				<td>配合相关处室完成工作及方案（项）</td>
-				<td><input id="office_docs" name="office_docs" type="number"></td>
+				<td><input id="docDepart" name="docDepart" type="number"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
 				<td><a class="btn btn-primary" href="">自动获取</a></td>
 
@@ -113,7 +114,7 @@
 	</form>
 
 	<!-- 例会 -->
-	<form action="" method="post">
+	<form action="/monthReport/affairs" method="post">
 		<table id="affairs" class="table table-condensed">
 			<tr>
 				<td colspan=4><h4>例会</h4></td>
@@ -135,14 +136,14 @@
 	</form>
 
 	<!-- 原创新闻发布-->
-	<form action="" method="post">
+	<form action="/monthReport/news" method="post">
 		<table id="news" class="table table-condensed">
 			<tr>
 				<td colspan=4><h4>新闻发布</h4></td>
 			</tr>
 			<tr>
 				<td>微信原创</td>
-				<td><input id="news_webchat_original" name="news_webchat"
+				<td><input id="webchatOriginal" name="webchatOriginal"
 					type="number"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
 				<td><a class="btn btn-primary" href="">自动获取</a></td>
@@ -150,7 +151,7 @@
 			</tr>
 			<tr>
 				<td>微信转发</td>
-				<td><input id="news_webchat_transpond" name="news_webchat"
+				<td><input id="webchatTranspond" name="webchatTranspond"
 					type="number"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
 				<td><a class="btn btn-primary" href="">自动获取</a></td>
@@ -158,21 +159,21 @@
 			</tr>
 			<tr>
 				<td>微博原创</td>
-				<td><input id="news_weibo_original" name="news_weibo"
+				<td><input id="weiboOriginal" name="weiboOriginal"
 					type="number"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
 				<td><a class="btn btn-primary" href="">自动获取</a></td>
 			</tr>
 			<tr>
 				<td>微博转发</td>
-				<td><input id="news_weibo_transpond" name="news_weibo"
+				<td><input id="weiboTranspond" name="weiboTranspond"
 					type="number"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
 				<td><a class="btn btn-primary" href="">自动获取</a></td>
 			</tr>
 			<tr>
 				<td>今日头条原创</td>
-				<td><input id="news_toutiao_original" name="news_toutiao"
+				<td><input id="toutiaoOriginal" name="toutiaoOriginal"
 					type="number"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
 				<td><a class="btn btn-primary" href="">自动获取</a></td>
@@ -180,7 +181,7 @@
 			</tr>
 			<tr>
 				<td>今日头条转发</td>
-				<td><input id="news_toutiao_transpond" name="news_toutiao"
+				<td><input id="toutiaoTranspond" name="toutiaoTranspond"
 					type="number"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
 				<td><a class="btn btn-primary" href="">自动获取</a></td>
@@ -188,13 +189,13 @@
 
 			<tr>
 				<td>内部公告栏</td>
-				<td><input id="news_board" name="news_board" type="number"></td>
+				<td><input id="newsBoard" name="newsBoard" type="number"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
 				<td><a class="btn btn-primary" href="">自动获取</a></td>
 			</tr>
 			<tr>
 				<td>局官网工作动态及通知公告</td>
-				<td><input id="news_website" name="news_website" type="number"></td>
+				<td><input id="newsWebsite" name="newsWebsite" type="number"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
 				<td><a class="btn btn-primary" href=" ">自动获取</a></td>
 
@@ -209,14 +210,14 @@
 	</form>
 
 	<!-- 局官网政策维护 -->
-	<form action="" method="post">
+	<form action="/monthReport/website" method="post">
 		<table id="website" class="table table-condensed">
 			<tr>
 				<td colspan=4><h4>局官网政策维护</h4></td>
 			</tr>
 			<tr>
 				<td>机构概况</td>
-				<td><input id="website_profile" name="website_profile"
+				<td><input id="websiteProfile" name="websiteProfile"
 					type="number"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
 				<td><a class="btn btn-primary" href="">自动获取</a></td>
@@ -224,15 +225,15 @@
 			</tr>
 			<tr>
 				<td>投资北京知识</td>
-				<td><input id="website_investbeijing"
-					name="website_investbeijing" type="number"></td>
+				<td><input id="websiteInvestBeijing"
+					name="websiteInvestBeijing" type="number"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
 				<td><a class="btn btn-primary" href="">自动获取</a></td>
 
 			</tr>
 			<tr>
 				<td>投资咨询咨询互动</td>
-				<td><input id="website_interaction" name="website_interaction"
+				<td><input id="websiteInteraction" name="websiteInteraction"
 					type="number"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
 				<td><a class="btn btn-primary" href="">自动获取</a></td>
@@ -240,7 +241,7 @@
 			</tr>
 			<tr>
 				<td>办事事项</td>
-				<td><input id="website_matters" name="website_matters"
+				<td><input id="websiteMatters" name="websiteMatters"
 					type="number"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
 				<td><a class="btn btn-primary" href="">自动获取</a></td>
@@ -248,7 +249,7 @@
 			</tr>
 			<tr>
 				<td>党工团机构</td>
-				<td><input id="website_party" name="website_party"
+				<td><input id="websiteParty" name="websiteParty"
 					type="number"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
 				<td><a class="btn btn-primary" href="">自动获取</a></td>
@@ -256,7 +257,7 @@
 			</tr>
 			<tr>
 				<td>信息公开</td>
-				<td><input id="website_info" name="website_info" type="number"></td>
+				<td><input id="websiteInfo" name="websiteInfo" type="number"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
 				<td><a class="btn btn-primary" href="">自动获取</a></td>
 
@@ -271,55 +272,55 @@
 	</form>
 
 	<!-- 民间投资平台维护 -->
-	<form action="" method="post">
+	<form action="/monthReport/nongovern" method="post">
 		<table id="nongovern" class="table table-condensed">
 			<tr>
 				<td colspan=4><h4>民间投资平台维护</h4></td>
 			</tr>
 			<tr>
 				<td>发展规划</td>
-				<td><input id="nongovern_develop_planning"
-					name="nongovern_develop_planning" type="number"></td>
+				<td><input id="nongovernDevelopPlanning"
+					name="nongovernDevelopPlanning" type="number"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
 				<td><a class="btn btn-primary" href="">自动获取</a></td>
 
 			</tr>
 			<tr>
 				<td>投资政策</td>
-				<td><input id="nongovern_invest_policy"
-					name="nongovern_invest_policy" type="number"></td>
+				<td><input id="nongovernInvestPolicy"
+					name="nongovernInvestPolicy" type="number"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
 				<td><a class="btn btn-primary" href="">自动获取</a></td>
 
 			</tr>
 			<tr>
 				<td>行政许可</td>
-				<td><input id="nongovern_authority_license"
-					name="nongovern_authority_license" type="number"></td>
+				<td><input id="nongovernAuthoritylicense"
+					name="nongovernAuthoritylicense" type="number"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
 				<td><a class="btn btn-primary" href="">自动获取</a></td>
 
 			</tr>
 			<tr>
 				<td>市场准入</td>
-				<td><input id="nongovern_market_access"
-					name="nongovern_market_access" type="number"></td>
+				<td><input id="nongovernMarketAccess"
+					name="nongovernMarketAccess" type="number"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
 				<td><a class="btn btn-primary" href="">自动获取</a></td>
 
 			</tr>
 			<tr>
 				<td>投资机会</td>
-				<td><input id="nongovern_invest_opportunity"
-					name="nongovern_invest_opportunity" type="number"></td>
+				<td><input id="nongovernInvestOpportunity"
+					name="nongovernInvestOpportunity" type="number"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
 				<td><a class="btn btn-primary" href="">自动获取</a></td>
 
 			</tr>
 			<tr>
 				<td>投资服务</td>
-				<td><input id="nongovern_invest_service"
-					name="nongovern_invest_service" type="number"></td>
+				<td><input id="nongovernInvestService"
+					name="nongovernInvestService" type="number"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
 				<td><a class="btn btn-primary" href="">自动获取</a></td>
 			</tr>
@@ -333,22 +334,22 @@
 	</form>
 
 	<!-- 软硬件维护 -->
-	<form action="" method="post">
+	<form action="/monthReport/mainenance" method="post">
 		<table id="maintenance" class="table table-condensed">
 			<tr>
 				<td colspan=4><h4>软硬件维护</h4></td>
 			</tr>
 			<tr>
 				<td>办公设备维修（人次）</td>
-				<td><input id="maintenance_hardware_num"
-					name="maintenance_service_num" type="number"></td>
+				<td><input id="maintenanceHardware"
+					name="maintenanceHardware" type="number"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
 				<td><a class="btn btn-primary" href="">自动获取</a></td>
 			</tr>
 			<tr>
 				<td>软件及系统问题（人次）</td>
-				<td><input id="maintenance_software_num"
-					name="maintenance_service_num" type="number"></td>
+				<td><input id="maintenanceSoftware"
+					name="maintenanceSoftware" type="number"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
 				<td><a class="btn btn-primary" href="">自动获取</a></td>
 			</tr>
@@ -362,14 +363,14 @@
 	</form>
 
 	<!-- "产业招商精准招商资料库" -->
-	<form action="" method="post">
-		<table id="database" class="table table-condensed">
+	<form action="/monthReport/fbase" method="post">
+		<table id="fbase" class="table table-condensed">
 			<tr>
 				<td colspan=4><h4>“产业招商精准招商”资料库</h4></td>
 			</tr>
 			<tr>
 				<td>本月新增（条）数</td>
-				<td><input id="database_new_num" name="database_new_num"
+				<td><input id="fbaseNew" name="fbaseNew"
 					type="number"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
 				<td><a class="btn btn-primary" href="/database/getnew">自动获取</a></td>
@@ -385,57 +386,57 @@
 
 
 	<!-- 网络与信息安全 -->
-	<form action="" method="post">
+	<form action="/monthReport/security" method="post">
 		<table id="security" class="table table-condensed">
 			<tr>
 				<td colspan=4><h4>网络与信息安全</h4></td>
 			</tr>
 			<tr>
 				<td>阻断 网站安全攻击（次）</td>
-				<td><input id="security_attack_block"
-					name="security_attack_block" type="number"></td>
+				<td><input id="securityAttackBlock"
+					name="securityAttackBlock" type="number"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
 				<td><a class="btn btn-primary" href="/database/getnew">自动获取</a></td>
 			</tr>
 			<tr>
 				<td>系统加固（条）</td>
-				<td><input id="security_system_reinforce"
-					name="security_attack_block" type="number"></td>
+				<td><input id="securitySystemReinforce"
+					name="securitySystemReinforce" type="number"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
 				<td><a class="btn btn-primary" href="/database/getnew">自动获取</a></td>
 			</tr>
 			<tr>
 				<td>安全通报（份）</td>
-				<td><input id="security_safety_message"
-					name="security_attack_block" type="number"></td>
+				<td><input id="securitySafetyMessage"
+					name="securitySafetyMessage" type="number"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
 				<td><a class="btn btn-primary" href="/database/getnew">自动获取</a></td>
 			</tr>
 			<tr>
 				<td>漏洞扫描（次）</td>
-				<td><input id="security_vulnerability_scanning"
-					name="security_attack_block" type="number"></td>
+				<td><input id="securityBugScan"
+					name="securityBugScan" type="number"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
 				<td><a class="btn btn-primary" href="/database/getnew">自动获取</a></td>
 			</tr>
 			<tr>
 				<td>发现漏洞（个）</td>
-				<td><input id="security_bugs_number"
-					name="security_bugs_number" type="number"></td>
+				<td><input id="securityBugNum"
+					name="securityBugNum" type="number"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
 				<td><a class="btn btn-primary" href="/database/getnew">自动获取</a></td>
 			</tr>
 			<tr>
 				<td>修复网站故障（次）</td>
-				<td><input id="security_website_trouble"
-					name="security_website_trouble" type="number"></td>
+				<td><input id="securityWebsiteTrouble"
+					name="securityWebsiteTrouble" type="number"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
 				<td><a class="btn btn-primary" href="/database/getnew">自动获取</a></td>
 			</tr>
 			<tr>
 				<td>全局性网络故障（次）</td>
-				<td><input id="security_global_trouble"
-					name="security_global_trouble" type="number"></td>
+				<td><input id="securityGlobalTrouble"
+					name="securityGlobalTrouble" type="number"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
 				<td><a class="btn btn-primary" href="/database/getnew">自动获取</a></td>
 			</tr>
@@ -449,28 +450,35 @@
 	</form>
 
 	<!-- 摄影摄像 -->
-	<form action="" method="post">
+	<form action="/monthReport/photo" method="post">
 		<table id="photo" class="table table-condensed">
 			<tr>
 				<td colspan=4><h4>摄影摄像</h4></td>
 			</tr>
 			<tr>
 				<td>会议摄影（次）</td>
-				<td><input id="photo_meeting_num" name="photo_meeting_num"
+				<td><input id="photoMeeting" name="photoMeeting"
+					type="number"></td>
+				<td><p class="text-error">说明：填写数字或自动获取</p></td>
+				<td><a class="btn btn-primary" href="">自动获取</a></td>
+			</tr>
+			<tr>
+				<td>活动摄影（次）</td>
+				<td><input id="photoActivity" name="photoActivity"
 					type="number"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
 				<td><a class="btn btn-primary" href="">自动获取</a></td>
 			</tr>
 			<tr>
 				<td>照片资料（次）</td>
-				<td><input id="photo_jgp_num" name="photo_meeting_num"
+				<td><input id="photoImgNum" name="photoImgNumm"
 					type="number"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
 				<td><a class="btn btn-primary" href="">自动获取</a></td>
 			</tr>
 			<tr>
 				<td>影像资料（段）</td>
-				<td><input id="photo_video_num" name="photo_video_num"
+				<td><input id="photoVideoNum" name="photoVideoNum"
 					type="number"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
 				<td><a class="btn btn-primary" href="">自动获取</a></td>

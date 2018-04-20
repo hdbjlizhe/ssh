@@ -30,7 +30,7 @@ public class RegistraFormDTO {
     
     @NotEmpty
     @NotNull
-    private boolean checkbox;
+    private String checkbox;
         
 	public String getUsername() {
 		return username;
@@ -56,11 +56,11 @@ public class RegistraFormDTO {
 		this.email = email;
 	}
 
-	public boolean getCheckbox() {
+	public String getCheckbox() {
 		return checkbox;
 	}
 
-	public void setCheckbox(boolean checkbox) {
+	public void setCheckbox(String checkbox) {
 		this.checkbox = checkbox;
 	}
 	
