@@ -47,7 +47,6 @@ public class DailyController {
 	}
 
 	/**
-	 * 以下均为AJAX请求
 	 * 
 	 * @return
 	 */
@@ -64,8 +63,7 @@ public class DailyController {
 			monthStatistics.setPartyActivity(mDto.getPartyActivity());
 			monthStatistics.setPartyMeeting(mDto.getPartyMeeting());
 			monthStatistics.setPartyStudy(mDto.getPartyStudy());
-			monthStatisticsService.save(monthStatistics);
-			
+			monthStatisticsService.save(monthStatistics);			
 			return true;
 		}else {
 			//id不为空，则更新
