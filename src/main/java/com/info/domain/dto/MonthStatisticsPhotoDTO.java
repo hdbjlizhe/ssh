@@ -8,20 +8,55 @@ import lombok.Data;
 
 @Data
 public class MonthStatisticsPhotoDTO {
+
+	private Long id;
 	@NotEmpty
 	@NotNull
 	@Digits(fraction=0,integer=0)
-	private int photoMeeting;
+	private Integer photoMeeting;
 	@NotEmpty
 	@NotNull
 	@Digits(fraction=0,integer=0)
-	private int photoActivity;
+	private Integer photoActivity;
 	@NotEmpty
 	@NotNull
 	@Digits(fraction=0,integer=0)
-	private int photoImgNum;
+	private Integer photoImgNum;
 	@NotEmpty
 	@NotNull
 	@Digits(fraction=0,integer=0)
-	private int photoVideoNum;
+	private Integer photoVideoNum;
+	
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public Integer getPhotoMeeting() {
+		return photoMeeting;
+	}
+	public void setPhotoMeeting(Integer photoMeeting) {
+		this.photoMeeting = photoMeeting;
+	}
+	public Integer getPhotoActivity() {
+		return photoActivity;
+	}
+	public void setPhotoActivity(Integer photoActivity) {
+		this.photoActivity = photoActivity;
+	}
+	public Integer getPhotoImgNum() {
+		return photoImgNum;
+	}
+	public void setPhotoImgNum(Integer photoImgNum) {
+		this.photoImgNum = photoImgNum;
+	}
+	public Integer getPhotoVideoNum() {
+		return photoVideoNum;
+	}
+	public void setPhotoVideoNum(Integer photoVideoNum) {
+		this.photoVideoNum = photoVideoNum;
+	}
+	
+	
 }

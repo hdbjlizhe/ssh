@@ -5,65 +5,73 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 public class MonthStatisticsWebsiteDTO {
+
+	private Long id;
 	@NotEmpty
 	@NotNull
 	@Digits(fraction = 0, integer = 0)
-	private int websiteProfile;//
+	private Integer websiteProfile;//
 	@NotEmpty
 	@NotNull
 	@Digits(fraction = 0, integer = 0)
-	private int websiteInvestBeijing;//
+	private Integer websiteInvestBeijing;//
 	@NotEmpty
 	@NotNull
 	@Digits(fraction = 0, integer = 0)
-	private int websiteInteraction;//
+	private Integer websiteInteraction;//
 	@NotEmpty
 	@NotNull
 	@Digits(fraction = 0, integer = 0)
-	private int websiteMatters;//
+	private Integer websiteMatters;//
 	@NotEmpty
 	@NotNull
 	@Digits(fraction = 0, integer = 0)
-	private int websiteParty;//
+	private Integer websiteParty;//
 	@NotEmpty
 	@NotNull
 	@Digits(fraction = 0, integer = 0)
-	private int websiteInfo;//
+	private Integer websiteInfo;//
 	
-	public int getWebsiteProfile() {
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public Integer getWebsiteProfile() {
 		return websiteProfile;
 	}
-	public void setWebsiteProfile(int websiteProfile) {
+	public void setWebsiteProfile(Integer websiteProfile) {
 		this.websiteProfile = websiteProfile;
 	}
-	public int getWebsiteInvestBeijing() {
+	public Integer getWebsiteInvestBeijing() {
 		return websiteInvestBeijing;
 	}
-	public void setWebsiteInvestBeijing(int websiteInvestBeijing) {
+	public void setWebsiteInvestBeijing(Integer websiteInvestBeijing) {
 		this.websiteInvestBeijing = websiteInvestBeijing;
 	}
-	public int getWebsiteInteraction() {
+	public Integer getWebsiteInteraction() {
 		return websiteInteraction;
 	}
-	public void setWebsiteInteraction(int websiteInteraction) {
+	public void setWebsiteInteraction(Integer websiteInteraction) {
 		this.websiteInteraction = websiteInteraction;
 	}
-	public int getWebsiteMatters() {
+	public Integer getWebsiteMatters() {
 		return websiteMatters;
 	}
-	public void setWebsiteMatters(int websiteMatters) {
+	public void setWebsiteMatters(Integer websiteMatters) {
 		this.websiteMatters = websiteMatters;
 	}
-	public int getWebsiteParty() {
+	public Integer getWebsiteParty() {
 		return websiteParty;
 	}
-	public void setWebsiteParty(int websiteParty) {
+	public void setWebsiteParty(Integer websiteParty) {
 		this.websiteParty = websiteParty;
 	}
-	public int getWebsiteInfo() {
+	public Integer getWebsiteInfo() {
 		return websiteInfo;
 	}
-	public void setWebsiteInfo(int websiteInfo) {
+	public void setWebsiteInfo(Integer websiteInfo) {
 		this.websiteInfo = websiteInfo;
 	}
 

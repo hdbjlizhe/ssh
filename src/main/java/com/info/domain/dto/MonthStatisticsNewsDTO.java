@@ -8,65 +8,71 @@ public class MonthStatisticsNewsDTO {
 	/**
 	 * 新闻发布版块
 	 */
+	private Long id;
 	@NotEmpty
 	@NotNull
 	@Digits(fraction = 0, integer = 0)
-	private int webchatOriginal;	//
+	private Integer webchatOriginal;	//
 	@NotEmpty
 	@NotNull
 	@Digits(fraction = 0, integer = 0)
-	private int webchatTranspond;
+	private Integer webchatTranspond;
 	@NotEmpty
 	@NotNull
 	@Digits(fraction = 0, integer = 0)
-	private int weiboOriginal;
+	private Integer weiboOriginal;
 	@NotEmpty
 	@NotNull
 	@Digits(fraction = 0, integer = 0)
-	private int weiboTranspond;
+	private Integer weiboTranspond;
 	@NotEmpty
 	@NotNull
 	@Digits(fraction = 0, integer = 0)
-	private int toutiaoOriginal;
+	private Integer toutiaoOriginal;
 	@NotEmpty
 	@NotNull
 	@Digits(fraction = 0, integer = 0)
-	private int toutiaoTranspond;
+	private Integer toutiaoTranspond;
 	@NotEmpty
 	@NotNull
 	@Digits(fraction = 0, integer = 0)
-	private int newsBoard;
+	private Integer newsBoard;
 	@NotEmpty
 	@NotNull
 	@Digits(fraction = 0, integer = 0)
-	private int newsWebsite;
+	private Integer newsWebsite;
 
-	
-	public int getWebchatOriginal() {
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public Integer getWebchatOriginal() {
 		return webchatOriginal;
 	}
-	public void setWebchatOriginal(int webchatOriginal) {
+	public void setWebchatOriginal(Integer webchatOriginal) {
 		this.webchatOriginal = webchatOriginal;
 	}
-	public int getWebchatTranspond() {
+	public Integer getWebchatTranspond() {
 		return webchatTranspond;
 	}
-	public void setWebchatTranspond(int webchatTranspond) {
+	public void setWebchatTranspond(Integer webchatTranspond) {
 		this.webchatTranspond = webchatTranspond;
 	}
-	public int getWeiboOriginal() {
+	public Integer getWeiboOriginal() {
 		return weiboOriginal;
 	}
-	public void setWeiboOriginal(int weiboOriginal) {
+	public void setWeiboOriginal(Integer weiboOriginal) {
 		this.weiboOriginal = weiboOriginal;
 	}
-	public int getWeiboTranspond() {
+	public Integer getWeiboTranspond() {
 		return weiboTranspond;
 	}
-	public void setWeiboTranspond(int weiboTranspond) {
+	public void setWeiboTranspond(Integer weiboTranspond) {
 		this.weiboTranspond = weiboTranspond;
 	}
-	public int getToutiaoOriginal() {
+	public Integer getToutiaoOriginal() {
 		return toutiaoOriginal;
 	}
 	public void setToutiaoOriginal(int toutiaoOriginal) {

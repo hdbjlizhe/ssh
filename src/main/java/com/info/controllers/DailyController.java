@@ -1,8 +1,6 @@
 package com.info.controllers;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,23 +13,34 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.info.domain.MonthStatistics;
 import com.info.domain.dto.MonthStatisticsOfficeDTO;
 import com.info.domain.dto.MonthStatisticsPartyDTO;
-import com.info.domain.entity.Department;
-import com.info.service.impl.DepartmentService;
 import com.info.service.impl.MonthStatisticsService;
 
 @Controller
 public class DailyController {
 
 	private static final Logger log = LoggerFactory.getLogger(DailyController.class);
-
-	@Autowired
-	private DepartmentService departmentService;
 	
 	@Autowired
 	private MonthStatisticsService monthStatisticsService;
 
 	@GetMapping("/monthly-report")
-	public String monthlyReport(Model model,String month) {
+	public String monthlyReport(Model model) {
+		String FORMATE_DATE = "yyyyMM";
+		DateTime dt= new DateTime();
+		String month=dt.toString(FORMATE_DATE);
+		MonthStatistics monthStatistics=monthStatisticsService.findByMonth(month);
+		//如果找不到就新建一个
+		if(monthStatistics==null){
+			monthStatistics=new MonthStatistics();
+			monthStatistics.setMonth(month);
+			monthStatistics=monthStatisticsService.save(monthStatistics);
+		}
+		model.addAttribute("statistics", monthStatistics);
+		return "daily/monthly-report";
+	}
+	
+	@PostMapping("/monthly-report")
+	public String monthReport(Model model,String month) {
 		MonthStatistics monthStatistics=monthStatisticsService.findByMonth(month);
 		model.addAttribute("statistics", monthStatistics);
 		return "daily/monthly-report";
@@ -49,8 +58,20 @@ public class DailyController {
 			model.addAttribute("message", result.getFieldError());
 			return false;
 		}
-		
-		return true;
+		//判断Id是否为空，如果为空则新增
+		if(mDto.getId()==null) {
+			MonthStatistics monthStatistics=new MonthStatistics();
+			monthStatistics.setPartyActivity(mDto.getPartyActivity());
+			monthStatistics.setPartyMeeting(mDto.getPartyMeeting());
+			monthStatistics.setPartyStudy(mDto.getPartyStudy());
+			monthStatisticsService.save(monthStatistics);
+			
+			return true;
+		}else {
+			//id不为空，则更新
+			monthStatisticsService.updateParty(mDto);
+			return true;
+		}
 	}
 
 	@PostMapping("/monthReport/office")

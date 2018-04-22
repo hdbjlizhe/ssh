@@ -26,52 +26,65 @@
 
 
 	<right> <!-- 下拉列表框-月份 -->
-	<div class="list-group">
-		<div class="list-group-item active">选择月份</div>
-		<div class="list-group-item">
-			<select class="form-control">
-				<option>1</option>
-				<option>2</option>
-				<option>3</option>
-				<option>4</option>
-				<option>5</option>
-				<option>6</option>
-				<option>7</option>
-				<option>8</option>
-				<option>9</option>
-				<option>10</option>
-				<option>11</option>
-				<option>12</option>
-			</select>
+	<form action="/monthly-report" method="get">
+		<input th:id="${_csrf.parameterName}" type="hidden"
+			th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+		<div class="list-group">
+			<div class="list-group-item active">选择月份</div>
+			<div class="list-group-item">
+				<select name="month" class="form-control">
+					<option>1</option>
+					<option>2</option>
+					<option>3</option>
+					<option>4</option>
+					<option>5</option>
+					<option>6</option>
+					<option>7</option>
+					<option>8</option>
+					<option>9</option>
+					<option>10</option>
+					<option>11</option>
+					<option>12</option>
+				</select>
+			</div>
+			<div class="list-group-item">
+				<input type="submit" text="提交">
+			</div>
 		</div>
-	</div>
+
+	</form>
 	<br>
 
 	<!-- 党务工作  -->
 	<form action="/monthReport/party" method="post">
 		<table id="party" class="table table-condensed">
+
 			<tr>
 				<td colspan=4><p class="text-center">
-					<h4>党务工作</h4></td>
+					<h4>党务工作</h4> <input th:id="${_csrf.parameterName}" type="hidden"
+					th:name="${_csrf.parameterName}" th:value="${_csrf.token}" /> <input
+					th:id="id" th:name="id" type="hidden" th:value="${statistics.id}">
+				</td>
+
 			</tr>
 			<tr>
 				<td>理论学习（次）</td>
-				<td><input id="partyStudy" name="partyStudy" type="number" 
-				th:text="${monthreport.partyStudy}"></td>
+				<td><input id="partyStudy" name="partyStudy" type="number"
+					th:value="${statistics.partyStudy}"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
 				<td><a class="btn btn-primary" href="">自动获取</a></td>
 			</tr>
 			<tr>
 				<td>党务会议（次）</td>
 				<td><input id="partyMeeting" name="partyMeeting"
-					th:text="${partyMeeting}" type="number"></td>
+					th:value="${statistics.partyMeeting}" type="number"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
 				<td><a class="btn btn-primary" href="">自动获取</a></td>
 			</tr>
 			<tr>
 				<td>党组织活动（次）</td>
 				<td><input id="partyActivity" name="partyActivity"
-					type="number"></td>
+					th:value="${statistics.partyActivity}" type="number"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
 				<td><a class="btn btn-primary" href="">自动获取</a></td>
 			</tr>
@@ -88,18 +101,26 @@
 	<form action="/monthReport/office" method="post">
 		<table id="office" class="table table-condensed">
 			<tr>
-				<td colspan=4><h4>公文往来</h4></td>
+				<td colspan=4><h4>公文往来</h4>
+				<input th:id="${_csrf.parameterName}" type="hidden"
+					th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+				<input th:id="id" th:name="id" type="hidden"
+					th:value="${statistics.id}">			
+				</td>
+
 			</tr>
 			<tr>
 				<td>处理公文（项）</td>
-				<td><input id="docOffice" name="docOffice" type="number"></td>
+				<td><input id="docOffice" name="docOffice" type="number"
+					th:value="${statistics.docOffice}"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
 				<td><a class="btn btn-primary" href="">自动获取</a></td>
 
 			</tr>
 			<tr>
 				<td>配合相关处室完成工作及方案（项）</td>
-				<td><input id="docDepart" name="docDepart" type="number"></td>
+				<td><input id="docDepart" name="docDepart" type="number"
+					th:value="${statistics.docDepart}"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
 				<td><a class="btn btn-primary" href="">自动获取</a></td>
 
@@ -121,7 +142,8 @@
 			</tr>
 			<tr>
 				<td>例会（次）</td>
-				<td><input id="affairs_num" name="affairs_num" type="number"></td>
+				<td><input id="affairs" name="affairs" type="number"
+					th:value="${statistics.affairs}"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
 				<td><a class="btn btn-primary" href="">自动获取</a></td>
 
@@ -144,7 +166,7 @@
 			<tr>
 				<td>微信原创</td>
 				<td><input id="webchatOriginal" name="webchatOriginal"
-					type="number"></td>
+					type="number" th:value="${statistics.webchatOriginal}"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
 				<td><a class="btn btn-primary" href="">自动获取</a></td>
 
@@ -152,7 +174,7 @@
 			<tr>
 				<td>微信转发</td>
 				<td><input id="webchatTranspond" name="webchatTranspond"
-					type="number"></td>
+					type="number" th:value="${statistics.webchatTranspond}"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
 				<td><a class="btn btn-primary" href="">自动获取</a></td>
 
@@ -160,21 +182,21 @@
 			<tr>
 				<td>微博原创</td>
 				<td><input id="weiboOriginal" name="weiboOriginal"
-					type="number"></td>
+					type="number" th:value="${statistics.weiboOriginal}"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
 				<td><a class="btn btn-primary" href="">自动获取</a></td>
 			</tr>
 			<tr>
 				<td>微博转发</td>
 				<td><input id="weiboTranspond" name="weiboTranspond"
-					type="number"></td>
+					type="number" th:value="${statistics.weiboTranspond}"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
 				<td><a class="btn btn-primary" href="">自动获取</a></td>
 			</tr>
 			<tr>
 				<td>今日头条原创</td>
 				<td><input id="toutiaoOriginal" name="toutiaoOriginal"
-					type="number"></td>
+					type="number" th:value="${statistics.toutiaoOriginal}"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
 				<td><a class="btn btn-primary" href="">自动获取</a></td>
 
@@ -182,20 +204,22 @@
 			<tr>
 				<td>今日头条转发</td>
 				<td><input id="toutiaoTranspond" name="toutiaoTranspond"
-					type="number"></td>
+					type="number" th:value="${statistics.toutiaoTranspond}"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
 				<td><a class="btn btn-primary" href="">自动获取</a></td>
 			</tr>
 
 			<tr>
 				<td>内部公告栏</td>
-				<td><input id="newsBoard" name="newsBoard" type="number"></td>
+				<td><input id="newsBoard" name="newsBoard" type="number"
+					th:value="${statistics.newsBoard}"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
 				<td><a class="btn btn-primary" href="">自动获取</a></td>
 			</tr>
 			<tr>
 				<td>局官网工作动态及通知公告</td>
-				<td><input id="newsWebsite" name="newsWebsite" type="number"></td>
+				<td><input id="newsWebsite" name="newsWebsite" type="number"
+					th:value="${statistics.newsWebsite}"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
 				<td><a class="btn btn-primary" href=" ">自动获取</a></td>
 
@@ -218,7 +242,7 @@
 			<tr>
 				<td>机构概况</td>
 				<td><input id="websiteProfile" name="websiteProfile"
-					type="number"></td>
+					type="number" th:value="${statistics.websiteProfile}"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
 				<td><a class="btn btn-primary" href="">自动获取</a></td>
 
@@ -226,7 +250,8 @@
 			<tr>
 				<td>投资北京知识</td>
 				<td><input id="websiteInvestBeijing"
-					name="websiteInvestBeijing" type="number"></td>
+					name="websiteInvestBeijing" type="number"
+					th:value="${statistics.websiteInvestBeijing}"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
 				<td><a class="btn btn-primary" href="">自动获取</a></td>
 
@@ -234,7 +259,7 @@
 			<tr>
 				<td>投资咨询咨询互动</td>
 				<td><input id="websiteInteraction" name="websiteInteraction"
-					type="number"></td>
+					type="number" th:value="${statistics.websiteInteraction}"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
 				<td><a class="btn btn-primary" href="">自动获取</a></td>
 
@@ -242,22 +267,23 @@
 			<tr>
 				<td>办事事项</td>
 				<td><input id="websiteMatters" name="websiteMatters"
-					type="number"></td>
+					type="number" th:value="${statistics.websiteMatters}"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
 				<td><a class="btn btn-primary" href="">自动获取</a></td>
 
 			</tr>
 			<tr>
 				<td>党工团机构</td>
-				<td><input id="websiteParty" name="websiteParty"
-					type="number"></td>
+				<td><input id="websiteParty" name="websiteParty" type="number"
+					th:value="${statistics.websiteParty}"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
 				<td><a class="btn btn-primary" href="">自动获取</a></td>
 
 			</tr>
 			<tr>
 				<td>信息公开</td>
-				<td><input id="websiteInfo" name="websiteInfo" type="number"></td>
+				<td><input id="websiteInfo" name="websiteInfo" type="number"
+					th:value="${statistics.websiteInfo}"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
 				<td><a class="btn btn-primary" href="">自动获取</a></td>
 
@@ -280,7 +306,8 @@
 			<tr>
 				<td>发展规划</td>
 				<td><input id="nongovernDevelopPlanning"
-					name="nongovernDevelopPlanning" type="number"></td>
+					name="nongovernDevelopPlanning" type="number"
+					th:value="${statistics.nongovernDevelopPlanning}"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
 				<td><a class="btn btn-primary" href="">自动获取</a></td>
 
@@ -288,7 +315,8 @@
 			<tr>
 				<td>投资政策</td>
 				<td><input id="nongovernInvestPolicy"
-					name="nongovernInvestPolicy" type="number"></td>
+					name="nongovernInvestPolicy" type="number"
+					th:value="${statistics.nongovernInvestPolicy}"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
 				<td><a class="btn btn-primary" href="">自动获取</a></td>
 
@@ -296,7 +324,8 @@
 			<tr>
 				<td>行政许可</td>
 				<td><input id="nongovernAuthoritylicense"
-					name="nongovernAuthoritylicense" type="number"></td>
+					name="nongovernAuthoritylicense" type="number"
+					th:value="${statistics.nongovernAuthoritylicense}"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
 				<td><a class="btn btn-primary" href="">自动获取</a></td>
 
@@ -304,7 +333,8 @@
 			<tr>
 				<td>市场准入</td>
 				<td><input id="nongovernMarketAccess"
-					name="nongovernMarketAccess" type="number"></td>
+					name="nongovernMarketAccess" type="number"
+					th:value="${statistics.nongovernMarketAccess}"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
 				<td><a class="btn btn-primary" href="">自动获取</a></td>
 
@@ -312,7 +342,8 @@
 			<tr>
 				<td>投资机会</td>
 				<td><input id="nongovernInvestOpportunity"
-					name="nongovernInvestOpportunity" type="number"></td>
+					name="nongovernInvestOpportunity" type="number"
+					th:value="${statistics.nongovernInvestOpportunity}"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
 				<td><a class="btn btn-primary" href="">自动获取</a></td>
 
@@ -320,7 +351,8 @@
 			<tr>
 				<td>投资服务</td>
 				<td><input id="nongovernInvestService"
-					name="nongovernInvestService" type="number"></td>
+					name="nongovernInvestService" type="number"
+					th:value="${statistics.nongovernInvestService}"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
 				<td><a class="btn btn-primary" href="">自动获取</a></td>
 			</tr>
@@ -341,15 +373,15 @@
 			</tr>
 			<tr>
 				<td>办公设备维修（人次）</td>
-				<td><input id="maintenanceHardware"
-					name="maintenanceHardware" type="number"></td>
+				<td><input id="maintenanceHardware" name="maintenanceHardware"
+					type="number" th:value="${statistics.maintenanceHardware}"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
 				<td><a class="btn btn-primary" href="">自动获取</a></td>
 			</tr>
 			<tr>
 				<td>软件及系统问题（人次）</td>
-				<td><input id="maintenanceSoftware"
-					name="maintenanceSoftware" type="number"></td>
+				<td><input id="maintenanceSoftware" name="maintenanceSoftware"
+					type="number" th:value="${statistics.maintenanceSoftware}"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
 				<td><a class="btn btn-primary" href="">自动获取</a></td>
 			</tr>
@@ -370,8 +402,8 @@
 			</tr>
 			<tr>
 				<td>本月新增（条）数</td>
-				<td><input id="fbaseNew" name="fbaseNew"
-					type="number"></td>
+				<td><input id="fbaseNew" name="fbaseNew" type="number"
+					th:value="${statistics.fbaseNew}"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
 				<td><a class="btn btn-primary" href="/database/getnew">自动获取</a></td>
 			</tr>
@@ -393,50 +425,54 @@
 			</tr>
 			<tr>
 				<td>阻断 网站安全攻击（次）</td>
-				<td><input id="securityAttackBlock"
-					name="securityAttackBlock" type="number"></td>
+				<td><input id="securityAttackBlock" name="securityAttackBlock"
+					type="number" th:value="${statistics.securityAttackBlock}"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
 				<td><a class="btn btn-primary" href="/database/getnew">自动获取</a></td>
 			</tr>
 			<tr>
 				<td>系统加固（条）</td>
 				<td><input id="securitySystemReinforce"
-					name="securitySystemReinforce" type="number"></td>
+					name="securitySystemReinforce" type="number"
+					th:value="${statistics.securitySystemReinforce}"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
 				<td><a class="btn btn-primary" href="/database/getnew">自动获取</a></td>
 			</tr>
 			<tr>
 				<td>安全通报（份）</td>
 				<td><input id="securitySafetyMessage"
-					name="securitySafetyMessage" type="number"></td>
+					name="securitySafetyMessage" type="number"
+					th:value="${statistics.securitySafetyMessage}"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
 				<td><a class="btn btn-primary" href="/database/getnew">自动获取</a></td>
 			</tr>
 			<tr>
 				<td>漏洞扫描（次）</td>
-				<td><input id="securityBugScan"
-					name="securityBugScan" type="number"></td>
+				<td><input id="securityBugScan" name="securityBugScan"
+					type="number" th:value="${statistics.securityBugScan}"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
 				<td><a class="btn btn-primary" href="/database/getnew">自动获取</a></td>
 			</tr>
 			<tr>
 				<td>发现漏洞（个）</td>
-				<td><input id="securityBugNum"
-					name="securityBugNum" type="number"></td>
+				<td><input id="securityBugNum" name="securityBugNum"
+					type="number" th:value="${statistics.securityBugNum}"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
 				<td><a class="btn btn-primary" href="/database/getnew">自动获取</a></td>
 			</tr>
 			<tr>
 				<td>修复网站故障（次）</td>
 				<td><input id="securityWebsiteTrouble"
-					name="securityWebsiteTrouble" type="number"></td>
+					name="securityWebsiteTrouble" type="number"
+					th:value="${statistics.securityWebsiteTrouble}"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
 				<td><a class="btn btn-primary" href="/database/getnew">自动获取</a></td>
 			</tr>
 			<tr>
 				<td>全局性网络故障（次）</td>
 				<td><input id="securityGlobalTrouble"
-					name="securityGlobalTrouble" type="number"></td>
+					name="securityGlobalTrouble" type="number"
+					th:value="${statistics.securityGlobalTrouble}"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
 				<td><a class="btn btn-primary" href="/database/getnew">自动获取</a></td>
 			</tr>
@@ -457,29 +493,29 @@
 			</tr>
 			<tr>
 				<td>会议摄影（次）</td>
-				<td><input id="photoMeeting" name="photoMeeting"
-					type="number"></td>
+				<td><input id="photoMeeting" name="photoMeeting" type="number"
+					th:value="${statistics.photoMeeting}"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
 				<td><a class="btn btn-primary" href="">自动获取</a></td>
 			</tr>
 			<tr>
 				<td>活动摄影（次）</td>
 				<td><input id="photoActivity" name="photoActivity"
-					type="number"></td>
+					type="number" th:value="${statistics.photoActivity}"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
 				<td><a class="btn btn-primary" href="">自动获取</a></td>
 			</tr>
 			<tr>
 				<td>照片资料（次）</td>
-				<td><input id="photoImgNum" name="photoImgNumm"
-					type="number"></td>
+				<td><input id="photoImgNum" name="photoImgNumm" type="number"
+					th:value="${statistics.photoImgNum}"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
 				<td><a class="btn btn-primary" href="">自动获取</a></td>
 			</tr>
 			<tr>
 				<td>影像资料（段）</td>
 				<td><input id="photoVideoNum" name="photoVideoNum"
-					type="number"></td>
+					type="number" th:value="${statistics.photoVideoNum}"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
 				<td><a class="btn btn-primary" href="">自动获取</a></td>
 			</tr>
@@ -492,8 +528,7 @@
 		</table>
 	</form>
 
-	<!-- 根据左侧按钮控制显示 -->
-	<script type="text/javascript">
+	<!-- 根据左侧按钮控制显示 --> <script type="text/javascript">
 		$(document).ready(function() {
 			$("table").hide();
 			$("#party").show();
@@ -504,7 +539,6 @@
 				$("#" + tableId).show();
 			});
 		});
-	</script> 
-	</right>
+	</script> </right>
 </body>
 </html>
