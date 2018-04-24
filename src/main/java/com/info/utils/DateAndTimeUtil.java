@@ -1,5 +1,8 @@
 package com.info.utils;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 public class DateAndTimeUtil {
@@ -36,4 +39,58 @@ public class DateAndTimeUtil {
 	public static int getMonthByDate(Date date){
 		return 0;
 	}
+	
+	// 使用当前月份,得到上一个月的月份:月份的格式是:yyyy-MM  
+    public static String getPreMonth(String currentDate) { 
+        //定义日期格式
+    	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");  
+        //定义日期
+    	Date date = null;
+    	//解析参数日期
+        try {  
+            date = sdf.parse(currentDate + "-" + "01");  
+        } catch (ParseException e) {  
+            e.printStackTrace();  
+        }  
+        Calendar c = Calendar.getInstance();  
+        c.setTime(date);
+        if(c.get(Calendar.MONTH)==0) {
+        	c.add(Calendar.YEAR, -1);
+        	c.add(Calendar.MONTH, +11);
+        }else{
+        	c.add(Calendar.MONTH, -1);
+        } 
+  
+        String preMonth = c.get(Calendar.YEAR) + "-"  
+                + (c.get(Calendar.MONTH) + 1);  
+  
+        return preMonth; 
+    }
+    
+    // 使用当前月份,得到下一个月的月份:月份的格式是:yyyy-MM  
+    public static String getNextMonth(String currentDate) { 
+        //定义日期格式
+    	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");  
+        //定义日期
+    	Date date = null;
+    	//解析参数日期
+        try {  
+            date = sdf.parse(currentDate + "-" + "01");  
+        } catch (ParseException e) {  
+            e.printStackTrace();  
+        }  
+        Calendar c = Calendar.getInstance();  
+        c.setTime(date);
+        if(c.get(Calendar.MONTH)==11) {
+        	c.add(Calendar.MONTH, -11);
+        	c.add(Calendar.YEAR, +1);
+        }else {
+        	c.add(Calendar.MONTH, +1); 
+        } 
+  
+        String nextMonth = c.get(Calendar.YEAR) + "-"  
+                + (c.get(Calendar.MONTH) + 1);  
+  
+        return nextMonth;   
+    }
 }

@@ -10,7 +10,7 @@
 <!-- SiteMesh:Title -->
 <title><sitemesh:write property='title' /></title>
 <!-- Bootstrap:CSS -->
-<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css">
 <!-- 顶部有菜单栏，内容下移60px避开 -->
 <style type="text/css">
 body {
@@ -18,10 +18,10 @@ body {
 }
 </style>
 <!-- 放在最后会使页面加载速度更快 -->
-<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
-<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" th:src="@{/js/jquery-3.3.1.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
 <!-- 暂时解除源代码
-<script type="text/javascript" src="js/source-not-open.js"></script>
+<script type="text/javascript" th:src="@{/js/source-not-open.js}"></script>
  -->
 <!-- Sitemeah:head -->
 <sitemesh:write property="head" />

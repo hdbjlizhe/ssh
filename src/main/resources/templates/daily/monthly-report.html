@@ -26,39 +26,18 @@
 
 
 	<right> <!-- 下拉列表框-月份 -->
-	<form action="/monthly-report" method="get">
+	<form action="/monthReport" method="get">
 		<input th:id="${_csrf.parameterName}" type="hidden"
 			th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-		<div class="list-group">
-			<div class="list-group-item active">选择月份</div>
-			<div class="list-group-item">
-				<select name="month" class="form-control">
-					<option>1</option>
-					<option>2</option>
-					<option>3</option>
-					<option>4</option>
-					<option>5</option>
-					<option>6</option>
-					<option>7</option>
-					<option>8</option>
-					<option>9</option>
-					<option>10</option>
-					<option>11</option>
-					<option>12</option>
-				</select>
-			</div>
-			<div class="list-group-item">
-				<input type="submit" text="提交">
-			</div>
-		</div>
-
+		<a th:href="@{/monthReport/pre/{currentMonth}(currentMonth=${statistics.month})}" class="btn btn-primary">上个月</a>
+		<input type="text" th:value="${statistics.month}" readonly>
+		<a th:href="@{/monthReport/next/{currentMonth}(currentMonth=${statistics.month})}" class="btn btn-primary">下个月</a>
 	</form>
 	<br>
-
+	
 	<!-- 党务工作  -->
-	<form action="/monthReport/party" method="post">
+	<form id="fm-party" action="/monthReport/party" method="post">
 		<table id="party" class="table table-condensed">
-
 			<tr>
 				<td colspan=4><p class="text-center">
 					<h4>党务工作</h4> <input th:id="${_csrf.parameterName}" type="hidden"
@@ -90,15 +69,15 @@
 			</tr>
 			<tr>
 				<td colspan=4>
-					<button type="reset" class="btn btn-default">重置</button> <span></span>
-					<button type="submit" class="btn btn-default">提交</button>
+					<button id="reset_party" type="reset" class="btn btn-default">重置</button>
+					<button id="submit_party" type="button" class="btn btn-default">提交</button>
 				</td>
 			</tr>
 		</table>
 	</form>
 
 	<!-- 往来公文 -->
-	<form action="/monthReport/office" method="post">
+	<form id="fm-office" action="/monthReport/office" method="post">
 		<table id="office" class="table table-condensed">
 			<tr>
 				<td colspan=4><h4>公文往来</h4>
@@ -127,18 +106,23 @@
 			</tr>
 			<tr>
 				<td colspan=4>
-					<button type="reset" class="btn btn-default">重置</button> <span></span>
-					<button type="submit" class="btn btn-default">提交</button>
+					<button id="reset_office" type="reset" class="btn btn-default">重置</button>
+					<button id="submit_office" type="button" class="btn btn-default">提交</button>
 				</td>
 			</tr>
 		</table>
 	</form>
 
 	<!-- 例会 -->
-	<form action="/monthReport/affairs" method="post">
+	<form id="fm-affairs" action="/monthReport/affairs" method="post">
 		<table id="affairs" class="table table-condensed">
 			<tr>
-				<td colspan=4><h4>例会</h4></td>
+				<td colspan=4><h4>例会</h4>
+				<input th:id="${_csrf.parameterName}" type="hidden"
+					th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+				<input th:id="id" th:name="id" type="hidden"
+					th:value="${statistics.id}">
+				</td>
 			</tr>
 			<tr>
 				<td>例会（次）</td>
@@ -150,18 +134,23 @@
 			</tr>
 			<tr>
 				<td colspan=4>
-					<button type="reset" class="btn btn-default">重置</button> <span></span>
-					<button type="submit" class="btn btn-default">提交</button>
+					<button id="reset_affairs" type="reset" class="btn btn-default">重置</button>
+					<button id="submit_affairs" type="button" class="btn btn-default">提交</button>
 				</td>
 			</tr>
 		</table>
 	</form>
 
 	<!-- 原创新闻发布-->
-	<form action="/monthReport/news" method="post">
+	<form id="fm-news" action="/monthReport/news" method="post">
 		<table id="news" class="table table-condensed">
 			<tr>
-				<td colspan=4><h4>新闻发布</h4></td>
+				<td colspan=4><h4>新闻发布</h4>
+				<input th:id="${_csrf.parameterName}" type="hidden"
+					th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+				<input th:id="id" th:name="id" type="hidden"
+					th:value="${statistics.id}">
+				</td>
 			</tr>
 			<tr>
 				<td>微信原创</td>
@@ -226,18 +215,23 @@
 			</tr>
 			<tr>
 				<td colspan=4>
-					<button type="reset" class="btn btn-default">重置</button> <span></span>
-					<button type="submit" class="btn btn-default">提交</button>
+					<button id="reset_news" type="reset" class="btn btn-default">重置</button> <span></span>
+					<button id="submit_news" type="button" class="btn btn-default">提交</button>
 				</td>
 			</tr>
 		</table>
 	</form>
 
 	<!-- 局官网政策维护 -->
-	<form action="/monthReport/website" method="post">
+	<form id="fm-website" action="/monthReport/website" method="post">
 		<table id="website" class="table table-condensed">
 			<tr>
-				<td colspan=4><h4>局官网政策维护</h4></td>
+				<td colspan=4><h4>局官网政策维护</h4>
+				<input th:id="${_csrf.parameterName}" type="hidden"
+					th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+				<input th:id="id" th:name="id" type="hidden"
+					th:value="${statistics.id}">
+				</td>
 			</tr>
 			<tr>
 				<td>机构概况</td>
@@ -290,18 +284,23 @@
 			</tr>
 			<tr>
 				<td colspan=4>
-					<button type="reset" class="btn btn-default">重置</button> <span></span>
-					<button type="submit" class="btn btn-default">提交</button>
+					<button id="reset_website" type="reset" class="btn btn-default">重置</button> <span></span>
+					<button id="submit_website" type="button" class="btn btn-default">提交</button>
 				</td>
 			</tr>
 		</table>
 	</form>
 
 	<!-- 民间投资平台维护 -->
-	<form action="/monthReport/nongovern" method="post">
+	<form id="fm-nongovern" action="/monthReport/nongovern" method="post">
 		<table id="nongovern" class="table table-condensed">
 			<tr>
-				<td colspan=4><h4>民间投资平台维护</h4></td>
+				<td colspan=4><h4>民间投资平台维护</h4>
+				<input th:id="${_csrf.parameterName}" type="hidden"
+					th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+				<input th:id="id" th:name="id" type="hidden"
+					th:value="${statistics.id}">
+				</td>
 			</tr>
 			<tr>
 				<td>发展规划</td>
@@ -358,18 +357,23 @@
 			</tr>
 			<tr>
 				<td colspan=4>
-					<button type="reset" class="btn btn-default">重置</button> <span></span>
-					<button type="submit" class="btn btn-default">提交</button>
+					<button id="reset_nongovern" type="reset" class="btn btn-default">重置</button> <span></span>
+					<button id="submit_nongovern" type="button" class="btn btn-default">提交</button>
 				</td>
 			</tr>
 		</table>
 	</form>
 
 	<!-- 软硬件维护 -->
-	<form action="/monthReport/mainenance" method="post">
+	<form id="fm-maintenance" action="/monthReport/maintenance" method="post">
 		<table id="maintenance" class="table table-condensed">
 			<tr>
-				<td colspan=4><h4>软硬件维护</h4></td>
+				<td colspan=4><h4>软硬件维护</h4>
+				<input th:id="${_csrf.parameterName}" type="hidden"
+					th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+				<input th:id="id" th:name="id" type="hidden"
+					th:value="${statistics.id}">
+				</td>
 			</tr>
 			<tr>
 				<td>办公设备维修（人次）</td>
@@ -387,18 +391,23 @@
 			</tr>
 			<tr>
 				<td colspan=4>
-					<button type="reset" class="btn btn-default">重置</button> <span></span>
-					<button type="submit" class="btn btn-default">提交</button>
+					<button id="reset_maintenance" type="reset" class="btn btn-default">重置</button> <span></span>
+					<button id="submit_maintenance" type="button" class="btn btn-default">提交</button>
 				</td>
 			</tr>
 		</table>
 	</form>
 
 	<!-- "产业招商精准招商资料库" -->
-	<form action="/monthReport/fbase" method="post">
+	<form id="fm-fbase" action="/monthReport/fbase" method="post">
 		<table id="fbase" class="table table-condensed">
 			<tr>
-				<td colspan=4><h4>“产业招商精准招商”资料库</h4></td>
+				<td colspan=4><h4>“产业招商精准招商”资料库</h4>
+				<input th:id="${_csrf.parameterName}" type="hidden"
+					th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+				<input th:id="id" th:name="id" type="hidden"
+					th:value="${statistics.id}">
+				</td>
 			</tr>
 			<tr>
 				<td>本月新增（条）数</td>
@@ -409,8 +418,8 @@
 			</tr>
 			<tr>
 				<td colspan=4>
-					<button type="reset" class="btn btn-default">重置</button> <span></span>
-					<button type="submit" class="btn btn-default">提交</button>
+					<button id="reset_fbase" type="reset" class="btn btn-default">重置</button> <span></span>
+					<button id="submit_fbase" type="button" class="btn btn-default">提交</button>
 				</td>
 			</tr>
 		</table>
@@ -418,10 +427,15 @@
 
 
 	<!-- 网络与信息安全 -->
-	<form action="/monthReport/security" method="post">
+	<form id="fm-security" action="/monthReport/security" method="post">
 		<table id="security" class="table table-condensed">
 			<tr>
-				<td colspan=4><h4>网络与信息安全</h4></td>
+				<td colspan=4><h4>网络与信息安全</h4>
+				<input th:id="${_csrf.parameterName}" type="hidden"
+					th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+				<input th:id="id" th:name="id" type="hidden"
+					th:value="${statistics.id}">
+				</td>
 			</tr>
 			<tr>
 				<td>阻断 网站安全攻击（次）</td>
@@ -478,18 +492,23 @@
 			</tr>
 			<tr>
 				<td colspan=4>
-					<button type="reset" class="btn btn-default">重置</button> <span></span>
-					<button type="submit" class="btn btn-default">提交</button>
+					<button id="reset_security" type="reset" class="btn btn-default">重置</button> <span></span>
+					<button id="submit_security" type="button" class="btn btn-default">提交</button>
 				</td>
 			</tr>
 		</table>
 	</form>
 
 	<!-- 摄影摄像 -->
-	<form action="/monthReport/photo" method="post">
+	<form id="fm-photo" action="/monthReport/photo" method="post">
 		<table id="photo" class="table table-condensed">
 			<tr>
-				<td colspan=4><h4>摄影摄像</h4></td>
+				<td colspan=4><h4>摄影摄像</h4>
+				<input th:id="${_csrf.parameterName}" type="hidden"
+					th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+				<input th:id="id" th:name="id" type="hidden"
+					th:value="${statistics.id}">
+				</td>
 			</tr>
 			<tr>
 				<td>会议摄影（次）</td>
@@ -507,7 +526,7 @@
 			</tr>
 			<tr>
 				<td>照片资料（次）</td>
-				<td><input id="photoImgNum" name="photoImgNumm" type="number"
+				<td><input id="photoImgNum" name="photoImgNum" type="number"
 					th:value="${statistics.photoImgNum}"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
 				<td><a class="btn btn-primary" href="">自动获取</a></td>
@@ -521,14 +540,15 @@
 			</tr>
 			<tr>
 				<td colspan=4>
-					<button type="reset" class="btn btn-default">重置</button> <span></span>
-					<button type="submit" class="btn btn-default">提交</button>
+					<button id="reset_photo" type="reset" class="btn btn-default">重置</button> <span></span>
+					<button id="submit_photo" type="button" class="btn btn-default">提交</button>
 				</td>
 			</tr>
 		</table>
 	</form>
 
-	<!-- 根据左侧按钮控制显示 --> <script type="text/javascript">
+	<!-- 根据左侧按钮控制显示 -->
+	<script type="text/javascript">
 		$(document).ready(function() {
 			$("table").hide();
 			$("#party").show();
@@ -538,7 +558,27 @@
 				$("table").hide();
 				$("#" + tableId).show();
 			});
+
+			//id以submit开关的
+			$("button[id^='submit']").click(function(){
+				var btnId=$(this).attr("id");//获取按钮ID
+				var ajaxurl=btnId.substr(btnId.lastIndexOf("_")+1);
+				//发送Ajax请求
+				debugger;
+				$.post(
+					"/monthReport/"+ajaxurl,
+					$("#fm-"+ajaxurl).serialize(),//表单数据
+					function(data){
+						debugger;
+						if(data==true) 
+							alert("保存成功");
+						else 
+							alert("保存失败");}//返回结果的处理
+				)
+			})
+
 		});
-	</script> </right>
+	</script>
+	</right>
 </body>
 </html>

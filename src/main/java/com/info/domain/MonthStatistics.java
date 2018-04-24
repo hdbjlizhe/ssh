@@ -17,9 +17,9 @@ public class MonthStatistics {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
 	
-	@Column(unique=true)
-	@Size(max=6,min=6)
-	private String month;//格式：201802
+	@Column(unique=true,nullable=false)
+	@Size(max=7,min=6)
+	private String month;//格式：2018-02
 	
 	/**
 	 * 党务版块

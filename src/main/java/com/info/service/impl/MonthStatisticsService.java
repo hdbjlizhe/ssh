@@ -1,5 +1,7 @@
 package com.info.service.impl;
 
+import java.time.Month;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,28 +31,28 @@ public class MonthStatisticsService {
 		return monthStatisticsRepository.findByMonth(month);
 	}
 	//更新party
-	public void updateParty(MonthStatisticsPartyDTO dto) {
+	public MonthStatistics updateParty(MonthStatisticsPartyDTO dto) {
 		MonthStatistics monthStatistics=monthStatisticsRepository.getOne(dto.getId());
 		monthStatistics.setPartyStudy(dto.getPartyStudy());
 		monthStatistics.setPartyMeeting(dto.getPartyMeeting());
 		monthStatistics.setPartyActivity(dto.getPartyActivity());
-		monthStatisticsRepository.save(monthStatistics);
+		return monthStatisticsRepository.save(monthStatistics);
 	}
 	//更新OfficeDoc
-	public void updateOffice(MonthStatisticsOfficeDTO dto) {
+	public MonthStatistics updateOffice(MonthStatisticsOfficeDTO dto) {
 		MonthStatistics monthStatistics=monthStatisticsRepository.getOne(dto.getId());
 		monthStatistics.setDocDepart(dto.getDocDepart());
 		monthStatistics.setDocOffice(dto.getDocOffice());
-		monthStatisticsRepository.save(monthStatistics);
+		return monthStatisticsRepository.save(monthStatistics);
 	}
 	//更新例会Affairs
-	public void updateAffairs(MonthStatisticsAffairsDTO dto) {
+	public MonthStatistics updateAffairs(MonthStatisticsAffairsDTO dto) {
 		MonthStatistics monthStatistics=monthStatisticsRepository.getOne(dto.getId());
 		monthStatistics.setAffairs(dto.getAffairs());
-		monthStatisticsRepository.save(monthStatistics);
+		return monthStatisticsRepository.save(monthStatistics);
 	}
 	//更新news
-	public void updateNews(MonthStatisticsNewsDTO dto) {
+	public MonthStatistics updateNews(MonthStatisticsNewsDTO dto) {
 		MonthStatistics monthStatistics=monthStatisticsRepository.getOne(dto.getId());
 		monthStatistics.setWebchatOriginal(dto.getWebchatOriginal());
 		monthStatistics.setWebchatTranspond(dto.getWebchatTranspond());
@@ -60,10 +62,10 @@ public class MonthStatisticsService {
 		monthStatistics.setToutiaoTranspond(dto.getToutiaoTranspond());
 		monthStatistics.setNewsBoard(dto.getNewsBoard());
 		monthStatistics.setNewsWebsite(dto.getNewsWebsite());
-		monthStatisticsRepository.save(monthStatistics);
+		return monthStatisticsRepository.save(monthStatistics);
 	}
 	//更新Website
-	public void updateWebsite(MonthStatisticsWebsiteDTO dto) {
+	public MonthStatistics updateWebsite(MonthStatisticsWebsiteDTO dto) {
 		MonthStatistics monthStatistics=monthStatisticsRepository.getOne(dto.getId());
 		monthStatistics.setWebsiteProfile(dto.getWebsiteProfile());
 		monthStatistics.setWebsiteInvestBeijing(dto.getWebsiteInvestBeijing());
@@ -71,10 +73,10 @@ public class MonthStatisticsService {
 		monthStatistics.setWebsiteMatters(dto.getWebsiteMatters());
 		monthStatistics.setWebsiteParty(dto.getWebsiteParty());
 		monthStatistics.setWebsiteInfo(dto.getWebsiteInfo());
-		monthStatisticsRepository.save(monthStatistics);
+		return monthStatisticsRepository.save(monthStatistics);
 	}
 	//更新民投nongovern
-	public void updateNongovern(MonthStatisticsNongovernDTO dto) {
+	public MonthStatistics updateNongovern(MonthStatisticsNongovernDTO dto) {
 		MonthStatistics monthStatistics=monthStatisticsRepository.getOne(dto.getId());
 		monthStatistics.setNongovernAuthoritylicense(dto.getNongovernAuthoritylicense());
 		monthStatistics.setNongovernDevelopPlanning(dto.getNongovernDevelopPlanning());
@@ -82,23 +84,23 @@ public class MonthStatisticsService {
 		monthStatistics.setNongovernInvestPolicy(dto.getNongovernInvestPolicy());
 		monthStatistics.setNongovernInvestService(dto.getNongovernInvestService());
 		monthStatistics.setNongovernMarketAccess(dto.getNongovernMarketAccess());
-		monthStatisticsRepository.save(monthStatistics);
+		return monthStatisticsRepository.save(monthStatistics);
 	}
 	//更新maintenance
-	public void updateMaintenance(MonthStatisticsMaintenanceDTO dto) {
+	public MonthStatistics updateMaintenance(MonthStatisticsMaintenanceDTO dto) {
 		MonthStatistics monthStatistics=monthStatisticsRepository.getOne(dto.getId());
 		monthStatistics.setMaintenanceHardware(dto.getMaintenanceHardware());
 		monthStatistics.setMaintenanceSoftware(dto.getMaintenanceSoftware());
-		monthStatisticsRepository.save(monthStatistics);
+		return monthStatisticsRepository.save(monthStatistics);
 	}
 	//更新fbaseNew
-	public void updateFbaseNew(MonthStatisticsFbaseNewDTO dto) {
+	public MonthStatistics updateFbaseNew(MonthStatisticsFbaseNewDTO dto) {
 		MonthStatistics monthStatistics=monthStatisticsRepository.getOne(dto.getId());
 		monthStatistics.setFbaseNew(dto.getFbaseNew());
-		monthStatisticsRepository.save(monthStatistics);
+		return monthStatisticsRepository.save(monthStatistics);
 	}
 	//更新Security
-	public void updateSecurity(MonthStatisticsSecurityDTO dto) {
+	public MonthStatistics updateSecurity(MonthStatisticsSecurityDTO dto) {
 		MonthStatistics monthStatistics=monthStatisticsRepository.getOne(dto.getId());
 		monthStatistics.setSecurityAttackBlock(dto.getSecurityAttackBlock());
 		monthStatistics.setSecurityBugNum(dto.getSecurityBugNum());
@@ -107,16 +109,16 @@ public class MonthStatisticsService {
 		monthStatistics.setSecuritySafetyMessage(dto.getSecuritySafetyMessage());
 		monthStatistics.setSecuritySystemReinforce(dto.getSecuritySystemReinforce());
 		monthStatistics.setSecurityWebsiteTrouble(dto.getSecurityWebsiteTrouble());
-		monthStatisticsRepository.save(monthStatistics);
+		return monthStatisticsRepository.save(monthStatistics);
 	}
 	//更新photo
-	public void updatePhoto(MonthStatisticsPhotoDTO dto) {
+	public MonthStatistics updatePhoto(MonthStatisticsPhotoDTO dto) {
 		MonthStatistics monthStatistics=monthStatisticsRepository.getOne(dto.getId());
 		monthStatistics.setPhotoActivity(dto.getPhotoActivity());
 		monthStatistics.setPhotoImgNum(dto.getPhotoImgNum());
 		monthStatistics.setPhotoMeeting(dto.getPhotoMeeting());
 		monthStatistics.setPhotoVideoNum(dto.getPhotoVideoNum());
-		monthStatisticsRepository.save(monthStatistics);
+		return monthStatisticsRepository.save(monthStatistics);
 	}
 	
 }

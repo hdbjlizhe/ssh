@@ -4,7 +4,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>header</title>
-<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
 
 </head>
 <body>
@@ -27,8 +27,8 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<img class="nav navbar-nav" src="imgs/zhelee_logo_flat.png" /> <a
-					class="navbar-brand" href="/" th:text="#{msg.brand}">信息服务中心</a>
+				<img class="nav navbar-nav" th:src="@{/imgs/zhelee_logo_flat.png}" /> <a
+					class="navbar-brand" th:href="@{/}" th:text="#{msg.brand}">信息服务中心</a>
 				<ul class="nav navbar-nav">
 					<li class="active"><a href="/index" th:text="#{msg.menu.home}">首页</a></li>
 					<li><a href="http://www.bjzg.gov.cn/" th:text="#{msg.menu.party}">党务工作</a></li>

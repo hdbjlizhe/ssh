@@ -1,0 +1,107 @@
+<!--
+三栏式： 
+为了撑开整个屏幕，需要设置html标签的高度为100%，然后挨个设置body和Main Content的高度和宽度，
+同时整个布局以body为基准，但是，也可以使用绝对定位撑开页面。
+ -->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta name="keywords" content="keyword1,keyword2,keyword3">
+<meta name="description" content="this is my page">
+<meta name="content-type" content="text/html; charset=UTF-8">
+<!-- Bootstrap:移动设备适配 -->
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<!-- SiteMesh:Title -->
+<title><sitemesh:write property='title' /></title>
+<!-- Bootstrap:CSS -->
+<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
+<!-- 放在最后会使页面加载速度更快 -->
+<script type="text/javascript" th:src="@{/js/jquery-3.3.1.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+<!-- 暂时解除源代码
+<script type="text/javascript" th:src="@{/js/source-not-open.js}"></script>
+ -->
+<!-- Sitemeah:head -->
+<sitemesh:write property="head" />
+<style type="text/css">
+* {
+	padding: 0;
+	margin: 0;
+	border: none;
+}
+
+body {
+	padding-top: 60px;
+	font-size: 14px;
+	font-family: "微软雅黑";
+}
+
+header {
+	width: 100%;
+	height: 50px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	background-color: #123;
+	color: #fff;
+}
+
+aside {
+	width: 300px;
+	position: absolute;
+	top: 50px;
+	left: 0;
+	bottom: 0;
+	background-color: #333333
+}
+
+#main {
+	position: absolute;
+	left: 300px;
+	top: 50px;
+	right: 0;
+	bottom: 0;
+	overflow: hidden;
+}
+
+#con {
+	height: 100%;
+	overflow: auto;
+	/*或者
+    *overflow-x:hidden;
+    *overflow-y:scroll;
+    */
+	background-color: #fff;
+	color: #333;
+}
+</style>
+</head>
+<body>
+	<!-- 顶层栏 -->
+	<header>
+		<!-- 引入header -->
+		<div th:include="header::body"></div>
+	</header>
+
+
+	<!-- 左侧固定的导航边栏 -->
+	<aside>
+		<sitemesh:write property="left" />
+	</aside>
+
+
+	<!-- 右侧可滑动的边栏 -->
+	<section id="main">
+		<div id="con">
+			<sitemesh:write property="right" />
+			<div style="height: 800px;">content1</div>
+			<div style="height: 400px;">content1</div>
+			<div style="height: 200px;">content1</div>
+		</div>
+	</section>
+
+</body>
+</html>
