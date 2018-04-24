@@ -8,89 +8,75 @@
 <body>
 	<!--  左侧数据 -->
 	<left>
-	<div class="row">
-		<ul class="list-group">
-			<li th:text="#{msg.management.backstage}">后台管理</li>
-			<li><span class="badge">新</span><a href="/resource"
-				th:text="#{msg.management.resource}">资源管理</a></li>
-			<li><a href="/privilege" th:text="#{msg.management.privilege}">权限管理</a></li>
-			<li><a href="/role" th:text="#{msg.management.role}">角色管理</a></li>
-			<li><a href="/user" th:text="#{msg.management.user}">用户管理</a></li>
-			<li th:text="#{msg.management.ftpbase}">资料库管理</li>
-
-			<li><a href="/syncftp" th:text="#{msg.management.syncftpbase}">手动同步fBase</a></li>
-			<li><a href="/syncftp" th:text="">定时任务管理</a></li>
-		</ul>
+	<div class="container-fluid">
+		<div class="row">
+			<ul class="list-group text-center">
+				<li th:text="#{msg.management.backstage}">后台管理</li>
+				<li><a href="/resource" th:text="#{msg.management.resource}">资源管理</a></li>
+				<li><a th:href="@{/privilege}"
+					th:text="#{msg.management.privilege}">权限管理</a></li>
+				<li><a th:href="@{/role}" th:text="#{msg.management.role}">角色管理</a></li>
+				<li><a th:href="@{/user}" th:text="#{msg.management.user}">用户管理</a></li>
+				<br>
+				<li th:text="#{msg.management.ftpbase}">资料库管理</li>
+				<li><a th:href="@{/syncftp}"
+					th:text="#{msg.management.syncftpbase}">手动同步fBase</a></li>
+				<li><a th:href="@{/syncftp}"
+					th:text="#{msg.management.timertask}">定时任务管理</a></li>
+				<li><a th:href="@{/syncftp}" th:text="#{msg.management.pwd}">密码管理</a></li>
+			</ul>
+		</div>
 	</div>
 	</left>
 
 
 	<!-- 右侧数据 -->
 	<right> <!-- 资源管理 -->
-	<div class="bg-primary">添加资源</div>
-	<br>
-	<form action="/resource/add" class="form-inline">
-		<label th:text="#{msg.resource.uri}"></label> <input name="uri"
-			type="text" class="form-control"> <label
-			th:text="#{msg.resource.description}"></label> <input
-			name="description" type="text" class="form-control"> <label
-			th:text="#{msg.resource.privilege}"></label> <select
-			name="privilegeId" class="form-control" th:filed="*{privilege}"
-			th:remove="all-but-first">
-			<option th:each="privilege:${privileges}" th:value="${privilege.id}"
-				th:text="${privilege.name}">
-			<option>
-		</select>
-		<button class="form-control" type="submit"
-			th:text="#{msg.resource.add}">添加新资源</button>
-	</form>
-	<br>
+	<div class="container-fluid text-middle">
+		<div class="bg-primary">添加资源</div>
+		<br>
+		<form action="/resource/add" class="form-inline">
+			<label th:text="#{msg.resource.uri}"></label> <input name="uri"
+				type="text" class="form-control"> <label
+				th:text="#{msg.resource.description}"></label> <input
+				name="description" type="text" class="form-control"> <label
+				th:text="#{msg.resource.privilege}"></label> <select
+				name="privilegeId" class="form-control" th:filed="*{privilege}"
+				th:remove="all-but-first">
+				<option th:each="privilege:${privileges}" th:value="${privilege.id}"
+					th:text="${privilege.name}">
+				<option>
+			</select>
+			<button class="form-control" type="submit"
+				th:text="#{msg.resource.add}">添加新资源</button>
+		</form>
+		<br>
 
-	<table class="table table-striped">
-		<caption class="bg-primary">资源管理</caption>
-		<thead>
-			<tr>
-				<td th:text="#{msg.resource.id}">ID</td>
-				<td th:text="#{msg.resource.uri}">URI</td>
-				<td th:text="#{msg.resource.description}">描述</td>
-				<td th:text="#{msg.resource.role}">所属角色</td>
-				<td th:text="#{msg.resource.method}">处理方法</td>
-				<td th:text="#{msg.resource.update}">修改</td>
-				<td th:text="#{msg.resource.delete}">删除</td>
+		<table class="table table-striped">
+			<caption class="bg-primary">资源管理</caption>
+			<thead>
+				<tr>
+					<td th:text="#{msg.resource.id}">ID</td>
+					<td th:text="#{msg.resource.uri}">URI</td>
+					<td th:text="#{msg.resource.description}">描述</td>
+					<td th:text="#{msg.resource.method}">处理方法</td>
+					<td th:text="#{msg.resource.update}">修改</td>
+				</tr>
+			</thead>
+			<tr th:each="resource : ${resources}">
+				<td th:text="${resource.id}">id</td>
+				<td><input name="uri" type="text" th:value="${resource.uri}"
+					readonly="readonly" class="form-control"></td>
+				<td><input name="description" type="text"
+					th:value="${resource.description}" class="form-control"></td>
+				<td><input name="methdPath" th:value="${resource.methodPath}"
+					class="form-control" readonly="readonly"></td>
+				<td><button th:text="#{msg.resource.update}"
+						class="btn btn-primary"></button></td>
 			</tr>
-		</thead>
-		<tr th:each="resource : ${resources}">
-			<td th:text="${resource.id}">id</td>
-			<td><input name="uri" type="text" th:value="${resource.uri}"
-				class="form-control"></td>
-			<td><input name="description" type="text"
-				th:value="${resource.description}" class="form-control"></td>
-			<td><select th:filed="*{role}" th:remove="all-but-first"
-				class="form-control">
-					<option th:each="privilege:${roles}" th:value="${role.id}"
-						th:text="${role.name}">
-					<option>
-			</select></td>
-			<td><a th:href="@{/resource/update/{id}(id=${resource.id})}"
-				th:text="#{msg.resource.update}">保存修改</a></td>
-			<td><a th:href="@{/resource/delete/{id}(id=${resource.id})}"
-				th:text="#{msg.resource.delete}">删除</a></td>
-		</tr>
 
-		<tr>
-			<td colspan="6">
-				<ul class="pagination">
-					<li><a href="#">&laquo;</a></li>
-					<li class="active"><a href="#">1</a></li>
-					<li class="disabled"><a href="#">2</a></li>
-					<li><a href="#">3</a></li>
-					<li><a href="#">4</a></li>
-					<li><a href="#">5</a></li>
-					<li><a href="#">&raquo;</a></li>
-				</ul>
-			</td>
-		</tr>
-	</table>
+		</table>
+	</div>
 	</right>
 
 </body>

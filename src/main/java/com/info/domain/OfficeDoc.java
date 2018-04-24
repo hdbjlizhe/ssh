@@ -1,5 +1,6 @@
 package com.info.domain;
 
+import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -7,6 +8,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.joda.time.DateTime;
+
+import com.info.domain.entity.Department;
 
 /***
  * 
@@ -23,7 +28,7 @@ public class OfficeDoc {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	//密级
-	private Integer security;  
+	private Integer securityLevel;  
 	//紧急程度
 	private Integer emergency;
 	//同号文件顺序号（）
@@ -41,14 +46,23 @@ public class OfficeDoc {
 	//主送机关：<set>
 	private String[] to;
 	//正文
+	private String content;
 	//附件标题
+	private String[] attachments;
 	//发放范围
+	
 	//行文时间
+	private Date writeDate;
 	//主题词
+	private Set<String> keywords;
 	//抄送机关
+	private Set<Department> departments;
 	//印制机关
+	private Department prtDepartment;
 	//印发时间
+	private DateTime prtDateTime;
 	//份数
+	private Integer copies;
 	
 	
 }

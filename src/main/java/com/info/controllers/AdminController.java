@@ -7,9 +7,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.kafka.KafkaProperties.Admin;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.info.asyntasks.AsyncTask;
+import com.info.domain.entity.Resource;
+import com.info.service.impl.ResourceService;
+
+import java.util.List;
 
 @Controller
 public class AdminController {
@@ -19,9 +24,14 @@ public class AdminController {
 	@Autowired
 	private AsyncTask asyncTask;
 	
+	@Autowired
+	private ResourceService resourceService;
+	
 	@GetMapping("/admin")
-	public String Admin() {
-		return "/admin/admin";
+	public String Admin(Model model) {
+		List<Resource> resources=resourceService.findAll();
+		model.addAttribute("resources", resources);
+		return "admin/admin";
 	}
 	
 	@RequestMapping("/syncftp")

@@ -13,8 +13,6 @@ import com.info.domain.entity.User;
 import com.info.domain.entity.ValidateToken;
 import com.info.event.OnRegistrationCompleteEvent;
 import com.info.service.IUserService;
-import com.info.utils.LocaleUtil;
-
 import java.util.UUID;
 
 /**

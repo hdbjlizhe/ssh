@@ -94,6 +94,7 @@ public class UserController {
         }
           
     }
+    
     /**
      *  邮箱验证
      *  1、判断token是否存在
@@ -117,6 +118,12 @@ public class UserController {
         return "redirect:/login";
     }
     
+    
+    /********************************************************************************************************
+     * 以下为Ajax
+     * @param username
+     * @return
+     ********************************************************************************************************/
     //Ajax检查用户名是否可用 true表示可用，false表示不可用
     @ResponseBody
     @PostMapping("/validateUserName")
