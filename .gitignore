@@ -23,3 +23,4 @@ nbbuild/
 dist/
 nbdist/
 .nb-gradle/
+/logback.2018-04-22.log
