@@ -30,5 +30,9 @@ public class DecoratorController {
 	public String report() {
 		return "/decorators/decorator-report";
 	}
+	@GetMapping("/decorators/personel")
+	public String personel() {
+		return "/decorators/decorator-personel";
+	}
 	
 }

@@ -27,9 +27,9 @@
 	<form action="/monthReport" method="get">
 		<input th:id="${_csrf.parameterName}" type="hidden"
 			th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-		<a th:href="@{/monthReport/pre/{currentMonth}(currentMonth=${statistics.month})}" class="btn btn-primary">上个月</a>
+		<a th:href="@{/daily/monthReport/pre/{currentMonth}(currentMonth=${statistics.month})}" class="btn btn-primary">上个月</a>
 		<input type="text" th:value="${statistics.month}" readonly>
-		<a th:href="@{/monthReport/next/{currentMonth}(currentMonth=${statistics.month})}" class="btn btn-primary">下个月</a>
+		<a th:href="@{/daily/monthReport/next/{currentMonth}(currentMonth=${statistics.month})}" class="btn btn-primary">下个月</a>
 	</form>
 	<br>
 	
@@ -38,7 +38,7 @@
 		<table id="party" class="table table-condensed">
 			<tr>
 				<td colspan=4><p class="text-center">
-					<h4>党务工作</h4> <input th:id="${_csrf.parameterName}" type="hidden"
+					<h4><b>党务工作</b></h4> <input th:id="${_csrf.parameterName}" type="hidden"
 					th:name="${_csrf.parameterName}" th:value="${_csrf.token}" /> <input
 					th:id="id" th:name="id" type="hidden" th:value="${statistics.id}">
 				</td>
@@ -48,7 +48,7 @@
 				<td>理论学习（次）</td>
 				<td><input id="partyStudy" name="partyStudy" type="number"
 					th:value="${statistics.partyStudy}"></td>
-				<td><p class="text-error">说明：填写数字或自动获取</p></td>
+				<td>说明：填写数字或自动获取</td>
 				<td><a class="btn btn-primary" href="">自动获取</a></td>
 			</tr>
 			<tr>
@@ -56,7 +56,7 @@
 				<td><input id="partyMeeting" name="partyMeeting"
 					th:value="${statistics.partyMeeting}" type="number"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
-				<td><a class="btn btn-primary" href="">自动获取</a></td>
+				<td><input type="button" class="btn btn-primary" value="自动获取"/></td>
 			</tr>
 			<tr>
 				<td>党组织活动（次）</td>
@@ -78,7 +78,7 @@
 	<form id="fm-office" action="/monthReport/office" method="post">
 		<table id="office" class="table table-condensed">
 			<tr>
-				<td colspan=4><h4>公文往来</h4>
+				<td colspan=4><h4><b>公文往来</b></h4>
 				<input th:id="${_csrf.parameterName}" type="hidden"
 					th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 				<input th:id="id" th:name="id" type="hidden"
@@ -115,7 +115,7 @@
 	<form id="fm-affairs" action="/monthReport/affairs" method="post">
 		<table id="affairs" class="table table-condensed">
 			<tr>
-				<td colspan=4><h4>例会</h4>
+				<td colspan=4><h4><b>例会</b></h4>
 				<input th:id="${_csrf.parameterName}" type="hidden"
 					th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 				<input th:id="id" th:name="id" type="hidden"
@@ -143,7 +143,7 @@
 	<form id="fm-news" action="/monthReport/news" method="post">
 		<table id="news" class="table table-condensed">
 			<tr>
-				<td colspan=4><h4>新闻发布</h4>
+				<td colspan=4><h4><b>新闻发布</b></h4>
 				<input th:id="${_csrf.parameterName}" type="hidden"
 					th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 				<input th:id="id" th:name="id" type="hidden"
@@ -224,7 +224,7 @@
 	<form id="fm-website" action="/monthReport/website" method="post">
 		<table id="website" class="table table-condensed">
 			<tr>
-				<td colspan=4><h4>局官网政策维护</h4>
+				<td colspan=4><h4><b>局官网政策维护</b></h4>
 				<input th:id="${_csrf.parameterName}" type="hidden"
 					th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 				<input th:id="id" th:name="id" type="hidden"
@@ -293,7 +293,7 @@
 	<form id="fm-nongovern" action="/monthReport/nongovern" method="post">
 		<table id="nongovern" class="table table-condensed">
 			<tr>
-				<td colspan=4><h4>民间投资平台维护</h4>
+				<td colspan=4><h4><b>民间投资平台维护</b></h4>
 				<input th:id="${_csrf.parameterName}" type="hidden"
 					th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 				<input th:id="id" th:name="id" type="hidden"
@@ -366,7 +366,7 @@
 	<form id="fm-maintenance" action="/monthReport/maintenance" method="post">
 		<table id="maintenance" class="table table-condensed">
 			<tr>
-				<td colspan=4><h4>软硬件维护</h4>
+				<td colspan=4><h4><b>软硬件维护</b></h4>
 				<input th:id="${_csrf.parameterName}" type="hidden"
 					th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 				<input th:id="id" th:name="id" type="hidden"
@@ -400,7 +400,7 @@
 	<form id="fm-fbase" action="/monthReport/fbase" method="post">
 		<table id="fbase" class="table table-condensed">
 			<tr>
-				<td colspan=4><h4>“产业招商精准招商”资料库</h4>
+				<td colspan=4><h4><b>“产业招商精准招商”资料库</b></h4>
 				<input th:id="${_csrf.parameterName}" type="hidden"
 					th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 				<input th:id="id" th:name="id" type="hidden"
@@ -428,7 +428,7 @@
 	<form id="fm-security" action="/monthReport/security" method="post">
 		<table id="security" class="table table-condensed">
 			<tr>
-				<td colspan=4><h4>网络与信息安全</h4>
+				<td colspan=4><h4><b>网络与信息安全</b></h4>
 				<input th:id="${_csrf.parameterName}" type="hidden"
 					th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 				<input th:id="id" th:name="id" type="hidden"
@@ -501,7 +501,7 @@
 	<form id="fm-photo" action="/monthReport/photo" method="post">
 		<table id="photo" class="table table-condensed">
 			<tr>
-				<td colspan=4><h4>摄影摄像</h4>
+				<td colspan=4><h4><b>摄影摄像</b></h4>
 				<input th:id="${_csrf.parameterName}" type="hidden"
 					th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 				<input th:id="id" th:name="id" type="hidden"

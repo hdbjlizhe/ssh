@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>季度考核系统</title>
+</head>
+<body>
+	
+	<table>
+		<thead>
+			<tr>
+				<td><b>序号</b></td>
+				<td><b>姓名</b></td>
+				<td><b>德（10分）</b></td>
+				<td><b>能（10分）</b></td>
+				<td><b>勤（10分）</b></td>
+				<td><b>绩（10分）</b></td>
+				<td><b>廉（10分）</b></td>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="employee:${employees}">
+				<td></td>
+				<td><p th:text="${employee.name}"></p></td>
+				<td><input type="text"></td>
+				<td><input type="text"></td>
+				<td><input type="text"></td>
+				<td><input type="text"></td>
+				<td><input type="text"></td>
+			</tr>
+		</tbody>
+	</table>
+	
+	
+</body>
+</html>
