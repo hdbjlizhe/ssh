@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns="http://www.w3.org/1999/html">
+<head>
+<meta charset="UTF-8">
+<title>月报总览</title>
+
+<script type="text/javascript">
+    function preview() {
+        bdhtml =window.document.body.innerHTML;//获取当前页的html代码
+        sprnstr = "<!--startprint-->";//设置打印开始区域
+        eprnstr = "<!--endprint-->";//设置打印结束区域
+        prnhtml =bdhtml.substring(bdhtml.indexOf(sprnstr) + 18); //从开始代码向后取html
+        prnhtml = prnhtml.substring(0,prnhtml.indexOf(eprnstr));//从结束代码向前取html
+        window.document.body.innerHTML= prnhtml;
+        window.print();
+        window.document.body.innerHTML =bdhtml;     
+    }
+</script>
+
+</head>
+<body>
+	<div class="container">
+		<form class="form-inline">
+			<div class="form-group">
+				<label class="sr-only" for="exampleInputAmount" th:text="${statistics.month}"></label>
+				<div class="input-group">
+					<div class="input-group-addon"><a th:href="@{/daily/overview/pre/{month}(month=${statistics.month})}">上个月</a></div>
+					<input type="text" class="form-control" id="exampleInputAmount"
+						placeholder="Amount" th:value="${statistics.month}">
+					<div class="input-group-addon"><a th:href="@{/daily/overview/next/{month}(month=${statistics.month})}">下个月</a></div>
+				</div>
+			</div>
+			<button type="button" class="btn btn-primary pull-right" onclick=preview()>打印表格</button>
+			<button type="button" class="btn btn-primary pull-right">导出至Excel</button>
+		</form>
+		<br>
+		
+		<!--startprint-->
+		<table id="party" class="table table-bordered">
+			<thead>
+				<tr class="info text-center">
+					<td><b>类别</b></td>
+					<td><b>名称</b></td>
+					<td><b>数量</b></td>
+					<td><b>填写人</b></td>
+					<td><b>负责人</b></td>
+				</tr>
+			</thead>
+
+			<tbody>
+				<!-- 党务工作  -->
+				<tr>
+					<td rowspan="3" class="text-center">党务工作</td>
+					<td>理论学习（次）</td>
+					<td><p th:text="${statistics.partyStudy}"></p></td>
+					<td rowspan="3"><p></p></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>党务会议（次）</td>
+					<td><p th:text="${statistics.partyMeeting}"></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>党组织活动（次）</td>
+					<td><p th:text="${statistics.partyActivity}"></td>
+					<td></td>
+				</tr>
+
+				<!-- 往来公文 -->
+				<tr>
+					<td rowspan=2 class="text-center">公文往来</td>
+					<td>处理公文（项）</td>
+					<td><p th:text="${statistics.docOffice}"></td>
+					<td rowspan=2></td>
+					<td></td>
+
+				</tr>
+				<tr>
+					<td>配合相关处室完成工作及方案（项）</td>
+					<td><p th:text="${statistics.docDepart}"></td>
+					<td></td>
+				</tr>
+
+				<!-- 例会 -->
+				<tr>
+					<td class="text-center">例会</td>
+					<td>例会（次）</td>
+					<td><p th:text="${statistics.affairs}"></td>
+					<td></td>
+					<td></td>
+
+				</tr>
+
+				<!-- 原创新闻发布-->
+				<tr>
+					<td rowspan=8 class="text-center">新闻发布</td>
+					<td>微信原创</td>
+					<td><p th:text="${statistics.webchatOriginal}"></td>
+					<td rowspan=2></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>微信转发</td>
+					<td><p th:text="${statistics.webchatTranspond}"></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>微博原创</td>
+					<td><p th:text="${statistics.weiboOriginal}"></td>
+					<td rowspan=2></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>微博转发</td>
+					<td><p th:text="${statistics.weiboTranspond}"></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>今日头条原创</td>
+					<td><p th:text="${statistics.toutiaoOriginal}"></td>
+					<td rowspan=2></td>
+					<td></td>
+
+				</tr>
+				<tr>
+					<td>今日头条转发</td>
+					<td><p th:text="${statistics.toutiaoTranspond}"></td>
+					<td></td>
+				</tr>
+
+				<tr>
+					<td>内部公告栏</td>
+					<td><p th:text="${statistics.newsBoard}"></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>局官网工作动态及通知公告</td>
+					<td><p th:text="${statistics.newsWebsite}"></td>
+					<td></td>
+					<td></td>
+				</tr>
+
+				<!-- 局官网政策维护 -->
+				<tr>
+					<td rowspan=6 class="text-center">局官网政策维护</td>
+					<td>机构概况</td>
+					<td><p th:text="${statistics.websiteProfile}"></td>
+					<td rowspan=6></td>
+					<td></td>
+
+				</tr>
+				<tr>
+					<td>投资北京知识</td>
+					<td><p th:text="${statistics.websiteInvestBeijing}"></td>
+					<td></td>
+
+				</tr>
+				<tr>
+					<td>投资咨询咨询互动</td>
+					<td><p th:text="${statistics.websiteInteraction}"></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>办事事项</td>
+					<td><p th:text="${statistics.websiteMatters}"></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>党工团机构</td>
+					<td><p th:text="${statistics.websiteParty}"></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>信息公开</td>
+					<td><p th:text="${statistics.websiteInfo}"></td>
+					<td></td>
+
+				</tr>
+
+				<!-- 民间投资平台维护 -->
+				<tr>
+					<td rowspan=6 class="text-center">民间投资平台维护</td>
+					<td>发展规划</td>
+					<td><p th:text="${statistics.nongovernDevelopPlanning}"></td>
+					<td rowspan=6></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>投资政策</td>
+					<td><p th:text="${statistics.nongovernInvestPolicy}"></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>行政许可</td>
+					<td><p th:text="${statistics.nongovernAuthoritylicense}"></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>市场准入</td>
+					<td><p th:text="${statistics.nongovernMarketAccess}"></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>投资机会</td>
+					<td><p th:text="${statistics.nongovernInvestOpportunity}"></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>投资服务</td>
+					<td><p th:text="${statistics.nongovernInvestService}"></td>
+					<td></td>
+				</tr>
+
+				<!-- 软硬件维护 -->
+				<tr>
+					<td rowspan=2 class="text-center">软硬件维护</td>
+					<td>办公设备维修（人次）</td>
+					<td><p th:text="${statistics.maintenanceHardware}"></td>
+					<td rowspan=2></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>软件及系统问题（人次）</td>
+					<td><p th:text="${statistics.maintenanceSoftware}"></td>
+					<td></td>
+				</tr>
+
+				<!-- "产业招商精准招商资料库" -->
+				<tr>
+					<td class="text-center">"产业招商精准招商资料库"</td>
+					<td>本月新增（条）数</td>
+					<td><p th:text="${statistics.fbaseNew}"></td>
+					<td></td>
+					<td></td>
+				</tr>
+
+				<!-- 网络与信息安全 -->
+				<tr>
+					<td rowspan=7 class="text-center">网络与信息安全</td>
+					<td>阻断 网站安全攻击（次）</td>
+					<td><p th:text="${statistics.securityAttackBlock}"></td>
+					<td rowspan=7></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>系统加固（条）</td>
+					<td><p th:text="${statistics.securitySystemReinforce}"></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>安全通报（份）</td>
+					<td><p th:text="${statistics.securitySafetyMessage}"></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>漏洞扫描（次）</td>
+					<td><p th:text="${statistics.securityBugScan}"></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>发现漏洞（个）</td>
+					<td><p th:text="${statistics.securityBugNum}"></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>修复网站故障（次）</td>
+					<td><p th:text="${statistics.securityWebsiteTrouble}"></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>全局性网络故障（次）</td>
+					<td><p th:text="${statistics.securityGlobalTrouble}"></td>
+					<td></td>
+				</tr>
+
+				<!-- 摄影摄像类 -->
+				<tr>
+					<td rowspan=4 class="text-center">摄影摄像类</td>
+					<td>会议摄影（次）</td>
+					<td><p th:text="${statistics.photoMeeting}"></td>
+					<td rowspan=4></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>活动摄影（次）</td>
+					<td><p th:text="${statistics.photoActivity}"></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>照片资料（次）</td>
+					<td><p th:text="${statistics.photoImgNum}"></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>影像资料（段）</td>
+					<td><p th:text="${statistics.photoVideoNum}"></td>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+		<!--endprint-->
+	</div>
+
+</body>
+</html>

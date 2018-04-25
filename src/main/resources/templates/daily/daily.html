@@ -6,9 +6,11 @@
 </head>
 <body>
 	<ul>
-		<li><a href="/monthReport/">月报填报</a></li>
-		<li><a href="/assetsAdmin/">固定资产管理</a></li>
-		<li><a href="">撰写总结</a></li>
+		<li><a th:href="@{/daily/monthReport/overview}">信息服务中心月报</a></li>
+		<li><a th:href="@{/daily/monthReport/department}">处室信息发布月报</a></li>
+		<li><a th:href="@{/daily/monthReport/fill}">月报填报</a></li>
+		<li><a th:href="@{/daily/assets}">固定资产管理</a></li>
+		<li><a th:href="@{/daily/write}">撰写总结</a></li>
 	</ul>
 </body>
 </html>

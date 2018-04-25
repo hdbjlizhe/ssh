@@ -10,7 +10,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="e_duty")
-public class Duty implements Serializable {
+public class Duty implements Serializable,Comparable<Duty>{
 	
 	/**
 	 * 
@@ -19,14 +19,23 @@ public class Duty implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long id;	
+	private Long id;
+	private int weight;//权重，方便比较对象大小
 	private String dutyName;
 	private String description;
+	
+	
 	public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {
 		this.id = id;
+	}
+	public int getWeight() {
+		return weight;
+	}
+	public void setWeight(int weight) {
+		this.weight = weight;
 	}
 	public String getDutyName() {
 		return dutyName;
@@ -39,6 +48,12 @@ public class Duty implements Serializable {
 	}
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	
+	@Override
+	public int compareTo(Duty o) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 	
 	

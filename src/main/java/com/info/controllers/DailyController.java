@@ -3,7 +3,6 @@ package com.info.controllers;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,11 +26,12 @@ import com.info.domain.dto.MonthStatisticsPartyDTO;
 import com.info.domain.dto.MonthStatisticsPhotoDTO;
 import com.info.domain.dto.MonthStatisticsSecurityDTO;
 import com.info.domain.dto.MonthStatisticsWebsiteDTO;
+import com.info.domain.entity.Department;
 import com.info.service.impl.MonthStatisticsService;
 import com.info.utils.DateAndTimeUtil;
 
 @Controller
-@RequestMapping("/monthReport")
+@RequestMapping("/daily")
 public class DailyController {
 
 	private static final Logger log = LoggerFactory.getLogger(DailyController.class);
@@ -39,36 +39,29 @@ public class DailyController {
 	@Autowired
 	private MonthStatisticsService monthStatisticsService;
 
-	@GetMapping("/")
+	@GetMapping("/monthReport/fill")
 	public String monthReport(Model model) {
 		//目标月份
-		String resultMonth=null;
-		DateTime dt= new DateTime();
-		String FORMATE_DATE = "yyyy-MM";
-		resultMonth=DateAndTimeUtil.getPreMonth(dt.toString(FORMATE_DATE));	
-		
-		//通过月份取出数据
-		MonthStatistics monthStatistics=monthStatisticsService.findByMonth(resultMonth);
-		//如果找不到就新建一个
-		if(monthStatistics==null){
-			monthStatistics=new MonthStatistics();
-			monthStatistics.setMonth(resultMonth);
-			monthStatistics=monthStatisticsService.save(monthStatistics);
-		}
+		MonthStatistics monthStatistics=monthStatisticsService.findPreOneByMonth();
 		model.addAttribute("statistics", monthStatistics);
-		return "/daily/monthly-report";
+		return "/daily/report-monthly";
 	}
 	
-	//前一个月份的数据
-	@GetMapping("/{inc}/{currentMonth}")
-	public String pre(Model model,@PathVariable @NotNull @NotEmpty String inc,@PathVariable @NotNull @NotEmpty String currentMonth) {
+	/**
+	 * 获取前一个月或后一个月的数据
+	 * @param model
+	 * @param inc
+	 * @param currentMonth
+	 * @return
+	 */
+	@GetMapping("/monthReport/{inc}/{currentMonth}")
+	public String preNext(Model model,@PathVariable @NotNull @NotEmpty String inc,@PathVariable @NotNull @NotEmpty String currentMonth) {
 		String rltMonth=null;
 		if("pre".equals(inc.trim())) {
 			rltMonth=DateAndTimeUtil.getPreMonth(currentMonth);
 		}else if("next".equals(inc.trim())){
 			rltMonth=DateAndTimeUtil.getNextMonth(currentMonth);
-		}
-		
+		}		
 		//通过月份取出数据
 		MonthStatistics monthStatistics=monthStatisticsService.findByMonth(rltMonth);
 		//如果找不到就新建一个
@@ -78,15 +71,35 @@ public class DailyController {
 			monthStatistics=monthStatisticsService.save(monthStatistics);
 		}
 		model.addAttribute("statistics", monthStatistics);
-		return "/daily/monthly-report";
+		return "/daily/report-monthly";
 	}
+	
+	/**
+	 * 月报总览
+	 * @param model
+	 * @return
+	 */
+	@GetMapping("/monthReport/overview")
+	public String overview(Model model) {
+		MonthStatistics monthStatistics=monthStatisticsService.findPreOneByMonth();
+		model.addAttribute("statistics", monthStatistics);
+		return "/daily/report-overview";
+	}
+	
+	
+	@GetMapping("/monthReport/department")
+	public String department(Model model) {
+		return "nothing";
+	}
+	
+	
 	
 	/*************************************************************************************************************
 	 * Ajax请求
 	 * @return boolean型
 	 *************************************************************************************************************/
 	@ResponseBody
-	@PostMapping("/party")
+	@PostMapping("/monthReport/party")
 	public boolean party(MonthStatisticsPartyDTO mDto, BindingResult result, Model model) {
 		if (result.hasErrors()) {
 			log.info(result.getFieldError().toString());
@@ -98,7 +111,7 @@ public class DailyController {
 	}
 
 	@ResponseBody
-	@PostMapping("/office")
+	@PostMapping("/monthReport/office")
 	public boolean office(MonthStatisticsOfficeDTO mDto, BindingResult result, Model model) {
 		if (result.hasErrors()) {
 			log.info(result.getFieldError().toString());
@@ -110,7 +123,7 @@ public class DailyController {
 	}
 
 	@ResponseBody
-	@PostMapping("/affairs")
+	@PostMapping("/monthReport/affairs")
 	public boolean affairs(MonthStatisticsAffairsDTO mDto, BindingResult result, Model model) {
 		if (result.hasErrors()) {
 			log.info(result.getFieldError().toString());
@@ -122,7 +135,7 @@ public class DailyController {
 	}
 
 	@ResponseBody
-	@PostMapping("/news")
+	@PostMapping("/monthReport/news")
 	public boolean news(MonthStatisticsNewsDTO mDto, BindingResult result, Model model) {
 		if (result.hasErrors()) {
 			log.info(result.getFieldError().toString());
@@ -134,7 +147,7 @@ public class DailyController {
 	}
 
 	@ResponseBody
-	@PostMapping("/website")
+	@PostMapping("/monthReport/website")
 	public boolean website(MonthStatisticsWebsiteDTO mDto, BindingResult result, Model model) {
 		if (result.hasErrors()) {
 			log.info(result.getFieldError().toString());
@@ -146,7 +159,7 @@ public class DailyController {
 	}
 
 	@ResponseBody
-	@PostMapping("/nongovern")
+	@PostMapping("/monthReport/nongovern")
 	public boolean nongovern(MonthStatisticsNongovernDTO mDto, BindingResult result, Model model) {
 		if (result.hasErrors()) {
 			log.info(result.getFieldError().toString());
@@ -158,7 +171,7 @@ public class DailyController {
 	}
 
 	@ResponseBody
-	@PostMapping("/maintenance")
+	@PostMapping("/monthReport/maintenance")
 	public boolean mainenance(MonthStatisticsMaintenanceDTO mDto, BindingResult result, Model model) {
 		if (result.hasErrors()) {
 			log.info(result.getFieldError().toString());
@@ -170,7 +183,7 @@ public class DailyController {
 	}
 
 	@ResponseBody
-	@PostMapping("/fbase")
+	@PostMapping("/monthReport/fbase")
 	public boolean fbase(MonthStatisticsFbaseNewDTO mDto, BindingResult result, Model model) {
 		if (result.hasErrors()) {
 			log.info(result.getFieldError().toString());
@@ -182,7 +195,7 @@ public class DailyController {
 	}
 
 	@ResponseBody
-	@PostMapping("/security")
+	@PostMapping("/monthReport/security")
 	public boolean security(MonthStatisticsSecurityDTO mDto, BindingResult result, Model model) {
 		if (result.hasErrors()) {
 			log.info(result.getFieldError().toString());
@@ -194,7 +207,7 @@ public class DailyController {
 	}
 
 	@ResponseBody
-	@PostMapping("/photo")
+	@PostMapping("/monthReport/photo")
 	public boolean photo(MonthStatisticsPhotoDTO mDto, BindingResult result) {
 		if (result.hasErrors()) {
 			log.info(result.getFieldError().toString());

@@ -2,6 +2,7 @@ package com.info.service.impl;
 
 import java.time.Month;
 
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,7 @@ import com.info.domain.dto.MonthStatisticsPhotoDTO;
 import com.info.domain.dto.MonthStatisticsSecurityDTO;
 import com.info.domain.dto.MonthStatisticsWebsiteDTO;
 import com.info.domain.repository.MonthStatisticsRepository;
+import com.info.utils.DateAndTimeUtil;
 
 @Service
 public class MonthStatisticsService {
@@ -30,6 +32,48 @@ public class MonthStatisticsService {
 	public MonthStatistics findByMonth(String month) {
 		return monthStatisticsRepository.findByMonth(month);
 	}
+	
+	/**
+	 * 获取当前月份的前一个月份数据
+	 * @return
+	 */
+	public MonthStatistics findPreOneByMonth() {
+		//目标月份
+		String resultMonth=null;
+		DateTime dt= new DateTime();
+		String FORMATE_DATE = "yyyy-MM";
+		resultMonth=DateAndTimeUtil.getPreMonth(dt.toString(FORMATE_DATE));	
+		//通过月份取出数据
+		MonthStatistics monthStatistics=monthStatisticsRepository.findByMonth(resultMonth);
+		//如果找不到就新建一个
+		if(monthStatistics==null){
+			monthStatistics=new MonthStatistics();
+			monthStatistics.setMonth(resultMonth);
+			monthStatistics=monthStatisticsRepository.save(monthStatistics);
+		}
+		return monthStatistics;
+	}
+	/**
+	 * 获取给定月份的前一个月份数据
+	 * @return
+	 */
+	public MonthStatistics findPreOneByMonth(String month) {
+		//目标月份
+		String resultMonth=null;
+		DateTime dt= new DateTime();
+		String FORMATE_DATE = "yyyy-MM";
+		resultMonth=DateAndTimeUtil.getPreMonth(dt.toString(FORMATE_DATE));	
+		//通过月份取出数据
+		MonthStatistics monthStatistics=monthStatisticsRepository.findByMonth(resultMonth);
+		//如果找不到就新建一个
+		if(monthStatistics==null){
+			monthStatistics=new MonthStatistics();
+			monthStatistics.setMonth(resultMonth);
+			monthStatistics=monthStatisticsRepository.save(monthStatistics);
+		}
+		return monthStatistics;
+	}
+			
 	//更新party
 	public MonthStatistics updateParty(MonthStatisticsPartyDTO dto) {
 		MonthStatistics monthStatistics=monthStatisticsRepository.getOne(dto.getId());

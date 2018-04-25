@@ -10,7 +10,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="e_rank")
-public class Rank implements Serializable{
+public class Rank implements Serializable,Comparable<Rank>{
 	
 	/**
 	 * 
@@ -19,15 +19,24 @@ public class Rank implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
+	private int weight;//权重,方便比较
 	private String rankName;
 	private String description;
-
+	
 	public Long getId() {
 		return id;
 	}
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+	
+	public int getWeight() {
+		return weight;
+	}
+
+	public void setWeight(int weight) {
+		this.weight = weight;
 	}
 
 	public String getRankName() {
@@ -49,6 +58,12 @@ public class Rank implements Serializable{
 	@Override
 	public String toString() {
 		return "Rank [id=" + id + ", rankName=" + rankName + "]";
+	}
+
+	@Override
+	public int compareTo(Rank o) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

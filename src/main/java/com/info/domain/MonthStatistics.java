@@ -10,7 +10,7 @@ import javax.validation.constraints.Size;
 
 
 @Entity
-@Table(name="m_statistics")
+@Table(name="m_month_statistics")
 public class MonthStatistics {
 	
 	@Id

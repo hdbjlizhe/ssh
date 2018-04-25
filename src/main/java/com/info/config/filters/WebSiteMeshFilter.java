@@ -14,8 +14,10 @@ public class WebSiteMeshFilter extends ConfigurableSiteMeshFilter {
 			   .addDecoratorPath("/admin", "/decorators/cms")
 			   .addDecoratorPath("/party", "/decorators/party")
 			   .addDecoratorPath("/office", "/decorators/cms")
-			   .addDecoratorPath("/monthReport","/decorators/report")
-			   .addDecoratorPath("/monthReport/**", "/decorators/report")
+			   .addDecoratorPath("/daily/monthReport","/decorators/report")
+			   .addDecoratorPath("/daily/monthReport/overview", "/decorators/default")
+			   .addDecoratorPath("/daily/monthReport/fill", "/decorators/report")
+			   .addDecoratorPath("/daily/monthReport/**", "/decorators/report")		   
 			    //.addDecoratorPath("/login", "/decorator")
 				//排除装饰路径
 			   .addExcludedPath("/static/**");
