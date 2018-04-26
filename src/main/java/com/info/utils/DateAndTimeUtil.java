@@ -35,6 +35,8 @@ public class DateAndTimeUtil {
 	public final static String YEAR_Dog="戌狗";
 	public final static String YEAR_Pig="亥猪";
 	
+	//
+	
 	//根据Date返回月份
 	public static int getMonthByDate(Date date){
 		return 0;

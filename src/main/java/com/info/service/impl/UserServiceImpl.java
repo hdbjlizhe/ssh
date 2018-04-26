@@ -1,22 +1,28 @@
 package com.info.service.impl;
 
+import com.info.domain.entity.Employee;
 import com.info.domain.entity.User;
 import com.info.domain.entity.ValidateToken;
 import com.info.domain.repository.UserRepository;
 import com.info.domain.repository.ValidateTokenRepository;
 import com.info.service.IUserService;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.DisabledException;
+import org.springframework.security.core.context.SecurityContextImpl;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 
 @Service
 @Transactional
 public class UserServiceImpl implements IUserService {
+	
+	private static final Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
 
     @Autowired
     private UserRepository userRepository;

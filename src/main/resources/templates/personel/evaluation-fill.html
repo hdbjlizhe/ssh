@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>考核填报系统</title>
+</head>
+<body>
+	<div class="container">
+		<form action="" method="post">
+			<table class="table table-bordered">
+				<thead>
+					<tr class="text-center active">
+						<td><b>姓名</b></td>
+						<td><b>德（10分）</b></td>
+						<td><b>能（10分）</b></td>
+						<td><b>勤（20分）</b></td>
+						<td><b>绩（50分）</b></td>
+						<td><b>廉（10分）</b></td>
+						<td><b>总分</b></td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="employee:${employees}">
+						<td>
+							<label th:text="${employee.name}"></label>
+							<input type="hidden" th:value="${employee.id}">
+						</td>						
+						<td><input class="form-control" type="number" name=""></td>
+						<td><input class="form-control" type="number" name=""></td>
+						<td><input class="form-control" type="number" name=""></td>
+						<td><input class="form-control" type="number" name=""></td>
+						<td><input class="form-control" type="number" name=""></td>
+						<td><input class="form-control" type="number" name="" readonly="readonly"></td>
+					</tr>
+					<tr>
+						<td><b>备注</b></td>
+						<td>政治品德3分<br>职业道德3分<br>社会公德2分<br>家庭美德2分
+						</td>
+						<td>业务执行能力3分<br>学习与研究能力2分<br>知识运用与表达能力3分<br>沟通协作能力2分
+						</td>
+						<td>工作积极性7分<br>工作责任心7分<br>出勤情况6分
+						</td>
+						<td>履职成效15分<br>目标任务完成情况20分<br>工作效率15分
+						</td>
+						<td>廉洁自律10分</td>
+						<td>说明：单项成绩之和</td>
+					</tr>
+				</tbody>
+			</table>
+			<button type="reset" class="btn btn-primary">重置</button>
+			<button type="submit" class="btn btn-primary pull-right">提交</button>
+			<br>
+		</form>
+	</div>
+</body>
+
+<script type="text/javascript">
+$(document).ready(function() {
+	//用户名修改事件
+	$(":input[name='username']").change(function() {
+									
+		var val = $(this).val(); //获取输入值				
+		val = $.trim(val); //去掉两端的空格
+		var $this = $(this); //
+		debugger
+		if (val != "") { //值不为空
+			//把当前节点后面的所有 font 兄弟节点删除
+			$this.nextAll("font").remove();
+			var url = "/validateUserName";
+			var args = {
+				"username" : val,
+				"time" : new Date(),
+				"_csrf" : $(":input[name='_csrf']").val()
+			};
+			$.post(url, args, function(data) {
+				debugger
+				//表示可用						
+				if (data == true) {
+					$this.after("<font color='green'>账户可用!</font>");
+				}
+				//不可用
+				else if (data == false) {
+					$this.after("<font color='red'>账户不可用!</font>");
+				}
+				//服务器错误
+				else {
+					alert("服务器错误!");
+				}
+			});
+		} else {
+			alert("账户不能为空");
+			$(this).val("");
+			$this.focus();
+		}
+	});
+
+</script>
+
+</html>
