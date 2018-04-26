@@ -1,11 +1,67 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns="http://www.w3.org/1999/html">
 <head>
-    <title>个人信息维护</title>
-    <meta charset=UTF-8/>
+<title>个人信息维护</title>
+<meta charset=UTF-8 />
 </head>
 <body>
-	
-
+<div class="container">
+	<form th:action="@{/user/employee/mod}" method="post">
+		<table class="table table-striped">
+			<tr>				
+				<td>ID号</td><td><input class="form-control" type="text" th:value="@{employee.id}"></td>
+			</tr>
+			<tr>
+				<td>部门</td><td><input class="form-control" type="text" th:value="@{employee.name}"></td>
+			</tr>
+			<tr>
+				<td>是否正式编制</td><td><input class="form-control" type="text" th:value="@{employee.isFormal}"></td>
+			</tr>
+			<tr>
+				<td>性别</td><td><input class="form-control" type="text" th:value="@{employee.isMale}"></td>
+			</tr>
+			<tr>
+				<td>民族</td><td><input class="form-control" type="text" th:value="@{employee.nation.name}"></td>
+			</tr>
+			<tr>
+				<td>生日</td><td><input class="form-control" type="text" th:value="@{employee.birthday}"></td>
+			</tr>
+			<tr>
+				<td>党团</td><td><input class="form-control" type="text" th:value="@{employee.party.name}"></td>
+			</tr>
+			<tr>
+				<td>党团时间</td><td><input class="form-control" type="text" th:value="@{employee.partyTime}"></td>
+			</tr>
+			<tr>
+				<td>参加工作时间</td><td><input class="form-control" type="text" th:value="@{employee.jobStartTime}"></td>
+			</tr>
+			<tr>
+				<td>调入本单位时间</td><td><input class="form-control" type="text" th:value="@{employee.entryTime}"></td>
+			</tr>
+			<tr>
+				<td>职务</td><td><input class="form-control" type="text" th:value="@{employee.duty.name}"></td>
+			</tr>
+			<tr>
+				<td>职务时间</td><td><input class="form-control" type="text" th:value="@{employee.dutyTime}"></td>
+			</tr>
+			<tr>
+				<td>职级</td><td><input class="form-control" type="text" th:value="@{employee.rank.name}"></td>
+			</tr>
+			<tr>
+				<td>职级时间</td><td><input class="form-control" type="text" th:value="@{employee.rankTime}"></td>
+			</tr>
+			<tr>
+				<td>全日制学历</td><td><input class="form-control" type="text" th:value="@{employee.fullTimeEdu}"></td>
+			</tr>
+			<tr>
+				<td>在职学历</td><td><input class="form-control" type="text" th:value="@{employee.inServiceEdu}"></td>
+			</tr>
+			<tr>
+				<td>创建时间</td><td><input class="form-control" type="text" th:value="@{employee.createTime}"></td>
+			</tr>
+		</table>
+	</form>
+	</div>
 </body>
 </html>

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,6 +23,7 @@ import com.info.event.OnRegistrationCompleteEvent;
 import com.info.service.IUserService;
 import com.info.service.IEmployeeService;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 @Controller
@@ -41,7 +43,14 @@ public class UserController {
     @Autowired
     private ApplicationEventPublisher eventPublisher;
 
-    // 注册
+    /**
+     *  注册
+     * @param registraFormDTO
+     * @param result
+     * @param request
+     * @param model
+     * @return
+     */
     @PostMapping("/register")
     public String register(@Valid RegistraFormDTO registraFormDTO, BindingResult result, WebRequest request,RedirectAttributesModelMap model){
             	
@@ -116,6 +125,13 @@ public class UserController {
         userService.saveRegistratedUser(user);
         model.addFlashAttribute("message", "确认成功，请登录");
         return "redirect:/login";
+    }
+    
+    @GetMapping("/user/details")
+    public String detail(Model model,HttpServletRequest request) {
+    	Employee employee=employeeService.getLoginEmployee(request);
+    	model.addAttribute("employee",employee);
+    	return "/user/details";
     }
     
     

@@ -53,8 +53,8 @@
 					class="navbar-text navbar-right">
 					<a class="navbar-link"
 						th:text="${session.SPRING_SECURITY_CONTEXT.authentication.principal.username}"
-						href="/detail"></a> <span>|</span> <a class="navbar-link"
-						href="/admin" th:text="#{msg.admin}">后台管理</a>
+						th:href="@{/user/details}"></a> <span>|</span> <a class="navbar-link"
+						th:href="@{/admin}" th:text="#{msg.admin}">后台管理</a>
 				</div>
 				
 				<div th:if="${session.SPRING_SECURITY_CONTEXT}!=null"
