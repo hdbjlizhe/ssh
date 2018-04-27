@@ -75,13 +75,19 @@ $(document).ready(function() {
 		
 		var sum=preName+'.sum';
 		
-		var numMorality=parseFloat($(":input[name='"+morality+"']").val());
-		var numAbility=$(":input[name='"+ability+"']").val();
-		var numDiligence=$(":input[name='"+diligence+"']").val();
-		var numAchievement=$(":input[name='"+achievement+"']").val();
-		var numHonest=$(":input[name='"+honest+"']").val();
+		var strMorality=$(":input[name='"+morality+"']".val());
+		var strAbility=$(":input[name='"+ability+"']").val();
+		var strDiligence=$(":input[name='"+diligence+"']").val();
+		var strAchievement=$(":input[name='"+achievement+"']").val();
+		var strHonest=$(":input[name='"+honest+"']").val();
 		
-		$(":input[name='"+sum+"']").val(parseFloat(numMorality)+parseFloat(numAbility)+parseFloat(numDiligence)+parseFloat(numAchievement)+parseFloat(numHonest));
+		var numMorality=Number(strMorality);
+		var numAbility=Number(strAbility);
+		var numDiligence=Number(strDiligence);
+		var numAchievement=Number(strAchievement);
+		var numHonest=Number(strHonest);
+		
+		$(":input[name='"+sum+"']").val(numMorality+numAbility+numDiligence+numAchievement+numHonest);
 	});
 });
 

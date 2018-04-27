@@ -67,18 +67,17 @@
 
 	<form th:action="@{/user/employee/mod}" method="post">
 		<table class="table table-condensed">
-			<caption>详细信息</caption>
-				
-			<tr>
-				<input type="hidden" th:value="${employee.id}">
+			<caption>详细信息<input type="hidden" th:value="${employee.id}"></caption>			
+			<tr>		
 				<td>部门</td>
-				<td><select class="form-control"
-					th:value="${employee.department}">
+				<td>
+					<select class="form-control" th:value="${employee.department}">
 						<option value="提示">请选择部门</option>
 						<option th:each="department:${departments}"
 							th:value="${department}" th:text="${department.departmentName}"
-							th:selected="${employee.department == department}"</option>
-				</select></td>
+							th:selected="${employee.department == department}"></option>
+					</select>
+				</td>
 			</tr>
 			<tr>
 				<td>是否正式编制</td>
