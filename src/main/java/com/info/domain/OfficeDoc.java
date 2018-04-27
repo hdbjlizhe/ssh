@@ -3,12 +3,9 @@ package com.info.domain;
 import java.util.Date;
 import java.util.Set;
 
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
-
 import org.joda.time.DateTime;
 
 import com.info.domain.entity.Department;

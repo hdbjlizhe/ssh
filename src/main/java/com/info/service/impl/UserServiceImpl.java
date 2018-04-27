@@ -1,6 +1,5 @@
 package com.info.service.impl;
 
-import com.info.domain.entity.Employee;
 import com.info.domain.entity.User;
 import com.info.domain.entity.ValidateToken;
 import com.info.domain.repository.UserRepository;
@@ -101,6 +100,15 @@ public class UserServiceImpl implements IUserService {
 	@Override
 	public User findByEmail(String email) {
 		return userRepository.findByEmail(email);
+	}
+
+	@Override
+	public User getLoginEmployee(HttpServletRequest request) {
+		SecurityContextImpl securityContextImpl = (SecurityContextImpl) request.getSession().getAttribute("SPRING_SECURITY_CONTEXT");			
+		log.info("Username:"+securityContextImpl.getAuthentication().getName());
+		String username=securityContextImpl.getAuthentication().getName();
+		User loginUser= userRepository.findByUsername(username);
+		return loginUser;
 	}
 
 }

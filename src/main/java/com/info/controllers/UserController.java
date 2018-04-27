@@ -16,12 +16,28 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributesModelMap;
 
 import com.info.domain.dto.RegistraFormDTO;
+import com.info.domain.entity.Department;
+import com.info.domain.entity.Duty;
+import com.info.domain.entity.EduLevel;
 import com.info.domain.entity.Employee;
+import com.info.domain.entity.Experience;
+import com.info.domain.entity.Nation;
+import com.info.domain.entity.Party;
+import com.info.domain.entity.Rank;
 import com.info.domain.entity.User;
 import com.info.domain.entity.ValidateToken;
 import com.info.event.OnRegistrationCompleteEvent;
 import com.info.service.IUserService;
+import com.info.service.IDepartmentService;
+import com.info.service.IDutyService;
+import com.info.service.IEduLevelService;
 import com.info.service.IEmployeeService;
+import com.info.service.IExperienceService;
+import com.info.service.INationService;
+import com.info.service.IPartyService;
+import com.info.service.IRankService;
+
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -32,16 +48,27 @@ public class UserController {
 	private static final Logger log = LoggerFactory.getLogger(UserController.class);
 
     @Autowired
-    private IUserService userService;
-    
+    private IUserService userService;   
     @Autowired
     private IEmployeeService employeeService;
-
     @Autowired
     private PasswordEncoder passwordEncoder;
-
     @Autowired
-    private ApplicationEventPublisher eventPublisher;
+    private ApplicationEventPublisher eventPublisher;   
+    @Autowired
+    private IDepartmentService departmentService;
+    @Autowired
+    private IDutyService dutyService;
+    @Autowired
+    private IEduLevelService eduLevelService;
+    @Autowired
+    private IExperienceService experienceService;
+    @Autowired
+    private INationService nationService;
+    @Autowired
+    private IPartyService partyService;
+    @Autowired
+    private IRankService rankService;
 
     /**
      *  注册
@@ -56,9 +83,7 @@ public class UserController {
             	
     	// 校验表单字段
         if (result.hasErrors()){
-        	log.info(result.getFieldError().toString());
-        	//mav.addObject("message", result.getFieldError());
-        	//mav.setViewName("redirect:/register");      	
+        	log.info(result.getFieldError().toString());   	
         	model.addFlashAttribute("message", result.getFieldError());
             return "redirect:/register";
         }else if(!"on".equals(registraFormDTO.getCheckbox())) {
@@ -79,8 +104,6 @@ public class UserController {
 	        // 发布邮箱验证事件
 	        String appUrl = request.getContextPath();
 	        if (registrated == null){
-	        	//mav.addObject("message", "该邮箱已注册");
-	        	//mav.setViewName("/register");
 	        	model.addFlashAttribute("message", "该邮箱已注册");
 	            return  "redirect:/register";
 	        }else {
@@ -128,9 +151,25 @@ public class UserController {
     }
     
     @GetMapping("/user/details")
-    public String detail(Model model,HttpServletRequest request) {
+    public String detail(Model model,HttpServletRequest request) {  	
+    	User user=userService.getLoginEmployee(request);
     	Employee employee=employeeService.getLoginEmployee(request);
+    	List<Experience> experiences=experienceService.getAllByEmployee(employee);
+    	List<Department> departments=departmentService.getAll();
+    	List<Rank> ranks=rankService.getAll();
+    	List<Duty> dutys=dutyService.getAll();
+    	List<EduLevel> eduLevels=eduLevelService.getAll();
+    	List<Nation> nations=nationService.getAll();
+    	List<Party> partys=partyService.getAll();
+    	model.addAttribute("user", user);
     	model.addAttribute("employee",employee);
+    	model.addAttribute("experiences", experiences);
+    	model.addAttribute("departments", departments);
+    	model.addAttribute("ranks", ranks);
+    	model.addAttribute("dutys", dutys);
+    	model.addAttribute("eduLevels", eduLevels);
+    	model.addAttribute("nations", nations);
+    	model.addAttribute("partys", partys);
     	return "/user/details";
     }
     
@@ -140,7 +179,12 @@ public class UserController {
      * @param username
      * @return
      ********************************************************************************************************/
-    //Ajax检查用户名是否可用 true表示可用，false表示不可用
+    
+    /**
+     * Ajax检查用户名是否可用 true表示可用，false表示不可用
+     * @param username
+     * @return
+     */
     @ResponseBody
     @PostMapping("/validateUserName")
     public boolean validateUserName(String username){
@@ -152,7 +196,11 @@ public class UserController {
 		}
     }
     
-    //Ajax检查用户名是否可用 true表示可用，false表示不可用   
+    /**
+     * Ajax检查用户名是否可用 true表示可用，false表示不可用   
+     * @param email
+     * @return
+     */
     @ResponseBody
     @PostMapping("/validateEmail")
     public boolean validateEmail(String email){

@@ -13,12 +13,12 @@ import com.info.domain.entity.Employee;
 
 @Entity
 @Table(name="eva_season")
-public class EmployeeEvaluation {
+public class EvaluationEmployee {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	@ManyToOne
-	private Employee toWho;//给谁打的分
+	private Employee toWhom;//给谁打的分
 	private int season;//季度
 	private float morality;//德
 	private float ability;//能
@@ -40,11 +40,11 @@ public class EmployeeEvaluation {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public Employee getToWho() {
-		return toWho;
+	public Employee getToWhom() {
+		return toWhom;
 	}
-	public void setToWho(Employee toWho) {
-		this.toWho = toWho;
+	public void setToWhom(Employee toWhom) {
+		this.toWhom = toWhom;
 	}
 	public int getSeason() {
 		return season;
@@ -109,7 +109,7 @@ public class EmployeeEvaluation {
 	}
 	@Override
 	public String toString() {
-		return "EmployeeEvaluation [id=" + id + ", toWho=" + toWho + ", season=" + season + ", morality=" + morality
+		return "EmployeeEvaluation [id=" + id + ", toWhom=" + toWhom + ", season=" + season + ", morality=" + morality
 				+ ", ability=" + ability + ", diligence=" + diligence + ", achievement=" + achievement + ", honest="
 				+ honest + ", fromWho=" + fromWho + ", createTime=" + createTime + ", updateTime=" + updateTime + "]";
 	}		

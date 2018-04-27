@@ -10,6 +10,7 @@
 			<table class="table table-bordered">
 				<thead>
 					<tr class="text-center active">
+						<td><b>序号</b></td>
 						<td><b>姓名</b></td>
 						<td><b>德（10分）</b></td>
 						<td><b>能（10分）</b></td>
@@ -20,20 +21,23 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="employee:${employees}">
+					<tr th:each="employee,iterStat:${employees}">
 						<td>
-							<label th:text="${employee.name}"></label>
-							<input type="hidden" th:value="${employee.id}">
+							<label th:text="${iterStat.count}"></label>
+							<input type="hidden" th:value="${employee.id}" th:name="${'evaluationEmployee['+iterStat.index+'].toWhom'}">
+						</td>
+						<td>
+							<label th:text="${employee.name}"></label>					
 						</td>						
-						<td><input class="form-control" type="number" name=""></td>
-						<td><input class="form-control" type="number" name=""></td>
-						<td><input class="form-control" type="number" name=""></td>
-						<td><input class="form-control" type="number" name=""></td>
-						<td><input class="form-control" type="number" name=""></td>
-						<td><input class="form-control" type="number" name="" readonly="readonly"></td>
+						<td><input class="form-control" type="number" th:name="${'evaluationEmployee['+iterStat.index+'].morality'}"></td>
+						<td><input class="form-control" type="number" th:name="${'evaluationEmployee['+iterStat.index+'].ability'}"></td>
+						<td><input class="form-control" type="number" th:name="${'evaluationEmployee['+iterStat.index+'].diligence'}"></td>
+						<td><input class="form-control" type="number" th:name="${'evaluationEmployee['+iterStat.index+'].achievement'}"></td>
+						<td><input class="form-control" type="number" th:name="${'evaluationEmployee['+iterStat.index+'].honest'}"></td>
+						<td><input class="form-control" type="number" th:name="${'evaluationEmployee['+iterStat.index+'].sum'}" readonly="readonly"></td>
 					</tr>
 					<tr>
-						<td><b>备注</b></td>
+						<td colspan="2"><b>备注</b></td>
 						<td>政治品德3分<br>职业道德3分<br>社会公德2分<br>家庭美德2分
 						</td>
 						<td>业务执行能力3分<br>学习与研究能力2分<br>知识运用与表达能力3分<br>沟通协作能力2分
@@ -52,48 +56,35 @@
 			<br>
 		</form>
 	</div>
-</body>
-
 <script type="text/javascript">
 $(document).ready(function() {
 	//用户名修改事件
-	$(":input[name='username']").change(function() {
-									
-		var val = $(this).val(); //获取输入值				
-		val = $.trim(val); //去掉两端的空格
-		var $this = $(this); //
-		debugger
-		if (val != "") { //值不为空
-			//把当前节点后面的所有 font 兄弟节点删除
-			$this.nextAll("font").remove();
-			var url = "/validateUserName";
-			var args = {
-				"username" : val,
-				"time" : new Date(),
-				"_csrf" : $(":input[name='_csrf']").val()
-			};
-			$.post(url, args, function(data) {
-				debugger
-				//表示可用						
-				if (data == true) {
-					$this.after("<font color='green'>账户可用!</font>");
-				}
-				//不可用
-				else if (data == false) {
-					$this.after("<font color='red'>账户不可用!</font>");
-				}
-				//服务器错误
-				else {
-					alert("服务器错误!");
-				}
-			});
-		} else {
-			alert("账户不能为空");
-			$(this).val("");
-			$this.focus();
-		}
+	$(":input").change(function() {
+		
+		debugger;
+		
+		var name = $(this).attr("name");//获取当前变化的控件name
+		var endIndex=name.indexOf("]");
+		var preName=name.substring(0,endIndex+1);
+		
+		var morality=preName+'.morality';
+		var ability=preName+'.ability';
+		var diligence=preName+'.diligence';
+		var achievement=preName+'.achievement';
+		var honest=preName+'.honest';
+		
+		var sum=preName+'.sum';
+		
+		var numMorality=parseFloat($(":input[name='"+morality+"']").val());
+		var numAbility=$(":input[name='"+ability+"']").val();
+		var numDiligence=$(":input[name='"+diligence+"']").val();
+		var numAchievement=$(":input[name='"+achievement+"']").val();
+		var numHonest=$(":input[name='"+honest+"']").val();
+		
+		$(":input[name='"+sum+"']").val(parseFloat(numMorality)+parseFloat(numAbility)+parseFloat(numDiligence)+parseFloat(numAchievement)+parseFloat(numHonest));
 	});
+});
 
 </script>
-
+</body>
 </html>

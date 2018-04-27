@@ -26,7 +26,6 @@ import com.info.domain.dto.MonthStatisticsPartyDTO;
 import com.info.domain.dto.MonthStatisticsPhotoDTO;
 import com.info.domain.dto.MonthStatisticsSecurityDTO;
 import com.info.domain.dto.MonthStatisticsWebsiteDTO;
-import com.info.domain.entity.Department;
 import com.info.service.impl.MonthStatisticsService;
 import com.info.utils.DateAndTimeUtil;
 

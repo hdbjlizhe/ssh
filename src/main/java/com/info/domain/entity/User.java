@@ -27,6 +27,8 @@ public class User implements UserDetails{
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+	
+	private String portrait;//uuid形式存储的头像
 
     private String username;
 
@@ -52,6 +54,7 @@ public class User implements UserDetails{
     private Employee employee;//对应个人具体信息
 
     public User(){
+    	this.portrait="portrait-default";
         this.enabled = false;
         this.accountNonExpired=true;	//账户未过期
         this.accountNonLocked=true;		//账户未被锁

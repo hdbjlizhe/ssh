@@ -17,8 +17,6 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.info.handler.WebExceptionHandler;
 
-import lombok.extern.slf4j.Slf4j;
-
 /**
  * 
  * 1.加入spring-boot-start-aop的支持

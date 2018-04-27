@@ -1,5 +1,7 @@
 package com.info.service;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 import com.info.domain.entity.User;
@@ -18,5 +20,7 @@ public interface IUserService extends UserDetailsService{
     User findByUsername(String username);
     //邮箱查找用户
     User findByEmail(String email);
+    //查找登录用户
+	User getLoginEmployee(HttpServletRequest request);
 
 }
