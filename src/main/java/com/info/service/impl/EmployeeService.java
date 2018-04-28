@@ -6,11 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextImpl;
 import org.springframework.stereotype.Service;
 
+import com.info.domain.EvaluationMap;
 import com.info.domain.entity.Department;
 import com.info.domain.entity.Employee;
 import com.info.domain.entity.User;
 import com.info.domain.repository.DepartmentRepository;
 import com.info.domain.repository.EmployeeRepository;
+import com.info.domain.repository.EvaluationMapRepository;
 import com.info.domain.repository.UserRepository;
 import com.info.service.IEmployeeService;
 
@@ -34,6 +36,9 @@ public class EmployeeService implements IEmployeeService {
 	
 	@Autowired
 	private DepartmentRepository departmentRepository;
+	
+	@Autowired
+	private EvaluationMapRepository evaluationMapRepository;
 	
 	@Override
 	public Employee createNewEmployee(Employee employee) {
@@ -64,14 +69,24 @@ public class EmployeeService implements IEmployeeService {
 	
 	
 	/**
-	 * 获取指定的employee
+	 * 获取指定的
+	 * @param employee 登录用户
 	 * @param department
 	 * @return
 	 */
 	public List<Employee> getEmployeesByChosen(Employee employee) {
 		
-		List<Employee> employees=new ArrayList<>();
-		
+//		int weight=employee.getDuty().getWeight();
+//		//首先判断employee的级别
+//		List<EvaluationMap> evaluationMaps=evaluationMapRepository.findByScorer(weight);
+//		//获取打分者级别
+//		List<Employee> employees=null;
+//		for(EvaluationMap evaluationMap:evaluationMaps) {
+//				
+//		}
+//		//然后去找登录用户作这个级别打分人所对应的打分对象并返回
+				
+		List<Employee> employees=new ArrayList<Employee>();
 		if(employee.getDuty()!=null) {			
 			//1.如果employee是普通科员、处级副职、处级正职
 			if(employee.getDuty().getWeight()<=5) {
@@ -113,6 +128,7 @@ public class EmployeeService implements IEmployeeService {
 				return employees;
 			}
 		}
+		
 		return null;
 	}
 
