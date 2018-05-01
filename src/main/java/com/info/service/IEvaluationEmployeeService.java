@@ -1,5 +1,5 @@
 package com.info.service;
 
-public interface IEmployeeEvaluationService {
+public interface IEvaluationEmployeeService {
 
 }

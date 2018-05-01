@@ -1,5 +1,7 @@
 package com.info.domain.entity;
 
+import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
+
 import java.io.Serializable;
 
 import javax.persistence.Entity;
@@ -52,9 +54,14 @@ public class Duty implements Serializable,Comparable<Duty>{
 	
 	@Override
 	public int compareTo(Duty o) {
-		// TODO Auto-generated method stub
-		return 0;
+		if(this.getWeight()>o.getWeight())
+			return 1;
+		else if(this.getWeight()==o.getWeight())
+			return 0;
+		else {			
+			return -1;
+		}
+		
 	}
-	
 	
 }

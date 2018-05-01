@@ -14,6 +14,7 @@ import com.info.domain.entity.Employee;
 @Entity
 @Table(name="eva_season")
 public class EvaluationEmployee {
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
