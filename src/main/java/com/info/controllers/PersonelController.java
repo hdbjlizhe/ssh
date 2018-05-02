@@ -1,6 +1,7 @@
 package com.info.controllers;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,21 +12,30 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.info.domain.EvaluationEmployee;
 import com.info.domain.dto.EvaluationEmployeeDTO;
+import com.info.domain.dto.EvaluationEmployeeDTOList;
 import com.info.domain.entity.Employee;
 import com.info.service.impl.EmployeeService;
 import com.info.service.impl.EvaluationEmployeeService;
+import com.info.utils.DateAndTimeUtil;
 
 import org.hibernate.dialect.DataDirectOracle9Dialect;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log;
 
 import java.util.Date;
+import java.util.Enumeration;
 import java.util.List;
 
 @Controller
 @RequestMapping("/personel")
 public class PersonelController {
+	
+	
+	private static final Logger log = LoggerFactory.getLogger(PersonelController.class);
 	
 	@GetMapping("/evaluationQuarter")
 	public String evaluationQuerter(Model model) {
@@ -49,8 +59,12 @@ public class PersonelController {
 		Employee employee=employeeService.getLoginEmployee(request);
 		//2.通过employee的部门获取所有属于此部门的员工employee
 		List<Employee> employees=employeeService.getEmployeesByChosen(employee);
-		//3.根据登录Employee的职务判断，处理employee
+		//3.获取评分数据
+		String season=DateAndTimeUtil.getSeason();//获取当前季度的前一个季度
+		List<EvaluationEmployee> evaluationEmployees=evaluationEmployeeService.getBySeasonFromTo(season,employee,employees);
+		//4.根据登录Employee的职务判断，处理employee
 		model.addAttribute("employees", employees);
+		model.addAttribute("evaluationEmployees", evaluationEmployees);
 		return "personel/evaluation-fill";
 	}
 	
@@ -58,30 +72,29 @@ public class PersonelController {
 	EvaluationEmployeeService evaluationEmployeeService;
 	
 	@PostMapping("/evaluationSeason")
-	public String evaluationSeason(List<EvaluationEmployeeDTO> eDtos,BindingResult bResult,HttpServletRequest request,Model model) {
+	public String evaluationSeason(@Valid EvaluationEmployeeDTOList evaluationEmployees,BindingResult bResult,HttpServletRequest request,Model model) {
 		if(bResult.hasErrors()) {
 			return "redirect:/personel/evaluation-fill";
 		}
-		for(EvaluationEmployeeDTO eDto:eDtos) {
-			EvaluationEmployee evaluationEmployee=null;
-			if(eDto.getId()!=null) {
-				evaluationEmployee=evaluationEmployeeService.getById(eDto.getId()).get();}
-			else {
-				evaluationEmployee=new EvaluationEmployee();
-				evaluationEmployee.setCreateTime(new Date());
-			}			
-				evaluationEmployee.setAbility(eDto.getAbility());
-				evaluationEmployee.setAchievement(eDto.getAchievement());
-				evaluationEmployee.setDiligence(eDto.getDiligence());
-				evaluationEmployee.setHonest(eDto.getHonest());
-				evaluationEmployee.setMorality(eDto.getMorality());
-				//evaluationEmployee.setSeason(season);
-				evaluationEmployee.setSum();
-				//Employee employeeFrom=employeeService.getLoginEmployee(request);
-				//evaluationEmployee.setFromWho(eDto.getFromWho());
-				//Employee employeeTo=employeeService.getEmployeeById(eDto.getToWhom()).get();
-				//evaluationEmployee.setToWhom(employeeTo);
-				evaluationEmployee.setUpdateTime(new Date());
+		
+		log.info(request.getParameter("evaluationEmployees[0].morality"));
+		
+		for(EvaluationEmployeeDTO eEmployee:evaluationEmployees.getEvaluationEmployees()) {			
+			EvaluationEmployee evaluationEmployee=evaluationEmployeeService.getById(Long.parseLong(eEmployee.getId())).get();			
+			evaluationEmployee.setSeason(eEmployee.getSeason());
+			evaluationEmployee.setAbility(Float.parseFloat(eEmployee.getAbility()));
+			evaluationEmployee.setAchievement(Float.parseFloat(eEmployee.getAchievement()));
+			evaluationEmployee.setDiligence(Float.parseFloat(eEmployee.getDiligence()));
+			evaluationEmployee.setHonest(Float.parseFloat(eEmployee.getHonest()));
+			evaluationEmployee.setMorality(Float.parseFloat(eEmployee.getMorality()));
+			evaluationEmployee.setSum();
+			//1.获取登录用户user的employee
+			Employee fromWhom=employeeService.getLoginEmployee(request);
+			evaluationEmployee.setFromWhom(fromWhom);
+			//2.获取评价对象
+			Employee toWhom=employeeService.getEmployeeById(Long.parseLong(eEmployee.getId())).get();
+			evaluationEmployee.setToWhom(toWhom);				
+			evaluationEmployee.setUpdateTime(new Date());
 		}
 		return "redirect:/personel/evaluation-fill";
 	}

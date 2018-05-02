@@ -2,6 +2,7 @@ package com.info.domain;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,7 +21,8 @@ public class EvaluationEmployee {
 	private Long id;
 	@ManyToOne
 	private Employee toWhom;//给谁打的分
-	private int season;//季度
+	@Column(nullable=false)
+	private String season;//季度
 	private float morality;//德
 	private float ability;//能
 	private float diligence;//勤
@@ -28,10 +30,21 @@ public class EvaluationEmployee {
 	private float honest;//廉
 	private float sum;//总分
 	@ManyToOne
-	private Employee fromWho;//谁打的分
+	private Employee fromWhom;//谁打的分
 	private Date createTime;//提交时间
 	private Date updateTime;//最后一次修改时间
 	
+	public EvaluationEmployee() {
+		super();
+		morality=0f;//德
+		ability=0f;//能
+		diligence=0f;//勤
+		achievement=0f;//绩
+		honest=0f;//廉
+		sum=0f;//总分
+		createTime=new Date();
+		updateTime=new Date();
+	}
 	/************************************************************************************************************
 	 * Getter and Setter
 	 ************************************************************************************************************/
@@ -47,10 +60,10 @@ public class EvaluationEmployee {
 	public void setToWhom(Employee toWhom) {
 		this.toWhom = toWhom;
 	}
-	public int getSeason() {
+	public String getSeason() {
 		return season;
 	}
-	public void setSeason(int season) {
+	public void setSeason(String season) {
 		this.season = season;
 	}
 	public float getMorality() {
@@ -83,11 +96,11 @@ public class EvaluationEmployee {
 	public void setHonest(float honest) {
 		this.honest = honest;
 	}
-	public Employee getFromWho() {
-		return fromWho;
+	public Employee getFromWhom() {
+		return fromWhom;
 	}
-	public void setFromWho(Employee fromWho) {
-		this.fromWho = fromWho;
+	public void setFromWhom(Employee fromWhom) {
+		this.fromWhom = fromWhom;
 	}
 	public Date getCreateTime() {
 		return createTime;
@@ -112,6 +125,6 @@ public class EvaluationEmployee {
 	public String toString() {
 		return "EmployeeEvaluation [id=" + id + ", toWhom=" + toWhom + ", season=" + season + ", morality=" + morality
 				+ ", ability=" + ability + ", diligence=" + diligence + ", achievement=" + achievement + ", honest="
-				+ honest + ", fromWho=" + fromWho + ", createTime=" + createTime + ", updateTime=" + updateTime + "]";
+				+ honest + ", fromWhom=" + fromWhom + ", createTime=" + createTime + ", updateTime=" + updateTime + "]";
 	}		
 }
