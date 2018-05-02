@@ -23,28 +23,36 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="employee,iterStat:${employees}" th:object="${evaluationEmployees}">
+					<tr th:each="evaluationEmployee,iterStat:${evaluationEmployees}">
 						<td>
 							<label th:text="${iterStat.count}"></label> 
-							<input	type="hidden" th:value="${employee.id}">
-							<!-- <input type="hidden" th:name="${'evaluationEmployees['+iterStat.index+'].id'}"
-								th:value="${evaluationEmployees['+iterStat.index+'].id}">
+							<input	type="hidden" th:value="${evaluationEmployee.toWhom.id}" 
+								th:name="${'evaluationEmployees['+iterStat.index+'].toWhom'}">
+							
+							<input type="hidden" th:name="${'evaluationEmployees['+iterStat.index+'].id'}"
+								th:value="${evaluationEmployee.id}">
+								
 							<input type="hidden" th:name="${'evaluationEmployees['+iterStat.index+'].season'}"
-								th:value="${evaluationEmployees['+iterStat.index+'].season}" -->
+								th:value="${evaluationEmployee.season}">
 						</td>
-						<td><label th:text="${employee.name}"></label></td>
+						<td><label th:text="${evaluationEmployee.toWhom.name}"></label></td>
 						<td><input class="form-control" type="number" 
-							th:id="${'evaluationEmployees['+iterStat.index+'].morality'}"
+							th:value="${evaluationEmployee.morality}"
 							th:name="${'evaluationEmployees['+iterStat.index+'].morality'}"></td>
 						<td><input class="form-control" type="number"
+							th:value="${evaluationEmployee.ability}"
 							th:name="${'evaluationEmployees['+iterStat.index+'].ability'}"></td>
 						<td><input class="form-control" type="number"
+							th:value="${evaluationEmployee.diligence}"
 							th:name="${'evaluationEmployees['+iterStat.index+'].diligence'}"></td>
 						<td><input class="form-control" type="number"
+							th:value="${evaluationEmployee.achievement}"
 							th:name="${'evaluationEmployees['+iterStat.index+'].achievement'}"></td>
 						<td><input class="form-control" type="number"
+							th:value="${evaluationEmployee.honest}"
 							th:name="${'evaluationEmployees['+iterStat.index+'].honest'}"></td>
 						<td><input class="form-control" type="number"
+							th:value="${evaluationEmployee.sum}"
 							th:name="${'evaluationEmployees['+iterStat.index+'].sum'}"
 							readonly="readonly"></td>
 					</tr>

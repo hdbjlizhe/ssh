@@ -76,9 +76,7 @@ public class PersonelController {
 		if(bResult.hasErrors()) {
 			return "redirect:/personel/evaluation-fill";
 		}
-		
-		log.info(request.getParameter("evaluationEmployees[0].morality"));
-		
+			
 		for(EvaluationEmployeeDTO eEmployee:evaluationEmployees.getEvaluationEmployees()) {			
 			EvaluationEmployee evaluationEmployee=evaluationEmployeeService.getById(Long.parseLong(eEmployee.getId())).get();			
 			evaluationEmployee.setSeason(eEmployee.getSeason());
