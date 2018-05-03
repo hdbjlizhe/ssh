@@ -1,15 +1,11 @@
 package com.info.service.impl;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.options;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.w3c.dom.css.ElementCSSInlineStyle;
-
 import com.info.domain.EvaluationEmployee;
 import com.info.domain.entity.Employee;
 import com.info.domain.repository.EvaluationEmployeeRepository;
@@ -23,6 +19,13 @@ public class EvaluationEmployeeService implements IEvaluationEmployeeService {
 		return evaluationEmployeeRepository.findById(id);
 	}
 
+	/**
+	 * 通过季度、评价人、评价对象进行查询
+	 * @param season
+	 * @param employeeFrom
+	 * @param employeesTo
+	 * @return
+	 */
 	public List<EvaluationEmployee> getBySeasonFromTo(String season,Employee employeeFrom, List<Employee> employeesTo) {
 		List<EvaluationEmployee> rltEEmployees=new ArrayList<EvaluationEmployee>();
 		for(Employee emp:employeesTo) {
@@ -40,5 +43,14 @@ public class EvaluationEmployeeService implements IEvaluationEmployeeService {
 			rltEEmployees.add(tmpEvaluationEmployee);
 		}
 		return rltEEmployees;
+	}
+
+	/**
+	 * 持久化对象到数据库
+	 * @param evaluationEmployee
+	 * @return
+	 */
+	public EvaluationEmployee update(EvaluationEmployee evaluationEmployee) {
+		return evaluationEmployeeRepository.save(evaluationEmployee);	
 	}
 }

@@ -1,8 +1,14 @@
 package com.info.config;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log;
+
 import java.util.Locale;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -11,13 +17,24 @@ import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
 @Configuration
+@EnableAutoConfiguration
+@ComponentScan
 public class WebLocaleConfig implements WebMvcConfigurer {
+	
+	
+	private static final Logger log = LoggerFactory.getLogger(WebLocaleConfig.class);
 
+	
     @Bean
     public LocaleResolver localeResolver() {
         SessionLocaleResolver slr = new SessionLocaleResolver();
+        
+        Locale defaultLocale = Locale.getDefault();//获取默认Locale
+        log.info(defaultLocale.toString());
         // 默认语言
-        slr.setDefaultLocale(Locale.CHINA);
+        //slr.setDefaultLocale(Locale.CHINA);
+        // 默认语言
+        slr.setDefaultLocale(defaultLocale);
         return slr;
     }
 

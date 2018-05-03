@@ -1,5 +1,7 @@
 package com.info.domain;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,8 +13,12 @@ import com.info.domain.entity.Duty;
 
 @Entity
 @Table(name="eva_map")
-public class EvaluationMap {
+public class EvaluationMap implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -413251619253019051L;
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
@@ -28,6 +34,8 @@ public class EvaluationMap {
 	private boolean departDivided;//是否区分部门
 	
 	private boolean excludInformal;//排除非正式员工
+	
+	private boolean includingSelf;//是否包含自己
 	//比重
 	private float proportions;
 	
@@ -35,6 +43,7 @@ public class EvaluationMap {
 	public EvaluationMap() {
 		this.departDivided=true;
 		this.excludInformal=true;
+		this.includingSelf=true;
 	}
 
 
@@ -95,6 +104,15 @@ public class EvaluationMap {
 
 	public void setExcludInformal(boolean excludInformal) {
 		this.excludInformal = excludInformal;
+	}
+
+	public boolean isIncludingSelf() {
+		return includingSelf;
+	}
+
+
+	public void setIncludingSelf(boolean includingSelf) {
+		this.includingSelf = includingSelf;
 	}
 
 

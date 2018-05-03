@@ -96,6 +96,8 @@ public class EmployeeService implements IEmployeeService {
 			if (evaluation.isDepartDivided()) {// 区分部门的情况，按部门查找
 				rltEmployees.addAll(employeeRepository.findByDepartmentAndDutyAndFormal(employee.getDepartment(),
 						evaluation.getObject(), evaluation.isExcludInformal()));
+				if(!evaluation.isIncludingSelf())
+					rltEmployees.remove(employee);
 			} else {// 不区分部门的情况下，就按职务查找
 				List<Department> depts = departmentRepository.findByDeputyBureau(employee);
 				if (depts.size() >= 1) {// 副局长

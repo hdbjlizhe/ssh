@@ -2,11 +2,14 @@ package com.info.controllers;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -63,7 +66,8 @@ public class PersonelController {
 		String season=DateAndTimeUtil.getSeason();//获取当前季度的前一个季度
 		List<EvaluationEmployee> evaluationEmployees=evaluationEmployeeService.getBySeasonFromTo(season,employee,employees);
 		//4.根据登录Employee的职务判断，处理employee
-		model.addAttribute("employees", employees);
+		//model.addAttribute("employees", employees);
+		model.addAttribute("season",season);
 		model.addAttribute("evaluationEmployees", evaluationEmployees);
 		return "personel/evaluation-fill";
 	}
@@ -77,8 +81,10 @@ public class PersonelController {
 			return "redirect:/personel/evaluation-fill";
 		}
 			
-		for(EvaluationEmployeeDTO eEmployee:evaluationEmployees.getEvaluationEmployees()) {			
+		for(EvaluationEmployeeDTO eEmployee:evaluationEmployees.getEvaluationEmployees()) {	
+			//1.从数据库获取记录
 			EvaluationEmployee evaluationEmployee=evaluationEmployeeService.getById(Long.parseLong(eEmployee.getId())).get();			
+			//2.赋值
 			evaluationEmployee.setSeason(eEmployee.getSeason());
 			evaluationEmployee.setAbility(Float.parseFloat(eEmployee.getAbility()));
 			evaluationEmployee.setAchievement(Float.parseFloat(eEmployee.getAchievement()));
@@ -86,14 +92,28 @@ public class PersonelController {
 			evaluationEmployee.setHonest(Float.parseFloat(eEmployee.getHonest()));
 			evaluationEmployee.setMorality(Float.parseFloat(eEmployee.getMorality()));
 			evaluationEmployee.setSum();
-			//1.获取登录用户user的employee
+			//3.获取登录用户user的employee
 			Employee fromWhom=employeeService.getLoginEmployee(request);
 			evaluationEmployee.setFromWhom(fromWhom);
-			//2.获取评价对象
-			Employee toWhom=employeeService.getEmployeeById(Long.parseLong(eEmployee.getId())).get();
+			//4.获取评价对象
+			Employee toWhom=employeeService.getEmployeeById(Long.parseLong(eEmployee.getToWhom())).get();
 			evaluationEmployee.setToWhom(toWhom);				
 			evaluationEmployee.setUpdateTime(new Date());
+			//5.存到数据库
+			evaluationEmployeeService.update(evaluationEmployee);
 		}
-		return "redirect:/personel/evaluation-fill";
+		return "redirect:/personel/evaluationFill";
 	}
+
+	@GetMapping("/personal/evaluationQuery")
+	public String evaluationQuery(Model model) {
+		return "/personal/evaluation-query";
+	}
+	
+	@GetMapping("/personal/evaluationQuery/{deptId}")
+	public String evaluationQuery(Model model,@PathVariable @NotNull @NotEmpty Long deptId) {
+		//根据
+		return "/personal/evaluation-query";
+	}
+
 }
