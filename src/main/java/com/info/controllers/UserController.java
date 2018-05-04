@@ -173,6 +173,28 @@ public class UserController {
     	return "/user/details";
     }
     
+    @GetMapping("/user/pwd/mod")
+    public String pwdMod() {  	
+    	return "/user/mod-pwd";
+    }
+    
+    @PostMapping("/user/pwd/mod")
+    public String pwdMod(String oldpwd,String newpwd,String newpwdcheck,HttpServletRequest request) {
+    	if(!newpwd.equals(newpwdcheck)) {
+    		return "redirect:/user/pwd/mod";
+    	}
+    	//1.获取登录用户user
+    	User user=userService.getLoginEmployee(request);
+    	//2.检查旧密码是否与提交的旧密码一致，
+    	String pwdcode=passwordEncoder.encode(oldpwd);
+    	if(pwdcode.equals(user.getPassword())) {
+    		user.setPassword(passwordEncoder.encode(newpwd));
+    		userService.update(user);
+        	return "redirect:/user/details";
+    	}    	
+    	return "redirect:/user/pwd/mod";
+    	//3.更新密码
+    }
     
     /********************************************************************************************************
      * 以下为Ajax

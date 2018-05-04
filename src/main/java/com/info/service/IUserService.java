@@ -22,5 +22,7 @@ public interface IUserService extends UserDetailsService{
     User findByEmail(String email);
     //查找登录用户
 	User getLoginEmployee(HttpServletRequest request);
+	//更新已存在的用户
+	User update(User user);
 
 }

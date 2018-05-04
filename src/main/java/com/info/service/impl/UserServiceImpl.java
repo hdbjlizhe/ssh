@@ -111,4 +111,8 @@ public class UserServiceImpl implements IUserService {
 		return loginUser;
 	}
 
+	@Override
+	public User update(User user) {
+		return userRepository.save(user);
+	}
 }
