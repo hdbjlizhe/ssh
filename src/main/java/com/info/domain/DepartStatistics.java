@@ -36,6 +36,7 @@ public class DepartStatistics implements Serializable {
 	private int weibo;//微博
 	
 	private int toutiao;//头条
+	
 	@ManyToOne
 	private Department department;
 	

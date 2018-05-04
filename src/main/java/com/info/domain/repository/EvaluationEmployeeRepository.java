@@ -5,9 +5,11 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.info.domain.EvaluationEmployee;
+import com.info.domain.entity.Department;
 import com.info.domain.entity.Employee;
 
 import java.lang.Long;
+import java.util.List;
 import java.util.Optional;
 
 public interface EvaluationEmployeeRepository extends JpaRepository<EvaluationEmployee, Long> {
@@ -17,5 +19,8 @@ public interface EvaluationEmployeeRepository extends JpaRepository<EvaluationEm
 			@Param("season") String season, 
 			@Param("fromWhom") Employee fromWhom, 
 			@Param("toWhom")Employee toWhom);
+	
+	@Query("FROM EvaluationEmployee e WHERE e.toWhom.department=:department")
+	List<EvaluationEmployee> findEvaluationEmployeesByObjectDepartment(@Param("department") Department department);
 
 }

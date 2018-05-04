@@ -32,9 +32,7 @@ public class WebLocaleConfig implements WebMvcConfigurer {
         Locale defaultLocale = Locale.getDefault();//获取默认Locale
         log.info(defaultLocale.toString());
         // 默认语言
-        //slr.setDefaultLocale(Locale.CHINA);
-        // 默认语言
-        slr.setDefaultLocale(defaultLocale);
+        slr.setDefaultLocale(Locale.CHINA);     
         return slr;
     }
 

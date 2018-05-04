@@ -17,6 +17,7 @@ import com.info.domain.entity.Duty;
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 
 	List<Employee> findByDuty(Duty duty);
+	
 	List<Employee> findByDepartment(Department department);
 	@Query("FROM Employee e where e.department=:department AND e.duty=:duty")
 	List<Employee> findByDepartmentAndDuty(@Param("department") Department department,@Param("duty") Duty duty);

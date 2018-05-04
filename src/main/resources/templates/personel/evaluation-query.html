@@ -1,10 +1,38 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>考核分数查询</title>
 </head>
 <body>
+	<left>
+		<div class="list-group">
+			<div class="list-group-item"  th:each="department,iterStat:${departments}">
+				<a th:unless="${department.id}==1" 
+					th:id="${department.id}" 
+					th:text="${department.departmentName}"
+					th:href="@{/personel/evaluationDept/id(id=${department.id})}"></a>
+			</div>
+		</div>
+	</left>
 	
+	<right>
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<td><b>序号</b></td>
+					<td><b>姓名</b></td>
+					<td><b>分数</b></td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="evaluationResult,iterStat:${evaluationResults}">
+					<td><p th:text="${iterStat.count}"></p></td>
+					<td><p th:text="${evaluationResult.object.name}"></p></td>
+					<td><p th:text="${evaluationResult.sum}"></p></td>
+				</tr>
+			</tbody>
+		</table>
+	</right>
 </body>
 </html>
