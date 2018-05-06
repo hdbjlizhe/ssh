@@ -5,7 +5,10 @@
 <title>考核填报系统</title>
 </head>
 <body>
-	<div class="container">
+	<left>
+		<div th:include="/personel/personel::left"></div>
+	</left>
+	<right>
 		<form th:action="@{/personel/evaluationSeason}" method="post">
 			<input type="hidden" th:name="${_csrf.parameterName}"
 				th:value="${_csrf.token}" />
@@ -16,9 +19,13 @@
 							<input class="btn btn-primary" type="button" value="上个季度" disabled="disabled">
 							<input type="text" th:value="${season}" readonly="readonly">
 							<input class="btn btn-primary" type="button" value="下个季度" disabled="disabled">
+																			
+								<a th:if="${loginEmployee.department.id}!=1" class="btn pull-right" 
+									th:href="@{/personel/evaluationDept/{id}(id=${loginEmployee.department.id})}">查询本部门评分</a>
+									
+								<a th:if="${loginEmployee.department.id}==1" class="btn pull-right" 
+									th:href="@{/personel/evaluationQuery}">查询所有人员评分</a>
 							
-							<a class="btn pull-right" th:href="@{/personel/evaluationDept}">查询部门考核分数</a>
-							<a class="btn pull-right" th:href="@{/personel/evaluationQuery}">查询所有人员分数</a>
 						</td>
 					</tr>
 					<tr class="text-center active">
@@ -89,8 +96,7 @@
 				</tfoot>
 			</table>			
 		</form>
-	</div>
-	<script type="text/javascript">
+		<script type="text/javascript">
 		$(document)
 				.ready(
 						function() {
@@ -157,5 +163,7 @@
 											});
 						});
 	</script>
+	</right>
+	
 </body>
 </html>

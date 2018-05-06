@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -111,15 +112,9 @@ public class UserController {
 		        	//注册完成事件,发送确认邮箱
 		            eventPublisher.publishEvent(new OnRegistrationCompleteEvent(user,appUrl));
 		        }catch (Exception e){
-		            log.info(e.getMessage());
-		            //mav.addObject("message", "请确认邮箱状态是否正常");
-		            //mav.setViewName("/login");
-		            //throw e;
 		            model.addFlashAttribute("message", "请确认邮箱状态是否正常");
 		            return  "redirect:/register";
 		        }
-		        //mav.addObject("message","注册成功，请到邮箱确认后再登录");
-		        //mav.setViewName("redirect:/login");
 		        model.addFlashAttribute("message","注册成功，请到邮箱确认后再登录");
 		        return "redirect:/login";
 	        }
@@ -186,8 +181,7 @@ public class UserController {
     	//1.获取登录用户user
     	User user=userService.getLoginEmployee(request);
     	//2.检查旧密码是否与提交的旧密码一致，
-    	String pwdcode=passwordEncoder.encode(oldpwd);
-    	if(pwdcode.equals(user.getPassword())) {
+    	if(passwordEncoder.matches(oldpwd, user.getPassword())) {
     		user.setPassword(passwordEncoder.encode(newpwd));
     		userService.update(user);
         	return "redirect:/user/details";

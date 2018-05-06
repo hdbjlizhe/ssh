@@ -28,6 +28,10 @@ public class DecoratorController {
 	public String cms() {
 		return "/decorators/decorator-cms";
 	}
+	@GetMapping("/daily")
+	public String daily() {
+		return "/decorators/decorator-daily";
+	}
 	@GetMapping("/report")
 	public String report() {
 		return "/decorators/decorator-report";
@@ -39,5 +43,9 @@ public class DecoratorController {
 	@GetMapping("/userdetails")
 	public String userDetails() {
 		return "/decorators/decorator-userdetails";
+	}
+	@GetMapping("/lmr")//左中右结构
+	public String lmr() {
+		return "/decorators/decorator-lmr";
 	}
 }

@@ -8,19 +8,19 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <!-- SiteMesh:Title -->
-<title><sitemesh:write property='title'/></title>
+<title><sitemesh:write property='title' /></title>
 <!-- Bootstrap:CSS -->
 <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
 <!-- 顶部有菜单栏，内容下移60px避开 -->
 <style type="text/css">
-body {padding-top: 60px;}
+body {padding-top: 50px;}
 .table tbody tr td{vertical-align: middle;}
 </style>
 <!-- 放在最后会使页面加载速度更快 -->
 <script type="text/javascript" th:src="@{/js/jquery-3.3.1.min.js}"></script>
 <script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
 <!-- 暂时解除源代码
-<script type="text/javascript" src="js/source-not-open.js"></script>
+<script type="text/javascript" th:src="@{/js/source-not-open.js}"></script>
  -->
 <!-- Sitemeah:head -->
 <sitemesh:write property="head" />
@@ -34,22 +34,21 @@ body {padding-top: 60px;}
 	<div class="container-fluid">
 
 		<div class="row">
-		
-			<div class="col-xs-6 col-md-2 text-center" style="">
+			<!-- Right SideBar -->
+			
+			<div class="col-md-10 col-md-push-2" >
+				<!-- Sitemesh:right -->
+				
+					<br>
+					<sitemesh:write property="right" />
+				
+			</div>
+			<!-- Left SideBar -->
+			<div class="col-md-2 col-md-pull-10">
 				<!-- Sitemesh:left -->
+				<br>
 				<sitemesh:write property="left" />
 			</div>
-			
-			<div class="col-xs-6 col-md-8">
-				<!-- Sitemesh:middle -->
-				<sitemesh:write property="middle" />
-			</div>
-			
-			<div class="col-xs-6 col-md-2 text-center">
-				<!-- Sitemesh:right -->
-				<sitemesh:write property="right" />
-			</div>		
-			
 		</div>
 	</div>
 

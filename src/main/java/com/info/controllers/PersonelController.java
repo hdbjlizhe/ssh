@@ -74,7 +74,7 @@ public class PersonelController {
 		String season=DateAndTimeUtil.getSeason();//获取当前季度的前一个季度
 		List<EvaluationEmployee> evaluationEmployees=evaluationService.getBySeasonFromTo(season,employee,employees);
 		//4.根据登录Employee的职务判断，处理employee
-		//model.addAttribute("employees", employees);
+		model.addAttribute("loginEmployee", employee);
 		model.addAttribute("season",season);
 		model.addAttribute("evaluationEmployees", evaluationEmployees);
 		return "personel/evaluation-fill";
@@ -90,31 +90,32 @@ public class PersonelController {
 		return "redirect:/personel/evaluationFill";
 	}
 
+	//为处级正职开设
 	@GetMapping("/evaluationQuery")
-	public String evaluationQuery(Model model) {
-		List<Department> departments=departmentService.findAll();
-		model.addAttribute("departments", departments);
-		List<EvaluationResult> evaluationResults=evaluationService.getAllEvaluationResult();
-		model.addAttribute("evaluationResults", evaluationResults);
+	public String evaluationQuery(Model model,HttpServletRequest request) {
+		Employee loginEmoployee=employeeService.getLoginEmployee(request);
+		//Department department=loginEmoployee.getDepartment();
+		List<EvaluationEmployee> evaluationEmployees=evaluationService.getEvaluationEmployeesByObjectDepartment(loginEmoployee.getDepartment().getId());
+		model.addAttribute("evaluationEmployees", evaluationEmployees);
 		return "personel/evaluation-query";
 	}
 	
+	//此专门为局级开设
 	@GetMapping("/evaluationDept")
-	public String evaluationDept(Model model) {
+	public String evaluationDept(Model model,HttpServletRequest request) {
 		List<Department> departments=departmentService.findAll();
 		model.addAttribute("departments", departments);
-		List<EvaluationEmployee> evaluationEmployees=evaluationService.getAllEvaluationEmployee();
-		model.addAttribute("evaluationEmployees", evaluationEmployees);
+		List<EvaluationResult> evaluationResults=evaluationService.getAllEvaluationResult();
+		model.addAttribute("evaluationResults",evaluationResults);
 		return "personel/evaluation-dept";
 	}
-	
+	//此地址专门为局级开设
 	@GetMapping("/evaluationDept/{deptId}")
-	public String evaluationQuery(Model model,@PathVariable @NotNull @NotEmpty Long deptId) {
+	public String evaluationQuery(Model model,@PathVariable @NotNull @NotEmpty String deptId) {
 		List<Department> departments=departmentService.findAll();
 		model.addAttribute("departments", departments);
-		List<EvaluationEmployee> evaluationEmployees=evaluationService.getEvaluationEmployeesByObjectDepartment(deptId);
+		List<EvaluationEmployee> evaluationEmployees=evaluationService.getEvaluationEmployeesByObjectDepartment(Long.parseLong(deptId));
 		model.addAttribute("evaluationEmployees",evaluationEmployees);
 		return "personel/evaluation-dept";
 	}
-
 }

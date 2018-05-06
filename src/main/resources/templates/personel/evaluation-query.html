@@ -6,33 +6,38 @@
 </head>
 <body>
 	<left>
-		<div class="list-group">
-			<div class="list-group-item"  th:each="department,iterStat:${departments}">
-				<a th:unless="${department.id}==1" 
-					th:id="${department.id}" 
-					th:text="${department.departmentName}"
-					th:href="@{/personel/evaluationDept/id(id=${department.id})}"></a>
-			</div>
-		</div>
+	<div th:include="/personel/personel::left"></div>
 	</left>
-	
+
 	<right>
-		<table class="table table-hover">
-			<thead>
-				<tr>
-					<td><b>序号</b></td>
-					<td><b>姓名</b></td>
-					<td><b>分数</b></td>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="evaluationResult,iterStat:${evaluationResults}">
-					<td><p th:text="${iterStat.count}"></p></td>
-					<td><p th:text="${evaluationResult.object.name}"></p></td>
-					<td><p th:text="${evaluationResult.sum}"></p></td>
-				</tr>
-			</tbody>
-		</table>
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<td><b>ID</b></td>
+				<td><b>姓名</b></td>
+				<td><b>德</b></td>
+				<td><b>能</b></td>
+				<td><b>勤</b></td>
+				<td><b>绩</b></td>
+				<td><b>廉</b></td>
+				<td><b>合计</b></td>
+				<!-- <td>评价人</td> -->
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="evaluationEmployee,iterStat:${evaluationEmployees}">
+				<td><p th:text="${evaluationEmployee.id}"></p></td>
+				<td><p th:text="${evaluationEmployee.toWhom.name}"></p></td>
+				<td><p th:text="${evaluationEmployee.morality}"></p></td>
+				<td><p th:text="${evaluationEmployee.ability}"></p></td>
+				<td><p th:text="${evaluationEmployee.diligence}"></p></td>
+				<td><p th:text="${evaluationEmployee.achievement}"></p></td>
+				<td><p th:text="${evaluationEmployee.honest}"></p></td>
+				<td><p th:text="${evaluationEmployee.sum}"></p></td>
+				<!-- <td><p th:text="*{fromWhom.name}"></p></td> -->
+			</tr>
+		</tbody>
+	</table>
 	</right>
 </body>
 </html>

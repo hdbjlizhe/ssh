@@ -7,19 +7,27 @@
 
 <body>
 	<left>
+		<ul  class="list-group">
+			<li class="list-group-item active">人事管理</li>
+			<li class="list-group-item"><a href="">干部管理</a></li>
+			<li class="list-group-item"><a href="">请销假</a></li>
+			<li class="list-group-item"><a href="">离京报备</a></li>
+			<li class="list-group-item"><a href="">上下班打卡</a></li>
+		</ul>
 		<ul class="list-group">
-		<li class="list-group-item active">人事管理</li>
-		<li class="list-group-item"><a href="">干部管理页面</a></li>
-		<li class="list-group-item"><a href="">请销假及外出报备</a></li>
-		<li class="list-group-item"><a href="">月总结</a></li>
-		<li class="list-group-item"><a href="">季度总结</a></li>
-		<li class="list-group-item"><a href="">上下班打卡</a></li>
-		<li class="list-group-item"><a th:href="@{/personel/evaluationFill}">公务员季度考核系统</a></li>
+			<li class="list-group-item active">工作总结</li>
+			<li class="list-group-item">月度总结</li>
+			<li class="list-group-item">季度总结</li>
+		</ul>
+		<ul id="togglePages" class="list-group">
+				<li class="list-group-item active">公务员季度考核 </li>
+				<li class="list-group-item"><a th:href="@{/personel/evaluationFill}"><i
+						class="icon-inbox"></i>考评填报 </a></li>
+				<li class="list-group-item"><a th:href="@{/personel/evaluationDept}"><i
+						class="icon-inbox"></i>查询全部（限局领导）</a></li>
+				<li class="list-group-item"><a th:href="@{/personel/evaluationQuery}"><i
+						class="icon-inbox"></i>查询本部门（限处级正职）</a></li>	
 		</ul>
 	</left>
-	
-	<right>
-	
-	</right>
 </body>
 </html>

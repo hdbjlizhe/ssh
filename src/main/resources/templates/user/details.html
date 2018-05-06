@@ -11,26 +11,39 @@
 	<table>
 		
 		<tr>
-			<td colspan="2" class="text-center">
+			<td class="text-center">
 				<img alt="" th:src="@{/portrait/portrait-default.png}">
 			</td>
 		</tr>
 		<tr>
-			<td>用户：</td>
+			<td><p class="text-left" th:text="#{msg.user.username}">用户：</p></td>
+		</tr>
+		<tr>
 			<td><p class="text-left" th:text="${user.username}"></p></td>
 		</tr>
 		<tr>
-			<td>密码：</td>
-			<td><a class="text-left" th:href="@{/user/pwd/mod}">修改密码</a></td>
+			<td><p class="text-left" th:text="#{msg.user.password}">密码：</p></td>
 		</tr>
 		<tr>
-			<td>邮箱：</td><td><p class="text-left" th:text="${user.email}"></td>
+			<td class="text-left"><a class="text-left" th:href="@{/user/pwd/mod}">修改密码</a></td>
 		</tr>
 		<tr>
-			<td>手机：</td><td><p class="text-left" th:text="${user.mobile}"></td>
+			<td><p class="text-left" th:text="#{msg.user.email}">邮箱：</p></td>
 		</tr>
 		<tr>
-			<td>状态：</td><td><p class="text-left" th:text="${user.enabled!='false'?'正常':'不可用'}"></td>
+			<td><p class="text-left" th:text="${user.email}"></td>
+		</tr>
+		<tr>
+			<td><p class="text-left" th:text="#{msg.user.mobile}">手机：</p></td>
+		</tr>
+		<tr>
+			<td><p class="text-left" th:text="${user.mobile}"></td>
+		</tr>
+		<tr>
+			<td><p class="text-left" th:text="#{msg.user.status}"状态：</td>
+		</tr>
+		<tr>
+			<td><p class="text-left" th:text="${user.enabled!='false'?'正常':'不可用'}"></td>
 		</tr>
 		
 	</table>
@@ -58,8 +71,7 @@
 				<td><p class="form-control" th:text="${user.enabled!='false'?'正常':'不可用'}"></td>
 			</tr>
 			<tr>
-				<td colspan="2"><input type="reset" value="重置" class="btn btn-primary">
-				<input type="submit" value="提交" class="btn btn-primary"></td>
+				<td colspan=2 class="text-center"><input type="submit" value="修改" class="btn btn-primary"></td>
 			</tr>
 		</table>
 	</form>

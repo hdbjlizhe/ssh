@@ -37,12 +37,14 @@
 	        	<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" /> 
 	        </form>
 	        <br>
+	        <!-- 
 	        <div class="row">
 		        <div class="col-xs-6 col-md-3 text-center"><img alt="支付宝登录" src="imgs/icon_alipay_256.png"></div>
 		        <div class="col-xs-6 col-md-3 text-center"><img alt="QQ登录" src="imgs/icon_qq_256.png"></div>
 		        <div class="col-xs-6 col-md-3 text-center"><img alt="微信登录" src="imgs/icon_webchat_256.png"></div>
 		        <div class="col-xs-6 col-md-3 text-center"><img alt="微博登录" src="imgs/icon_weibo_256.png"></div>
-		    </div>	        
+		    </div>
+		     -->	        
 	        <th:block th:text="${#httpServletRequest.session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION')}"></th:block>
          </div>
          <br>

@@ -38,7 +38,7 @@ public class DemoApplication {
 	private static final Logger log = LoggerFactory.getLogger(DemoApplication.class);
 	
 	@Autowired
-	private RequestMappingHandlerConfig requestMappingHandlerConfig;
+	private RequestMappingHandlerMapping requestMappingHandlerMapping;
 	
 	@Autowired
 	private ResourceService resourceService;
@@ -55,7 +55,7 @@ public class DemoApplication {
 	//这个注解很重要，可以在每次启动的时候检查是否有URL更新，RequestMappingHandlerMapping只能在controller层用。这里我们放在主类中
 	@PostConstruct  
     public void detectHandlerMethods(){  
-           final RequestMappingHandlerMapping requestMappingHandlerMapping = requestMappingHandlerConfig.requestMappingHandlerMapping ();  
+           //final RequestMappingHandlerMapping requestMappingHandlerMapping = requestMappingHandlerConfig.requestMappingHandlerMapping ();  
            Map<RequestMappingInfo, HandlerMethod> map = requestMappingHandlerMapping.getHandlerMethods();  
            Set<RequestMappingInfo> mappings = map.keySet();  
            //Map<String, String> reversedMap = new HashMap<String, String>();  
