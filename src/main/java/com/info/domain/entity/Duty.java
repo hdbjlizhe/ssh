@@ -1,7 +1,5 @@
 package com.info.domain.entity;
 
-import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
-
 import java.io.Serializable;
 
 import javax.persistence.Entity;

@@ -1,6 +1,5 @@
 package com.zhelee.info;
 
-import org.aspectj.weaver.tools.Trace;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -19,15 +18,10 @@ public class DemoApplicationTests {
 	
 	private static final Logger log = LoggerFactory.getLogger(DemoApplicationTests.class);
 	
-	@Autowired(required=true)
+	@Autowired
 	PasswordEncoder passwordEncoder;
 	
 	@Test
 	public void contextLoads() {
-	}
-	
-	@Test
-	public void testPasswordEncoder() {
-		//System.out.println(passwordEncoder.encode("123456"));
 	}
 }

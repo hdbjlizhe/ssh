@@ -1,7 +1,5 @@
 package com.info.config;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log;
-
 import java.util.Locale;
 
 import org.slf4j.Logger;
