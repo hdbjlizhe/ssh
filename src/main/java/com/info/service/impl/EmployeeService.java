@@ -100,7 +100,7 @@ public class EmployeeService implements IEmployeeService {
 					rltEmployees.remove(employee);
 			} else {// 不区分部门的情况下，就按职务查找
 				List<Department> depts = departmentRepository.findByDeputyBureau(employee);
-				if (depts.size() >= 1) {// 副局长
+				if (depts.size()> 1) {// 副局长
 					for (Department dept : depts) {
 						rltEmployees.addAll(employeeRepository.findByDepartmentAndDutyAndFormal(dept,
 								evaluation.getObject(), evaluation.isExcludInformal()));

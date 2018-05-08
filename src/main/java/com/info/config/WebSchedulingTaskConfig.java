@@ -1,4 +1,4 @@
-package com.info.config.schedules;
+package com.info.config;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -21,9 +21,9 @@ import com.info.utils.FtpBaseFileUtil;
  * @author Administrator
  *
  */
-public class WebSchedulingTask {
+public class WebSchedulingTaskConfig {
 	
-	private static final Logger log=LoggerFactory.getLogger(WebSchedulingTask.class);
+	private static final Logger log=LoggerFactory.getLogger(WebSchedulingTaskConfig.class);
 	
 	//定义每天晚上0点进行数据库备份
 	@Scheduled(cron="0 0 0 * * ? *")//表达式生成地址：http://cron.qqe2.com

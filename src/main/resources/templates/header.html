@@ -29,9 +29,10 @@
 				</button>
 				<img class="nav navbar-nav" th:src="@{/imgs/zhelee_logo_flat.png}" /> <a
 					class="navbar-brand" th:href="@{/}" th:text="#{msg.brand}">信息服务中心</a>
+			</div>
+			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
 					<li class="active"><a href="/index" th:text="#{msg.menu.home}">首页</a></li>
-					<li><a href="http://www.bjzg.gov.cn/" th:text="#{msg.menu.party}">党务工作</a></li>
 					<li><a href="/office" th:text="#{msg.menu.office}">公文往来</a></li>
 					<li><a href="/daily" th:text="#{msg.menu.daily}">日常工作</a></li>
 					<li><a href="/personel" th:text="#{msg.menu.personel}">人事管理</a></li>
@@ -39,9 +40,6 @@
 					<li><a href="/activity" th:text="#{msg.menu.activity}">活动通知</a></li>
 					<li><a href="/about" th:text="#{msg.menu.about}">关于</a></li>
 				</ul>
-			</div>
-			<div id="navbar" class="navbar-collapse collapse">
-
 				<div class="navbar-text navbar-right">
 					<a id="lang-english" href='javascript:;' onclick='english();'
 						class="navbar-link">English(US)</a> <span>|</span> <a

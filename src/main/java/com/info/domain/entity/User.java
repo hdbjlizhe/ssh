@@ -171,6 +171,30 @@ public class User implements UserDetails{
 	public Employee getEmployeee() {
 		return employee;
 	}
+
+	public String getPortrait() {
+		return portrait;
+	}
+
+	public void setPortrait(String portrait) {
+		this.portrait = portrait;
+	}
+
+	public Boolean getAccountNonExpired() {
+		return accountNonExpired;
+	}
+
+	public Boolean getAccountNonLocked() {
+		return accountNonLocked;
+	}
+
+	public Boolean getCredentialsNonExpired() {
+		return credentialsNonExpired;
+	}
+
+	public Employee getEmployee() {
+		return employee;
+	}
     
     
 }

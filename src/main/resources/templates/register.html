@@ -3,62 +3,101 @@
 <head>
 <title th:text="#{msg.register}">注册</title>
 <meta charset="utf-8">
+<!-- 
+<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
+
+<style type="text/css">
+.form{
+	background: rgba(92,184,92,0.1);
+	padding-top:20px;
+	padding-bottom: 20px;
+	border-radius: 10px;
+	border: solid 1px rgb(92,184,92);}  
+</style>
+ -->
 </head>
 
 <body>
-	<div class="container">
-		 <div th:if="${message}" style="color:red">  
-	            <p th:text="${message}"></p> 
-	     </div> 
-		<form action="/register" method="post">
-			<h2 th:text="#{msg.register.title}">Please Register</h2>
-			<input th:id="${_csrf.parameterName}" type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-			
-			<label th:text="#{msg.register.username}">UserName:</label>
-			<input id="username" name="username" type="text"
-				placeholder="UserName/Tel./Email" class="form-control"> <br>
-				
-			<label th:text="#{msg.register.password}">Password:</label>
-			<input id="password" name="password" type="password"
-				class="form-control" placeholder="Password">
-			<label class="text-warning">密码应该在6位到32位之间</label> <br>
-			
-			<label th:text="#{msg.register.password2}">Password:</label>
-			<input id="password2" name="password2" type="password"
-				class="form-control" placeholder="Password Again">
-			<label class="text-warning">密码应该在6位到32位之间</label> <br>
-				
-			<label th:text="#{msg.register.email}">Email:</label>
-			<input id="email" name="email" type="email"
-				class="form-control" placeholder="Email">
-			<label class="text-warning">请确保邮箱正确，注册成功后要到邮箱确认</label><br>
-			<div class="checkbox">
-				<label> 
-					<input type="checkbox" id="checkbox" name="checkbox" checked="checked">
-					<a href="/protocol" th:text="#{msg.register.protocol}" ></a>
-				</label>
+	
+	<div class="container" style="margin-top: 100px; margin-bottom: 100px">
+		<div th:if="${message}" style="color: red">
+			<p th:text="${message}"></p>
+		</div>
+
+		<form
+			class="col-sm-offset-4 col-sm-4 col-sm-offset-4 form form-horizontal"
+			th:action="@{/register}" method="post">
+			<h3 class="text-center" th:text="#{msg.register.title}">Please
+				Register</h3>
+			<input th:id="${_csrf.parameterName}" type="hidden"
+				th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+
+			<div class="form-group">
+				<label class="col-sm-3 control-label"
+					th:text="#{msg.register.username}">UserName:</label>
+				<div class="col-sm-9">
+					<input id="username" name="username" type="text"
+						placeholder="UserName/Tel./Email" class="form-control">
+				</div>
 			</div>
-			<button id="btn-reset" class="btn btn-large btn-primary"
-				type="submit" th:text="#{msg.reset}">Reset</button>
-			<button id="btn-submit" class="btn btn-large btn-primary pull-right"
-				type="submit" th:text="#{msg.register}">Register</button>
+
+			<div class="form-group">
+				<label class="col-sm-3 control-label"
+					th:text="#{msg.register.password}">Password:</label>
+				<div class="col-sm-9">
+					<input id="password" name="password" type="password"
+						class="form-control" placeholder="6位到32位之间">
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="col-sm-3 control-label"
+					th:text="#{msg.register.password2}">Password:</label>
+				<div class="col-sm-9">
+					<input id="password2" name="password2" type="password"
+						class="form-control" placeholder="重复密码">
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="col-sm-3 control-label"
+					th:text="#{msg.register.email}">Email:</label>
+				<div class="col-sm-9">
+					<input id="email" name="email" type="email" class="form-control"
+						placeholder="使用邮箱确认">
+				</div>
+			</div>
+				<div class="col-sm-3"></div>
+				<div class="col-sm-9 checkbox">
+					<label> <input type="checkbox" id="checkbox"
+						name="checkbox" checked="checked"> <a href="/protocol"
+						th:text="#{msg.register.protocol}"></a>
+					</label>
+				</div>
+				<br><br>
+				<div>
+					<input type="submit" value="Register" th:value="#{msg.register}"
+						class="btn btn-success center-block" />
+				</div>
 		</form>
-		<br>
+		<!-- 
         <div class="row">
 	        <div class="col-xs-6 col-md-3 text-center"><img alt="支付宝登录" src="imgs/icon_alipay_256.png"></div>
 	        <div class="col-xs-6 col-md-3 text-center"><img alt="QQ登录" src="imgs/icon_qq_256.png"></div>
 	        <div class="col-xs-6 col-md-3 text-center"><img alt="微信登录" src="imgs/icon_webchat_256.png"></div>
 	        <div class="col-xs-6 col-md-3 text-center"><img alt="微博登录" src="imgs/icon_weibo_256.png"></div>
 	    </div>	
+	     -->
 		<th:block th:text="${message}">异常信息</th:block>
 	</div>
+	<br>
 
 	<!-- Ajax 注册的用户名是否可用 -->
 	<script type="text/javascript">
-	$(document).ready(function() {
+		$(document).ready(function() {
 			//用户名修改事件
 			$(":input[name='username']").change(function() {
-											
+
 				var val = $(this).val(); //获取输入值				
 				val = $.trim(val); //去掉两端的空格
 				var $this = $(this); //
@@ -103,7 +142,7 @@
 				if (val != "") { //值不为空
 					//把当前节点后面的所有 font 兄弟节点删除
 					$this.nextAll("font").remove();
-	
+
 					var url = "/validateEmail";
 					var args = {
 						"email" : val,
@@ -136,7 +175,7 @@
 				debugger
 				var account = $("#username").val();
 				var password = $("#password").val();
-				var email=$("#email").val();
+				var email = $("#email").val();
 				if (account == null || account == "") {
 					alert("username should not be empty");
 					$("#username").focus();
@@ -145,7 +184,7 @@
 					alert("Password should not be empty");
 					$("#password").focus();
 					return false;
-				}else if (email == null || email == "") {
+				} else if (email == null || email == "") {
 					alert("Password should not be empty");
 					$("#password").focus();
 					return false;

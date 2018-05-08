@@ -51,16 +51,6 @@ public class PersonelController {
 	/***********************************************************************************************
 	 * 
 	 ************************************************************************************************/
-	@GetMapping("/evaluationQuarter")
-	public String evaluationQuerter(Model model) {
-		return "personel/evaluation-quarter";
-	}
-	
-	@GetMapping("/evaluationMonth")
-	public String evaluationMonth(Model model) {
-		return "personel/evaluation-month";
-	}
-		
 	@GetMapping("/evaluationFill")//互评填报
 	public String evaluationFill(Model model,HttpServletRequest request) {
 		if(request.getSession().getAttribute("SPRING_SECURITY_CONTEXT")==null) {

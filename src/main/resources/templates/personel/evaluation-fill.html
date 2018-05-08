@@ -16,16 +16,9 @@
 				<thead>
 					<tr>
 						<td colspan="8">
-							<input class="btn btn-primary" type="button" value="上个季度" disabled="disabled">
+							<input class="btn btn-primary" type="button" value="上个季度">
 							<input type="text" th:value="${season}" readonly="readonly">
-							<input class="btn btn-primary" type="button" value="下个季度" disabled="disabled">
-																			
-								<a th:if="${loginEmployee.department.id}!=1" class="btn pull-right" 
-									th:href="@{/personel/evaluationDept/{id}(id=${loginEmployee.department.id})}">查询本部门评分</a>
-									
-								<a th:if="${loginEmployee.department.id}==1" class="btn pull-right" 
-									th:href="@{/personel/evaluationQuery}">查询所有人员评分</a>
-							
+							<input class="btn btn-primary" type="button" value="下个季度">							
 						</td>
 					</tr>
 					<tr class="text-center active">

@@ -18,7 +18,9 @@ public class Role implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     //角色ID
-    private String roleName;	
+    private String roleName;
+    //角色描述
+    private String description;
     //有此角色的所有用户
     @ManyToMany(targetEntity = User.class,mappedBy = "roles",fetch = FetchType.EAGER)
     private Set<User> users = new HashSet<>();
@@ -47,6 +49,14 @@ public class Role implements Serializable{
 
 	public void setRoleName(String roleName) {
 		this.roleName = roleName;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public Set<User> getUsers() {

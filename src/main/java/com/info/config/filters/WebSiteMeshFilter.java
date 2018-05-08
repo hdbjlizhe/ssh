@@ -27,7 +27,8 @@ public class WebSiteMeshFilter extends ConfigurableSiteMeshFilter {
 	
 				//排除装饰路径
 			   .addExcludedPath("/static/**");
-			   //.addExcludedPath("/login");
+			   //.addExcludedPath("/login")
+			   //.addExcludedPath("/register");
 		
 		//
 		builder.addTagRuleBundles(new DivExtractingTagRuleBundle());

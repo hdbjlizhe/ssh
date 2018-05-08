@@ -4,6 +4,20 @@
 <head>
 <title>个人信息维护</title>
 <meta charset=UTF-8 />
+<style type="text/css">
+.form-part {
+	background: rgba(92,184,92,0.1);
+	padding-top: 20px;
+	padding-bottom: 1px;
+	padding-left: 20px;
+	padding-right: 20px;
+	border-radius: 5px;
+	border: solid 1px #5cb85c;
+}
+i{
+	color: #5cb85c
+}
+</style>
 </head>
 <body>
 <left>
@@ -16,34 +30,34 @@
 			</td>
 		</tr>
 		<tr>
-			<td><p class="text-left" th:text="#{msg.user.username}">用户：</p></td>
+			<td><b><p class="text-left" th:text="#{msg.user.username}">用户：</p></b></td>
 		</tr>
 		<tr>
-			<td><p class="text-left" th:text="${user.username}"></p></td>
+			<td><i><p class="text-left" th:text="${user.username}"></p></i></td>
 		</tr>
 		<tr>
-			<td><p class="text-left" th:text="#{msg.user.password}">密码：</p></td>
+			<td><b><p class="text-left" th:text="#{msg.user.password}">密码：</p></b></td>
 		</tr>
 		<tr>
-			<td class="text-left"><a class="text-left" th:href="@{/user/pwd/mod}">修改密码</a></td>
+			<td class="text-left"><i><a class="text-left" th:href="@{/user/pwd/mod}" style="color:#5cb85c;">修改密码</a></i></td>
 		</tr>
 		<tr>
-			<td><p class="text-left" th:text="#{msg.user.email}">邮箱：</p></td>
+			<td><b><p class="text-left" th:text="#{msg.user.email}">邮箱：</p></b></td>
 		</tr>
 		<tr>
-			<td><p class="text-left" th:text="${user.email}"></td>
+			<td><i><p class="text-left" th:text="${user.email}"></p></i></td>
 		</tr>
 		<tr>
-			<td><p class="text-left" th:text="#{msg.user.mobile}">手机：</p></td>
+			<td><b><p class="text-left" th:text="#{msg.user.mobile}">手机：</p></b></td>
 		</tr>
 		<tr>
-			<td><p class="text-left" th:text="${user.mobile}"></td>
+			<td><i><p class="text-left" th:text="${user.mobile}"></p></i></td>
 		</tr>
 		<tr>
-			<td><p class="text-left" th:text="#{msg.user.status}"状态：</td>
+			<td><b><p class="text-left" th:text="#{msg.user.status}">状态：</p></b></td>
 		</tr>
 		<tr>
-			<td><p class="text-left" th:text="${user.enabled!='false'?'正常':'不可用'}"></td>
+			<td><i><p class="text-left" th:text="${user.enabled!='false'?'正常':'不可用'}"></p></i></td>
 		</tr>
 		
 	</table>
@@ -51,9 +65,13 @@
 </left>
 	
 <middle>
-	<form action="">
+	<form action="" class="form-part">
 		<table class="table table-condensed">
 			<caption>用户信息</caption>
+			<tr>
+				<td class="text-center"><img alt="" th:src="@{/portrait/portrait-default.png}"></td>
+				<td><input type="text"><input type="button" value="修改头像"></td>
+			<tr>
 			<tr>
 				<td>用户名：</td>
 				<td><input class="form-control" type="text" name="username" readonly="readonly" th:value="${user.username}"></td>
@@ -71,13 +89,13 @@
 				<td><p class="form-control" th:text="${user.enabled!='false'?'正常':'不可用'}"></td>
 			</tr>
 			<tr>
-				<td colspan=2 class="text-center"><input type="submit" value="修改" class="btn btn-primary"></td>
+				<td colspan=2 class="text-center"><input type="submit" value="修改" class="btn btn-success"></td>
 			</tr>
 		</table>
 	</form>
 	<br>
 
-	<form th:action="@{/user/employee/mod}" method="post">
+	<form class="form-part" th:action="@{/user/employee/mod}" method="post">
 		<table class="table table-condensed">
 			<caption>详细信息<input type="hidden" th:value="${employee.id}"></caption>			
 			<tr>		
@@ -210,13 +228,12 @@
 				<td><input class="form-control" type="text"></td>
 			</tr>
 			<tr>
-				<td colspan="2"><input type="reset" value="重置" class="btn btn-primary">
-				<input type="submit" value="提交" class="btn btn-primary"></td>
+				<td colspan="2" class="text-center"><input type="submit" value="提交" class="btn btn-success"></td>
 			</tr>
 		</table>
 	</form>
-	
-	<form action="">
+	<br>
+	<form class="form-part" action="">
 		<table class="table  table-condensed">
 			<caption th:value="#{msg.user.experience}">工作经历</caption>
 			<tr>
@@ -229,9 +246,9 @@
 				<td><input class="form-control" type="text" th:value="${experience.others}"></td>
 			</tr>
 			<tr>
-				<td colspan="4">
-					<input class="btn btn-primary" type="button" th:value="#{msg.user.experience.add}">
-					<input class="btn btn-primary" type="submit" th:value="#{msg.user.experience.submit}">
+				<td colspan="4" class="text-center">
+					<input class="btn btn-success" type="button" th:value="#{msg.user.experience.add}">
+					<input class="btn btn-success" type="submit" th:value="#{msg.user.experience.submit}">
 				</td>
 			</tr>
 		</table>

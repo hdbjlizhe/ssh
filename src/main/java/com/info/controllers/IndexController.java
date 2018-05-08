@@ -60,7 +60,7 @@ public class IndexController {
 	//关于
 	@GetMapping("/about")
 	public String about() {
-		return "about";
+		return "about/about";
 	}
     //拒绝登录页面
     @RequestMapping(value = {"/deny"})

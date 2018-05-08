@@ -1,5 +1,7 @@
 package com.info.handler;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.DefaultRedirectStrategy;
@@ -7,17 +9,27 @@ import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import com.info.domain.entity.User;
 
+import javax.mail.Session;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log;
+
 import java.io.IOException;
+import java.util.Enumeration;
 
 /**
  *  登录成功处理器
- *      需求：
- *          登录成功后，默认跳转到对应角色下的页面
+ *  需求：
+ *  登录成功后，默认跳转到之前的页面
  */
 public class LoginSuccessHandler implements AuthenticationSuccessHandler {
+	
+	
+	private static final Logger log = LoggerFactory.getLogger(LoginSuccessHandler.class);
+
 
     private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 
@@ -29,18 +41,12 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
         System.out.println(authentication.getPrincipal());//用户对象
         //获得授权后可得到用户信息
         User user = (User) authentication.getPrincipal();
-
         //输出登录提示信息
         System.out.println("用户名： " + user.getUsername());
-
         System.out.println("用户密码： " + authentication.getCredentials());
-
         System.out.println("角色列表："+authentication.getAuthorities());
-
         System.out.println("IP信息 :"+authentication.getDetails());
-
         System.out.println("是否被授权 :"+authentication.isAuthenticated());
-        
         System.out.println("Session:"+request.getSession().toString());
 
         //登录成功后跳转到默认对应的页面
@@ -75,6 +81,6 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
         if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {      
             ip = request.getRemoteAddr();      
         }      
-        return ip;      
+        return ip;  
     } 
 }
