@@ -15,9 +15,9 @@
 	<left>
 		<ul class="list-group">
 			<li class="list-group-item active">关于</li>
-			<li id="li_abstract" class="list-group-item"><a id="a_abstract" name="a_abstract" href="javascript:void(0)" th:text="#{msg.about.abstract}">中心简介</a></li>
-			<li id="li_post" class="list-group-item"><a id="a_post" name="a_post" href="javascript:void(0)" th:text="#{msg.about.post}">岗位设置</a></li>
-			<li id="li_duties" class="list-group-item"><a id="a_duties" name="a_duties" href="javascript:void(0)" th:text="#{msg.about.duties}">职责分工</a></li>		
+			<li id="li_abstract" class="list-group-item"><a id="a_abstract" name="a_abstract" href="javascript:void(0)" th:utext="|<span class='glyphicon glyphicon-th-list'></span> #{msg.about.abstract}">中心简介</a></li>
+			<li id="li_post" class="list-group-item"><a id="a_post" name="a_post" href="javascript:void(0)" th:utext="|<span class='glyphicon glyphicon-exclamation-sign'></span> #{msg.about.post}">岗位设置</a></li>
+			<li id="li_duties" class="list-group-item"><a id="a_duties" name="a_duties" href="javascript:void(0)" th:utext="|<span class='glyphicon glyphicon-tasks'></span> #{msg.about.duties}">职责分工</a></li>		
 		</ul>
 		<ul class="list-group">
 			<div class="list-group-item active">

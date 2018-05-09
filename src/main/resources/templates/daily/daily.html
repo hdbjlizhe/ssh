@@ -2,17 +2,42 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="utf-8">
-<title >日常工作</title>
+<title>日常工作</title>
 </head>
 <body>
 	<left>
-		<ul class="list-group">
-			<li class="list-group-item active">日常工作</li>
-			<li class="list-group-item"><a th:href="@{/daily/monthReport/departments}">信息发布统计月报</a></li>
-			<li class="list-group-item"><a th:href="@{/daily/monthReport/fill}">信息中心工作月报</a></li>
-			<li class="list-group-item"><a th:href="@{/daily/assets}">固定资产管理</a></li>
-			<li class="list-group-item"><a th:href="@{/daily/write}">撰写总结</a></li>
+	<ul class="list-group">
+		<li class="list-group-item active">日常工作</li>
+		<li class="list-group-item"><a
+			th:href="@{/daily/monthReport/fill}">信息中心工作月报</a></li>
+		<li class="list-group-item"><a
+			th:href="@{/daily/monthReport/departments}">信息发布统计月报</a></li>
+		<li class="list-group-item"><a th:href="@{/daily/assets}">固定资产管理</a></li>
+	</ul>
+
+
+	<div class="sidebar-nav list-group">
+		<a href="#dashboard-menu" class="nav-header list-group-item" data-toggle="collapse"><i class="glyphicon glyphicon-user"></i><b> 信息中心工作月报</b></a>
+		<ul id="dashboard-menu" class="nav nav-list collapse">
+			<li><a th:href="@{/daily/monthReport/fill}"> 月报填报</a></li>
+			<li><a th:href="@{/daily/monthReport/overview}"> 月报查阅</a></li>
 		</ul>
+
+		<a href="#table-menu" class="nav-header list-group-item" data-toggle="collapse"><i class="glyphicon glyphicon-th-list"></i><b> 信息发布统计月报</b></a>
+		<ul id="table-menu" class="nav nav-list collapse">
+			<li><a href=""> 月报填报</a></li>
+			<li><a href=""> 月报查阅</a></li>
+		</ul>
+
+		<a href="#menu-menu" class="nav-header list-group-item" data-toggle="collapse"><i class="glyphicon glyphicon-asterisk"></i><b> 菜谱</b> </a>
+		<ul id="menu-menu" class="nav nav-list collapse">
+			<li><a href=""> 菜谱管理</a></li>
+			<li><a href=""> 菜谱管理</a></li>
+		</ul>
+		
+		<a href="" class="nav-header list-group-item" data-toggle="collapse"><i class="glyphicon glyphicon-edit"></i><b> 菜谱</b> </a>	
+	</div>
+
 	</left>
 </body>
 </html>

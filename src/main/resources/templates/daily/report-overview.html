@@ -21,12 +21,15 @@
 </head>
 <body>
 	<div class="container">
+		
+	
+		<!-- 月份选择 -->
 		<form class="form-inline">
 			<div class="form-group">
 				<label class="sr-only" for="exampleInputAmount" th:text="${statistics.month}"></label>
 				<div class="input-group">
 					<div class="input-group-addon"><a th:href="@{/daily/overview/pre/{month}(month=${statistics.month})}">上个月</a></div>
-					<input type="text" class="form-control" id="exampleInputAmount"
+					<input type="text" class="form-control" id="exampleInputAmount" readonly="readonly"
 						placeholder="Amount" th:value="${statistics.month}">
 					<div class="input-group-addon"><a th:href="@{/daily/overview/next/{month}(month=${statistics.month})}">下个月</a></div>
 				</div>

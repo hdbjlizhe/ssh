@@ -11,17 +11,17 @@
 		<ul class="nav nav-sidebar">
 			<li><a id="overview"> <span
 					class="glyphicon glyphicon-align-left" aria-hidden="true"
-					th:text="#{msg.office.overview}"></span>
+					th:text="| #{msg.office.overview}"></span>
 			</a></li>
 			<li><a id="higher"> <span class="glyphicon glyphicon-copy"
-					aria-hidden="true" th:text="#{msg.office.higher}">上级机关</span>
+					aria-hidden="true" th:text="| #{msg.office.higher}">上级机关</span>
 			</a></li>
 			<li><a id="bureau"> <span class="glyphicon glyphicon-cd"
-					aria-hidden="true" th:text="#{msg.office.bureau}">局内文件</span>
+					aria-hidden="true" th:text="| #{msg.office.bureau}">局内文件</span>
 			</a></li>
 			<li><a id="local"> <span
 					class="glyphicon glyphicon-transfer" aria-hidden="true"
-					th:text="#{msg.office.local}">本级文件</span>
+					th:text="| #{msg.office.local}">本级文件</span>
 			</a></li>
 		</ul>
 	</div>
@@ -29,7 +29,7 @@
 
 	<!-- 右侧滚动栏内容 -->
 	<right>
-	<div class="container-fluid">
+	<div class="container-fluid">		
 		<!-- Overview表格 -->
 		<table id="table-overview" class="table table-bordered">
 			<caption th:text="#{msg.office.overview}">DashBoard</caption>

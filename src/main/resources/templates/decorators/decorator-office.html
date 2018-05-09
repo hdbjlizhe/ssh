@@ -65,15 +65,18 @@ aside {
 	padding-top:20px;
 	width: 17%;
 	position: fixed;
+	background-color: #e9e9e9;
 	top: 51px;
 	left: 0;
 	bottom: 0;
 	color:#fff;
+	display: block;
+	border-right: solid 1px #d9d9d9;
 }
 #main{
     width:100%;
     height:100%;
-    padding:50px 0 0 17%;
+    padding:60px 0 0 17%;
     box-sizing:border-box;
 }
 #con{
@@ -104,6 +107,14 @@ a:hover {color: black;}
 	<!-- 右侧可滑动的边栏 -->
 	<section id="main">
 		<div id="con">
+			<!-- 当前所在位置 -->
+			<div class="container-fluid">
+			<ol class="breadcrumb">
+				<li class="active"><b>当前所在位置：</b></li>
+			    <li><a th:href="@{/index}">主页</a></li>
+			    <li><a th:href="@{/office}">公文往来</a></li>
+			</ol>
+			</div>
 			<sitemesh:write property="right" />
 			<!-- 引入footer -->
 			<div th:include="footer::body"></div>

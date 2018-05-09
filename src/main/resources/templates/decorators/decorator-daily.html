@@ -40,10 +40,16 @@ body {padding-top: 50px;}
 			<!-- Right SideBar -->
 			
 			<div class="col-md-10 col-md-push-2" >
+				<!-- 当前所在位置 -->
+				<br>
+				<ol class="breadcrumb">
+					<li class="active"><b>当前所在位置：</b></li>
+				    <li><a th:href="@{/index}">主页</a></li>
+				    <li><a th:href="@{/daily}">日常工作</a></li>
+				</ol>
 				<!-- Sitemesh:right -->
-				
-					<br>
-					<sitemesh:write property="right" />
+				<br>
+				<sitemesh:write property="right" />
 				
 			</div>
 			<!-- Left SideBar -->

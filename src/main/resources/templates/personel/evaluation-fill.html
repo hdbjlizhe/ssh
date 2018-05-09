@@ -5,16 +5,16 @@
 <title>考核填报系统</title>
 </head>
 <body>
-
-<ol class="breadcrumb">
-	<li class="active"><b>当前所在位置：</b></li>
-    <li><a th:href="@{/index}">主页</a></li>
-    <li><a th:href="@{/personel}">人事服务</a></li>
-    <li class="active">季度考核填报</li>
-</ol>
-
-<div class="container-fluid">
+<br>
+<div class="container">
 	<div class="row">
+		<!-- 导航 -->
+		<ol class="breadcrumb">
+			<li class="active"><b>当前所在位置：</b></li>
+		    <li><a th:href="@{/index}">主页</a></li>
+		    <li><a th:href="@{/personel}">人事服务</a></li>
+		    <li class="active">季度考核填报</li>
+		</ol>
 		<form th:action="@{/personel/evaluationSeason}" method="post">
 		
 			<h3 class="text-center">季度考核填报</h3>

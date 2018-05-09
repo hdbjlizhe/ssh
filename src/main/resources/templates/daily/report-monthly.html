@@ -7,30 +7,42 @@
 <body>
 
 	<left>
-	<div class="list-group">
-		<a id="btn_menu" class="list-group-item" th:href="@{/daily/monthReport/overview}"><b>总览</b></a>
-		<button id="btn_party" class="list-group-item"><b>党务工作</b></button>
-		<button id="btn_office" class="list-group-item"><b>往来公文</b></button>
-		<button id="btn_affairs" class="list-group-item"><b>例会</b></button>
-		<button id="btn_news" class="list-group-item"><b>新闻发布</b></button>
-		<button id="btn_website" class="list-group-item"><b>局官网政策维护</b></button>
-		<button id="btn_nongovern" class="list-group-item"><b>民间投资平台</b></button>
-		<button id="btn_maintenance" class="list-group-item"><b>软硬件维护</b></button>
-		<button id="btn_fbase" class="list-group-item"><b>“产业招商精准招商”资料库</b></button>
-		<button id="btn_security" class="list-group-item"><b>网络与信息安全</b></button>
-		<button id="btn_photo" class="list-group-item"><b>摄影摄像</b></button>
-	</div>
+		<div class="list-group">
+			<button id="btn_month" class="list-group-item active">月报填报</button>			
+			<button id="btn_party" class="list-group-item">党务工作</button>
+			<button id="btn_office" class="list-group-item">往来公文</button>
+			<button id="btn_affairs" class="list-group-item">例会</button>
+			<button id="btn_news" class="list-group-item">新闻发布</button>
+			<button id="btn_website" class="list-group-item">局官网政策维护</button>
+			<button id="btn_nongovern" class="list-group-item">民间投资平台</button>
+			<button id="btn_maintenance" class="list-group-item">软硬件维护</button>
+			<button id="btn_fbase" class="list-group-item">“产业招商精准招商”资料库</button>
+			<button id="btn_security" class="list-group-item">网络与信息安全</button>
+			<button id="btn_photo" class="list-group-item">摄影摄像</button>
+		</div>
 	</left>
 
-
 	<right> <!-- 下拉列表框-月份 -->
-	<form action="/monthReport" method="get">
+	
+	<!-- 当前所在位置 -->
+	<ol class="breadcrumb">
+		<li class="active"><b>当前所在位置：</b></li>
+	    <li><a href="/index">主页</a></li>
+	    <li><a href="/daily">日常工作</a></li>
+	    <li><a href="/daily/monthReport/fill">信息中心工作月报</a></li>
+	</ol>
+	
+	
+	<!-- 月份选择 -->
+	<div>
 		<input th:id="${_csrf.parameterName}" type="hidden"
 			th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-		<a th:href="@{/daily/monthReport/pre/{currentMonth}(currentMonth=${statistics.month})}" class="btn btn-primary">上个月</a>
+		<a th:href="@{/daily/monthReport/pre/{currentMonth}(currentMonth=${statistics.month})}" class="btn btn-primary" style="color:white;">上个月</a>
 		<input type="text" th:value="${statistics.month}" readonly>
-		<a th:href="@{/daily/monthReport/next/{currentMonth}(currentMonth=${statistics.month})}" class="btn btn-primary">下个月</a>
-	</form>
+		<a th:href="@{/daily/monthReport/next/{currentMonth}(currentMonth=${statistics.month})}" class="btn btn-primary" style="color:white;">下个月</a>
+		<a id="btn_menu" class="btn btn-success" style="color:white" th:href="@{/daily/monthReport/overview}">月报总览</a>
+	</div>
+	
 	<br>
 	
 	<!-- 党务工作  -->
@@ -49,7 +61,7 @@
 				<td><input id="partyStudy" name="partyStudy" type="number"
 					th:value="${statistics.partyStudy}"></td>
 				<td>说明：填写数字或自动获取</td>
-				<td><a class="btn btn-primary" href="">自动获取</a></td>
+				<td><button class="btn btn-primary" href="">自动获取</button></td>
 			</tr>
 			<tr>
 				<td>党务会议（次）</td>
@@ -63,12 +75,12 @@
 				<td><input id="partyActivity" name="partyActivity"
 					th:value="${statistics.partyActivity}" type="number"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
-				<td><a class="btn btn-primary" href="">自动获取</a></td>
+				<td><button class="btn btn-primary" href="">自动获取</button></td>
 			</tr>
 			<tr>
 				<td colspan=4>
-					<button id="reset_party" type="reset" class="btn btn-default">重置</button>
-					<button id="submit_party" type="button" class="btn btn-default">提交</button>
+					<button id="reset_party" type="reset" class="btn btn-success">重置</button>
+					<button id="submit_party" type="button" class="btn btn-success">提交</button>
 				</td>
 			</tr>
 		</table>
@@ -91,7 +103,7 @@
 				<td><input id="docOffice" name="docOffice" type="number"
 					th:value="${statistics.docOffice}"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
-				<td><a class="btn btn-primary" href="">自动获取</a></td>
+				<td><button class="btn btn-primary" href="">自动获取</button></td>
 
 			</tr>
 			<tr>
@@ -99,13 +111,13 @@
 				<td><input id="docDepart" name="docDepart" type="number"
 					th:value="${statistics.docDepart}"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
-				<td><a class="btn btn-primary" href="">自动获取</a></td>
+				<td><button class="btn btn-primary" href="">自动获取</button></td>
 
 			</tr>
 			<tr>
 				<td colspan=4>
-					<button id="reset_office" type="reset" class="btn btn-default">重置</button>
-					<button id="submit_office" type="button" class="btn btn-default">提交</button>
+					<button id="reset_office" type="reset" class="btn btn-success">重置</button>
+					<button id="submit_office" type="button" class="btn btn-success">提交</button>
 				</td>
 			</tr>
 		</table>
@@ -127,13 +139,13 @@
 				<td><input id="affairs" name="affairs" type="number"
 					th:value="${statistics.affairs}"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
-				<td><a class="btn btn-primary" href="">自动获取</a></td>
+				<td><button class="btn btn-primary" href="">自动获取</button></td>
 
 			</tr>
 			<tr>
 				<td colspan=4>
-					<button id="reset_affairs" type="reset" class="btn btn-default">重置</button>
-					<button id="submit_affairs" type="button" class="btn btn-default">提交</button>
+					<button id="reset_affairs" type="reset" class="btn btn-success">重置</button>
+					<button id="submit_affairs" type="button" class="btn btn-success">提交</button>
 				</td>
 			</tr>
 		</table>
@@ -155,7 +167,7 @@
 				<td><input id="webchatOriginal" name="webchatOriginal"
 					type="number" th:value="${statistics.webchatOriginal}"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
-				<td><a class="btn btn-primary" href="">自动获取</a></td>
+				<td><button class="btn btn-primary" href="">自动获取</button></td>
 
 			</tr>
 			<tr>
@@ -163,7 +175,7 @@
 				<td><input id="webchatTranspond" name="webchatTranspond"
 					type="number" th:value="${statistics.webchatTranspond}"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
-				<td><a class="btn btn-primary" href="">自动获取</a></td>
+				<td><button class="btn btn-primary" href="">自动获取</button></td>
 
 			</tr>
 			<tr>
@@ -171,21 +183,21 @@
 				<td><input id="weiboOriginal" name="weiboOriginal"
 					type="number" th:value="${statistics.weiboOriginal}"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
-				<td><a class="btn btn-primary" href="">自动获取</a></td>
+				<td><button class="btn btn-primary" href="">自动获取</button></td>
 			</tr>
 			<tr>
 				<td>微博转发</td>
 				<td><input id="weiboTranspond" name="weiboTranspond"
 					type="number" th:value="${statistics.weiboTranspond}"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
-				<td><a class="btn btn-primary" href="">自动获取</a></td>
+				<td><button class="btn btn-primary" href="">自动获取</button></td>
 			</tr>
 			<tr>
 				<td>今日头条原创</td>
 				<td><input id="toutiaoOriginal" name="toutiaoOriginal"
 					type="number" th:value="${statistics.toutiaoOriginal}"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
-				<td><a class="btn btn-primary" href="">自动获取</a></td>
+				<td><button class="btn btn-primary" href="">自动获取</button></td>
 
 			</tr>
 			<tr>
@@ -193,7 +205,7 @@
 				<td><input id="toutiaoTranspond" name="toutiaoTranspond"
 					type="number" th:value="${statistics.toutiaoTranspond}"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
-				<td><a class="btn btn-primary" href="">自动获取</a></td>
+				<td><button class="btn btn-primary" href="">自动获取</button></td>
 			</tr>
 
 			<tr>
@@ -201,20 +213,20 @@
 				<td><input id="newsBoard" name="newsBoard" type="number"
 					th:value="${statistics.newsBoard}"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
-				<td><a class="btn btn-primary" href="">自动获取</a></td>
+				<td><button class="btn btn-primary" href="">自动获取</button></td>
 			</tr>
 			<tr>
 				<td>局官网工作动态及通知公告</td>
 				<td><input id="newsWebsite" name="newsWebsite" type="number"
 					th:value="${statistics.newsWebsite}"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
-				<td><a class="btn btn-primary" href=" ">自动获取</a></td>
+				<td><button class="btn btn-primary" href=" ">自动获取</button></td>
 
 			</tr>
 			<tr>
 				<td colspan=4>
-					<button id="reset_news" type="reset" class="btn btn-default">重置</button> <span></span>
-					<button id="submit_news" type="button" class="btn btn-default">提交</button>
+					<button id="reset_news" type="reset" class="btn btn-success">重置</button> <span></span>
+					<button id="submit_news" type="button" class="btn btn-success">提交</button>
 				</td>
 			</tr>
 		</table>
@@ -236,7 +248,7 @@
 				<td><input id="websiteProfile" name="websiteProfile"
 					type="number" th:value="${statistics.websiteProfile}"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
-				<td><a class="btn btn-primary" href="">自动获取</a></td>
+				<td><button class="btn btn-primary" href="">自动获取</button></td>
 
 			</tr>
 			<tr>
@@ -245,7 +257,7 @@
 					name="websiteInvestBeijing" type="number"
 					th:value="${statistics.websiteInvestBeijing}"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
-				<td><a class="btn btn-primary" href="">自动获取</a></td>
+				<td><button class="btn btn-primary" href="">自动获取</button></td>
 
 			</tr>
 			<tr>
@@ -253,7 +265,7 @@
 				<td><input id="websiteInteraction" name="websiteInteraction"
 					type="number" th:value="${statistics.websiteInteraction}"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
-				<td><a class="btn btn-primary" href="">自动获取</a></td>
+				<td><button class="btn btn-primary" href="">自动获取</button></td>
 
 			</tr>
 			<tr>
@@ -261,7 +273,7 @@
 				<td><input id="websiteMatters" name="websiteMatters"
 					type="number" th:value="${statistics.websiteMatters}"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
-				<td><a class="btn btn-primary" href="">自动获取</a></td>
+				<td><button class="btn btn-primary" href="">自动获取</button></td>
 
 			</tr>
 			<tr>
@@ -269,7 +281,7 @@
 				<td><input id="websiteParty" name="websiteParty" type="number"
 					th:value="${statistics.websiteParty}"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
-				<td><a class="btn btn-primary" href="">自动获取</a></td>
+				<td><button class="btn btn-primary" href="">自动获取</button></td>
 
 			</tr>
 			<tr>
@@ -277,13 +289,13 @@
 				<td><input id="websiteInfo" name="websiteInfo" type="number"
 					th:value="${statistics.websiteInfo}"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
-				<td><a class="btn btn-primary" href="">自动获取</a></td>
+				<td><button class="btn btn-primary" href="">自动获取</button></td>
 
 			</tr>
 			<tr>
 				<td colspan=4>
-					<button id="reset_website" type="reset" class="btn btn-default">重置</button> <span></span>
-					<button id="submit_website" type="button" class="btn btn-default">提交</button>
+					<button id="reset_website" type="reset" class="btn btn-success">重置</button> <span></span>
+					<button id="submit_website" type="button" class="btn btn-success">提交</button>
 				</td>
 			</tr>
 		</table>
@@ -306,7 +318,7 @@
 					name="nongovernDevelopPlanning" type="number"
 					th:value="${statistics.nongovernDevelopPlanning}"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
-				<td><a class="btn btn-primary" href="">自动获取</a></td>
+				<td><button class="btn btn-primary" href="">自动获取</button></td>
 
 			</tr>
 			<tr>
@@ -315,7 +327,7 @@
 					name="nongovernInvestPolicy" type="number"
 					th:value="${statistics.nongovernInvestPolicy}"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
-				<td><a class="btn btn-primary" href="">自动获取</a></td>
+				<td><button class="btn btn-primary" href="">自动获取</button></td>
 
 			</tr>
 			<tr>
@@ -324,7 +336,7 @@
 					name="nongovernAuthoritylicense" type="number"
 					th:value="${statistics.nongovernAuthoritylicense}"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
-				<td><a class="btn btn-primary" href="">自动获取</a></td>
+				<td><button class="btn btn-primary" href="">自动获取</button></td>
 
 			</tr>
 			<tr>
@@ -333,7 +345,7 @@
 					name="nongovernMarketAccess" type="number"
 					th:value="${statistics.nongovernMarketAccess}"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
-				<td><a class="btn btn-primary" href="">自动获取</a></td>
+				<td><button class="btn btn-primary" href="">自动获取</button></td>
 
 			</tr>
 			<tr>
@@ -342,7 +354,7 @@
 					name="nongovernInvestOpportunity" type="number"
 					th:value="${statistics.nongovernInvestOpportunity}"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
-				<td><a class="btn btn-primary" href="">自动获取</a></td>
+				<td><button class="btn btn-primary" href="">自动获取</button></td>
 
 			</tr>
 			<tr>
@@ -351,12 +363,12 @@
 					name="nongovernInvestService" type="number"
 					th:value="${statistics.nongovernInvestService}"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
-				<td><a class="btn btn-primary" href="">自动获取</a></td>
+				<td><button class="btn btn-primary" href="">自动获取</button></td>
 			</tr>
 			<tr>
 				<td colspan=4>
-					<button id="reset_nongovern" type="reset" class="btn btn-default">重置</button> <span></span>
-					<button id="submit_nongovern" type="button" class="btn btn-default">提交</button>
+					<button id="reset_nongovern" type="reset" class="btn btn-success">重置</button> <span></span>
+					<button id="submit_nongovern" type="button" class="btn btn-success">提交</button>
 				</td>
 			</tr>
 		</table>
@@ -378,19 +390,19 @@
 				<td><input id="maintenanceHardware" name="maintenanceHardware"
 					type="number" th:value="${statistics.maintenanceHardware}"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
-				<td><a class="btn btn-primary" href="">自动获取</a></td>
+				<td><button class="btn btn-primary" href="">自动获取</button></td>
 			</tr>
 			<tr>
 				<td>软件及系统问题（人次）</td>
 				<td><input id="maintenanceSoftware" name="maintenanceSoftware"
 					type="number" th:value="${statistics.maintenanceSoftware}"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
-				<td><a class="btn btn-primary" href="">自动获取</a></td>
+				<td><button class="btn btn-primary" href="">自动获取</button></td>
 			</tr>
 			<tr>
 				<td colspan=4>
-					<button id="reset_maintenance" type="reset" class="btn btn-default">重置</button> <span></span>
-					<button id="submit_maintenance" type="button" class="btn btn-default">提交</button>
+					<button id="reset_maintenance" type="reset" class="btn btn-success">重置</button> <span></span>
+					<button id="submit_maintenance" type="button" class="btn btn-success">提交</button>
 				</td>
 			</tr>
 		</table>
@@ -412,12 +424,12 @@
 				<td><input id="fbaseNew" name="fbaseNew" type="number"
 					th:value="${statistics.fbaseNew}"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
-				<td><a class="btn btn-primary" href="/database/getnew">自动获取</a></td>
+				<td><button class="btn btn-primary" href="/database/getnew">自动获取</button></td>
 			</tr>
 			<tr>
 				<td colspan=4>
-					<button id="reset_fbase" type="reset" class="btn btn-default">重置</button> <span></span>
-					<button id="submit_fbase" type="button" class="btn btn-default">提交</button>
+					<button id="reset_fbase" type="reset" class="btn btn-success">重置</button> <span></span>
+					<button id="submit_fbase" type="button" class="btn btn-success">提交</button>
 				</td>
 			</tr>
 		</table>
@@ -440,7 +452,7 @@
 				<td><input id="securityAttackBlock" name="securityAttackBlock"
 					type="number" th:value="${statistics.securityAttackBlock}"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
-				<td><a class="btn btn-primary" href="/database/getnew">自动获取</a></td>
+				<td><button class="btn btn-primary" href="/database/getnew">自动获取</button></td>
 			</tr>
 			<tr>
 				<td>系统加固（条）</td>
@@ -448,7 +460,7 @@
 					name="securitySystemReinforce" type="number"
 					th:value="${statistics.securitySystemReinforce}"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
-				<td><a class="btn btn-primary" href="/database/getnew">自动获取</a></td>
+				<td><button class="btn btn-primary" href="/database/getnew">自动获取</button></td>
 			</tr>
 			<tr>
 				<td>安全通报（份）</td>
@@ -456,21 +468,21 @@
 					name="securitySafetyMessage" type="number"
 					th:value="${statistics.securitySafetyMessage}"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
-				<td><a class="btn btn-primary" href="/database/getnew">自动获取</a></td>
+				<td><button class="btn btn-primary" href="/database/getnew">自动获取</button></td>
 			</tr>
 			<tr>
 				<td>漏洞扫描（次）</td>
 				<td><input id="securityBugScan" name="securityBugScan"
 					type="number" th:value="${statistics.securityBugScan}"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
-				<td><a class="btn btn-primary" href="/database/getnew">自动获取</a></td>
+				<td><button class="btn btn-primary" href="/database/getnew">自动获取</button></td>
 			</tr>
 			<tr>
 				<td>发现漏洞（个）</td>
 				<td><input id="securityBugNum" name="securityBugNum"
 					type="number" th:value="${statistics.securityBugNum}"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
-				<td><a class="btn btn-primary" href="/database/getnew">自动获取</a></td>
+				<td><button class="btn btn-primary" href="/database/getnew">自动获取</button></td>
 			</tr>
 			<tr>
 				<td>修复网站故障（次）</td>
@@ -478,7 +490,7 @@
 					name="securityWebsiteTrouble" type="number"
 					th:value="${statistics.securityWebsiteTrouble}"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
-				<td><a class="btn btn-primary" href="/database/getnew">自动获取</a></td>
+				<td><button class="btn btn-primary" href="/database/getnew">自动获取</button></td>
 			</tr>
 			<tr>
 				<td>全局性网络故障（次）</td>
@@ -486,12 +498,12 @@
 					name="securityGlobalTrouble" type="number"
 					th:value="${statistics.securityGlobalTrouble}"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
-				<td><a class="btn btn-primary" href="/database/getnew">自动获取</a></td>
+				<td><button class="btn btn-primary" href="/database/getnew">自动获取</button></td>
 			</tr>
 			<tr>
 				<td colspan=4>
-					<button id="reset_security" type="reset" class="btn btn-default">重置</button> <span></span>
-					<button id="submit_security" type="button" class="btn btn-default">提交</button>
+					<button id="reset_security" type="reset" class="btn btn-success">重置</button> <span></span>
+					<button id="submit_security" type="button" class="btn btn-success">提交</button>
 				</td>
 			</tr>
 		</table>
@@ -513,33 +525,33 @@
 				<td><input id="photoMeeting" name="photoMeeting" type="number"
 					th:value="${statistics.photoMeeting}"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
-				<td><a class="btn btn-primary" href="">自动获取</a></td>
+				<td><button class="btn btn-primary" href="">自动获取</button></td>
 			</tr>
 			<tr>
 				<td>活动摄影（次）</td>
 				<td><input id="photoActivity" name="photoActivity"
 					type="number" th:value="${statistics.photoActivity}"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
-				<td><a class="btn btn-primary" href="">自动获取</a></td>
+				<td><button class="btn btn-primary" href="">自动获取</button></td>
 			</tr>
 			<tr>
 				<td>照片资料（次）</td>
 				<td><input id="photoImgNum" name="photoImgNum" type="number"
 					th:value="${statistics.photoImgNum}"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
-				<td><a class="btn btn-primary" href="">自动获取</a></td>
+				<td><button class="btn btn-primary" href="">自动获取</button></td>
 			</tr>
 			<tr>
 				<td>影像资料（段）</td>
 				<td><input id="photoVideoNum" name="photoVideoNum"
 					type="number" th:value="${statistics.photoVideoNum}"></td>
 				<td><p class="text-error">说明：填写数字或自动获取</p></td>
-				<td><a class="btn btn-primary" href="">自动获取</a></td>
+				<td><button class="btn btn-primary" href="">自动获取</button></td>
 			</tr>
 			<tr>
 				<td colspan=4>
-					<button id="reset_photo" type="reset" class="btn btn-default">重置</button> <span></span>
-					<button id="submit_photo" type="button" class="btn btn-default">提交</button>
+					<button id="reset_photo" type="reset" class="btn btn-success">重置</button> <span></span>
+					<button id="submit_photo" type="button" class="btn btn-success">提交</button>
 				</td>
 			</tr>
 		</table>
@@ -550,8 +562,12 @@
 		$(document).ready(function() {
 			$("table").hide();
 			$("#party").show();
-			$("button.list-group-item").click(function() {		
+			$("#btn_party").addClass("list-group-item-info");
+			$("button.list-group-item").click(function() {
+				debugger
+				$("button.list-group-item").removeClass("list-group-item-info");
 				var btnId = $(this).attr("id");
+				$(this).addClass("list-group-item-info");
 				var tableId = btnId.substr(btnId.lastIndexOf("_") + 1);
 				$("table").hide();
 				$("#" + tableId).show();

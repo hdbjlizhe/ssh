@@ -86,9 +86,9 @@ public class DailyController {
 	}
 	
 	
-	@GetMapping("/monthReport/department")
+	@GetMapping("/monthReport/departments")
 	public String department(Model model) {
-		return "nothing";
+		return "report-depts-fill";
 	}
 	
 	
