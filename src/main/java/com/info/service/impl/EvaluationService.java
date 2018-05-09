@@ -11,12 +11,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.info.domain.EvaluationEmployee;
-import com.info.domain.EvaluationMap;
+
 import com.info.domain.dto.EvaluationEmployeeDTO;
 import com.info.domain.dto.EvaluationEmployeeDTOList;
 import com.info.domain.entity.Department;
 import com.info.domain.entity.Employee;
+import com.info.domain.entity.EvaluationEmployee;
+import com.info.domain.entity.EvaluationMap;
 import com.info.domain.pojo.EvaluationResult;
 import com.info.domain.repository.DepartmentRepository;
 import com.info.domain.repository.EmployeeRepository;

@@ -1,4 +1,4 @@
-package com.info.domain;
+package com.info.domain.entity;
 
 import java.io.Serializable;
 
@@ -8,8 +8,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
-import com.info.domain.entity.Duty;
 
 @Entity
 @Table(name="eva_map")

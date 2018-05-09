@@ -3,7 +3,7 @@ package com.info.domain.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.info.domain.MonthStatistics;
+import com.info.domain.entity.MonthStatistics;
 
 import java.lang.String;
 @Repository

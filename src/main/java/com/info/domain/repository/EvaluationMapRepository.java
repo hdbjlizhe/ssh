@@ -7,8 +7,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.info.domain.EvaluationMap;
 import com.info.domain.entity.Duty;
+import com.info.domain.entity.EvaluationMap;
 
 @Repository
 public interface EvaluationMapRepository extends JpaRepository<EvaluationMap, Integer> {

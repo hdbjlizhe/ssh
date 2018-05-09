@@ -14,7 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import com.info.domain.FtpBaseFile;
+import com.info.domain.entity.FtpBaseFile;
 
 /**
  * “产业招商、精准招商”资料库 指定目录下面的所有文件

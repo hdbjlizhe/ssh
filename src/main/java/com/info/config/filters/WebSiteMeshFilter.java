@@ -13,7 +13,7 @@ public class WebSiteMeshFilter extends ConfigurableSiteMeshFilter {
 			   .addDecoratorPath("/about", "/decorators/about")
 			   .addDecoratorPath("/admin", "/decorators/cms")
 			   .addDecoratorPath("/party", "/decorators/party")
-			   .addDecoratorPath("/office", "/decorators/cms")
+			   .addDecoratorPath("/office", "/decorators/office")
 			   .addDecoratorPath("/daily","/decorators/daily")
 			   .addDecoratorPath("/daily/monthReport","/decorators/report")
 			   .addDecoratorPath("/daily/monthReport/overview", "/decorators/default")
@@ -23,8 +23,7 @@ public class WebSiteMeshFilter extends ConfigurableSiteMeshFilter {
 			   .addDecoratorPath("/user/details", "/decorators/userdetails")
 			   .addDecoratorPath("/personel/evaluationDept", "/decorators/personel")
 			   .addDecoratorPath("/personel/evaluationQuery", "/decorators/personel")
-			   .addDecoratorPath("/personel/evaluationFill", "/decorators/personel")
-	
+			   .addDecoratorPath("/personel/evaluationFill", "/decorators/default")
 				//排除装饰路径
 			   .addExcludedPath("/static/**");
 			   //.addExcludedPath("/login")

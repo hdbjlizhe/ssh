@@ -4,9 +4,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import com.info.domain.EvaluationEmployee;
 import com.info.domain.entity.Department;
 import com.info.domain.entity.Employee;
+import com.info.domain.entity.EvaluationEmployee;
 
 import java.lang.Long;
 import java.util.List;

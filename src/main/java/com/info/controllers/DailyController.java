@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.info.domain.MonthStatistics;
 import com.info.domain.dto.MonthStatisticsAffairsDTO;
 import com.info.domain.dto.MonthStatisticsFbaseNewDTO;
 import com.info.domain.dto.MonthStatisticsMaintenanceDTO;
@@ -26,6 +25,7 @@ import com.info.domain.dto.MonthStatisticsPartyDTO;
 import com.info.domain.dto.MonthStatisticsPhotoDTO;
 import com.info.domain.dto.MonthStatisticsSecurityDTO;
 import com.info.domain.dto.MonthStatisticsWebsiteDTO;
+import com.info.domain.entity.MonthStatistics;
 import com.info.service.impl.MonthStatisticsService;
 import com.info.utils.DateAndTimeUtil;
 

@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 
-import com.info.domain.FtpBaseFile;
+import com.info.domain.entity.FtpBaseFile;
 import com.info.service.impl.FtpBaseFileService;
 import com.info.utils.FtpBaseFileUtil;
 /**

@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.info.domain.EvaluationEmployee;
 import com.info.domain.dto.EvaluationEmployeeDTOList;
 import com.info.domain.entity.Department;
 import com.info.domain.entity.Employee;
+import com.info.domain.entity.EvaluationEmployee;
 import com.info.domain.pojo.EvaluationResult;
 import com.info.service.impl.DepartmentService;
 import com.info.service.impl.EmployeeService;

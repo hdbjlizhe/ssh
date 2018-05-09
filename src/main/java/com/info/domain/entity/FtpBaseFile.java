@@ -1,4 +1,4 @@
-package com.info.domain;
+package com.info.domain.entity;
 
 import java.util.Date;
 

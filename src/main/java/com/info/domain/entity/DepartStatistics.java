@@ -1,4 +1,4 @@
-package com.info.domain;
+package com.info.domain.entity;
 
 import java.io.Serializable;
 
@@ -10,8 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
-
-import com.info.domain.entity.Department;
 
 @Entity
 @Table(name="m_depart_Statistics")
@@ -39,7 +37,6 @@ public class DepartStatistics implements Serializable {
 	
 	@ManyToOne
 	private Department department;
-	
 	
 	public long getId() {
 		return id;

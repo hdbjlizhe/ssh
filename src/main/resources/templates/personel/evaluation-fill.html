@@ -5,22 +5,30 @@
 <title>考核填报系统</title>
 </head>
 <body>
-	<left>
-		<div th:include="/personel/personel::left"></div>
-	</left>
-	<right>
+
+<ol class="breadcrumb">
+	<li class="active"><b>当前所在位置：</b></li>
+    <li><a th:href="@{/index}">主页</a></li>
+    <li><a th:href="@{/personel}">人事服务</a></li>
+    <li class="active">季度考核填报</li>
+</ol>
+
+<div class="container-fluid">
+	<div class="row">
 		<form th:action="@{/personel/evaluationSeason}" method="post">
+		
+			<h3 class="text-center">季度考核填报</h3>
+				
 			<input type="hidden" th:name="${_csrf.parameterName}"
 				th:value="${_csrf.token}" />
+			<div class="text-center">	
+				<input class="btn btn-primary" type="button" value="上个季度">
+				<input type="text" th:value="${season}" readonly="readonly">
+				<input class="btn btn-primary" type="button" value="下个季度">	
+			</div>	
+			<br>
 			<table class="table table-bordered">
 				<thead>
-					<tr>
-						<td colspan="8">
-							<input class="btn btn-primary" type="button" value="上个季度">
-							<input type="text" th:value="${season}" readonly="readonly">
-							<input class="btn btn-primary" type="button" value="下个季度">							
-						</td>
-					</tr>
 					<tr class="text-center active">
 						<td><b>序号</b></td>
 						<td><b>姓名</b></td>
@@ -156,7 +164,7 @@
 											});
 						});
 	</script>
-	</right>
-	
+	</div><!-- end of "row" -->
+</div><!-- end of "container-fluid" -->
 </body>
 </html>

@@ -1,3 +1,4 @@
+`
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <title>office.html</title>
@@ -7,25 +8,22 @@
 	<!-- 左侧导航栏 -->
 	<left>
 	<div class="container-fluid">
-	
-			<ul class="nav nav-sidebar">
-				<li><a id="overview" style="color:#aaaaaa;"> <span
-						class="glyphicon glyphicon-align-left" aria-hidden="true"
-						th:text="#{msg.office.overview}"></span>
-				</a></li>
-				<li><a id="higher" style="color:#aaaaaa;"> <span
-						class="glyphicon glyphicon-copy" aria-hidden="true"
-						th:text="#{msg.office.higher}">上级机关</span>
-				</a></li>
-				<li><a id="bureau" style="color:#aaaaaa;"> <span class="glyphicon glyphicon-cd"
-						aria-hidden="true" th:text="#{msg.office.bureau}">局内文件</span>
-				</a></li>
-				<li><a id="local" style="color:#aaaaaa;"> <span
-						class="glyphicon glyphicon-transfer" aria-hidden="true"
-						th:text="#{msg.office.local}">本级文件</span>
-				</a></li>
-			</ul>
-
+		<ul class="nav nav-sidebar">
+			<li><a id="overview"> <span
+					class="glyphicon glyphicon-align-left" aria-hidden="true"
+					th:text="#{msg.office.overview}"></span>
+			</a></li>
+			<li><a id="higher"> <span class="glyphicon glyphicon-copy"
+					aria-hidden="true" th:text="#{msg.office.higher}">上级机关</span>
+			</a></li>
+			<li><a id="bureau"> <span class="glyphicon glyphicon-cd"
+					aria-hidden="true" th:text="#{msg.office.bureau}">局内文件</span>
+			</a></li>
+			<li><a id="local"> <span
+					class="glyphicon glyphicon-transfer" aria-hidden="true"
+					th:text="#{msg.office.local}">本级文件</span>
+			</a></li>
+		</ul>
 	</div>
 	</left>
 

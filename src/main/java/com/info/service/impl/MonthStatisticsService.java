@@ -4,7 +4,6 @@ import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.info.domain.MonthStatistics;
 import com.info.domain.dto.MonthStatisticsAffairsDTO;
 import com.info.domain.dto.MonthStatisticsFbaseNewDTO;
 import com.info.domain.dto.MonthStatisticsMaintenanceDTO;
@@ -15,6 +14,7 @@ import com.info.domain.dto.MonthStatisticsPartyDTO;
 import com.info.domain.dto.MonthStatisticsPhotoDTO;
 import com.info.domain.dto.MonthStatisticsSecurityDTO;
 import com.info.domain.dto.MonthStatisticsWebsiteDTO;
+import com.info.domain.entity.MonthStatistics;
 import com.info.domain.repository.MonthStatisticsRepository;
 import com.info.utils.DateAndTimeUtil;
 

@@ -1,6 +1,6 @@
 package com.info.utils;
 
-import com.info.domain.Result;
+import com.info.domain.pojo.Result;
 
 public class ResultUtil {
 	

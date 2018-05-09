@@ -1,4 +1,4 @@
-package com.info.domain;
+package com.info.domain.pojo;
 
 public class Result<T>  {
 	private Integer code;//结果码

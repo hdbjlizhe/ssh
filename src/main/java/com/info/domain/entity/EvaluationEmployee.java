@@ -1,4 +1,4 @@
-package com.info.domain;
+package com.info.domain.entity;
 
 import java.util.Date;
 
@@ -9,8 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
-import com.info.domain.entity.Employee;
 
 @Entity
 @Table(name="eva_season")

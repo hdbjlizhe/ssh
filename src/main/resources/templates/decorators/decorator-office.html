@@ -1,5 +1,19 @@
+<!-- 
+box-sizing属性
+css的box-sizing属性用来设置或检索对象的盒模型组成模式。取值有如下两个： 
+- content-box： 
+padding和border不被包含在定义的width和height之内。
+对象的实际宽度等于设置的width值和border、padding之和，
+即 ( Element width = width + border + padding ) 
+此属性表现为标准模式下的盒模型。 
+- border-box： 
+padding和border被包含在定义的width和height之内。
+对象的实际宽度就等于设置的width值，即使定义有border和padding也不会改变对象的实际宽度，
+即 ( Element width = width ) 
+此属性表现为“怪异”模式下的盒模型。
+-->
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
 <head>
 <meta name="keywords" content="keyword1,keyword2,keyword3">
 <meta name="description" content="this is my page">
@@ -10,14 +24,7 @@
 <!-- SiteMesh:Title -->
 <title><sitemesh:write property='title' /></title>
 <!-- Bootstrap:CSS -->
-<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css">
-<!-- 顶部有菜单栏，内容下移60px避开 -->
-<style type="text/css">
-body {padding-top: 50px;}
-	a:link{color:grey;}
-	a:visited {color: grey;}
-	a:hover {color: black;}
-</style>
+<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
 <!-- 放在最后会使页面加载速度更快 -->
 <script type="text/javascript" th:src="@{/js/jquery-3.3.1.min.js}"></script>
 <script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
@@ -26,36 +33,82 @@ body {padding-top: 50px;}
  -->
 <!-- Sitemeah:head -->
 <sitemesh:write property="head" />
+<style type="text/css">
+* {
+	padding: 0;
+	margin: 0;
+	border: none;
+}
+
+html {
+	height: 100%;
+	width: 100%;
+}
+
+body {
+	height: 100%;
+	width: 100%;
+	font-size: 14px;
+	font-family: "微软雅黑";
+}
+
+header {
+	width: 100%;
+	height: 50px;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+}
+
+aside {
+	padding-top:20px;
+	width: 17%;
+	position: fixed;
+	top: 51px;
+	left: 0;
+	bottom: 0;
+	color:#fff;
+}
+#main{
+    width:100%;
+    height:100%;
+    padding:50px 0 0 17%;
+    box-sizing:border-box;
+}
+#con{
+    height:100%;
+    overflow:auto;
+    background-color:#fff;
+    color:#333;
+}
+a:link{color:grey;}
+a:visited {color: grey;}
+a:hover {color: black;}
+</style>
 </head>
-
 <body>
-	<!-- 引入header -->
-	<div th:include="header::body"></div>
-
-	<!-- Body -->
-	<div class="container-fluid">
-
-		<div class="row">
-			<!-- Right SideBar -->
-			<div class="col-md-10 col-md-push-2" >
-				<!-- Sitemesh:right -->
-				<div class="row">
-					<sitemesh:write property="right" />
-				</div>
-			</div>
-			<!-- Left SideBar -->
-			<div class="col-md-2 col-md-pull-10" style="background-color:#08c596;">
-				<!-- Sitemesh:left -->
-				<sitemesh:write property="left" />
-			</div>
-		</div>
-	</div>
+	<!-- 顶层栏 -->
+	<header>
+		<!-- 引入header -->
+		<div th:include="header::body"></div>
+	</header>
 
 
+	<!-- 左侧固定的导航边栏 -->
+	<aside>
+		<sitemesh:write property="left" />
+	</aside>
 
-	<!-- 引入footer -->
-	<div th:include="footer::body"></div>
 
+	<!-- 右侧可滑动的边栏 -->
+	<section id="main">
+		<div id="con">
+			<sitemesh:write property="right" />
+			<!-- 引入footer -->
+			<div th:include="footer::body"></div>
+		</div>	
+	</section>
+	
 </body>
-
 </html>
