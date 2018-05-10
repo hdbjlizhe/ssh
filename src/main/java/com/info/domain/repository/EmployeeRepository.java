@@ -24,4 +24,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 
 	@Query("FROM Employee e where e.department=:department AND e.duty=:duty AND e.isFormal=:formal")
 	List<Employee> findByDepartmentAndDutyAndFormal(@Param("department") Department department,@Param("duty") Duty duty,@Param("formal") boolean formal);
+	
+	@Query(value="select * from e_employee where department_id=?1",nativeQuery = true)
+	List<Employee> findByDepartment(Long deptId);
 }

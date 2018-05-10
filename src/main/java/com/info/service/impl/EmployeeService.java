@@ -68,7 +68,9 @@ public class EmployeeService implements IEmployeeService {
 	public List<Employee> getEmployeesByDepartment(Department department) {
 		return employeeRepository.findByDepartment(department);
 	}
-
+	public List<Employee> getEmployeesByDepartment(Long deptId) {
+		return employeeRepository.findByDepartment(deptId);
+	}
 	/**
 	 * 获取指定的
 	 * 

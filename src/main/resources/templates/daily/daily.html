@@ -11,7 +11,7 @@
 		<li class="list-group-item"><a
 			th:href="@{/daily/monthReport/fill}">信息中心工作月报</a></li>
 		<li class="list-group-item"><a
-			th:href="@{/daily/monthReport/departments}">信息发布统计月报</a></li>
+			th:href="@{/daily/monthReport/departments}">新闻发布统计月报</a></li>
 		<li class="list-group-item"><a th:href="@{/daily/assets}">固定资产管理</a></li>
 	</ul>
 
@@ -19,25 +19,58 @@
 	<div class="sidebar-nav list-group">
 		<a href="#dashboard-menu" class="nav-header list-group-item" data-toggle="collapse"><i class="glyphicon glyphicon-user"></i><b> 信息中心工作月报</b></a>
 		<ul id="dashboard-menu" class="nav nav-list collapse">
-			<li><a th:href="@{/daily/monthReport/fill}"> 月报填报</a></li>
-			<li><a th:href="@{/daily/monthReport/overview}"> 月报查阅</a></li>
+			<li><a th:href="@{/daily/monthReport/overview}"><i class="glyphicon glyphicon-search"> 月报查阅（所有人）</i></a></li>
+			<li><a th:href="@{/daily/monthReport/fill}"> <i class="glyphicon glyphicon-pencil"> 月报填报（信息中心）</i></a></li>
 		</ul>
 
-		<a href="#table-menu" class="nav-header list-group-item" data-toggle="collapse"><i class="glyphicon glyphicon-th-list"></i><b> 信息发布统计月报</b></a>
+		<a href="#table-menu" class="nav-header list-group-item" data-toggle="collapse"><i class="glyphicon glyphicon-th-list"></i><b> 新闻发布统计月报</b></a>
 		<ul id="table-menu" class="nav nav-list collapse">
-			<li><a href=""> 月报填报</a></li>
-			<li><a href=""> 月报查阅</a></li>
+			<li><a href=""> <i class="glyphicon glyphicon-search"> 月报查阅（所有人）</i></a></li>
+			<li><a href=""> <i class="glyphicon glyphicon-pencil"> 月报填报（信息中心）</i></a></li>
 		</ul>
 
-		<a href="#menu-menu" class="nav-header list-group-item" data-toggle="collapse"><i class="glyphicon glyphicon-asterisk"></i><b> 菜谱</b> </a>
+		<a href="#menu-menu" class="nav-header list-group-item" data-toggle="collapse"><i class="glyphicon glyphicon-asterisk"></i><b> 信息化固定资产管理</b> </a>
 		<ul id="menu-menu" class="nav nav-list collapse">
-			<li><a href=""> 菜谱管理</a></li>
-			<li><a href=""> 菜谱管理</a></li>
+			<li><a href=""><i class="glyphicon glyphicon-search"> 固定资产查询</i></a></li>
+			<li><a href=""><i class="glyphicon glyphicon-pencil"> 固定资产调整</i></a></li>
 		</ul>
 		
 		<a href="" class="nav-header list-group-item" data-toggle="collapse"><i class="glyphicon glyphicon-edit"></i><b> 菜谱</b> </a>	
 	</div>
 
 	</left>
+	
+	<right>
+		<div class="row">
+			<div class="col-xs-6 col-md-6">
+				<div class="jumbotron">
+				  <h1>Hello, world!</h1>
+				  <p>...</p>
+				  <p><a class="btn btn-default btn-lg" href="#" role="button">Learn more</a></p>
+				</div>
+			</div>
+			<div class="col-xs-6 col-md-6">
+				<div class="jumbotron">
+				  <h1>Hello, world!</h1>
+				  <p>...</p>
+				  <p><a class="btn btn-default btn-lg" href="#" role="button">Learn more</a></p>
+				</div>
+			</div>
+			<div class="col-xs-6 col-md-6">
+				<div class="jumbotron">
+				  <h1>Hello, world!</h1>
+				  <p>...</p>
+				  <p><a class="btn btn-default btn-lg" href="#" role="button">Learn more</a></p>
+				</div>
+			</div>
+			<div class="col-xs-6 col-md-6">
+				<div class="jumbotron">
+				  <h1>Hello, world!</h1>
+				  <p>...</p>
+				  <p><a class="btn btn-default btn-lg" href="#" role="button">Learn more</a></p>
+				</div>
+			</div>
+		</div>
+	</right>
 </body>
 </html>

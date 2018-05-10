@@ -12,7 +12,7 @@
 			class="list-group-item active">部门</button>
 		<button th:each="department,iter:${departments}"
 			th:id="${department.id}" th:if="${department.id}!=1"
-			th:utext="|<span class='glyphicon glyphicon-user'></span> ${department.departmentName}"
+			th:utext="|<span class='glyphicon glyphicon-user'></span><span class='badge'>3</span> ${department.departmentName}"
 			class="list-group-item">	
 		</button>
 	</div>

@@ -92,7 +92,7 @@ public class PersonelController {
 	
 	//此专门为局级开设
 	@GetMapping("/evaluationDept")
-	public String evaluationDept(Model model,HttpServletRequest request) {
+	public String evaluationDept(Model model) {
 		List<Department> departments=departmentService.findAll();
 		model.addAttribute("departments", departments);
 		List<EvaluationResult> evaluationResults=evaluationService.getAllEvaluationResult();
@@ -107,5 +107,17 @@ public class PersonelController {
 		List<EvaluationEmployee> evaluationEmployees=evaluationService.getEvaluationEmployeesByObjectDepartment(Long.parseLong(deptId));
 		model.addAttribute("evaluationEmployees",evaluationEmployees);
 		return "personel/evaluation-dept";
+	}
+	
+	/*****************************************************************************************************************************
+	 * 人员信息管理业务
+	 *****************************************************************************************************************************/
+	@GetMapping("/employees/info/{deptId}")
+	public String employeesInfo(Model model,@PathVariable Long deptId) {
+		List<Department> departments=departmentService.findAll();
+		model.addAttribute("departments", departments);
+		List<Employee> employees=employeeService.getEmployeesByDepartment(deptId);
+		model.addAttribute("employees",employees);
+		return "personel/employees-info";
 	}
 }

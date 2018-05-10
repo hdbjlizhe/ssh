@@ -3,17 +3,20 @@
 <head>
 <title>人事管理</title>
 <meta charset="UTF-8">
+<style type="text/css">
 
+
+</style>
 </head>
 
 <body>
 	<left>
 		<ul  class="list-group">
 			<li class="list-group-item active"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> 人事管理</li>
-			<li class="list-group-item"><a href=""><span class="glyphicon glyphicon-user" aria-hidden="true"></span> 干部管理</a></li>
-			<li class="list-group-item"><a href=""><span class="glyphicon glyphicon-user" aria-hidden="true"></span> 请销假</a></li>
-			<li class="list-group-item"><a href=""><span class="glyphicon glyphicon-user" aria-hidden="true"></span> 离京报备</a></li>
-			<li class="list-group-item"><a href=""><span class="glyphicon glyphicon-user" aria-hidden="true"></span> 上下班打卡</a></li>
+			<li class="list-group-item"><a th:href="@{/personel/employees/info/1}"><span class="glyphicon glyphicon-star" aria-hidden="true"></span> 干部管理（限人事干部）</a></li>
+			<li class="list-group-item"><a href=""><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> 请销假</a></li>
+			<li class="list-group-item"><a href=""><span class="glyphicon glyphicon-export" aria-hidden="true"></span> 离京报备</a></li>
+			<li class="list-group-item"><a href=""><span class="glyphicon glyphicon-transfer" aria-hidden="true"></span> 上下班打卡</a></li>
 		</ul>
 		<ul class="list-group">
 			<li class="list-group-item active"><span class="glyphicon glyphicon-file" aria-hidden="true"></span> 工作总结</li>
@@ -28,11 +31,43 @@
 		</ul>
 	</left>
 	<right>
+		<!-- 导航 -->
 		<ol class="breadcrumb">
 			<li class="active"><b>当前所在位置：</b></li>
 		    <li><a th:href="@{/index}">主页</a></li>
 		    <li><a th:href="@{/personel}">人事服务</a></li>
 		</ol>
+		<div class="row">
+			<div class="col-xs-6 col-md-6">
+				<div class="jumbotron">
+				  <h1>Hello, world!</h1>
+				  <p>...</p>
+				  <p><a class="btn btn-default btn-lg" href="#" role="button">Learn more</a></p>
+				</div>
+			</div>
+			<div class="col-xs-6 col-md-6">
+				<div class="jumbotron">
+				  <h1>Hello, world!</h1>
+				  <p>...</p>
+				  <p><a class="btn btn-default btn-lg" href="#" role="button">Learn more</a></p>
+				</div>
+			</div>
+			<div class="col-xs-6 col-md-6">
+				<div class="jumbotron">
+				  <h1>Hello, world!</h1>
+				  <p>...</p>
+				  <p><a class="btn btn-default btn-lg" href="#" role="button">Learn more</a></p>
+				</div>
+			</div>
+			<div class="col-xs-6 col-md-6">
+				<div class="jumbotron">
+				  <h1>Hello, world!</h1>
+				  <p>...</p>
+				  <p><a class="btn btn-default btn-lg" href="#" role="button">Learn more</a></p>
+				</div>
+			</div>
+		</div>
+	
 	</right>
 </body>
 </html>
