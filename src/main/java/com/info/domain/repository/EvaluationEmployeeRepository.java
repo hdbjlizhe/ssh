@@ -23,4 +23,7 @@ public interface EvaluationEmployeeRepository extends JpaRepository<EvaluationEm
 	@Query("FROM EvaluationEmployee e WHERE e.toWhom.department=:department")
 	List<EvaluationEmployee> findEvaluationEmployeesByObjectDepartment(@Param("department") Department department);
 
+	@Query("FROM EvaluationEmployee e WHERE e.toWhom.department=:department AND e.toWhom!=:loginEmployee")
+	List<EvaluationEmployee> findEvaluationEmployeesByObjectDepartmentExcludeSelf(@Param("loginEmployee") Employee loginEmoployee, @Param("department") Department department);
+
 }

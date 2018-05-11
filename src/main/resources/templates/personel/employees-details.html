@@ -1,0 +1,197 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns="http://www.w3.org/1999/html">
+<head>
+<title>个人信息维护</title>
+<meta charset=UTF-8 />
+<style type="text/css">
+.form-part {
+	background: rgba(92,184,92,0.1);
+	padding-top: 20px;
+	padding-bottom: 1px;
+	padding-left: 20px;
+	padding-right: 20px;
+	border-radius: 5px;
+	border: solid 1px #5cb85c;
+}
+i{
+	color: #5cb85c
+}
+</style>
+</head>
+<body>
+<div class="container">	
+	<br>
+	<!-- 导航 -->
+		<ol class="breadcrumb">
+			<li class="active"><b>当前所在位置：</b></li>
+		    <li><a th:href="@{/index}">主页</a></li>
+		    <li><a th:href="@{/personel}">人事服务</a></li>
+		    <li><a th:href="@{/personel/employees/info/{depId}(depId=${employee.department.id})}">人事管理</a></li>
+		    <li><a th:href="@{/personel/employees/details/{id}(id=${employee.id})}">具体信息</a></li>
+		</ol>
+	<form class="form-part" th:action="@{/personnel/employee/mod}" method="post">
+		<table class="table table-condensed">
+			<caption><h3>详细信息</h3><input type="hidden" th:value="${employee.id}"></caption>			
+			<tr>		
+				<td class="text-right">部门</td>
+				<td>
+					<select class="form-control" th:value="${employee.department}">
+						<option value="提示">请选择部门</option>
+						<option th:each="department:${departments}"
+							th:value="${department}" th:text="${department.departmentName}"
+							th:selected="${employee.department == department}"></option>
+					</select>
+				</td>
+			</tr>
+			<tr>		
+				<td class="text-right">姓名</td>
+				<td><input type="text" th:value="${employee.name}" class="form-control"></td>
+			</tr>
+			<tr>
+				<td class="text-right">是否正式编制</td>
+				<td><select class="form-control"
+					th:field="${employee.isFormal}"> 
+						<option value="true" th:selected="${employee.isFormal==true}">正式人员</option>					
+						<option value="false" th:selected="${employee.isFormal==false}">工勤人员</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td class="text-right">性别</td>
+				<td><select class="form-control" th:field="${employee.isMale}">
+						<option value="true" th:selected="${employee.isMale==true}">男</option>
+						<option value="false" th:selected="${employee.isMale==false}">女</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td class="text-right">民族</td>
+				<td><select class="form-control" th:value="${employee.nation}">
+						<option value="提示">请选择民族</option>
+						<option th:each="nation:${nations}" th:value="${nation}"
+							th:text="${nation.nationName}"
+							th:selected="${employee.nation == nation}"></option>
+					</select>
+				
+				</td>
+			</tr>
+			<tr>
+				<td class="text-right">生日</td>
+				<td><input class="form-control" type="text"
+					th:value="${#dates.format(employee.birthday,'yyyy-MM-dd')}"></td>
+			</tr>
+			<tr>
+				<td class="text-right">党团</td>
+				<td>
+					<select class="form-control" th:value="${employee.party}">
+						<option value="提示">请选择党团</option>
+						<option th:each="party:${partys}" th:value="${party}"
+							th:text="${party.partyName}"
+							th:selected="${employee.party == party}"></option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td class="text-right">党团时间</td>
+				<td><input class="form-control" type="text"
+					th:value="${#dates.format(employee.partyTime,'yyyy-MM-dd')}"></td>
+			</tr>
+			<tr>
+				<td class="text-right">参加工作时间</td>
+				<td><input class="form-control" type="text"
+					th:value="${#dates.format(employee.jobStartTime,'yyyy-MM-dd')}"></td>
+			</tr>
+			<tr>
+				<td class="text-right">调入本单位时间</td>
+				<td><input class="form-control" type="text"
+					th:value="${#dates.format(employee.entryTime,'yyyy-MM-dd')}"></td>
+			</tr>
+			<tr>
+				<td class="text-right">职务</td>
+				<td>
+				<select class="form-control" th:value="${employee.duty}">
+						<option value="">请选择职务</option>
+						<option th:each="duty:${dutys}" th:value="${duty}"
+							th:text="${duty.dutyName}"
+							th:selected="${employee.duty == duty}"></option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td class="text-right">职务时间</td>
+				<td><input class="form-control" type="text"
+					th:value="${#dates.format(employee.dutyTime,'yyyy-MM-dd')}">
+				</td>
+			</tr>
+			<tr>
+				<td class="text-right">职级</td>
+				<td>
+					<select class="form-control" th:value="${employee.rank}">
+						<option value="">请选择职级</option>
+						<option th:each="rank:${ranks}" th:value="${rank}"
+							th:text="${rank.rankName}"
+							th:selected="${employee.rank == rank}"></option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td class="text-right">职级时间</td>
+				<td><input class="form-control" type="text"
+					th:value="${#dates.format(employee.rankTime,'yyyy-MM-dd')}"></td>
+			</tr>
+			<tr>
+				<td class="text-right">全日制学历</td>
+				<td>
+					<select class="form-control" th:value="${employee.fullTimeEdu}">
+						<option value="">请选择全日制学历</option>
+						<option th:each="fullTimeEdu:${eduLevels}"
+							th:value="${fullTimeEdu}" th:text="${fullTimeEdu.eduName}"
+							th:selected="${employee.fullTimeEdu == fullTimeEdu}"></option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td class="text-right">在职学历</td>
+				<td>
+					<select class="form-control" th:value="${employee.inServiceEdu}">
+						<option value="">请选择在职学历</option>
+						<option th:each="inServiceEdu:${eduLevels}"
+							th:value="${inServiceEdu}" th:text="${inServiceEdu.eduName}"
+							th:selected="${employee.inServiceEdu == inServiceEdu}"></option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td class="text-right">注册时间</td>
+				<td><input class="form-control" type="text"></td>
+			</tr>
+			<tr>
+				<td colspan="2" class="text-center"><input type="submit" value="提交" class="btn btn-success"></td>
+			</tr>
+		</table>
+	</form>
+	<br>
+	<form class="form-part" action="">
+		<table class="table  table-condensed">
+			<caption th:value="#{msg.user.experience}">工作经历</caption>
+			<tr>
+				<td>开始时间</td><td>结束时间</td><td>工作内容</td><td>备注</td>
+			</tr>
+			<tr th:each="experience,iterState:${experiences}">
+				<td><input class="form-control" type="text" th:value="${#dates.format(experience.startTime,'yyyy-MM-dd')}"></td>
+				<td><input class="form-control" type="text" th:value="${#dates.format(experience.endTime,'yyyy-MM-dd')}"></td>
+				<td><input class="form-control" type="text" th:value="${experience.jobContent}"></td>
+				<td><input class="form-control" type="text" th:value="${experience.others}"></td>
+			</tr>
+			<tr>
+				<td colspan="4" class="text-center">
+					<input class="btn btn-success" type="button" th:value="#{msg.user.experience.add}">
+					<input class="btn btn-success" type="submit" th:value="#{msg.user.experience.submit}">
+				</td>
+			</tr>
+		</table>
+	</form>	
+</div>
+</body>
+</html>

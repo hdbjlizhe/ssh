@@ -120,4 +120,9 @@ public class EmployeeService implements IEmployeeService {
 		return employeeRepository.findById(toWhom);
 	}
 
+	public Optional<Employee> getEmployeesById(Long empId) {
+		// TODO Auto-generated method stub
+		return employeeRepository.findById(empId);
+	}
+
 }

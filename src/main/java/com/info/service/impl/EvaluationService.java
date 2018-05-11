@@ -128,9 +128,49 @@ public class EvaluationService implements IEvaluationEmployeeService {
 		return evaluationEmployeeRepository.findAll();
 	}
 	
+	/**
+	 * 通过对象和部门查询评价记录
+	 * @param deptId
+	 * @return
+	 */
 	public List<EvaluationEmployee> getEvaluationEmployeesByObjectDepartment(Long deptId){
 		Department department=departmentRepository.getOne(deptId);
 		return evaluationEmployeeRepository.findEvaluationEmployeesByObjectDepartment(department);
+	}
+	
+	/**
+	 * 按照登录用户的部门去查找，且要去掉对登录用户的评分
+	 * @param loginEmoployee
+	 * @param deptId
+	 * @return
+	 */
+	public List<EvaluationEmployee> getEvaluationEmployeesByObjectDepartmentExcludeSelf(Employee loginEmoployee, Long deptId) {
+		Department department=departmentRepository.getOne(deptId);
+		return evaluationEmployeeRepository.findEvaluationEmployeesByObjectDepartmentExcludeSelf(loginEmoployee, department);
+	}
+	
+	
+	/**
+	 * 排序函数
+	 * @param eEmployees
+	 * @return
+	 */
+	public List<List<EvaluationEmployee>> sortByObject(List<EvaluationEmployee> eEmployees){
+		Set<Employee> employees=new HashSet<Employee>();
+		for(EvaluationEmployee e:eEmployees) {
+			employees.add(e.getToWhom());
+		}
+		List<List<EvaluationEmployee>> tables=new ArrayList<>();
+		for(Employee e:employees) {
+			List<EvaluationEmployee> tmp=new ArrayList<>();
+			for(EvaluationEmployee ee:eEmployees) {
+				if(ee.getToWhom().equals(e)) {
+					tmp.add(ee);
+				}
+			}
+			tables.add(tmp);
+		}
+		return tables;		
 	}
 	/**
 	 * 获取所有人员的考核结果
@@ -193,4 +233,6 @@ public class EvaluationService implements IEvaluationEmployeeService {
 		}		
 		return evaluationResults;
 	}
+
+
 }

@@ -15,12 +15,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.info.domain.dto.EvaluationEmployeeDTOList;
 import com.info.domain.entity.Department;
+import com.info.domain.entity.Duty;
+import com.info.domain.entity.EduLevel;
 import com.info.domain.entity.Employee;
 import com.info.domain.entity.EvaluationEmployee;
+import com.info.domain.entity.Experience;
+import com.info.domain.entity.Nation;
+import com.info.domain.entity.Party;
+import com.info.domain.entity.Rank;
 import com.info.domain.pojo.EvaluationResult;
 import com.info.service.impl.DepartmentService;
+import com.info.service.impl.DutyService;
+import com.info.service.impl.EduLevelService;
 import com.info.service.impl.EmployeeService;
 import com.info.service.impl.EvaluationService;
+import com.info.service.impl.ExperienceService;
+import com.info.service.impl.NationService;
+import com.info.service.impl.PartyService;
+import com.info.service.impl.RankService;
 import com.info.utils.DateAndTimeUtil;
 
 import org.slf4j.Logger;
@@ -47,6 +59,19 @@ public class PersonelController {
 	
 	@Autowired
 	private DepartmentService departmentService;
+	
+	@Autowired
+	private ExperienceService experienceService;
+	@Autowired
+	private RankService rankService;
+	@Autowired
+	private DutyService dutyService;
+	@Autowired
+	private EduLevelService eduLevelService;
+	@Autowired
+	private NationService nationService;
+	@Autowired
+	private PartyService partyService;
 	
 	/***********************************************************************************************
 	 * 
@@ -84,9 +109,9 @@ public class PersonelController {
 	@GetMapping("/evaluationQuery")
 	public String evaluationQuery(Model model,HttpServletRequest request) {
 		Employee loginEmoployee=employeeService.getLoginEmployee(request);
-		//Department department=loginEmoployee.getDepartment();
-		List<EvaluationEmployee> evaluationEmployees=evaluationService.getEvaluationEmployeesByObjectDepartment(loginEmoployee.getDepartment().getId());
-		model.addAttribute("evaluationEmployees", evaluationEmployees);
+		List<EvaluationEmployee> evaluationEmployees=evaluationService.getEvaluationEmployeesByObjectDepartmentExcludeSelf(loginEmoployee,loginEmoployee.getDepartment().getId());
+		List<List<EvaluationEmployee>> evaEmployeess=evaluationService.sortByObject(evaluationEmployees);
+		model.addAttribute("evaluationEmployeess", evaEmployeess);
 		return "personel/evaluation-query";
 	}
 	
@@ -119,5 +144,25 @@ public class PersonelController {
 		List<Employee> employees=employeeService.getEmployeesByDepartment(deptId);
 		model.addAttribute("employees",employees);
 		return "personel/employees-info";
+	}	
+	@GetMapping("/employees/details/{empId}")
+	public String employeesDetails(Model model,@PathVariable Long empId) {
+		Employee employee=employeeService.getEmployeesById(empId).get();
+		model.addAttribute("employee",employee);
+		List<Experience> experiences=experienceService.getAllByEmployee(employee);
+    	List<Department> departments=departmentService.getAll();
+    	List<Rank> ranks=rankService.getAll();
+    	List<Duty> dutys=dutyService.getAll();
+    	List<EduLevel> eduLevels=eduLevelService.getAll();
+    	List<Nation> nations=nationService.getAll();
+    	List<Party> partys=partyService.getAll();
+    	model.addAttribute("experiences", experiences);
+    	model.addAttribute("departments", departments);
+    	model.addAttribute("ranks", ranks);
+    	model.addAttribute("dutys", dutys);
+    	model.addAttribute("eduLevels", eduLevels);
+    	model.addAttribute("nations", nations);
+    	model.addAttribute("partys", partys);
+		return "personel/employees-details";
 	}
 }

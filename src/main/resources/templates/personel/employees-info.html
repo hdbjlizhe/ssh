@@ -65,7 +65,7 @@
 				<td th:text="${#dates.format(employee.rankTime,'yyyy-MM-dd')}"></td>
 				<td th:text="${employee.fullTimeEdu}!=null?${employee.fullTimeEdu.eduName}:''"></td>
 				<td th:text="${employee.inServiceEdu}!=null?${employee.inServiceEdu.eduName}:''"></td>
-				<td><a class="btn btn-success btn-sm" style="color:white;" th:href="@{/personel/mod}">修改</a></td>				
+				<td><a class="btn btn-success btn-sm" style="color:white;" th:href="@{/personel/employees/details/{empId}(empId=${employee.id})}">修改</a></td>				
 			</tr>
 		</table>
 	</right>
