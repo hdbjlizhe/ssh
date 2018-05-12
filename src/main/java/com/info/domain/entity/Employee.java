@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 @Table(name="e_employee")
 public class Employee implements Serializable{
@@ -28,23 +30,29 @@ public class Employee implements Serializable{
 	private boolean isMale; // 是否男性
 	@ManyToOne
 	private Nation nation; // 民族
+	@DateTimeFormat(pattern="yyyy-MM-dd")  
 	private Date birthday; // 生日
 	@ManyToOne
 	private Party party; // 政治面貌
+	@DateTimeFormat(pattern="yyyy-MM-dd") 
 	private Date partyTime; // 党团时间
-
+	@DateTimeFormat(pattern="yyyy-MM-dd")  
 	private Date jobStartTime; // 参加工作时间
+	@DateTimeFormat(pattern="yyyy-MM-dd")  
 	private Date entryTime; // 工作调入时间
 	@ManyToOne
 	private Duty duty; // 当前职务
+	@DateTimeFormat(pattern="yyyy-MM-dd")  
 	private Date dutyTime; // 职务时间
 	@ManyToOne
 	private Rank rank; // 当前职级
+	@DateTimeFormat(pattern="yyyy-MM-dd")  
 	private Date rankTime; // 职级时间
 	@ManyToOne
 	private EduLevel fullTimeEdu; // 全日制学历
 	@ManyToOne
 	private EduLevel inServiceEdu; // 在职学历
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")  
 	private Date createTime; // 创建时间
 	
 	public Employee() {

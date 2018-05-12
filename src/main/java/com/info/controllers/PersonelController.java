@@ -11,8 +11,11 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.info.domain.dto.EmployeeDTO;
 import com.info.domain.dto.EvaluationEmployeeDTOList;
 import com.info.domain.entity.Department;
 import com.info.domain.entity.Duty;
@@ -62,14 +65,19 @@ public class PersonelController {
 	
 	@Autowired
 	private ExperienceService experienceService;
+	
 	@Autowired
 	private RankService rankService;
+	
 	@Autowired
 	private DutyService dutyService;
+	
 	@Autowired
 	private EduLevelService eduLevelService;
+	
 	@Autowired
 	private NationService nationService;
+	
 	@Autowired
 	private PartyService partyService;
 	
@@ -164,5 +172,19 @@ public class PersonelController {
     	model.addAttribute("nations", nations);
     	model.addAttribute("partys", partys);
 		return "personel/employees-details";
+	}
+	
+	/**
+	 * Employee信息修改
+	 * @param eDto:Employee的数据传输对象
+	 * @return
+	 */
+	@PostMapping("/employees/mod")
+	public String employeesMod(Employee eDto,BindingResult bResult) {
+		if(bResult.hasErrors()) {
+			return "redirect:/personel";
+		}
+		employeeService.update(eDto);
+		return "redirect:/personel/employees/info/"+eDto.getDepartment().getId();
 	}
 }

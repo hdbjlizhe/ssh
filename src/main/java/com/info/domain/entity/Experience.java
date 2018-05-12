@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.springframework.format.annotation.DateTimeFormat;
 @Entity
 @Table(name="e_experience")
 public class Experience implements Serializable{
@@ -19,8 +21,10 @@ public class Experience implements Serializable{
 	private static final long serialVersionUID = 5826825377367927112L;
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long id;					//������id
+	private Long id;					//id
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date startTime;
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date endTime;
 	private String jobContent;
 	private String others;

@@ -125,4 +125,8 @@ public class EmployeeService implements IEmployeeService {
 		return employeeRepository.findById(empId);
 	}
 
+	public Employee update(Employee employee) {
+		return employeeRepository.save(employee);		
+	}
+
 }
