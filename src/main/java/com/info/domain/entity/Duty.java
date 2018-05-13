@@ -49,6 +49,12 @@ public class Duty implements Serializable,Comparable<Duty>{
 	public void setDescription(String description) {
 		this.description = description;
 	}
+		
+	@Override
+	public String toString() {
+		return "Duty [id=" + id + ", weight=" + weight + ", dutyName=" + dutyName + ", description=" + description
+				+ "]";
+	}
 	
 	@Override
 	public int compareTo(Duty o) {

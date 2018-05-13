@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.info.domain.dto.EmployeeDTO;
 import com.info.domain.dto.EvaluationEmployeeDTOList;
+import com.info.domain.dto.ExperienceList;
 import com.info.domain.entity.Department;
 import com.info.domain.entity.Duty;
 import com.info.domain.entity.EduLevel;
@@ -43,6 +44,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
+import java.text.ParseException;
 
 @Controller
 @RequestMapping("/personel")
@@ -153,6 +155,7 @@ public class PersonelController {
 		model.addAttribute("employees",employees);
 		return "personel/employees-info";
 	}	
+	
 	@GetMapping("/employees/details/{empId}")
 	public String employeesDetails(Model model,@PathVariable Long empId) {
 		Employee employee=employeeService.getEmployeesById(empId).get();
@@ -186,5 +189,26 @@ public class PersonelController {
 		}
 		employeeService.update(eDto);
 		return "redirect:/personel/employees/info/"+eDto.getDepartment().getId();
+	}
+	
+	@PostMapping("/employees/experience/mod")
+	public String employeesExperienceMod(@Valid ExperienceList eList,BindingResult bResult,HttpServletRequest request) throws ParseException{
+		log.info(request.getParameter("id[0]"));
+		log.info(request.getParameter("startTime[0]"));
+		log.info(request.getParameter("endTime[0]"));
+		log.info(request.getParameter("jobContent[0]"));
+		log.info(request.getParameter("others[0]"));
+		log.info(request.getParameter("employee[0]"));
+		log.info(request.getParameter("id[1]"));
+		log.info(request.getParameter("startTime[1]"));
+		log.info(request.getParameter("endTime[1]"));
+		log.info(request.getParameter("jobContent[1]"));
+		log.info(request.getParameter("others[1]"));
+		log.info(request.getParameter("employee[1]"));
+		if(bResult.hasErrors()) {
+			return "redirect:/personel";
+		}
+		experienceService.saveOrUpdate(eList);
+		return "redirect:/personel";
 	}
 }

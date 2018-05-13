@@ -128,9 +128,8 @@ i{color: #5cb85c}
 				<td>
 					<select name="rank" class="form-control" th:value="${employee.rank}">
 						<option value="">请选择职级</option>
-						<option th:each="rank:${ranks}" th:value="${rank.id}"
-							th:text="${rank.rankName}"
-							th:selected="${employee.rank == rank}"></option>
+						<option th:each="rank:${ranks}" th:value="${rank.id}"	th:text="${rank.rankName}"
+							th:selected="${employee.rank.id == rank.id}"></option>
 					</select>
 				</td>
 			</tr>
@@ -171,17 +170,17 @@ i{color: #5cb85c}
 		</table>
 	</form>
 	<br>
-	<form class="form-part" th:action="@{/personel/employees/experience/mod}">
+	<form class="form-part" th:action="@{/personel/employees/experience/mod}" method="post">
 		<table class="table  table-condensed">
-			<caption th:value="#{msg.user.experience}">工作经历</caption>
+			<caption th:value="#{msg.user.experience}">工作经历(不超过10条)</caption>
 			<tr id="title">
 				<td>开始时间</td><td>结束时间</td><td>工作内容</td><td>备注</td>
 			</tr>
 			<tr th:each="experience,iterState:${experiences}" th:id="|experience_${iterState.index}|">
 				<input th:name="|employee[${iterState.index}]|" type="hidden" th:value="${employee.id}">
 				<input th:name="|id[${iterState.index}]|" type="hidden" th:value="${experience.id}">
-				<td><input th:name="|startTime[${iterState.index}]|" class="form-control" type="text" th:value="${#dates.format(experience.startTime,'yyyy-MM-dd')}"></td>
-				<td><input th:name="|endTime[${iterState.index}]|" class="form-control" type="text" th:value="${#dates.format(experience.endTime,'yyyy-MM-dd')}"></td>
+				<td><input th:id="|startTime[${iterState.index}]|" th:name="|startTime[${iterState.index}]|" class="form-control" type="text" th:value="${#dates.format(experience.startTime,'yyyy-MM-dd')}"></td>
+				<td><input th:id="|endTime[${iterState.index}]|" th:name="|endTime[${iterState.index}]|" class="form-control" type="text" th:value="${#dates.format(experience.endTime,'yyyy-MM-dd')}"></td>
 				<td><input th:name="|jobContent[${iterState.index}]|" class="form-control" type="text" th:value="${experience.jobContent}"></td>
 				<td><input th:name="|others[${iterState.index}]|" class="form-control" type="text" th:value="${experience.others}"></td>
 			</tr>
@@ -207,11 +206,15 @@ function appendElement()
 		index=0;
 	}else{
 		index=Number(eleId.substr(eleId.indexOf("_")+1))+1;
+		if(index>10){
+			index=10;
+		}
 	}
 	var empId=$("input[name='id']").val();
 	var appendText=
-		"<tr id='experience"+index+"'>"+
-		"<input name='id["+index+"]' type='hidden' value='"+empId+"'>"+
+		"<tr id='experience_"+index+"'>"+
+		"<input name='id["+index+"]' type='hidden' value=''>"+
+		"<input name='employee["+index+"]' type='hidden' value='"+empId+"'>"+
 		"<td><input name='startTime["+index+"]' class='form-control' type='text' value=''></td>"+
 		"<td><input name='endTime["+index+"]' class='form-control' type='text' value=''></td>"+
 		"<td><input name='jobContent["+index+"]' class='form-control' type='text' value=''></td>"+

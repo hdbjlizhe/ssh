@@ -62,7 +62,6 @@ public class Rank implements Serializable,Comparable<Rank>{
 
 	@Override
 	public int compareTo(Rank o) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
