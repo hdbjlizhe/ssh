@@ -13,9 +13,8 @@
 		<div class="text-center"><img alt="" src="/imgs/lock.png"></div>
 		<h3 class="text-center">当前您访问的资源受到保护,您没有访问权限！</h3>
 		<br>
-		<div class="text-center" style="color: red;font-size: 12pt;">您<a th:href="@{/login}"><b>未登录</b></a>或权限不足，请与管理员联系 </div>
-		<br> 
-		<div class="text-center" style="font-size: 12pt;"><a href="javascript:history.go(-1)"><b>返回</b></a></div>
+		<div class="text-center" style="color: red;font-size: 12pt;">您<a th:href="@{/login}">未登录</a>或权限不足，请与管理员联系，点击<a href="javascript:history.go(-1)">返回</a></div>
+		
 		<br>
 		<div class="text-center" hidden="true">
 			<th:block th:text="${#httpServletRequest.getAttribute('SPRING_SECURITY_403_EXCEPTION')}"></th:block>
