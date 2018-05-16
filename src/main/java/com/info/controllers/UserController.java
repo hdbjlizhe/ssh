@@ -164,7 +164,7 @@ public class UserController {
     	model.addAttribute("eduLevels", eduLevels);
     	model.addAttribute("nations", nations);
     	model.addAttribute("partys", partys);
-    	return "/user/details";
+    	return "user/details";
     }
     
     @GetMapping("/user/pwd/mod")

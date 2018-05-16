@@ -1,15 +1,13 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:include="fregment/top::head">
 <title>403</title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
-<style type="text/css">
-body{margin-top: 60px;}
-</style>
+<meta charset="utf-8">
 </head>
 <body>
-	<div th:include="/header::body"></div>
+	<!-- 顶部目录 -->
+	<div th:include="fregment/header::body"></div>
+	
 	<!--属性名是通过查看源码AccessDeniedHandlerImpl的handle（）方法找到的-->
 	<div class="container" style="margin-top: 100px; margin-bottom: 100px">
 		<div class="text-center"><img alt="" src="/imgs/lock.png"></div>
@@ -21,5 +19,7 @@ body{margin-top: 60px;}
 			<th:block th:text="${#httpServletRequest.getAttribute('SPRING_SECURITY_403_EXCEPTION')}"></th:block>
 		</div>	
 	</div>
+	
+	<div th:include="fregment/footer::body"></div>
 </body>
 </html>

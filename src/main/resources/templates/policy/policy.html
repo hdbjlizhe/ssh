@@ -1,22 +1,23 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
   <head>
+  	<meta charset="UTF-8">
+  	<meta th:include="fregment/top::head">	
     <title>政策收集管理</title>
-	<meta charset="UTF-8">	
   </head>
   
   <body>
    	<!-- 引入header -->
-	<div th:include="header::html"></div>
+	<div th:include="fregment/header::body"></div>
 	
 	<!-- body -->
-	<div class="container">
+	<div class="container-fluid">
 	
 		<a href="">政策收集管理页面</a>
 	
 	</div>
 
 	<!-- 引入footer -->
-	<div th:include="footer::html"></div>
+	<div th:include="fregment/footer::body"></div>
   </body>
 </html>

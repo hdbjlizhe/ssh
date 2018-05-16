@@ -1,69 +1,64 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="utf-8" />
-<title>首页</title>
+<meta charset="utf-8"/>
+<meta th:include="fregment/top::head">
+<title>后台管理</title>
 </head>
 
 <body>
-	<!--  左侧数据 -->
-	<left>
+	<div th:include="fregment/header::body"></div>
+
 	<div class="container-fluid">
 		<div class="row">
-			<ul class="list-group text-center">
-				<li th:text="#{msg.management.backstage}">后台管理</li>
-				<li><a th:href="@{/resource}" th:text="#{msg.management.resource}">资源管理</a></li>
-				<li><a th:href="@{/privilege}"
-					th:text="#{msg.management.privilege}">权限管理</a></li>
-				<li><a th:href="@{/role}" th:text="#{msg.management.role}">角色管理</a></li>
-				<li><a th:href="@{/user}" th:text="#{msg.management.user}">用户管理</a></li>
-				<br>
-				<li th:text="#{msg.management.ftpbase}">资料库管理</li>
-				<li><a th:href="@{/syncftp}"
-					th:text="#{msg.management.syncftpbase}">手动同步fBase</a></li>
-				<li><a th:href="@{/syncftp}"
-					th:text="#{msg.management.timertask}">定时任务管理</a></li>
-				<li><a th:href="@{/syncftp}" th:text="#{msg.management.pwd}">密码管理</a></li>
-				<li><a th:href="@{/syncftp}" th:text="#{msg.management.pwd}">公务员季度考核规则设置</a></li>
-			</ul>
-		</div>
-	</div>
-	</left>
+			<!--  左侧数据 -->
+			<div class="col-md-2">
+				<ul class="list-group">
+					<li class="list-group-item active" th:text="#{msg.management.backstage}">后台管理</li>
+					<li class="list-group-item"><a th:href="@{/resource}" th:text="#{msg.management.resource}">资源管理</a></li>
+					<li class="list-group-item"><a th:href="@{/privilege}" th:text="#{msg.management.privilege}">权限管理</a></li>
+					<li class="list-group-item"><a th:href="@{/role}" th:text="#{msg.management.role}">角色管理</a></li>
+					<li class="list-group-item"><a th:href="@{/user}" th:text="#{msg.management.user}">用户管理</a></li>
+				</ul>
+				<ul class="list-group">
+					<li class="list-group-item active" th:text="#{msg.management.ftpbase}">资料库管理</li>
+					<li class="list-group-item"><a th:href="@{/syncftp}" th:text="#{msg.management.syncftpbase}">手动同步fBase</a></li>
+					<li class="list-group-item"><a th:href="@{/syncftp}" th:text="#{msg.management.timertask}">定时任务管理</a></li>
+					<li class="list-group-item"><a th:href="@{/syncftp}" th:text="#{msg.management.pwd}">密码管理</a></li>
+					<li class="list-group-item"><a th:href="@{/syncftp}" th:text="#{msg.management.pwd}">公务员季度考核规则设置</a></li>
+				</ul>
+			</div>
 
-	<!-- 右侧数据 -->
-	<right> <!-- 资源管理 -->
-	<div class="container-fluid text-middle">
-		<br>
-		<table class="table table-striped">
-			<thead>
-				<tr>
-					<td th:text="#{msg.resource.id}">ID</td>
-					<td th:text="#{msg.resource.uri}">URI</td>
-					<td th:text="#{msg.resource.description}">描述</td>
-					<td th:text="#{msg.resource.method}">处理方法</td>
-					<td th:text="#{msg.resource.save}">修改</td>
-				</tr>
-			</thead>
-			<tr th:each="resource : ${resources}">
-				<td th:text="${resource.id}">id</td>
-				<td><input name="uri" type="text" th:value="${resource.uri}"
-					readonly="readonly" class="form-control"></td>
-				<td><input name="description" type="text"
-					th:value="${resource.description}" class="form-control"></td>
-				<td><input name="methdPath" th:value="${resource.methodPath}"
-					class="form-control" readonly="readonly"></td>
-				<td><button th:text="#{msg.resource.save}"
-						class="btn btn-primary"></button></td>
-			</tr>
-
-		</table>
-	</div>
-	</right>
-	
-	<!-- Script -->
-	<script type="text/javascript">
+			<!-- 右侧数据 -->
+			<div class="col-md-10 text-middle">
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<td th:text="#{msg.resource.id}">ID</td>
+							<td th:text="#{msg.resource.uri}">URI</td>
+							<td th:text="#{msg.resource.description}">描述</td>
+							<td th:text="#{msg.resource.method}">处理方法</td>
+							<td th:text="#{msg.resource.save}">修改</td>
+						</tr>
+					</thead>
+					<tr th:each="resource : ${resources}">
+						<td th:text="${resource.id}">id</td>
+						<td><input name="uri" type="text" th:value="${resource.uri}"
+							readonly="readonly" class="form-control"></td>
+						<td><input name="description" type="text"
+							th:value="${resource.description}" class="form-control"></td>
+						<td><input name="methdPath" th:value="${resource.methodPath}"
+							class="form-control" readonly="readonly"></td>
+						<td><button th:text="#{msg.resource.save}"
+								class="btn btn-primary"></button></td>
+					</tr>
+				</table>
+			</div>
+			
+		</div><!-- row -->
+	</div><!-- container-fluid -->
 		
-	</script>
+	<div th:include="fregment/footer::body"></div>
 </body>
 
 </html>

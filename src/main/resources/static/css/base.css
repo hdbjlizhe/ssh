@@ -1,0 +1,7 @@
+@charset "UTF-8";
+body{padding-top:60px;}
+.table tbody tr td{vertical-align: middle;}
+a:link{color:grey;}
+a:visited {color: grey;}
+a:hover {color: black;}
+}

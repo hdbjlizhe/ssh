@@ -2,169 +2,191 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
+<meta th:include="fregment/top::head">
 <title>考核填报系统</title>
 </head>
 <body>
-<br>
-<div class="container">
-	<div class="row">
-		<!-- 导航 -->
-		<ol class="breadcrumb">
-			<li class="active"><b>当前所在位置：</b></li>
-		    <li><a th:href="@{/index}">主页</a></li>
-		    <li><a th:href="@{/personel}">人事服务</a></li>
-		    <li class="active">季度考核填报</li>
-		</ol>
-		<form th:action="@{/personel/evaluationSeason}" method="post">
-		
-			<h3 class="text-center">季度考核填报</h3>
-				
-			<input type="hidden" th:name="${_csrf.parameterName}"
-				th:value="${_csrf.token}" />
-			<div class="text-center">	
-				<input class="btn btn-primary" type="button" value="上个季度">
-				<input type="text" th:value="${season}" readonly="readonly">
-				<input class="btn btn-primary" type="button" value="下个季度">	
-			</div>	
-			<br>
-			<table class="table table-bordered">
-				<thead>
-					<tr class="text-center active">
-						<td><b>序号</b></td>
-						<td><b>姓名</b></td>
-						<td><b>德（10分）</b></td>
-						<td><b>能（10分）</b></td>
-						<td><b>勤（20分）</b></td>
-						<td><b>绩（50分）</b></td>
-						<td><b>廉（10分）</b></td>
-						<td><b>总分</b></td>
-					</tr>
-				</thead>
-				<tbody>
-					<tr th:each="evaluationEmployee,iterStat:${evaluationEmployees}">
-						<td>
-							<p th:text="${iterStat.count}"></p> 
-							<input	type="hidden" 
-								th:value="${evaluationEmployee.toWhom.id}" 
+	<div th:include="fregment/header::body"></div>
+
+	<div class="container">
+		<div class="row">
+			<!-- 导航 -->
+			<ol class="breadcrumb">
+				<li class="active"><b>当前所在位置：</b></li>
+				<li><a th:href="@{/index}">主页</a></li>
+				<li><a th:href="@{/personel}">人事服务</a></li>
+				<li class="active">季度考核填报</li>
+			</ol>
+			<form th:action="@{/personel/evaluationSeason}" method="post">
+
+				<h3 class="text-center">季度考核填报</h3>
+				<input type="hidden" th:name="${_csrf.parameterName}"
+					th:value="${_csrf.token}" />
+				<div class="text-center">
+					<input class="btn btn-primary" type="button" value="上个季度">
+					<input type="text" th:value="${season}" readonly="readonly">
+					<input class="btn btn-primary" type="button" value="下个季度">
+				</div>
+				<br>
+				<table class="table table-bordered">
+					<thead>
+						<tr class="text-center active">
+							<td><b>序号</b></td>
+							<td><b>姓名</b></td>
+							<td><b>德（10分）</b></td>
+							<td><b>能（10分）</b></td>
+							<td><b>勤（20分）</b></td>
+							<td><b>绩（50分）</b></td>
+							<td><b>廉（10分）</b></td>
+							<td><b>总分</b></td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="evaluationEmployee,iterStat:${evaluationEmployees}">
+							<td>
+								<p th:text="${iterStat.count}"></p> <input type="hidden"
+								th:value="${evaluationEmployee.toWhom.id}"
 								th:name="${'evaluationEmployees['+iterStat.index+'].toWhom'}">
-							
-							<input type="hidden"
-								th:value="${evaluationEmployee.id}"
+
+								<input type="hidden" th:value="${evaluationEmployee.id}"
 								th:name="${'evaluationEmployees['+iterStat.index+'].id'}">
-								
-							<input type="hidden" th:name="${'evaluationEmployees['+iterStat.index+'].season'}"
+
+								<input type="hidden"
+								th:name="${'evaluationEmployees['+iterStat.index+'].season'}"
 								th:value="${evaluationEmployee.season}">
-						</td>
-						<td><p th:text="${evaluationEmployee.toWhom.name}"></p></td>
-						<td><input class="form-control" type="number" step="0.01"
-							th:value="${evaluationEmployee.morality}" max="10" min="0"
-							th:name="${'evaluationEmployees['+iterStat.index+'].morality'}"></td>
-						<td><input class="form-control" type="number" step="0.01"
-							th:value="${evaluationEmployee.ability}" max="10" min="0"
-							th:name="${'evaluationEmployees['+iterStat.index+'].ability'}"></td>
-						<td><input class="form-control" type="number" step="0.01"
-							th:value="${evaluationEmployee.diligence}" max="20" min="0"
-							th:name="${'evaluationEmployees['+iterStat.index+'].diligence'}"></td>
-						<td><input class="form-control" type="number" step="0.01"
-							th:value="${evaluationEmployee.achievement}" max="50" min="0"
-							th:name="${'evaluationEmployees['+iterStat.index+'].achievement'}"></td>
-						<td><input class="form-control" type="number" step="0.01"
-							th:value="${evaluationEmployee.honest}" max="10" min="0"
-							th:name="${'evaluationEmployees['+iterStat.index+'].honest'}"></td>
-						<td><input class="form-control" type="number"
-							th:value="${evaluationEmployee.sum}"
-							th:name="${'evaluationEmployees['+iterStat.index+'].sum'}"
-							readonly="readonly"></td>
-					</tr>
-					<tr>
-						<td colspan="2"><b>备注</b></td>
-						<td>政治品德3分<br>职业道德3分<br>社会公德2分<br>家庭美德2分
-						</td>
-						<td>业务执行能力3分<br>学习与研究能力2分<br>知识运用与表达能力3分<br>沟通协作能力2分
-						</td>
-						<td>工作积极性7分<br>工作责任心7分<br>出勤情况6分
-						</td>
-						<td>履职成效15分<br>目标任务完成情况20分<br>工作效率15分
-						</td>
-						<td>廉洁自律10分</td>
-						<td>说明：单项成绩之和</td>
-					</tr>
-				</tbody>
-				<tfoot>
-					<tr>
-						<td colspan="8" class="text-center"><button type="submit" class="btn btn-primary">匿名提交</button></td>
-					</tr>
-				</tfoot>
-			</table>			
-		</form>
-		<script type="text/javascript">
-		$(document)
-				.ready(
-						function() {
-							//用户名修改事件
-							$(":input")
-									.change(
-											function() {
+							</td>
+							<td><p th:text="${evaluationEmployee.toWhom.name}"></p></td>
+							<td><input class="form-control" type="number" step="0.01"
+								th:value="${evaluationEmployee.morality}" max="10" min="0"
+								th:name="${'evaluationEmployees['+iterStat.index+'].morality'}"></td>
+							<td><input class="form-control" type="number" step="0.01"
+								th:value="${evaluationEmployee.ability}" max="10" min="0"
+								th:name="${'evaluationEmployees['+iterStat.index+'].ability'}"></td>
+							<td><input class="form-control" type="number" step="0.01"
+								th:value="${evaluationEmployee.diligence}" max="20" min="0"
+								th:name="${'evaluationEmployees['+iterStat.index+'].diligence'}"></td>
+							<td><input class="form-control" type="number" step="0.01"
+								th:value="${evaluationEmployee.achievement}" max="50" min="0"
+								th:name="${'evaluationEmployees['+iterStat.index+'].achievement'}"></td>
+							<td><input class="form-control" type="number" step="0.01"
+								th:value="${evaluationEmployee.honest}" max="10" min="0"
+								th:name="${'evaluationEmployees['+iterStat.index+'].honest'}"></td>
+							<td><input class="form-control" type="number"
+								th:value="${evaluationEmployee.sum}"
+								th:name="${'evaluationEmployees['+iterStat.index+'].sum'}"
+								readonly="readonly"></td>
+						</tr>
+						<tr>
+							<td colspan="2"><b>备注</b></td>
+							<td>政治品德3分<br>职业道德3分<br>社会公德2分<br>家庭美德2分
+							</td>
+							<td>业务执行能力3分<br>学习与研究能力2分<br>知识运用与表达能力3分<br>沟通协作能力2分
+							</td>
+							<td>工作积极性7分<br>工作责任心7分<br>出勤情况6分
+							</td>
+							<td>履职成效15分<br>目标任务完成情况20分<br>工作效率15分
+							</td>
+							<td>廉洁自律10分</td>
+							<td>说明：单项成绩之和</td>
+						</tr>
+					</tbody>
+					<tfoot>
+						<tr>
+							<td colspan="8" class="text-center"><button type="submit"
+									class="btn btn-primary">匿名提交</button></td>
+						</tr>
+					</tfoot>
+				</table>
+			</form>
+			
+		</div>
+		<!-- end of "row" -->
+	</div>
+	<!-- end of "container-fluid" -->
 
-												debugger;
 
-												var name = $(this).attr("name");//获取当前变化的控件name
-												var endIndex = name
-														.indexOf("]");
-												var preName = name.substring(0,
+	<div th:include="fregment/footer::body"></div>
+</body>
+
+<!-- 自动计算 自动写入 -->
+<script type="text/javascript">
+$(document)
+		.ready(
+				function() {
+					//用户名修改事件
+					$(":input")
+							.change(
+									function() {
+
+										debugger;
+
+										var name = $(this)
+												.attr("name");//获取当前变化的控件name
+										var endIndex = name
+												.indexOf("]");
+										var preName = name
+												.substring(
+														0,
 														endIndex + 1);
 
-												var morality = preName
-														+ '.morality';
-												var ability = preName
-														+ '.ability';
-												var diligence = preName
-														+ '.diligence';
-												var achievement = preName
-														+ '.achievement';
-												var honest = preName
-														+ '.honest';
+										var morality = preName
+												+ '.morality';
+										var ability = preName
+												+ '.ability';
+										var diligence = preName
+												+ '.diligence';
+										var achievement = preName
+												+ '.achievement';
+										var honest = preName
+												+ '.honest';
 
-												var sum = preName + '.sum';
+										var sum = preName
+												+ '.sum';
 
-												var strMorality = $(
-														":input[name='"
-																+ morality
-																+ "']").val();
-												var strAbility = $(
-														":input[name='"
-																+ ability
-																+ "']").val();
-												var strDiligence = $(
-														":input[name='"
-																+ diligence
-																+ "']").val();
-												var strAchievement = $(
-														":input[name='"
-																+ achievement
-																+ "']").val();
-												var strHonest = $(
-														":input[name='"
-																+ honest + "']")
-														.val();
+										var strMorality = $(
+												":input[name='"
+														+ morality
+														+ "']")
+												.val();
+										var strAbility = $(
+												":input[name='"
+														+ ability
+														+ "']")
+												.val();
+										var strDiligence = $(
+												":input[name='"
+														+ diligence
+														+ "']")
+												.val();
+										var strAchievement = $(
+												":input[name='"
+														+ achievement
+														+ "']")
+												.val();
+										var strHonest = $(
+												":input[name='"
+														+ honest
+														+ "']")
+												.val();
 
-												var numMorality = Number(strMorality);
-												var numAbility = Number(strAbility);
-												var numDiligence = Number(strDiligence);
-												var numAchievement = Number(strAchievement);
-												var numHonest = Number(strHonest);
+										var numMorality = Number(strMorality);
+										var numAbility = Number(strAbility);
+										var numDiligence = Number(strDiligence);
+										var numAchievement = Number(strAchievement);
+										var numHonest = Number(strHonest);
 
-												$(":input[name='" + sum + "']")
-														.val(
-																numMorality
-																		+ numAbility
-																		+ numDiligence
-																		+ numAchievement
-																		+ numHonest);
-											});
-						});
-	</script>
-	</div><!-- end of "row" -->
-</div><!-- end of "container-fluid" -->
-</body>
+										$(
+												":input[name='"
+														+ sum
+														+ "']")
+												.val(
+														numMorality
+																+ numAbility
+																+ numDiligence
+																+ numAchievement
+																+ numHonest);
+									});
+				});
+</script>
+
 </html>

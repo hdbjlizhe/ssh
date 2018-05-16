@@ -9,7 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -23,7 +22,7 @@ public class Employee implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id; // 用户ID-对应User.id
-	private String name; // 真实姓名
+	private String name; // 姓名
 	@ManyToOne
 	private Department department; // 所在部门
 	private boolean isFormal; // 是否在编
@@ -60,7 +59,27 @@ public class Employee implements Serializable{
 		this.setIsFormal(true);
 		this.setIsMale(true);
 	}
-
+	//初始化函数，类似于清空
+	public void init() {
+		this.birthday=null;
+		this.createTime=null;
+		this.department=null;
+		this.duty=null;
+		this.dutyTime=null;
+		this.entryTime=null;
+		this.fullTimeEdu=null;
+		this.inServiceEdu=null;
+		this.isFormal=true;
+		this.isMale=true;
+		this.jobStartTime=null;
+		this.name=null;
+		this.nation=null;
+		this.party=null;
+		this.partyTime=null;
+		this.rank=null;
+		this.rankTime=null;
+	}
+	
 	public Long getId() {
 		return id;
 	}

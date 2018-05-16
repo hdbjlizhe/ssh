@@ -17,6 +17,8 @@ import com.info.domain.repository.EvaluationMapRepository;
 import com.info.domain.repository.UserRepository;
 import com.info.service.IEmployeeService;
 
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -54,21 +56,19 @@ public class EmployeeService implements IEmployeeService {
 	public Employee getLoginEmployee(HttpServletRequest request) {
 		SecurityContextImpl securityContextImpl = (SecurityContextImpl) request.getSession()
 				.getAttribute("SPRING_SECURITY_CONTEXT");
-		log.info("Username:" + securityContextImpl.getAuthentication().getName());
-		String username = securityContextImpl.getAuthentication().getName();
-		User loginUser = userRepository.findByUsername(username);
-		return loginUser.getEmployeee();
+		User loginUser =(User)securityContextImpl.getAuthentication().getPrincipal();
+		return loginUser.getEmployee();
 	}
 
 	/**
 	 * 通过部门获取所有的employee
-	 * 
 	 * @param department
 	 * @return
 	 */
 	public List<Employee> getEmployeesByDepartment(Department department) {
 		return employeeRepository.findByDepartment(department);
 	}
+	
 	public List<Employee> getEmployeesByDepartment(Long deptId) {
 		return employeeRepository.findByDepartment(deptId);
 	}

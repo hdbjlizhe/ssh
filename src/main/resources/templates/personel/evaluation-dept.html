@@ -2,64 +2,79 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
+<meta th:include="fregment/top::head">
 <title>评分查询</title>
 </head>
 <body>
-	<left>
-	<div class="list-group">
-		<button th:each="department,iter:${departments}"
-			th:id="${department.id}" th:if="${department.id}==1"
-			class="list-group-item active">部门</button>
-		<button th:each="department,iter:${departments}"
-			th:id="${department.id}" th:if="${department.id}!=1"
-			th:utext="|<span class='glyphicon glyphicon-user'></span><span class='badge'>3</span> ${department.departmentName}"
-			class="list-group-item">	
-		</button>
-	</div>
-	</left>
+	<div th:include="fregment/header::body"></div>
 
-	<right>
-	
-	<!-- 导航 -->
-	<ol class="breadcrumb">
-		<li class="active"><b>当前所在位置：</b></li>
-	    <li><a th:href="@{/index}">主页</a></li>
-	    <li><a th:href="@{/personel}">人事服务</a></li>
-	    <li class="active">按部门查询</li>
-	</ol>
-	
-	
-	<div>
-		<table class="table table-hover">
-			<thead>
-				<tr>
-					<td><b>ID</b></td>
-					<td><b>姓名</b></td>
-					<td><b>分数</b></td>
-					<!-- <td>评价人</td> -->
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:name="content+${evaluationResult.object.department.id}"
-					th:each="evaluationResult,iterStat:${evaluationResults}">
-					<td><p th:text="${iterStat.index}"></p></td>
-					<td><p th:text="${evaluationResult.object.name}"></p></td>
-					<td><p th:text="${#numbers.formatDecimal(evaluationResult.sum, 0, 2)}"></p></td>
-				</tr>
-			</tbody>
-		</table>
+	<div class="container-fluid">
+		<div class="row">
+
+			<div class="col-md-2">
+				<div class="list-group">
+					<button th:each="department,iter:${departments}"
+						th:id="${department.id}" th:if="${department.id}==1"
+						class="list-group-item active">部门</button>
+					<button th:each="department,iter:${departments}"
+						th:id="${department.id}" th:if="${department.id}!=1"
+						th:utext="|<span class='glyphicon glyphicon-user'></span><span class='badge'>3</span> ${department.departmentName}"
+						class="list-group-item"></button>
+				</div>
+			</div>
+
+			<div class="col-md-10">
+				<!-- 导航 -->
+				<ol class="breadcrumb">
+					<li class="active"><b>当前所在位置：</b></li>
+					<li><a th:href="@{/index}">主页</a></li>
+					<li><a th:href="@{/personel}">人事服务</a></li>
+					<li class="active">按部门查询</li>
+				</ol>
+
+
+				<div>
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<td><b>ID</b></td>
+								<td><b>姓名</b></td>
+								<td><b>分数</b></td>
+								<!-- <td>评价人</td> -->
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:name="content+${evaluationResult.object.department.id}"
+								th:each="evaluationResult,iterStat:${evaluationResults}">
+								<td><p th:text="${iterStat.index}"></p></td>
+								<td><p th:text="${evaluationResult.object.name}"></p></td>
+								<td><p
+										th:text="${#numbers.formatDecimal(evaluationResult.sum, 0, 2)}"></p></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<br> <a th:href="@{/personel}" class="btn btn-default">返回</a>
+			</div>
+
+
+		</div>
+		<!-- row -->
 	</div>
-	<br>
-	<!-- 根据左侧按钮控制显示 --> <script type="text/javascript">
-		$(document).ready(function() {
-			$("tr[name^='content']").hide();
-			$("tr[name='content2']").show();
-			$("button").click(function() {
-				var btnId = $(this).attr("id");
-				$("tr[name^='content']").hide();
-				$("tr[name='content" + btnId + "']").show();
-			});
-		});
-	</script> <a th:href="@{/personel}" class="btn btn-default">返回</a> </right>
+	<!-- container-fluid -->
+	
+	<div th:include="fregment/footer::body"></div>
 </body>
+<!-- 根据左侧按钮控制显示 -->
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("tr[name^='content']").hide();
+		$("tr[name='content2']").show();
+		$("button").click(function() {
+			var btnId = $(this).attr("id");
+			$("tr[name^='content']").hide();
+			$("tr[name='content" + btnId + "']").show();
+		});
+	});
+</script>
 </html>

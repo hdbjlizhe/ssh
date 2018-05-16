@@ -1,91 +1,103 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<title th:text="#{msg.about}">about.html</title>
-
-<meta name="keywords" content="keyword1,keyword2,keyword3">
-<meta name="description" content="this is my page">
-<meta name="content-type" content="text/html; charset=UTF-8">
-
-<!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+<meta charset="UTF-8">
+<meta th:include="fregment/top::head">
+<title th:text="#{msg.about}"></title>
 </head>
-
 <body>
+	<!-- 顶部菜单 -->
+	<div th:include="fregment/header::body"></div>
+	<!-- 内容 -->
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-2">
+				<ul class="list-group">
+					<li class="list-group-item active">关于</li>
+					<li id="li_abstract" class="list-group-item"><a
+						id="a_abstract" name="a_abstract" href="javascript:void(0)"
+						th:utext="|<span class='glyphicon glyphicon-th-list'></span> #{msg.about.abstract}">中心简介</a></li>
+					<li id="li_post" class="list-group-item"><a id="a_post"
+						name="a_post" href="javascript:void(0)"
+						th:utext="|<span class='glyphicon glyphicon-exclamation-sign'></span> #{msg.about.post}">岗位设置</a></li>
+					<li id="li_duties" class="list-group-item"><a id="a_duties"
+						name="a_duties" href="javascript:void(0)"
+						th:utext="|<span class='glyphicon glyphicon-tasks'></span> #{msg.about.duties}">职责分工</a></li>
+				</ul>
+				<ul class="list-group">
+					<div class="list-group-item active">人员介绍</div>
+					<div class="list-group-item">
+						<div>主任：康宇珑</div>
+						<div>电话：13522867530</div>
+					</div>
+
+					<div class="list-group-item">
+						<div>副主任：李楠</div>
+						<div>电话：13601259857</div>
+					</div>
+
+					<div class="list-group-item">
+						<div>技术科员：李哲</div>
+						<div>电话：15120076366</div>
+					</div>
+
+					<div class="list-group-item">
+						<div>技术科员：王军</div>
+						<div>电话：13621206916</div>
+					</div>
+
+					<div class="list-group-item">
+						<div>数据科员：李凛</div>
+						<div>电话：13910682980</div>
+					</div>
+
+					<div class="list-group-item">
+						<div>数据科员：张洁</div>
+						<div>电话：13683383259</div>
+					</div>
+
+					<div class="list-group-item">
+						<div>内勤科员：侯丹</div>
+						<div>电话：13810668091</div>
+					</div>
+				</ul>
+			</div>
+
+
+			<div class="col-md-10">
+				<br>
+				<div id="div_abstract" name="div_abstract" th:include="about/abstract::body"></div>
+				<div id="div_post" name="div_post" th:include="about/post::body"></div>
+				<div id="div_duties" name="div_duties" th:include="about/duties::body"></div>
+			</div>
+		</div>
+		<!-- row -->
+	</div>
+	<!-- container-fluid -->
 	
-	<left>
-		<ul class="list-group">
-			<li class="list-group-item active">关于</li>
-			<li id="li_abstract" class="list-group-item"><a id="a_abstract" name="a_abstract" href="javascript:void(0)" th:utext="|<span class='glyphicon glyphicon-th-list'></span> #{msg.about.abstract}">中心简介</a></li>
-			<li id="li_post" class="list-group-item"><a id="a_post" name="a_post" href="javascript:void(0)" th:utext="|<span class='glyphicon glyphicon-exclamation-sign'></span> #{msg.about.post}">岗位设置</a></li>
-			<li id="li_duties" class="list-group-item"><a id="a_duties" name="a_duties" href="javascript:void(0)" th:utext="|<span class='glyphicon glyphicon-tasks'></span> #{msg.about.duties}">职责分工</a></li>		
-		</ul>
-		<ul class="list-group">
-			<div class="list-group-item active">
-				人员介绍
-			</div>
-			<div class="list-group-item">
-				<div>主任：康宇珑</div>
-				<div>电话：13522867530</div>
-			</div>
-			
-			<div class="list-group-item">
-				<div>副主任：李楠</div>
-				<div>电话：13601259857</div>
-			</div>
-			
-			<div class="list-group-item">
-				<div>技术科员：李哲</div>
-				<div>电话：15120076366</div>
-			</div>
-			
-			<div class="list-group-item">
-				<div>技术科员：王军</div>
-				<div>电话：13621206916</div>
-			</div>
-			
-			<div class="list-group-item">
-				<div>数据科员：李凛</div>
-				<div>电话：13910682980</div>
-			</div>
-			
-			<div class="list-group-item">
-				<div>数据科员：张洁</div>
-				<div>电话：13683383259</div>
-			</div>
-			
-			<div class="list-group-item">
-				<div>内勤科员：侯丹</div>
-				<div>电话：13810668091</div>
-			</div>
-		</ul>
-	</left>
+	<div th:include="fregment/footer::body"></div>
 	
-	<middle>
-		<div id="div_abstract" name="div_abstract" th:include="/about/abstract::body"></div>
-		<div id="div_post" name="div_post" th:include="/about/post::body"></div>
-		<div id="div_duties" name="div_duties" th:include="/about/duties::body"></div>
 	
-	<script type="text/javascript">
-		$(document).ready(function(){			
-			$("div[name^='div_']").hide();
-			$("li[name^='li_']").removeClass("list-group-item-info");
-			$("#div_abstract").show();
-			$("#li_abstract").addClass("list-group-item-info");
-			debugger		
-			  $("[href='javascript:void(0)']").click(function(){
-				debugger
-				$("#li_abstract").removeClass("list-group-item-info");
-				$("#li_post").removeClass("list-group-item-info");
-				$("#li_duties").removeClass("list-group-item-info");
-			    var aId=$(this).attr("id");
-			    var divId=aId.substr(aId.lastIndexOf("_") + 1);
-			    $("div[name^='div_']").hide();
-			    $("#div_"+divId).show();
-			    $("#li_"+divId).addClass("list-group-item-info");
-			  });
-			});	
-	</script>
-	</middle>
-	
+<script type="text/javascript">
+$(document).ready(function() {
+	$("div[name^='div_']").hide();
+	$("li[name^='li_']").removeClass("list-group-item-info");
+	$("#div_abstract").show();
+	$("#li_abstract").addClass("list-group-item-info");
+	debugger
+	$("[href='javascript:void(0)']").click(function() {
+		debugger
+		$("#li_abstract").removeClass("list-group-item-info");
+		$("#li_post").removeClass("list-group-item-info");
+		$("#li_duties").removeClass("list-group-item-info");
+		var aId = $(this).attr("id");
+		var divId = aId.substr(aId.lastIndexOf("_") + 1);
+		$("div[name^='div_']").hide();
+		$("#div_" + divId).show();
+		$("#li_" + divId).addClass("list-group-item-info");
+	});
+});
+</script>
+
 </body>
 </html>

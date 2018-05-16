@@ -9,16 +9,10 @@ import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import com.info.domain.entity.User;
 
-import javax.mail.Session;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log;
-
 import java.io.IOException;
-import java.util.Enumeration;
 
 /**
  *  登录成功处理器

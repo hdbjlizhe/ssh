@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="utf-8">
-<title>信息服务中心信息化系统</title>
+<title>信息服务中心</title>
+<meta th:include="fregment/top::head">
 </head>
 <body>
+	<!-- 顶部目录 -->
+	<div th:insert="fregment/header::body"></div>
+	
 	<!-- 测试 -->
 	<div class="container-fluid">
-		<span style="white-space: pre"> </span>
 		<div class="row">
 			<div id="carousel-generic" class="carousel slide" data-ride="carousel">
 				<!-- 轮播（Carousel）指标 -->
@@ -55,6 +57,7 @@
 				<span class="glyphicon glyphicon-chevron-right"></span></a>
 			</div>
 		</div>
+
 
 	<br>
 	<!-- 展示框 -->
@@ -115,12 +118,13 @@
 							</p>
 						</div>
 					</div>
-				</li>
-				
-				
+				</li>	
 			</ul>
 		</div>
 	</div>
-
+	
+	
+	<!-- 底部 -->
+	<div th:insert="fregment/footer::body"></div>
 </body>
 </html>

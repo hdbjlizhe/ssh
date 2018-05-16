@@ -2,51 +2,60 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
+<meta th:include="fregment/top::head">
 <title>考核分数查询</title>
 </head>
 <body>
-	<left>
-	<div th:include="/personel/personel::left"></div>
-	</left>
 
-	<right>
+<div th:include="fregment/header::body"></div>
+
+	<div class="container">
+		<div class="row">
+
+				<!-- 导航 -->
+				<ol class="breadcrumb">
+					<li class="active"><b>当前所在位置：</b></li>
+					<li><a th:href="@{/index}">主页</a></li>
+					<li><a th:href="@{/personel}">人事服务</a></li>
+					<li class="active">查询本部门</li>
+				</ol>
+
+				<table class="table table-bordered"
+					th:each="evaluationEmployees,iterStat:${evaluationEmployeess}">
+					<thead>
+						<tr class="active">
+							<td><b>ID</b></td>
+							<td><b>姓名</b></td>
+							<td><b>德</b></td>
+							<td><b>能</b></td>
+							<td><b>勤</b></td>
+							<td><b>绩</b></td>
+							<td><b>廉</b></td>
+							<td><b>合计</b></td>
+							<!-- <td>评价人</td> -->
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="evaluationEmployee,iterStat:${evaluationEmployees}">
+							<td><p th:text="${evaluationEmployee.id}"></p></td>
+							<td><p th:text="${evaluationEmployee.toWhom.name}"></p></td>
+							<td><p th:text="${evaluationEmployee.morality}"></p></td>
+							<td><p th:text="${evaluationEmployee.ability}"></p></td>
+							<td><p th:text="${evaluationEmployee.diligence}"></p></td>
+							<td><p th:text="${evaluationEmployee.achievement}"></p></td>
+							<td><p th:text="${evaluationEmployee.honest}"></p></td>
+							<td><p th:text="${evaluationEmployee.sum}"></p></td>
+							<!-- <td><p th:text="*{fromWhom.name}"></p></td> -->
+						</tr>
+					</tbody>
+				</table>
+
+		</div>
+		<!-- row -->
+	</div>
+	<!-- container-fluid -->
 	
-	<!-- 导航 -->
-	<ol class="breadcrumb">
-		<li class="active"><b>当前所在位置：</b></li>
-	    <li><a th:href="@{/index}">主页</a></li>
-	    <li><a th:href="@{/personel}">人事服务</a></li>
-	    <li class="active">查询本部门</li>
-	</ol>
-	
-	<table class="table table-bordered" th:each="evaluationEmployees,iterStat:${evaluationEmployeess}">
-		<thead>
-			<tr class="active">
-				<td><b>ID</b></td>
-				<td><b>姓名</b></td>
-				<td><b>德</b></td>
-				<td><b>能</b></td>
-				<td><b>勤</b></td>
-				<td><b>绩</b></td>
-				<td><b>廉</b></td>
-				<td><b>合计</b></td>
-				<!-- <td>评价人</td> -->
-			</tr>
-		</thead>
-		<tbody>
-			<tr th:each="evaluationEmployee,iterStat:${evaluationEmployees}">
-				<td><p th:text="${evaluationEmployee.id}"></p></td>
-				<td><p th:text="${evaluationEmployee.toWhom.name}"></p></td>
-				<td><p th:text="${evaluationEmployee.morality}"></p></td>
-				<td><p th:text="${evaluationEmployee.ability}"></p></td>
-				<td><p th:text="${evaluationEmployee.diligence}"></p></td>
-				<td><p th:text="${evaluationEmployee.achievement}"></p></td>
-				<td><p th:text="${evaluationEmployee.honest}"></p></td>
-				<td><p th:text="${evaluationEmployee.sum}"></p></td>
-				<!-- <td><p th:text="*{fromWhom.name}"></p></td> -->
-			</tr>
-		</tbody>
-	</table>
-	</right>
+<div th:include="fregment/footer::body"></div>
+
 </body>
 </html>

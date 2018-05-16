@@ -3,8 +3,8 @@
 	xmlns="http://www.w3.org/1999/html">
 <head>
 <meta charset="UTF-8">
+<meta th:include="fregment/top::head">
 <title>月报总览</title>
-
 <script type="text/javascript">
     function preview() {
         bdhtml =window.document.body.innerHTML;//获取当前页的html代码
@@ -20,9 +20,10 @@
 
 </head>
 <body>
-	<div class="container">
-		
 	
+	<div th:include="fregment/header::body"></div>
+	
+	<div class="container">
 		<!-- 月份选择 -->
 		<form class="form-inline">
 			<div class="form-group">
@@ -307,5 +308,7 @@
 		<!--endprint-->
 	</div>
 
+
+	<div th:include="fregment/footer::body"></div>
 </body>
 </html>

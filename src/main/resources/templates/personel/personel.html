@@ -1,73 +1,133 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>人事管理</title>
 <meta charset="UTF-8">
-<style type="text/css">
-
-
-</style>
+<title>人事管理</title>
+<meta th:include="fregment/top::head">
 </head>
-
 <body>
-	<left>
-		<ul  class="list-group">
-			<li class="list-group-item active"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> 人事管理</li>
-			<li class="list-group-item"><a th:href="@{/personel/employees/info/1}"><span class="glyphicon glyphicon-star" aria-hidden="true"></span> 干部管理（限人事干部）</a></li>
-			<li class="list-group-item"><a href=""><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> 请销假</a></li>
-			<li class="list-group-item"><a href=""><span class="glyphicon glyphicon-export" aria-hidden="true"></span> 离京报备</a></li>
-			<li class="list-group-item"><a href=""><span class="glyphicon glyphicon-transfer" aria-hidden="true"></span> 上下班打卡</a></li>
-		</ul>
-		<ul class="list-group">
-			<li class="list-group-item active"><span class="glyphicon glyphicon-file" aria-hidden="true"></span> 工作总结</li>
-			<li class="list-group-item"><a href=""><span class="glyphicon glyphicon-time" aria-hidden="true"></span> 月度总结</a></li>
-			<li class="list-group-item"><a href=""><span class="glyphicon glyphicon-flag" aria-hidden="true"></span> 季度总结</a></li>
-		</ul>
-		<ul id="togglePages" class="list-group">
-				<li class="list-group-item active"><span class="glyphicon glyphicon-record" aria-hidden="true"></span> 公务员季度考核 </li>
-				<li class="list-group-item"><a th:href="@{/personel/evaluationFill}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> 考评填报 </a></li>
-				<li class="list-group-item"><a th:href="@{/personel/evaluationDept}"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> 查询全部（限局领导）</a></li>
-				<li class="list-group-item"><a th:href="@{/personel/evaluationQuery}"><span class="glyphicon glyphicon-check" aria-hidden="true"></span> 查询本部门（限处级正职）</a></li>	
-		</ul>
-	</left>
-	<right>
-		<!-- 导航 -->
-		<ol class="breadcrumb">
-			<li class="active"><b>当前所在位置：</b></li>
-		    <li><a th:href="@{/index}">主页</a></li>
-		    <li><a th:href="@{/personel}">人事服务</a></li>
-		</ol>
+	<!-- 顶部目录 -->
+	<div th:include="fregment/header::body"></div>
+
+	<div class="container-fluid">
 		<div class="row">
-			<div class="col-xs-6 col-md-6">
-				<div class="jumbotron">
-				  <h1>Hello, world!</h1>
-				  <p>...</p>
-				  <p><a class="btn btn-default btn-lg" href="#" role="button">Learn more</a></p>
-				</div>
+			<!-- 左侧边栏 -->
+			<div class="col-md-2">
+				 
+				<ul class="list-group">
+					<li class="list-group-item active"><span
+						class="glyphicon glyphicon-user" aria-hidden="true"></span> 人事管理</li>
+					<li class="list-group-item"><a
+						th:href="@{/personel/employees/info/1}"><span
+							class="glyphicon glyphicon-star" aria-hidden="true"></span>
+							干部管理（限人事干部）</a></li>
+				</ul>
+				<!--
+					<li class="list-group-item"><a href=""><span
+							class="glyphicon glyphicon-new-window" aria-hidden="true"></span>
+							请销假</a></li>
+					<li class="list-group-item"><a href=""><span
+							class="glyphicon glyphicon-export" aria-hidden="true"></span>
+							离京报备</a></li>
+					<li class="list-group-item"><a href=""><span
+							class="glyphicon glyphicon-transfer" aria-hidden="true"></span>
+							上下班打卡</a></li>
+				</ul>
+				<ul class="list-group">
+					<li class="list-group-item active"><span
+						class="glyphicon glyphicon-file" aria-hidden="true"></span> 工作总结</li>
+					<li class="list-group-item"><a href=""><span
+							class="glyphicon glyphicon-time" aria-hidden="true"></span> 月度总结</a></li>
+					<li class="list-group-item"><a href=""><span
+							class="glyphicon glyphicon-flag" aria-hidden="true"></span> 季度总结</a></li>
+				</ul>
+				 -->
+				
+				<ul id="togglePages" class="list-group">
+					<li class="list-group-item active"><span
+						class="glyphicon glyphicon-record" aria-hidden="true"></span>
+						公务员季度考核</li>
+					<li class="list-group-item"><a
+						th:href="@{/personel/evaluationFill}"><span
+							class="glyphicon glyphicon-edit" aria-hidden="true"></span> 考评填报
+					</a></li>
+					<li class="list-group-item"><a
+						th:href="@{/personel/evaluationSettings}"><span
+							class="glyphicon glyphicon-asterisk" aria-hidden="true"></span> 
+							考评规则设置（限人事干部）</a></li>
+					<li class="list-group-item"><a
+						th:href="@{/personel/evaluationDept}"><span
+							class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+							查询全部（限局领导）</a></li>
+					<li class="list-group-item"><a
+						th:href="@{/personel/evaluationQuery}"><span
+							class="glyphicon glyphicon-check" aria-hidden="true"></span>
+							查询本部门（限处领导）</a></li>
+				</ul>
 			</div>
-			<div class="col-xs-6 col-md-6">
-				<div class="jumbotron">
-				  <h1>Hello, world!</h1>
-				  <p>...</p>
-				  <p><a class="btn btn-default btn-lg" href="#" role="button">Learn more</a></p>
+
+			<!-- 右侧内容 -->
+			<div class="col-md-10">
+				<!-- 导航 -->
+				<ol class="breadcrumb">
+					<li class="active"><b>当前所在位置：</b></li>
+					<li><a th:href="@{/index}">主页</a></li>
+					<li><a th:href="@{/personel}">人事服务</a></li>
+				</ol>
+
+				<div class="row">
+					<div class="col-md-6">
+						<div class="jumbotron">
+							<h1>干部维护</h1>
+							<p style="color:red;">(限人事干部)</p>
+							<p>维护干部信息</p>
+							<p>
+								<a class="btn btn-default btn-lg" th:href="@{/personel/employees/info/1}" role="button">进入</a>
+							</p>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="jumbotron">
+							<h1>考评填报</h1>
+							<p style="color:red;">(登录用户)</p>
+							<p>登录用户均可填报</p>
+							<p>
+								<a class="btn btn-default btn-lg" th:href="@{/personel/evaluationFill}" role="button">进入</a>
+							</p>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="jumbotron">
+							<h1>考评规则</h1>
+							<p style="color:red;">(人事干部)</p>
+							<p>设置考评对象、考评人、所占比重等</p>
+							<p>
+								<a class="btn btn-default btn-lg" th:href="@{/personel/evaluationSettings}" role="button">进入</a>
+							</p>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="jumbotron">
+							<h1>查询结果</h1>
+							<p style="color:red;">(限局、处领导)</p>
+							<p>局领导和处领导查询考评结果</p>
+							<p>
+								<a class="btn btn-default btn-lg" th:href="@{/personel/evaluationDept}" role="button">进入（局领导）</a>
+								<a class="btn btn-default btn-lg" th:href="@{/personel/evaluationQuery}" role="button">进入（处领导）</a>
+							</p>
+						</div>
+					</div>
+					
 				</div>
+				<!-- row -->
 			</div>
-			<div class="col-xs-6 col-md-6">
-				<div class="jumbotron">
-				  <h1>Hello, world!</h1>
-				  <p>...</p>
-				  <p><a class="btn btn-default btn-lg" href="#" role="button">Learn more</a></p>
-				</div>
-			</div>
-			<div class="col-xs-6 col-md-6">
-				<div class="jumbotron">
-				  <h1>Hello, world!</h1>
-				  <p>...</p>
-				  <p><a class="btn btn-default btn-lg" href="#" role="button">Learn more</a></p>
-				</div>
-			</div>
+			<!-- 右侧内容 -->
 		</div>
-	
-	</right>
+		<!-- row -->
+	</div>
+	<!-- container-fluid -->
+
+
+	<div th:include="fregment/footer::body"></div>
 </body>
 </html>

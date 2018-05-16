@@ -21,5 +21,8 @@ public class DepartmentService implements IDepartmentService{
 	public List<Department> getAll() {
 		return departmentRepository.findAll();
 	}
+	public Department getById(Long deptId) {
+		return departmentRepository.findById(deptId).get();
+	}
 	
 }

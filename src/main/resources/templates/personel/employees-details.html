@@ -2,8 +2,9 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns="http://www.w3.org/1999/html">
 <head>
-<title>个人信息维护</title>
 <meta charset=UTF-8/>
+<meta th:include="fregment/top::head">
+<title>个人信息维护</title>
 <style type="text/css">
 .form-part {
 	background: rgba(92,184,92,0.1);
@@ -18,16 +19,19 @@ i{color: #5cb85c}
 </style>
 </head>
 <body>
+
+<div th:include="fregment/header::body"></div>
+
 <div class="container">	
-	<br>
 	<!-- 导航 -->
-		<ol class="breadcrumb">
-			<li class="active"><b>当前所在位置：</b></li>
-		    <li><a th:href="@{/index}">主页</a></li>
-		    <li><a th:href="@{/personel}">人事服务</a></li>
-		    <li><a th:href="@{/personel/employees/info/{depId}(depId=${employee.department.id})}">人事管理</a></li>
-		    <li><a th:href="@{/personel/employees/details/{id}(id=${employee.id})}">具体信息</a></li>
-		</ol>
+	<ol class="breadcrumb">
+		<li class="active"><b>当前所在位置：</b></li>
+	    <li><a th:href="@{/index}">主页</a></li>
+	    <li><a th:href="@{/personel}">人事服务</a></li>
+	    <li><a th:href="@{/personel/employees/info/{depId}(depId=${employee.department.id})}">人事管理</a></li>
+	    <li><a th:href="@{/personel/employees/details/{id}(id=${employee.id})}">具体信息</a></li>
+	</ol>
+	
 	<form class="form-part" th:action="@{/personel/employees/mod}" method="post">
 		<table class="table table-condensed">
 			<caption><h3>详细信息</h3><input name="id" type="hidden" th:value="${employee.id}"></caption>			
@@ -127,9 +131,9 @@ i{color: #5cb85c}
 				<td class="text-right">职级</td>
 				<td>
 					<select name="rank" class="form-control" th:value="${employee.rank}">
-						<option value="">请选择职级</option>
-						<option th:each="rank:${ranks}" th:value="${rank.id}"	th:text="${rank.rankName}"
-							th:selected="${employee.rank.id == rank.id}"></option>
+						<option value="" th:selected="${employee.rank==null}">请选择职级</option>
+						<option th:each="rank:${ranks}" th:value="${rank.id}" th:text="${rank.rankName}"
+							th:selected="${employee.rank.id}==${rank.id}"></option>
 					</select>
 				</td>
 			</tr>
@@ -177,13 +181,14 @@ i{color: #5cb85c}
 				<td>开始时间</td><td>结束时间</td><td>工作内容</td><td>备注</td>
 			</tr>
 			<tr th:each="experience,iterState:${experiences}" th:id="|experience_${iterState.index}|">
-				<input th:name="|employee[${iterState.index}]|" type="hidden" th:value="${employee.id}">
-				<input th:name="|id[${iterState.index}]|" type="hidden" th:value="${experience.id}">
-				<td><input th:id="|startTime[${iterState.index}]|" th:name="|startTime[${iterState.index}]|" class="form-control" type="text" th:value="${#dates.format(experience.startTime,'yyyy-MM-dd')}"></td>
-				<td><input th:id="|endTime[${iterState.index}]|" th:name="|endTime[${iterState.index}]|" class="form-control" type="text" th:value="${#dates.format(experience.endTime,'yyyy-MM-dd')}"></td>
-				<td><input th:name="|jobContent[${iterState.index}]|" class="form-control" type="text" th:value="${experience.jobContent}"></td>
-				<td><input th:name="|others[${iterState.index}]|" class="form-control" type="text" th:value="${experience.others}"></td>
+				<input th:name="|experiences[${iterState.index}].employee|" type="hidden" th:value="${employee.id}">
+				<input th:name="|experiences[${iterState.index}].id|" type="hidden" th:value="${experience.id}">
+				<td><input th:name="|experiences[${iterState.index}].startTime|" class="form-control" type="text" th:value="${#dates.format(experience.startTime,'yyyy-MM-dd')}"></td>
+				<td><input th:name="|experiences[${iterState.index}].endTime|" class="form-control" type="text" th:value="${#dates.format(experience.endTime,'yyyy-MM-dd')}"></td>
+				<td><input th:name="|experiences[${iterState.index}].jobContent|" class="form-control" type="text" th:value="${experience.jobContent}"></td>
+				<td><input th:name="|experiences[${iterState.index}].others|" class="form-control" type="text" th:value="${experience.others}"></td>
 			</tr>
+			
 			<tr id="submit">
 				<td colspan="4" class="text-center">
 					<input id="experAdd" class="btn btn-success" type="button" th:value="#{msg.user.experience.add}" onclick="appendElement()">
@@ -194,6 +199,10 @@ i{color: #5cb85c}
 		</table>
 	</form>	
 </div>
+
+
+<div th:include="fregment/footer::body"></div>
+
 <script type="text/javascript" th:src="@{/laydate.dev.js}"></script>
 <script type="text/javascript">
 function appendElement()
@@ -213,12 +222,12 @@ function appendElement()
 	var empId=$("input[name='id']").val();
 	var appendText=
 		"<tr id='experience_"+index+"'>"+
-		"<input name='id["+index+"]' type='hidden' value=''>"+
-		"<input name='employee["+index+"]' type='hidden' value='"+empId+"'>"+
-		"<td><input name='startTime["+index+"]' class='form-control' type='text' value=''></td>"+
-		"<td><input name='endTime["+index+"]' class='form-control' type='text' value=''></td>"+
-		"<td><input name='jobContent["+index+"]' class='form-control' type='text' value=''></td>"+
-		"<td><input name='others["+index+"]' class='form-control' type='text' value=''></td>"+
+		"<input name='experiences["+index+"].id' type='hidden' value=''>"+
+		"<input name='experiences["+index+"].employee' type='hidden' value='"+empId+"'>"+
+		"<td><input name='experiences["+index+"].startTime' class='form-control' type='text' value=''></td>"+
+		"<td><input name='experiences["+index+"].endTime' class='form-control' type='text' value=''></td>"+
+		"<td><input name='experiences["+index+"].jobContent' class='form-control' type='text' value=''></td>"+
+		"<td><input name='experiences["+index+"].others' class='form-control' type='text' value=''></td>"+
 		"</tr>"
 	$("#submit").before(appendText);	
 }

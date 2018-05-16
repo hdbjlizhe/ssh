@@ -1,7 +1,6 @@
 package com.info.service.impl;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -12,8 +11,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.info.domain.dto.EvaluationEmployeeDTO;
-import com.info.domain.dto.EvaluationEmployeeDTOList;
 import com.info.domain.entity.Department;
 import com.info.domain.entity.Employee;
 import com.info.domain.entity.EvaluationEmployee;
@@ -36,9 +33,6 @@ public class EvaluationService implements IEvaluationEmployeeService {
 	
 	@Autowired
 	private EvaluationMapRepository evaluationMapRepository;
-	
-	@Autowired
-	private EmployeeRepository employeeRepository;
 	
 	@Autowired
 	private DepartmentRepository departmentRepository;
@@ -85,39 +79,6 @@ public class EvaluationService implements IEvaluationEmployeeService {
 	 */
 	public EvaluationEmployee update(EvaluationEmployee evaluationEmployee) {
 		return evaluationEmployeeRepository.save(evaluationEmployee);	
-	}
-	
-	/**
-	 * 持久化对象数组到数据库
-	 * @param evaluationEmployees：EvaluationEmployeeDTO的数据传输对象的数组
-	 * @param :登录用户ID
-	 * @return ：返回存储的EvaluationEmployee对象
-	 */
-	public List<EvaluationEmployee> update(EvaluationEmployeeDTOList evaluationEmployees,Employee loginEmployee) {
-		List<EvaluationEmployee> rltEvauationEmployees=new ArrayList<>();
-		
-		for(EvaluationEmployeeDTO eEmployee:evaluationEmployees.getEvaluationEmployees()) {	
-			//1.从数据库获取记录
-			EvaluationEmployee evaluationEmployee=evaluationEmployeeRepository.getOne(Long.parseLong(eEmployee.getId()));			
-			//2.赋值
-			evaluationEmployee.setSeason(eEmployee.getSeason());
-			evaluationEmployee.setAbility(Float.parseFloat(eEmployee.getAbility()));
-			evaluationEmployee.setAchievement(Float.parseFloat(eEmployee.getAchievement()));
-			evaluationEmployee.setDiligence(Float.parseFloat(eEmployee.getDiligence()));
-			evaluationEmployee.setHonest(Float.parseFloat(eEmployee.getHonest()));
-			evaluationEmployee.setMorality(Float.parseFloat(eEmployee.getMorality()));
-			evaluationEmployee.setSum();
-			//3.获取登录用户user的employee
-			Employee fromWhom=loginEmployee;
-			evaluationEmployee.setFromWhom(fromWhom);
-			//4.获取评价对象
-			Employee toWhom=employeeRepository.getOne(Long.parseLong(eEmployee.getToWhom()));
-			evaluationEmployee.setToWhom(toWhom);				
-			evaluationEmployee.setUpdateTime(new Date());
-			//5.存到数据库
-			rltEvauationEmployees.add(evaluationEmployeeRepository.save(evaluationEmployee));
-		}
-		return rltEvauationEmployees;
 	}
 
 	/**

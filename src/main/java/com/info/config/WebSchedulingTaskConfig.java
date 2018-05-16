@@ -32,7 +32,9 @@ public class WebSchedulingTaskConfig {
 	}
 	
 	
-	//同步FTP资料库的文件，每天晚上0点进行同步
+	/**
+	 * 同步FTP资料库的文件，每天晚上0点进行同步
+	 
 	@Autowired
 	private FtpBaseFileService ftpBaseFileService;	
 	@Scheduled(cron="0 0 0 * * ? *")
@@ -47,5 +49,5 @@ public class WebSchedulingTaskConfig {
 		ftpBaseFileService.addAll(ftpBaseFiles);
 		log.info("同步FTP资料库完成");
 	}
-	
+	*/
 }

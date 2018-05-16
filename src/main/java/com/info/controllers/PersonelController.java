@@ -11,18 +11,17 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.info.domain.dto.EmployeeDTO;
-import com.info.domain.dto.EvaluationEmployeeDTOList;
+import com.info.domain.dto.EvaluationEmployeeListDTO;
 import com.info.domain.dto.ExperienceList;
 import com.info.domain.entity.Department;
 import com.info.domain.entity.Duty;
 import com.info.domain.entity.EduLevel;
 import com.info.domain.entity.Employee;
 import com.info.domain.entity.EvaluationEmployee;
+import com.info.domain.entity.EvaluationMap;
 import com.info.domain.entity.Experience;
 import com.info.domain.entity.Nation;
 import com.info.domain.entity.Party;
@@ -32,6 +31,7 @@ import com.info.service.impl.DepartmentService;
 import com.info.service.impl.DutyService;
 import com.info.service.impl.EduLevelService;
 import com.info.service.impl.EmployeeService;
+import com.info.service.impl.EvaluationMapService;
 import com.info.service.impl.EvaluationService;
 import com.info.service.impl.ExperienceService;
 import com.info.service.impl.NationService;
@@ -82,6 +82,9 @@ public class PersonelController {
 	
 	@Autowired
 	private PartyService partyService;
+
+	@Autowired
+	private EvaluationMapService evaluationMapService;
 	
 	/***********************************************************************************************
 	 * 
@@ -102,17 +105,31 @@ public class PersonelController {
 		model.addAttribute("loginEmployee", employee);
 		model.addAttribute("season",season);
 		model.addAttribute("evaluationEmployees", evaluationEmployees);
+		model.addAttribute("message","");
 		return "personel/evaluation-fill";
 	}
-		
+	
+	/**
+	 * 	此函数为Ajax函数
+	 * @param evaluationEmployees
+	 * @param bResult
+	 * @param request
+	 * @return
+	 */
 	@PostMapping("/evaluationSeason")
-	public String evaluationSeason(@Valid EvaluationEmployeeDTOList evaluationEmployees,BindingResult bResult,HttpServletRequest request,Model model) {
+	public String evaluationSeason(@Valid EvaluationEmployeeListDTO evaluationEmployees,BindingResult bResult,HttpServletRequest request) {
 		if(bResult.hasErrors()) {
-			return "redirect:/personel/evaluation-fill";
+			return "redirect:personel/evaluationFill";
 		}
+		//获取登录用户
+		Employee employee=employeeService.getLoginEmployee(request);
 		//数据存储
-		evaluationService.update(evaluationEmployees,employeeService.getLoginEmployee(request));
-		return "redirect:/personel/evaluationFill";
+		for(EvaluationEmployee evaluationEmployee:evaluationEmployees.getEvaluationEmployees()) {
+			evaluationEmployee.setFromWhom(employee);
+			evaluationEmployee.setSum();
+			evaluationService.update(evaluationEmployee);
+		}
+		return "personel/evaluation-success";
 	}
 
 	//为处级正职开设
@@ -144,17 +161,28 @@ public class PersonelController {
 		return "personel/evaluation-dept";
 	}
 	
+	@GetMapping("/evaluationSettings")
+	public String evaluationSettings(Model model) {
+		List<Duty> duties=dutyService.getAll();
+		model.addAttribute("objects", duties);		
+		List<EvaluationMap> evaluationMaps= evaluationMapService.getAll();
+		model.addAttribute("evaluationMaps", evaluationMaps);
+		return "personel/evaluation-settings";
+	}
+	
 	/*****************************************************************************************************************************
 	 * 人员信息管理业务
 	 *****************************************************************************************************************************/
 	@GetMapping("/employees/info/{deptId}")
 	public String employeesInfo(Model model,@PathVariable Long deptId) {
-		List<Department> departments=departmentService.findAll();
+		Department department=departmentService.getById(deptId);
+		model.addAttribute("department", department);
+		List<Department> departments=departmentService.getAll();
 		model.addAttribute("departments", departments);
 		List<Employee> employees=employeeService.getEmployeesByDepartment(deptId);
 		model.addAttribute("employees",employees);
 		return "personel/employees-info";
-	}	
+	}
 	
 	@GetMapping("/employees/details/{empId}")
 	public String employeesDetails(Model model,@PathVariable Long empId) {
@@ -177,6 +205,15 @@ public class PersonelController {
 		return "personel/employees-details";
 	}
 	
+	@GetMapping("/employees/delete/{empId}")
+	public String employeesDelete(Model model,@PathVariable Long empId) {	
+		Employee employee=employeeService.getEmployeesById(empId).get();	
+		Long depId=employee.getDepartment().getId();
+		employee.init();
+		employeeService.update(employee);
+		return "redirect:/personel/employees/info/"+depId;
+	}
+	
 	/**
 	 * Employee信息修改
 	 * @param eDto:Employee的数据传输对象
@@ -193,22 +230,14 @@ public class PersonelController {
 	
 	@PostMapping("/employees/experience/mod")
 	public String employeesExperienceMod(@Valid ExperienceList eList,BindingResult bResult,HttpServletRequest request) throws ParseException{
-		log.info(request.getParameter("id[0]"));
-		log.info(request.getParameter("startTime[0]"));
-		log.info(request.getParameter("endTime[0]"));
-		log.info(request.getParameter("jobContent[0]"));
-		log.info(request.getParameter("others[0]"));
-		log.info(request.getParameter("employee[0]"));
-		log.info(request.getParameter("id[1]"));
-		log.info(request.getParameter("startTime[1]"));
-		log.info(request.getParameter("endTime[1]"));
-		log.info(request.getParameter("jobContent[1]"));
-		log.info(request.getParameter("others[1]"));
-		log.info(request.getParameter("employee[1]"));
+		Long depId=eList.getExperiences().get(0).getEmployee().getDepartment().getId();
 		if(bResult.hasErrors()) {
 			return "redirect:/personel";
 		}
 		experienceService.saveOrUpdate(eList);
-		return "redirect:/personel";
+		if(depId!=null) {
+			return "redirect:/personel/employees/info/"+depId;
+		}else
+			return "redirect:/personel";
 	}
 }

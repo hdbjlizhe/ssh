@@ -2,15 +2,17 @@ package com.info.domain.dto;
 
 import java.util.List;
 
-public class EvaluationEmployeeDTOList {
-	
-	private List<EvaluationEmployeeDTO> evaluationEmployees;
+import com.info.domain.entity.EvaluationEmployee;
 
-	public List<EvaluationEmployeeDTO> getEvaluationEmployees() {
+public class EvaluationEmployeeListDTO {
+	
+	private List<EvaluationEmployee> evaluationEmployees;
+
+	public List<EvaluationEmployee> getEvaluationEmployees() {
 		return evaluationEmployees;
 	}
 
-	public void setEvaluationEmployees(List<EvaluationEmployeeDTO> evaluationEmployees) {
+	public void setEvaluationEmployees(List<EvaluationEmployee> evaluationEmployees) {
 		this.evaluationEmployees = evaluationEmployees;
 	}
 	
