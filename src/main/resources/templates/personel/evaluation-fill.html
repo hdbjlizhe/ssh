@@ -77,7 +77,7 @@
 								readonly="readonly"></td>
 						</tr>
 						<tr>
-							<td colspan="2"><b>备注</b></td>
+							<td colspan="2"><b>说明</b></td>
 							<td>政治品德3分<br>职业道德3分<br>社会公德2分<br>家庭美德2分
 							</td>
 							<td>业务执行能力3分<br>学习与研究能力2分<br>知识运用与表达能力3分<br>沟通协作能力2分
@@ -89,11 +89,17 @@
 							<td>廉洁自律10分</td>
 							<td>说明：单项成绩之和</td>
 						</tr>
+						<tr>
+							<td colspan="2">备注：</td>
+							<td colspan="6" style="color:red;">
+								评鉴打分须进行差异化评分，同一考核主体对相关人员的打分分差不得低于1分,优秀等次比例不超过考核总人数的40%。
+							</td>
+						</tr>
 					</tbody>
 					<tfoot>
 						<tr>
-							<td colspan="8" class="text-center"><button type="submit"
-									class="btn btn-primary">匿名提交</button></td>
+							<td colspan="8" class="text-center"><button type="button"
+									class="btn btn-primary" onclick="validate()">匿名提交</button></td>
 						</tr>
 					</tfoot>
 				</table>
@@ -188,5 +194,40 @@ $(document)
 									});
 				});
 </script>
+<!-- 表单的规则验证 ,分差不得低于1且90分以上不得超过40%-->
+<script type="text/javascript">
+function validate(){
 
+	var inputSumArrays=$("input[name$='sum']");
+	var arrays=[];//定义数组
+	var youxiu=0;
+	//数组赋值
+	for(var i=0; i<inputSumArrays.length; i++){
+		arrays[i]=$("input[name='evaluationEmployees["+i+"].sum'").val();
+		if(Number(arrays[i])>=90)
+			youxiu++;
+	}
+	debugger
+	//对数组处理，分差不得低于1
+	arrays.sort(function(a,b){
+        return a-b;
+    });
+	for(var j=0;j<arrays.length-1;j++){
+		if(arrays[j+1]-arrays[j]<1){
+			alert("打分级差必须大于1！");
+			return;
+		}
+	}
+	//对数组处理，优秀不超过40%
+	if(youxiu/arrays.length>0.4){
+		alert("优秀不得超过40%！");
+		return;
+	}
+	$("form").submit();//提交表单
+}
+
+function sortNumber(a,b){
+	  return a - b;
+}
+</script>
 </html>

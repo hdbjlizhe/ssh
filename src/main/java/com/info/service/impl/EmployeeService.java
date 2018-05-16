@@ -9,15 +9,11 @@ import org.springframework.stereotype.Service;
 import com.info.domain.entity.Department;
 import com.info.domain.entity.Employee;
 import com.info.domain.entity.EvaluationMap;
-import com.info.domain.entity.Experience;
 import com.info.domain.entity.User;
 import com.info.domain.repository.DepartmentRepository;
 import com.info.domain.repository.EmployeeRepository;
 import com.info.domain.repository.EvaluationMapRepository;
-import com.info.domain.repository.UserRepository;
 import com.info.service.IEmployeeService;
-
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,9 +28,6 @@ public class EmployeeService implements IEmployeeService {
 
 	@Autowired
 	private EmployeeRepository employeeRepository;
-
-	@Autowired
-	private UserRepository userRepository;
 
 	@Autowired
 	private DepartmentRepository departmentRepository;

@@ -76,44 +76,44 @@
 				</ol>
 
 				<div class="row">
+					
 					<div class="col-md-6">
-						<div class="jumbotron">
-							<h1>干部维护</h1>
-							<p style="color:red;">(限人事干部)</p>
-							<p>维护干部信息</p>
-							<p>
-								<a class="btn btn-default btn-lg" th:href="@{/personel/employees/info/1}" role="button">进入</a>
-							</p>
-						</div>
-					</div>
-					<div class="col-md-6">
-						<div class="jumbotron">
-							<h1>考评填报</h1>
+						<div class="jumbotron"style="background-image: url('/imgs/personel_evaluation_fill.jpg');background-size: cover;">
+							<h2 style="color:white;">互评填报</h2>
 							<p style="color:red;">(登录用户)</p>
-							<p>登录用户均可填报</p>
+							<p style="color:white;">登录用户均可填报</p>
 							<p>
 								<a class="btn btn-default btn-lg" th:href="@{/personel/evaluationFill}" role="button">进入</a>
 							</p>
 						</div>
 					</div>
 					<div class="col-md-6">
-						<div class="jumbotron">
-							<h1>考评规则</h1>
+						<div class="jumbotron"style="background-image: url('/imgs/personel_evaluation_fill.jpg');background-size: cover;">
+							<h2 style="color:white">考评规则设置</h2>
 							<p style="color:red;">(人事干部)</p>
-							<p>设置考评对象、考评人、所占比重等</p>
+							<p style="color:white">设置考评对象、考评人、所占比重等</p>
 							<p>
 								<a class="btn btn-default btn-lg" th:href="@{/personel/evaluationSettings}" role="button">进入</a>
 							</p>
 						</div>
 					</div>
 					<div class="col-md-6">
-						<div class="jumbotron">
-							<h1>查询结果</h1>
-							<p style="color:red;">(限局、处领导)</p>
-							<p>局领导和处领导查询考评结果</p>
+						<div class="jumbotron"style="background-image: url('/imgs/personel_evaluation_query.jpg');background-size: cover;">
+							<h2 style="color:white">查询结果</h2>
+							<p style="color:red;">(限局领导)</p>
+							<p style="color:white">局领导查询全部考评结果</p>
 							<p>
-								<a class="btn btn-default btn-lg" th:href="@{/personel/evaluationDept}" role="button">进入（局领导）</a>
-								<a class="btn btn-default btn-lg" th:href="@{/personel/evaluationQuery}" role="button">进入（处领导）</a>
+								<a class="btn btn-default btn-lg" th:href="@{/personel/evaluationQuery}" role="button">进入</a>
+							</p>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="jumbotron" style="background-image: url('/imgs/personel_evaluation_query.jpg');background-size: cover;">
+							<h2 style="color:white;">查询结果</h2>
+							<p style="color:red;">(限处室领导)</p>
+							<p style="color:white;">查询本部门考评结果</p>
+							<p>
+								<a class="btn btn-default btn-lg" th:href="@{/personel/evaluationDept}" role="button">进入</a>
 							</p>
 						</div>
 					</div>

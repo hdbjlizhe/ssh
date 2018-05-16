@@ -1,22 +1,19 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
   <head>
-    <title>error.html</title>
-	
-    <meta name="keywords" content="keyword1,keyword2,keyword3">
-    <meta name="description" content="this is my page">
-    <meta name="content-type" content="text/html; charset=UTF-8">
-    
-    <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
-
+  <meta charset="UTF-8">
+  <meta th:include="fregment/top::head">
+    <title>错误</title>
   </head>
   
   <body>
+    <div th:include="fregment/header::body"></div>
     
     <h1 class="text-error">发生错误</h1>
     <div th:if="${url}"><p th:text="${url}"></p></div>
     <div th:if="${exception.message}"><p th:text="${exception.message}"></p></div>    
-    <!-- <script type="text/javascript" src="js/source-not-open.js"></script>
-     -->
+
+
+	<div th:include="fregment/footer::body"></div>
   </body>
 </html>
