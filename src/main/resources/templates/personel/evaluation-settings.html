@@ -23,13 +23,21 @@
 
 			<!-- right content -->
 			<div class="col-md-10">
-				<form>
+				<!-- 导航 -->
+				<ol class="breadcrumb">
+					<li class="active"><b>当前所在位置：</b></li>
+					<li><a th:href="@{/index}">主页</a></li>
+					<li><a th:href="@{/personel}">人事服务</a></li>
+					<li class="active">考核规则设置</li>
+				</ol>
+						
+				<form th:action="@{/personel/evaluationSettings}" method="post">
 					<table class="table table-bordered">
 						<thead>
 							<tr class="active">
 								<td>考核对象</td>
-								<td>考评人范围</td>
-								<td>考评人范围</td>
+								<td>考评人范围(小)</td>
+								<td>考评人范围(大)</td>
 								<td>是否自我评分</td>
 								<td>是否区分部门</td>
 								<td>仅限在编人员</td>
@@ -39,25 +47,81 @@
 						<tbody>
 							<tr th:each="evaluationMap,iterStat:${evaluationMaps}">
 								<input class="form-control" type="hidden"
+									th:name="|evaluationMaps[${iterStat.index}].id|"
 									th:value="${evaluationMap.id}">
-								<td><input class="form-control" type="text"
-									th:value="${evaluationMap.object.dutyName}"></td>
-								<td><input class="form-control" type="text"
-									th:value="${evaluationMap.minScorer.dutyName}"></td>
-								<td><input class="form-control" type="text"
-									th:value="${evaluationMap.maxScorer.dutyName}"></td>
-								<td><input class="form-control" type="text"
-									th:value="${evaluationMap.includingSelf}"></td>
-								<td><input class="form-control" type="text"
-									th:value="${evaluationMap.departDivided}"></td>
-								<td><input class="form-control" type="text"
-									th:value="${evaluationMap.excludInformal}"></td>
-								<td><input class="form-control" type="text"
-									th:value="${evaluationMap.proportions}"></td>
+								<td>
+									<select class="form-control" type="text"
+											th:name="|evaluationMaps[${iterStat.index}].object|">
+										<option value="">请选择考核对象</option>
+										<option th:each="object,iterStat:${objects}" 
+												th:value="${object.id}"
+												th:text="${object.dutyName}"
+												th:selected="${evaluationMap.object==object}"></option>
+									</select>
+									
+								</td>
+								
+								<td>
+									<select class="form-control" type="text"
+											th:name="|evaluationMaps[${iterStat.index}].minScorer|">
+										<option value="">请选择最小级别考评人</option>
+										<option th:each="object,iterStat:${objects}" 
+												th:value="${object.id}"
+												th:text="${object.dutyName}"
+												th:selected="${evaluationMap.minScorer==object}"></option>
+									</select>
+									
+								</td>
+								
+								<td>
+									<select class="form-control" type="text"
+											th:name="|evaluationMaps[${iterStat.index}].maxScorer|">
+										<option value="">请选择最大级别考评人</option>
+										<option th:each="object,iterStat:${objects}" 
+												th:value="${object.id}"
+												th:text="${object.dutyName}"
+												th:selected="${evaluationMap.maxScorer==object}"></option>
+									</select>
+									
+								</td>
+
+								<td>
+									<select class="form-control" type="text"
+											th:name="|evaluationMaps[${iterStat.index}].includingSelf|">
+										<option value="true" th:selected="${evaluationMap.includingSelf==true}">是</option>
+										<option value="false" th:selected="${evaluationMap.includingSelf==false}">否</option>
+									</select>
+									
+								</td>
+								
+								<td>
+									<select class="form-control" type="text"
+											th:name="|evaluationMaps[${iterStat.index}].departDivided|">
+										<option value="true" th:selected="${evaluationMap.departDivided==true}">是</option>
+										<option value="false" th:selected="${evaluationMap.departDivided==false}">否</option>
+									</select>
+									
+								</td>
+								
+								<td>
+									<select class="form-control" type="text"
+											th:name="|evaluationMaps[${iterStat.index}].excludInformal|">
+										<option value="true" th:selected="${evaluationMap.excludInformal==true}">是</option>
+										<option value="false" th:selected="${evaluationMap.excludInformal==false}">否</option>
+									</select>
+									
+								</td>
+								
+								<td>
+									<input class="form-control" type="text"
+											th:name="|evaluationMaps[${iterStat.index}].proportions|"
+											th:value="${evaluationMap.proportions}">
+									
+								</td>
 							</tr>
 						</tbody>
 						<tfoot>
-							<tr class="active">
+							<tr>
 								<td>考核什么级别的对象</td>
 								<td>考评人范围最低职务</td>
 								<td>考评人范围最高职务</td>
@@ -65,6 +129,9 @@
 								<td>考评人是否仅限于考核对象所在的部门</td>
 								<td>考评人是否仅限在编人员</td>
 								<td>此组考评人在考核对象中所占的比重</td>
+							</tr>
+							<tr>
+								<td colspan="7" class="text-center"><input class="btn btn-success" type="submit" value="保存修改"></td>
 							</tr>
 						</tfoot>
 					</table>

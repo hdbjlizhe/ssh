@@ -17,4 +17,8 @@ public class EvaluationMapService {
 	public List<EvaluationMap> getAll(){
 		return evaluationMapRepository.findAll();
 	}
+
+	public EvaluationMap saveOrUpdate(EvaluationMap evaluationMap) {
+		return evaluationMapRepository.save(evaluationMap);
+	}
 }

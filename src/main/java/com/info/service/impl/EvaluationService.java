@@ -121,6 +121,7 @@ public class EvaluationService implements IEvaluationEmployeeService {
 		for(EvaluationEmployee e:eEmployees) {
 			employees.add(e.getToWhom());
 		}
+		
 		List<List<EvaluationEmployee>> tables=new ArrayList<>();
 		for(Employee e:employees) {
 			List<EvaluationEmployee> tmp=new ArrayList<>();
@@ -133,6 +134,7 @@ public class EvaluationService implements IEvaluationEmployeeService {
 		}
 		return tables;		
 	}
+	
 	/**
 	 * 获取所有人员的考核结果
 	 * @return

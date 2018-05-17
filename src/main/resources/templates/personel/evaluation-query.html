@@ -24,28 +24,32 @@
 					th:each="evaluationEmployees,iterStat:${evaluationEmployeess}">
 					<thead>
 						<tr class="active">
-							<td><b>ID</b></td>
-							<td><b>姓名</b></td>
-							<td><b>德</b></td>
-							<td><b>能</b></td>
-							<td><b>勤</b></td>
-							<td><b>绩</b></td>
-							<td><b>廉</b></td>
-							<td><b>合计</b></td>
+							<!-- <td><b>ID</b></td> -->
+							<td class="text-center"><b>姓名</b></td>
+							<td class="text-center"><b>德</b></td>
+							<td class="text-center"><b>能</b></td>
+							<td class="text-center"><b>勤</b></td>
+							<td class="text-center"><b>绩</b></td>
+							<td class="text-center"><b>廉</b></td>
+							<td class="text-center"><b>合计</b></td>
 							<!-- <td>评价人</td> -->
 						</tr>
 					</thead>
 					<tbody>
 						<tr th:each="evaluationEmployee,iterStat:${evaluationEmployees}">
-							<td><p th:text="${evaluationEmployee.id}"></p></td>
-							<td><p th:text="${evaluationEmployee.toWhom.name}"></p></td>
-							<td><p th:text="${evaluationEmployee.morality}"></p></td>
-							<td><p th:text="${evaluationEmployee.ability}"></p></td>
-							<td><p th:text="${evaluationEmployee.diligence}"></p></td>
-							<td><p th:text="${evaluationEmployee.achievement}"></p></td>
-							<td><p th:text="${evaluationEmployee.honest}"></p></td>
-							<td><p th:text="${evaluationEmployee.sum}"></p></td>
+							<!-- <td><p th:text="${evaluationEmployee.id}"></p></td> -->
+							<td class="text-center"><p th:text="${evaluationEmployee.toWhom.name}"></p></td>
+							<td class="text-center"><p th:text="${evaluationEmployee.morality}"></p></td>
+							<td class="text-center"><p th:text="${evaluationEmployee.ability}"></p></td>
+							<td class="text-center"><p th:text="${evaluationEmployee.diligence}"></p></td>
+							<td class="text-center"><p th:text="${evaluationEmployee.achievement}"></p></td>
+							<td class="text-center"><p th:text="${evaluationEmployee.honest}"></p></td>
+							<td class="text-center"><p th:text="${evaluationEmployee.sum}"></p></td>
 							<!-- <td><p th:text="*{fromWhom.name}"></p></td> -->
+						</tr>
+						<tr class="warning">
+							<td class="text-center" style="color:red;"><b>总评</b></td>
+							<td colspan="6" class="text-center" style="color:red;"><p th:utext="${sums[iterStat.index]}"></p></td>
 						</tr>
 					</tbody>
 				</table>
@@ -58,4 +62,8 @@
 <div th:include="fregment/footer::body"></div>
 
 </body>
+<script type="text/javascript">
+
+
+</script>
 </html>

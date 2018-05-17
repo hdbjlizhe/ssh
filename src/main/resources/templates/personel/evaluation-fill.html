@@ -17,6 +17,7 @@
 				<li><a th:href="@{/personel}">人事服务</a></li>
 				<li class="active">季度考核填报</li>
 			</ol>
+
 			<form th:action="@{/personel/evaluationSeason}" method="post">
 
 				<h3 class="text-center">季度考核填报</h3>
@@ -116,83 +117,66 @@
 
 <!-- 自动计算 自动写入 -->
 <script type="text/javascript">
-$(document)
-		.ready(
-				function() {
-					//用户名修改事件
-					$(":input")
-							.change(
-									function() {
+$(document).ready(
+function() {
+	//用户名修改事件
+	$(":input").change(
+					function() {
 
-										debugger;
+						debugger;
 
-										var name = $(this)
-												.attr("name");//获取当前变化的控件name
-										var endIndex = name
-												.indexOf("]");
-										var preName = name
-												.substring(
-														0,
-														endIndex + 1);
+						var name = $(this).attr("name");//获取当前变化的控件name
+						var endIndex = name.indexOf("]");
+						var preName = name.substring(0,endIndex + 1);
+						var morality = preName+ '.morality';
+						var ability = preName+ '.ability';
+						var diligence = preName	+ '.diligence';
+						var achievement = preName+ '.achievement';
+						var honest = preName+ '.honest';
 
-										var morality = preName
-												+ '.morality';
-										var ability = preName
-												+ '.ability';
-										var diligence = preName
-												+ '.diligence';
-										var achievement = preName
-												+ '.achievement';
-										var honest = preName
-												+ '.honest';
+						var sum = preName+ '.sum';
 
-										var sum = preName
-												+ '.sum';
+						var strMorality = $(":input[name='"+ morality+ "']").val();
+						var strAbility = $(":input[name='"+ ability	+ "']")	.val();
+						var strDiligence = $(":input[name='"+ diligence	+ "']").val();
+						var strAchievement = $(":input[name='"+ achievement	+ "']").val();
+						var strHonest = $(":input[name='"+ honest+ "']").val();
 
-										var strMorality = $(
-												":input[name='"
-														+ morality
-														+ "']")
-												.val();
-										var strAbility = $(
-												":input[name='"
-														+ ability
-														+ "']")
-												.val();
-										var strDiligence = $(
-												":input[name='"
-														+ diligence
-														+ "']")
-												.val();
-										var strAchievement = $(
-												":input[name='"
-														+ achievement
-														+ "']")
-												.val();
-										var strHonest = $(
-												":input[name='"
-														+ honest
-														+ "']")
-												.val();
+						var numMorality = Number(strMorality);
+						var numAbility = Number(strAbility);
+						var numDiligence = Number(strDiligence);
+						var numAchievement = Number(strAchievement);
+						var numHonest = Number(strHonest);
+						
+						if(numMorality>10||numMorality<0){
+							alert("输入的数据不正确！请修改");
+							$(":input[name='"+ morality+ "']").focus();
+							return;
+						}else if(numAbility>10||numAbility<0){
+							alert("输入的数据不正确！请修改");
+							$(":input[name='"+ ability+ "']").focus();
+							return;
+						}else if(numDiligence>20||numDiligence<0){
+							alert("输入的数据不正确！请修改");
+							$(":input[name='"+ diligence+ "']").focus();
+							return;
+						}else if(numAchievement>50||numAchievement<0){
+							alert("输入的数据不正确！请修改");
+							$(":input[name='"+ achievement+ "']").focus();
+							return;
+						}else if(numHonest>10||numHonest<0){
+							alert("输入的数据不正确！请修改");
+							$(":input[name='"+ honest+ "']").focus();
+							return;
+						}
 
-										var numMorality = Number(strMorality);
-										var numAbility = Number(strAbility);
-										var numDiligence = Number(strDiligence);
-										var numAchievement = Number(strAchievement);
-										var numHonest = Number(strHonest);
-
-										$(
-												":input[name='"
-														+ sum
-														+ "']")
-												.val(
-														numMorality
-																+ numAbility
-																+ numDiligence
-																+ numAchievement
-																+ numHonest);
-									});
-				});
+						$(":input[name='"+ sum+ "']").val(numMorality
+												+ numAbility
+												+ numDiligence
+												+ numAchievement
+												+ numHonest);
+					});
+});
 </script>
 <!-- 表单的规则验证 ,分差不得低于1且90分以上不得超过40%-->
 <script type="text/javascript">

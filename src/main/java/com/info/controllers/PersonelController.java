@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.info.domain.dto.EvaluationEmployeeListDTO;
+import com.info.domain.dto.EvaluationMapListDTO;
 import com.info.domain.dto.ExperienceList;
 import com.info.domain.entity.Department;
 import com.info.domain.entity.Duty;
@@ -43,6 +44,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.text.ParseException;
 
@@ -139,6 +141,15 @@ public class PersonelController {
 		List<EvaluationEmployee> evaluationEmployees=evaluationService.getEvaluationEmployeesByObjectDepartmentExcludeSelf(loginEmoployee,loginEmoployee.getDepartment().getId());
 		List<List<EvaluationEmployee>> evaEmployeess=evaluationService.sortByObject(evaluationEmployees);
 		model.addAttribute("evaluationEmployeess", evaEmployeess);
+		List<Float> sums=new ArrayList<Float>();
+		for(List<EvaluationEmployee> evaEmployees:evaEmployeess) {
+			Float tmpSum=0f;
+			for(EvaluationEmployee evaluationEmployee:evaEmployees) {
+				tmpSum+=evaluationEmployee.getSum();
+			}
+			sums.add(tmpSum);
+		}
+		model.addAttribute("sums", sums);
 		return "personel/evaluation-query";
 	}
 	
@@ -168,6 +179,14 @@ public class PersonelController {
 		List<EvaluationMap> evaluationMaps= evaluationMapService.getAll();
 		model.addAttribute("evaluationMaps", evaluationMaps);
 		return "personel/evaluation-settings";
+	}
+	
+	@PostMapping("/evaluationSettings")
+	public String evaluationSettings(EvaluationMapListDTO evaluationMaps) {
+		for(EvaluationMap evaluationMap:evaluationMaps.getEvaluationMaps()) {
+			evaluationMapService.saveOrUpdate(evaluationMap);
+		}
+		return "personel/evaluation-settings-success";
 	}
 	
 	/*****************************************************************************************************************************
