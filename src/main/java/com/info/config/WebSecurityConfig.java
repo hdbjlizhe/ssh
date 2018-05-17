@@ -60,7 +60,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapterImpl {
 		String[] strNoAuthentication= {
 				"/index",
 				"/",
-				"/decorator*",
 				"/js/**",
 				"/imgs/**",
 				"/css/**",

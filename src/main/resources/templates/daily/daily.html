@@ -13,16 +13,8 @@
 		<div class="row">
 			<!-- Left SideBar -->
 			<div class="col-md-2">
-				<ul class="list-group">
-					<li class="list-group-item active">日常工作</li>
-					<li class="list-group-item"><a
-						th:href="@{/daily/monthReport/fill}">信息中心工作月报</a></li>
-					<li class="list-group-item"><a
-						th:href="@{/daily/monthReport/departments}">新闻发布统计月报</a></li>
-					<li class="list-group-item"><a th:href="@{/daily/assets}">固定资产管理</a></li>
-				</ul>
-
 				<div class="sidebar-nav list-group">
+				    <a href="javascript:void(0)" class="nav-header list-group-item active">日常工作</a>
 					<a href="#dashboard-menu" class="nav-header list-group-item"
 						data-toggle="collapse"><i class="glyphicon glyphicon-user"></i><b>
 							信息中心工作月报</b></a>
@@ -53,9 +45,8 @@
 									固定资产调整</i></a></li>
 					</ul>
 
-					<a href="" class="nav-header list-group-item"
-						data-toggle="collapse"><i class="glyphicon glyphicon-edit"></i><b>
-							返回</b> </a>
+					<a th:href="@{/index}" class="nav-header list-group-item"><i class="glyphicon glyphicon-edit"></i><b>
+							返回首页</b></a>
 				</div>
 			</div>
 
