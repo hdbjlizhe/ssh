@@ -169,7 +169,7 @@ public class UserController {
     
     @GetMapping("/user/pwd/mod")
     public String pwdMod() {  	
-    	return "/user/mod-pwd";
+    	return "user/mod-pwd";
     }
     
     @PostMapping("/user/pwd/mod")
