@@ -9,10 +9,9 @@
   <body>
     <div th:include="fregment/header::body"></div>
     
-    <h1 class="text-error">发生错误</h1>
+    <div class="container text-center"><h1 class="text-error">发生错误</h1></div>
     <div th:if="${url?}"><p th:text="${url?}"></p></div>
     <div th:if="${exception?.message?}"><p th:text="${exception?.message?}"></p></div>    
-
 
 	<div th:include="fregment/footer::body"></div>
   </body>
