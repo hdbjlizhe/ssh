@@ -1,5 +1,8 @@
 package com.info.controllers;
 
+import java.util.Date;
+import java.util.List;
+
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -25,7 +28,11 @@ import com.info.domain.dto.MonthStatisticsPartyDTO;
 import com.info.domain.dto.MonthStatisticsPhotoDTO;
 import com.info.domain.dto.MonthStatisticsSecurityDTO;
 import com.info.domain.dto.MonthStatisticsWebsiteDTO;
+import com.info.domain.entity.DepartStatistics;
+import com.info.domain.entity.Department;
 import com.info.domain.entity.MonthStatistics;
+import com.info.service.impl.DepartStatisticsService;
+import com.info.service.impl.DepartmentService;
 import com.info.service.impl.MonthStatisticsService;
 import com.info.utils.DateAndTimeUtil;
 
@@ -38,16 +45,51 @@ public class DailyController {
 	@Autowired
 	private MonthStatisticsService monthStatisticsService;
 
+	@Autowired
+	private DepartStatisticsService departStatisticService;
+
+	@Autowired
+	private DepartmentService departmentService;
+	/**
+	 * 信息服务中心的月报填报界面
+	 * @param model
+	 * @return
+	 */
 	@GetMapping("/monthReport/fill")
 	public String monthReport(Model model) {
 		//目标月份
 		MonthStatistics monthStatistics=monthStatisticsService.findPreOneByMonth();
 		model.addAttribute("statistics", monthStatistics);
-		return "/daily/report-monthly";
+		return "daily/report-monthly";
 	}
 	
 	/**
-	 * 获取前一个月或后一个月的数据
+	 * 部门统计信息的填报页面（统计每个处室每月发布的信息条数）
+	 * @param model
+	 * @return
+	 */
+	@GetMapping("/monthDepts/fill")
+	public String monthDept(Model model) {
+		List<DepartStatistics> departStatistics=departStatisticService.findPreOneByMonth();
+		List<Department> departments=departmentService.getAll();
+		if(departStatistics.isEmpty()) {
+			//如果没有就新建数据
+			for(Department department:departments) {
+				if(department.getId()!=1) {
+					DepartStatistics departStatistic=new DepartStatistics();
+					departStatistic.setMonth(DateAndTimeUtil.getPreMonth(new Date()));
+					departStatistic.setDepartment(department);
+					departStatistics.add(departStatistic);
+				}
+			}
+		}
+		model.addAttribute("departments", departments);
+		model.addAttribute("statistics",departStatistics);
+		return "daily/depts-monthly";
+	}
+	
+	/**
+	 * 获取前一个月或后一个月的信息中心月报数据
 	 * @param model
 	 * @param inc
 	 * @param currentMonth
@@ -70,11 +112,63 @@ public class DailyController {
 			monthStatistics=monthStatisticsService.save(monthStatistics);
 		}
 		model.addAttribute("statistics", monthStatistics);
-		return "/daily/report-monthly";
+		return "daily/report-monthly";
+	}
+	
+	
+	@GetMapping("/monthDepts/{inc}/{currentMonth}")
+	public String monthDeptsPreNext(Model model,@PathVariable @NotNull @NotEmpty String inc,@PathVariable @NotNull @NotEmpty String currentMonth) {
+		String rltMonth=null;
+		if("pre".equals(inc.trim())) {
+			rltMonth=DateAndTimeUtil.getPreMonth(currentMonth);
+		}else if("next".equals(inc.trim())){
+			rltMonth=DateAndTimeUtil.getNextMonth(currentMonth);
+		}	
+		List<Department> departments=departmentService.getAll();
+		//通过月份取出数据
+		List<DepartStatistics> departStatistics=departStatisticService.getByMonth(rltMonth);	
+		//如果找不到就新建一个
+		if(departStatistics.isEmpty()){
+			for(Department department:departments) {
+				if(department.getId()!=1) {
+					DepartStatistics departStatistic=new DepartStatistics();
+					departStatistic.setMonth(rltMonth);
+					departStatistic.setDepartment(department);
+					departStatistics.add(departStatistic);
+				}
+			}
+		}
+		model.addAttribute("statistics", departStatistics);
+		return "daily/depts-monthly";
 	}
 	
 	/**
-	 * 月报总览
+	 * 
+	 * @param model
+	 * @return
+	 */
+	@GetMapping("/monthDepts/overview")
+	public String overviewDepts(Model model) {
+		List<DepartStatistics> departStatistics=departStatisticService.findPreOneByMonth();
+		List<Department> departments=departmentService.getAll();
+		if(departStatistics.isEmpty()) {
+			//如果没有就新建数据
+			for(Department department:departments) {
+				if(department.getId()!=1) {
+					DepartStatistics departStatistic=new DepartStatistics();
+					departStatistic.setMonth(DateAndTimeUtil.getPreMonth(new Date()));
+					departStatistic.setDepartment(department);
+					departStatistics.add(departStatistic);
+				}
+			}
+		}
+		model.addAttribute("departments", departments);
+		model.addAttribute("statistics",departStatistics);
+		return "daily/depts-overview";
+	}
+	
+	/**
+	 * 月报总览界面
 	 * @param model
 	 * @return
 	 */
@@ -82,17 +176,69 @@ public class DailyController {
 	public String overview(Model model) {
 		MonthStatistics monthStatistics=monthStatisticsService.findPreOneByMonth();
 		model.addAttribute("statistics", monthStatistics);
-		return "/daily/report-overview";
+		return "daily/report-overview";
+	}
+	/**
+	 * 获取月报总览前一个月的数据或后一个月的数据
+	 * @param model
+	 * @param inc
+	 * @param currentMonth
+	 * @return
+	 */
+	@GetMapping("/monthReport/overview/{inc}/{currentMonth}")
+	public String overviewPreNext(Model model,@PathVariable @NotNull @NotEmpty String inc,@PathVariable @NotNull @NotEmpty String currentMonth) {
+		String rltMonth=null;
+		if("pre".equals(inc.trim())) {
+			rltMonth=DateAndTimeUtil.getPreMonth(currentMonth);
+		}else if("next".equals(inc.trim())){
+			rltMonth=DateAndTimeUtil.getNextMonth(currentMonth);
+		}		
+		//通过月份取出数据
+		MonthStatistics monthStatistics=monthStatisticsService.findByMonth(rltMonth);
+		//如果找不到就新建一个
+		if(monthStatistics==null){
+			monthStatistics=new MonthStatistics();
+			monthStatistics.setMonth(rltMonth);
+			monthStatistics=monthStatisticsService.save(monthStatistics);
+		}
+		model.addAttribute("statistics", monthStatistics);
+		return "daily/report-overview";
 	}
 	
-	
-	@GetMapping("/monthReport/departments")
-	public String department(Model model) {
-		return "report-depts-fill";
+	/**
+	 * 
+	 * @param model
+	 * @param inc
+	 * @param currentMonth
+	 * @return
+	 */
+	@GetMapping("/monthDepts/overview/{inc}/{currentMonth}")
+	public String monthDeptsOverviewPreNext(Model model,@PathVariable @NotNull @NotEmpty String inc,@PathVariable @NotNull @NotEmpty String currentMonth) {
+		String rltMonth=null;
+		if("pre".equals(inc.trim())) {
+			rltMonth=DateAndTimeUtil.getPreMonth(currentMonth);
+		}else if("next".equals(inc.trim())){
+			rltMonth=DateAndTimeUtil.getNextMonth(currentMonth);
+		}	
+		List<Department> departments=departmentService.getAll();
+		//通过月份取出数据
+		List<DepartStatistics> departStatistics=departStatisticService.getByMonth(rltMonth);	
+		//如果找不到就新建一个
+		if(departStatistics.isEmpty()){
+			for(Department department:departments) {
+				if(department.getId()!=1) {
+					DepartStatistics departStatistic=new DepartStatistics();
+					departStatistic.setMonth(rltMonth);
+					departStatistic.setDepartment(department);
+					departStatistics.add(departStatistic);
+				}
+			}
+		}
+		model.addAttribute("statistics", departStatistics);
+		return "daily/depts-overview";
 	}
 	
-	
-	
+		
 	/*************************************************************************************************************
 	 * Ajax请求
 	 * @return boolean型

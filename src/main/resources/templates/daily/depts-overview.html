@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta th:include="fregment/top::head">
+<title>处室统计月报</title>
+</head>
+<body>
+<div th:include="fregment/header::body"></div>
+
+<div class="container">
+	<!-- 当前所在位置 -->
+	<ol class="breadcrumb">
+		<li class="active"><b>当前所在位置：</b></li>
+	    <li><a href="/index">主页</a></li>
+	    <li><a href="/daily">日常工作</a></li>
+	    <li>新闻发布处室统计月报</li>
+	</ol>
+	
+	
+	<!-- 月份选择 -->
+	<div>
+		<input th:id="${_csrf.parameterName}" type="hidden"
+			th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+		<a th:href="@{/daily/monthDepts/overview/pre/{currentMonth}(currentMonth=${statistics[0].month})}" class="btn btn-primary" style="color:white;">上个月</a>
+		<input type="text" th:value="${statistics[0].month}" readonly>
+		<a th:href="@{/daily/monthDepts/overview/next/{currentMonth}(currentMonth=${statistics[0].month})}" class="btn btn-primary" style="color:white;">下个月</a>
+	</div>
+
+	<br>
+
+<table class="table">
+	<caption><h4 class="text-center" th:text="|${statistics[0].month}信息发布按部门统计的月报|"></h4></caption>
+	<tr>
+		<td>部门</td>
+		<td>微信（条）</td>
+		<td>微博（条）</td>
+		<td>今日头条（条）</td>
+		<td>网站消息（条）</td>
+		<td>内部公告栏（条）</td>
+		<td>小计</td>
+	</tr>
+	<tr th:each="statistic,iterStat:${statistics}">
+		<td><p th:text="${statistic.department.departmentName}"></p></td>
+		<td><p th:text="${statistic.webchat}"></td>
+		<td><p th:text="${statistic.weibo}"></td>
+		<td><p th:text="${statistic.toutiao}"></td>
+		<td><p th:text="${statistic.website}"></td>
+		<td><p th:text="${statistic.newsboard}"></td>
+		<td><p ></td>
+	</tr>
+</table>
+</div>
+
+
+<div th:include="fregment/footer::body"></div>
+</body>
+</html>

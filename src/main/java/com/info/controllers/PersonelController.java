@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.info.domain.dto.EvaluationEmployeeListDTO;
 import com.info.domain.dto.EvaluationMapListDTO;
@@ -156,7 +155,7 @@ public class PersonelController {
 	//此专门为局级开设
 	@GetMapping("/evaluationDept")
 	public String evaluationDept(Model model) {
-		List<Department> departments=departmentService.findAll();
+		List<Department> departments=departmentService.getAll();
 		model.addAttribute("departments", departments);
 		List<EvaluationResult> evaluationResults=evaluationService.getAllEvaluationResult();
 		model.addAttribute("evaluationResults",evaluationResults);
@@ -165,7 +164,7 @@ public class PersonelController {
 	//此地址专门为局级开设
 	@GetMapping("/evaluationDept/{deptId}")
 	public String evaluationQuery(Model model,@PathVariable @NotNull @NotEmpty String deptId) {
-		List<Department> departments=departmentService.findAll();
+		List<Department> departments=departmentService.getAll();
 		model.addAttribute("departments", departments);
 		List<EvaluationEmployee> evaluationEmployees=evaluationService.getEvaluationEmployeesByObjectDepartment(Long.parseLong(deptId));
 		model.addAttribute("evaluationEmployees",evaluationEmployees);
@@ -247,6 +246,14 @@ public class PersonelController {
 		return "redirect:/personel/employees/info/"+eDto.getDepartment().getId();
 	}
 	
+	/**
+	 * 职工的经历——修改
+	 * @param eList
+	 * @param bResult
+	 * @param request
+	 * @return
+	 * @throws ParseException
+	 */
 	@PostMapping("/employees/experience/mod")
 	public String employeesExperienceMod(@Valid ExperienceList eList,BindingResult bResult,HttpServletRequest request) throws ParseException{
 		Long depId=eList.getExperiences().get(0).getEmployee().getDepartment().getId();

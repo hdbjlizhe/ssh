@@ -23,27 +23,41 @@
 	
 	<div th:include="fregment/header::body"></div>
 	
+
+	
+	
 	<div class="container">
+	
+		<!-- 导航 -->
+		<ol class="breadcrumb">
+			<li class="active"><b>当前所在位置：</b></li>
+			<li><a th:href="@{/index}">主页</a></li>
+			<li><a th:href="@{/daily}">信息中心</a></li>
+			<li>月报查阅</li>
+		</ol>
+	
+	
 		<!-- 月份选择 -->
 		<form class="form-inline">
 			<div class="form-group">
 				<label class="sr-only" for="exampleInputAmount" th:text="${statistics.month}"></label>
 				<div class="input-group">
-					<div class="input-group-addon"><a th:href="@{/daily/overview/pre/{month}(month=${statistics.month})}">上个月</a></div>
+					<div class="input-group-addon"><a th:href="@{/daily/monthReport/overview/pre/{month}(month=${statistics.month})}">上个月</a></div>
 					<input type="text" class="form-control" id="exampleInputAmount" readonly="readonly"
 						placeholder="Amount" th:value="${statistics.month}">
-					<div class="input-group-addon"><a th:href="@{/daily/overview/next/{month}(month=${statistics.month})}">下个月</a></div>
+					<div class="input-group-addon"><a th:href="@{/daily/monthReport/overview/next/{month}(month=${statistics.month})}">下个月</a></div>
 				</div>
 			</div>
 			<button type="button" class="btn btn-primary pull-right" onclick=preview()>打印表格</button>
-			<button type="button" class="btn btn-primary pull-right">导出至Excel</button>
+			<!-- <button type="button" class="btn btn-primary pull-right">导出至Excel</button> -->
 		</form>
 		<br>
 		
 		<!--startprint-->
 		<table id="party" class="table table-bordered">
+			<caption class="text-center"><h4 th:text="'信息服务中心'+${statistics.month}+'月份月报'"></h4></caption>
 			<thead>
-				<tr class="info text-center">
+				<tr class="success text-center">
 					<td><b>类别</b></td>
 					<td><b>名称</b></td>
 					<td><b>数量</b></td>

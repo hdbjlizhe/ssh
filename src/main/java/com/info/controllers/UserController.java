@@ -28,6 +28,7 @@ import com.info.domain.entity.User;
 import com.info.domain.entity.ValidateToken;
 import com.info.event.OnRegistrationCompleteEvent;
 import com.info.service.IUserService;
+import com.info.utils.RegexUtil;
 import com.info.service.IDepartmentService;
 import com.info.service.IDutyService;
 import com.info.service.IEduLevelService;
@@ -146,7 +147,7 @@ public class UserController {
     
     @GetMapping("/user/details")
     public String detail(Model model,HttpServletRequest request) {  	
-    	User user=userService.getLoginEmployee(request);
+    	User user=userService.getLoginUser(request);
     	Employee employee=employeeService.getLoginEmployee(request);
     	List<Experience> experiences=experienceService.getAllByEmployee(employee);
     	List<Department> departments=departmentService.getAll();
@@ -167,18 +168,30 @@ public class UserController {
     	return "user/details";
     }
     
+    /**
+     * 获取密码修改的页面
+     * @return
+     */
     @GetMapping("/user/pwd/mod")
     public String pwdMod() {  	
     	return "user/mod-pwd";
     }
     
+    /**
+     * 修改密码的提交
+     * @param oldpwd
+     * @param newpwd
+     * @param newpwdcheck
+     * @param request
+     * @return
+     */
     @PostMapping("/user/pwd/mod")
     public String pwdMod(String oldpwd,String newpwd,String newpwdcheck,HttpServletRequest request) {
     	if(!newpwd.equals(newpwdcheck)) {
     		return "redirect:/user/pwd/mod";
     	}
     	//1.获取登录用户user
-    	User user=userService.getLoginEmployee(request);
+    	User user=userService.getLoginUser(request);
     	//2.检查旧密码是否与提交的旧密码一致，
     	if(passwordEncoder.matches(oldpwd, user.getPassword())) {
     		user.setPassword(passwordEncoder.encode(newpwd));
@@ -189,6 +202,23 @@ public class UserController {
     	//3.更新密码
     }
     
+    @GetMapping("/user/phone/binding")
+    public String phoneBinding() {
+    	return "user/phone-binding";
+    }
+    
+    @PostMapping("/user/phone/bindging")
+    public String phoneBinding(String mobile,HttpServletRequest request) {
+    	//验证手机号
+    	if(!mobile.matches(RegexUtil.REGEX_MOBILE)) {
+    		return "redirect:/user/phone/binding";
+    	}else {
+    		User user=userService.getLoginUser(request);
+    		user.setMobile(mobile);
+    		userService.update(user);
+    		return "user/binding-success";
+    	}
+    }
     /********************************************************************************************************
      * 以下为Ajax
      * @param username

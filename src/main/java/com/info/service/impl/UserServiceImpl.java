@@ -103,11 +103,9 @@ public class UserServiceImpl implements IUserService {
 	}
 
 	@Override
-	public User getLoginEmployee(HttpServletRequest request) {
+	public User getLoginUser(HttpServletRequest request) {
 		SecurityContextImpl securityContextImpl = (SecurityContextImpl) request.getSession().getAttribute("SPRING_SECURITY_CONTEXT");			
-		log.info("Username:"+securityContextImpl.getAuthentication().getName());
 		User loginUser=(User)securityContextImpl.getAuthentication().getPrincipal();
-		//User loginUser= userRepository.findByUsername(username);
 		return loginUser;
 	}
 

@@ -14,9 +14,6 @@ public class DepartmentService implements IDepartmentService{
 	@Autowired 
 	private DepartmentRepository departmentRepository;
 
-	public List<Department> findAll() {
-		return departmentRepository.findAll();
-	}
 	@Override
 	public List<Department> getAll() {
 		return departmentRepository.findAll();

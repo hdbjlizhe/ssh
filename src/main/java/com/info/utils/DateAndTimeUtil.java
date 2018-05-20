@@ -38,10 +38,15 @@ public class DateAndTimeUtil {
 	//
 
 	// 根据Date返回月份
-	public static int getMonthByDate(Date date) {
-		return 0;
+	public static String getCurrentMonth(Date date) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
+		return sdf.format(new Date());
 	}
 
+	public static String getPreMonth(Date date) {	
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
+		return getPreMonth(sdf.format(date));
+	}
 	// 使用当前月份,得到上一个月的月份:月份的格式是:yyyy-MM
 	public static String getPreMonth(String currentDate) {
 		// 定义日期格式
