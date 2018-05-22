@@ -11,7 +11,7 @@ import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
 import com.info.domain.entity.Resource;
-import com.info.service.impl.ResourceService;
+import com.info.service.IResourceService;
 
 import java.io.IOException;
 import java.util.List;
@@ -41,7 +41,7 @@ public class DemoApplication {
 	private RequestMappingHandlerMapping requestMappingHandlerMapping;
 	
 	@Autowired
-	private ResourceService resourceService;
+	private IResourceService resourceService;
 
 	@PostConstruct
 	public void initApplication() throws IOException {

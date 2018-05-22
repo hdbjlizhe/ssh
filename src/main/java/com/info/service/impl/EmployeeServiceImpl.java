@@ -17,14 +17,13 @@ import com.info.service.IEmployeeService;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 
 @Service
-public class EmployeeService implements IEmployeeService {
+public class EmployeeServiceImpl implements IEmployeeService {
 
-	private static final Logger log = LoggerFactory.getLogger(EmployeeService.class);
+	private static final Logger log = LoggerFactory.getLogger(EmployeeServiceImpl.class);
 
 	@Autowired
 	private EmployeeRepository employeeRepository;
@@ -42,7 +41,6 @@ public class EmployeeService implements IEmployeeService {
 
 	/**
 	 * 获取当前登录用户的employee
-	 * 
 	 * @param request
 	 * @return
 	 */
@@ -58,21 +56,26 @@ public class EmployeeService implements IEmployeeService {
 	 * @param department
 	 * @return
 	 */
+	@Override
 	public List<Employee> getEmployeesByDepartment(Department department) {
 		return employeeRepository.findByDepartment(department);
 	}
 	
+	/**
+	 * 
+	 */
+	@Override
 	public List<Employee> getEmployeesByDepartment(Long deptId) {
 		return employeeRepository.findByDepartment(deptId);
 	}
+	
 	/**
-	 * 获取指定的
-	 * 
+	 * 获取指定的职工
 	 * @param employee
-	 *            登录用户
 	 * @param department
 	 * @return
 	 */
+	@Override
 	public List<Employee> getEmployeesByChosen(Employee employee) {
 
 		List<Employee> rltEmployees = new ArrayList<Employee>();
@@ -110,15 +113,17 @@ public class EmployeeService implements IEmployeeService {
 		return rltEmployees;
 	}
 
-	public Optional<Employee> getEmployeeById(Long toWhom) {
-		return employeeRepository.findById(toWhom);
+	@Override
+	public Employee getEmployeeById(Long toWhom) {
+		return employeeRepository.findById(toWhom).get();
 	}
 
-	public Optional<Employee> getEmployeesById(Long empId) {
-		// TODO Auto-generated method stub
-		return employeeRepository.findById(empId);
+	@Override
+	public Employee getEmployeesById(Long empId) {
+		return employeeRepository.findById(empId).get();
 	}
 
+	@Override
 	public Employee update(Employee employee) {
 		return employeeRepository.save(employee);		
 	}

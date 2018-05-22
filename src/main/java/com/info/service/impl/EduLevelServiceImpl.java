@@ -10,7 +10,7 @@ import com.info.domain.repository.EduLevelRepository;
 import com.info.service.IEduLevelService;
 
 @Service
-public class EduLevelService implements IEduLevelService {
+public class EduLevelServiceImpl implements IEduLevelService {
 
 	@Autowired
 	private EduLevelRepository eduLevelRepository;

@@ -10,7 +10,7 @@ import com.info.domain.repository.DutyRepository;
 import com.info.service.IDutyService;
 
 @Service
-public class DutyService implements IDutyService {
+public class DutyServiceImpl implements IDutyService {
 
 	@Autowired
 	private DutyRepository dutyRepository;

@@ -30,38 +30,99 @@
 
 	<br>
 
-
-<table class="table">
-	<caption><h4 class="text-center" th:text="|${statistics[0].month}信息发布按部门统计的月报|"></h4></caption>
-	<tr>
-		<td>部门</td>
-		<td>微信（条）</td>
-		<td>微博（条）</td>
-		<td>今日头条（条）</td>
-		<td>网站消息（条）</td>
-		<td>内部公告栏（条）</td>
-		<td>小计</td>
-	</tr>
-	<tr th:each="statistic,iterStat:${statistics}">
-		<td><p th:text="${statistic.department.departmentName}"></p></td>
-		<td><input class="form-control" type="text" th:name="|departStatistics[${iterStat}].webchat|"
-				th:value="${statistic.webchat}"></td>
-		<td><input class="form-control" type="text" th:name="|departStatistics[${iterStat}].weibo|"
-				th:value="${statistic.weibo}"></td>
-		<td><input class="form-control" type="text" th:name="|departStatistics[${iterStat}].toutiao|"
-				th:value="${statistic.toutiao}"></td>
-		<td><input class="form-control" type="text" th:name="|departStatistics[${iterStat}].website|"
-				th:value="${statistic.website}"></td>
-		<td><input class="form-control" type="text" th:name="|departStatistics[${iterStat}].newsboard|"
-				th:value="${statistic.newsboard}"></td>
-		<td><input class="form-control" type="text" readonly="readonly"></td>
-	</tr>
-	
-	<tr><td colspan="7" class="text-center"><input class="btn btn-success" type="submit" value="提交"></td></tr>
-</table>
+<form th:action="@{/daily/monthDepts/submit}" method="post">
+	<table class="table">
+		<caption><h4 class="text-center" th:text="|${statistics[0].month}信息发布统计月报(按部门)|"></h4></caption>
+		<tr>
+			<td>部门</td>
+			<td>微信（条）</td>
+			<td>微博（条）</td>
+			<td>今日头条（条）</td>
+			<td>网站消息（条）</td>
+			<td>内部公告栏（条）</td>
+			<td>小计</td>
+		</tr>
+		<tr th:each="statistic,iterStat:${statistics}">
+			<td><p th:text="${statistic.department.departmentName}"></p></td>
+			<td><input class="form-control" type="text" th:name="|departStatistics[${iterStat}].webchat|"
+					th:value="${statistic.webchat}"></td>
+			<td><input class="form-control" type="text" th:name="|departStatistics[${iterStat}].weibo|"
+					th:value="${statistic.weibo}"></td>
+			<td><input class="form-control" type="text" th:name="|departStatistics[${iterStat}].toutiao|"
+					th:value="${statistic.toutiao}"></td>
+			<td><input class="form-control" type="text" th:name="|departStatistics[${iterStat}].website|"
+					th:value="${statistic.website}"></td>
+			<td><input class="form-control" type="text" th:name="|departStatistics[${iterStat}].newsboard|"
+					th:value="${statistic.newsboard}"></td>
+			<td><input class="form-control" type="text" readonly="readonly" th:name="|departStatistics[${iterStat}].sum|"></td>
+		</tr>
+		
+		<tr><td colspan="7" class="text-center"><input class="btn btn-success" type="submit" value="提交"></td></tr>
+	</table>
+</form>
 </div>
 
 
 <div th:include="fregment/footer::body"></div>
 </body>
+<script type="text/javascript">
+$(document).ready(
+		function() {
+			//用户名修改事件
+			$(":input").change(
+					function() {
+						debugger;
+						var name = $(this).attr("name");//获取当前变化的控件name
+						var endIndex = name.indexOf("]");
+						var preName = name.substring(0,endIndex + 1);
+						var webchat = preName+ '.webchat';
+						var weibo = preName+ '.weibo';
+						var toutiao = preName	+ '.toutiao';
+						var website = preName+ '.website';
+						var newsboard = preName+ '.newsboard';
+			
+						var sum = preName+ '.sum';
+			
+						var strWebchat = $(":input[name='"+ webchat+ "']").val();
+						var strWeibo = $(":input[name='"+ weibo+ "']")	.val();
+						var strToutiao = $(":input[name='"+ toutiao+ "']").val();
+						var strWebsite = $(":input[name='"+ website	+ "']").val();
+						var strNewsboard = $(":input[name='"+ newsboard+ "']").val();
+			
+						var numWebchat = Number(strWebchat);
+						var numWeibo = Number(strWeibo);
+						var numToutiao = Number(strToutiao);
+						var numWebsite = Number(strWebsite);
+						var numNewsboard = Number(strNewsboard);
+						
+						if(numWebchat<0){
+							alert("输入的数据不正确！请修改");
+							$(":input[name='"+ morality+ "']").focus();
+							return;
+						}else if(numWeibo<0){
+							alert("输入的数据不正确！请修改");
+							$(":input[name='"+ ability+ "']").focus();
+							return;
+						}else if(numToutiao<0){
+							alert("输入的数据不正确！请修改");
+							$(":input[name='"+ diligence+ "']").focus();
+							return;
+						}else if(numWebsite<0){
+							alert("输入的数据不正确！请修改");
+							$(":input[name='"+ achievement+ "']").focus();
+							return;
+						}else if(numNewsboard<0){
+							alert("输入的数据不正确！请修改");
+							$(":input[name='"+ honest+ "']").focus();
+							return;
+						}
+			
+						$(":input[name='"+ sum+ "']").val(numWebchat
+												+ numWeibo
+												+ numToutiao
+												+ numWebsite
+												+ numNewsboard);
+					});
+			});
+</script>
 </html>

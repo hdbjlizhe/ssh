@@ -7,9 +7,11 @@ import org.springframework.stereotype.Service;
 
 import com.info.domain.entity.Resource;
 import com.info.domain.repository.ResourceRepository;
+import com.info.service.IResourceService;
 
 @Service
-public class ResourceService {
+public class ResourceServiceImpl implements IResourceService {
+	
 	@Autowired
 	private ResourceRepository resourceRepository;
 	

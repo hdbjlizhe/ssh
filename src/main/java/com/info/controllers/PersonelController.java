@@ -27,16 +27,16 @@ import com.info.domain.entity.Nation;
 import com.info.domain.entity.Party;
 import com.info.domain.entity.Rank;
 import com.info.domain.pojo.EvaluationResult;
-import com.info.service.impl.DepartmentService;
-import com.info.service.impl.DutyService;
-import com.info.service.impl.EduLevelService;
-import com.info.service.impl.EmployeeService;
-import com.info.service.impl.EvaluationMapService;
-import com.info.service.impl.EvaluationService;
-import com.info.service.impl.ExperienceService;
-import com.info.service.impl.NationService;
-import com.info.service.impl.PartyService;
-import com.info.service.impl.RankService;
+import com.info.service.IDepartmentService;
+import com.info.service.IDutyService;
+import com.info.service.IEduLevelService;
+import com.info.service.IEmployeeService;
+import com.info.service.IEvaluationMapService;
+import com.info.service.IEvaluationEmployeeService;
+import com.info.service.IExperienceService;
+import com.info.service.INationService;
+import com.info.service.IPartyService;
+import com.info.service.IRankService;
 import com.info.utils.DateAndTimeUtil;
 
 import org.slf4j.Logger;
@@ -58,38 +58,45 @@ public class PersonelController {
 	 * Bean
 	 ************************************************************************************************/
 	@Autowired
-	private EmployeeService employeeService;
+	private IEmployeeService employeeService;
 	
 	@Autowired
-	private EvaluationService evaluationService;
+	private IEvaluationEmployeeService evaluationEmployeeService;
 	
 	@Autowired
-	private DepartmentService departmentService;
+	private IDepartmentService departmentService;
 	
 	@Autowired
-	private ExperienceService experienceService;
+	private IExperienceService experienceService;
 	
 	@Autowired
-	private RankService rankService;
+	private IRankService rankService;
 	
 	@Autowired
-	private DutyService dutyService;
+	private IDutyService dutyService;
 	
 	@Autowired
-	private EduLevelService eduLevelService;
+	private IEduLevelService eduLevelService;
 	
 	@Autowired
-	private NationService nationService;
+	private INationService nationService;
 	
 	@Autowired
-	private PartyService partyService;
+	private IPartyService partyService;
 
 	@Autowired
-	private EvaluationMapService evaluationMapService;
+	private IEvaluationMapService evaluationMapService;
 	
 	/***********************************************************************************************
 	 * 
 	 ************************************************************************************************/
+	
+	/**
+	 * 互评填报的页面
+	 * @param model
+	 * @param request
+	 * @return
+	 */
 	@GetMapping("/evaluationFill")//互评填报
 	public String evaluationFill(Model model,HttpServletRequest request) {
 		if(request.getSession().getAttribute("SPRING_SECURITY_CONTEXT")==null) {
@@ -101,7 +108,7 @@ public class PersonelController {
 		List<Employee> employees=employeeService.getEmployeesByChosen(employee);
 		//3.获取评分数据
 		String season=DateAndTimeUtil.getSeason();//获取当前季度的前一个季度
-		List<EvaluationEmployee> evaluationEmployees=evaluationService.getBySeasonFromTo(season,employee,employees);
+		List<EvaluationEmployee> evaluationEmployees=evaluationEmployeeService.getBySeasonFromTo(season,employee,employees);
 		//4.根据登录Employee的职务判断，处理employee
 		model.addAttribute("loginEmployee", employee);
 		model.addAttribute("season",season);
@@ -128,7 +135,7 @@ public class PersonelController {
 		for(EvaluationEmployee evaluationEmployee:evaluationEmployees.getEvaluationEmployees()) {
 			evaluationEmployee.setFromWhom(employee);
 			evaluationEmployee.setSum();
-			evaluationService.update(evaluationEmployee);
+			evaluationEmployeeService.update(evaluationEmployee);
 		}
 		return "personel/evaluation-success";
 	}
@@ -137,8 +144,8 @@ public class PersonelController {
 	@GetMapping("/evaluationQuery")
 	public String evaluationQuery(Model model,HttpServletRequest request) {
 		Employee loginEmoployee=employeeService.getLoginEmployee(request);
-		List<EvaluationEmployee> evaluationEmployees=evaluationService.getEvaluationEmployeesByObjectDepartmentExcludeSelf(loginEmoployee,loginEmoployee.getDepartment().getId());
-		List<List<EvaluationEmployee>> evaEmployeess=evaluationService.sortByObject(evaluationEmployees);
+		List<EvaluationEmployee> evaluationEmployees=evaluationEmployeeService.getEvaluationEmployeesByObjectDepartmentExcludeSelf(loginEmoployee,loginEmoployee.getDepartment().getId());
+		List<List<EvaluationEmployee>> evaEmployeess=evaluationEmployeeService.sortByObject(evaluationEmployees);
 		model.addAttribute("evaluationEmployeess", evaEmployeess);
 		List<Float> sums=new ArrayList<Float>();
 		for(List<EvaluationEmployee> evaEmployees:evaEmployeess) {
@@ -157,7 +164,7 @@ public class PersonelController {
 	public String evaluationDept(Model model) {
 		List<Department> departments=departmentService.getAll();
 		model.addAttribute("departments", departments);
-		List<EvaluationResult> evaluationResults=evaluationService.getAllEvaluationResult();
+		List<EvaluationResult> evaluationResults=evaluationEmployeeService.getAllEvaluationResult();
 		model.addAttribute("evaluationResults",evaluationResults);
 		return "personel/evaluation-dept";
 	}
@@ -166,7 +173,7 @@ public class PersonelController {
 	public String evaluationQuery(Model model,@PathVariable @NotNull @NotEmpty String deptId) {
 		List<Department> departments=departmentService.getAll();
 		model.addAttribute("departments", departments);
-		List<EvaluationEmployee> evaluationEmployees=evaluationService.getEvaluationEmployeesByObjectDepartment(Long.parseLong(deptId));
+		List<EvaluationEmployee> evaluationEmployees=evaluationEmployeeService.getEvaluationEmployeesByObjectDepartment(Long.parseLong(deptId));
 		model.addAttribute("evaluationEmployees",evaluationEmployees);
 		return "personel/evaluation-dept";
 	}
@@ -204,7 +211,7 @@ public class PersonelController {
 	
 	@GetMapping("/employees/details/{empId}")
 	public String employeesDetails(Model model,@PathVariable Long empId) {
-		Employee employee=employeeService.getEmployeesById(empId).get();
+		Employee employee=employeeService.getEmployeesById(empId);
 		model.addAttribute("employee",employee);
 		List<Experience> experiences=experienceService.getAllByEmployee(employee);
     	List<Department> departments=departmentService.getAll();
@@ -225,7 +232,7 @@ public class PersonelController {
 	
 	@GetMapping("/employees/delete/{empId}")
 	public String employeesDelete(Model model,@PathVariable Long empId) {	
-		Employee employee=employeeService.getEmployeesById(empId).get();	
+		Employee employee=employeeService.getEmployeesById(empId);	
 		Long depId=employee.getDepartment().getId();
 		employee.init();
 		employeeService.update(employee);

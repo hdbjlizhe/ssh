@@ -10,7 +10,7 @@ import com.info.domain.repository.DepartmentRepository;
 import com.info.service.IDepartmentService;
 
 @Service
-public class DepartmentService implements IDepartmentService{
+public class DepartmentServiceImpl implements IDepartmentService{
 	@Autowired 
 	private DepartmentRepository departmentRepository;
 

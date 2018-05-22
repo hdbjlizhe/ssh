@@ -10,7 +10,7 @@ import com.info.domain.repository.NationRepository;
 import com.info.service.INationService;
 
 @Service
-public class NationService implements INationService {
+public class NationServiceImpl implements INationService {
 
 	@Autowired
 	private NationRepository nationRepository;

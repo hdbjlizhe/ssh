@@ -9,7 +9,7 @@ import com.info.domain.entity.Party;
 import com.info.domain.repository.PartyRepository;
 import com.info.service.IPartyService;
 @Service
-public class PartyService implements IPartyService {
+public class PartyServiceImpl implements IPartyService {
 
 	@Autowired
 	private PartyRepository partyRepository;

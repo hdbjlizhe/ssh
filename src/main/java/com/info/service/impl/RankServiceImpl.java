@@ -9,7 +9,7 @@ import com.info.domain.entity.Rank;
 import com.info.domain.repository.RankRepository;
 import com.info.service.IRankService;
 @Service
-public class RankService implements IRankService {
+public class RankServiceImpl implements IRankService {
 
 	@Autowired
 	private RankRepository rankRepository;

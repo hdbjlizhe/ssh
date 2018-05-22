@@ -31,9 +31,9 @@ import com.info.domain.dto.MonthStatisticsWebsiteDTO;
 import com.info.domain.entity.DepartStatistics;
 import com.info.domain.entity.Department;
 import com.info.domain.entity.MonthStatistics;
-import com.info.service.impl.DepartStatisticsService;
-import com.info.service.impl.DepartmentService;
-import com.info.service.impl.MonthStatisticsService;
+import com.info.service.IDepartStatisticsService;
+import com.info.service.IDepartmentService;
+import com.info.service.IMonthStatisticsService;
 import com.info.utils.DateAndTimeUtil;
 
 @Controller
@@ -43,15 +43,16 @@ public class DailyController {
 	private static final Logger log = LoggerFactory.getLogger(DailyController.class);
 	
 	@Autowired
-	private MonthStatisticsService monthStatisticsService;
+	private IMonthStatisticsService monthStatisticsService;
 
 	@Autowired
-	private DepartStatisticsService departStatisticService;
+	private IDepartStatisticsService departStatisticService;
 
 	@Autowired
-	private DepartmentService departmentService;
+	private IDepartmentService departmentService;
+	
 	/**
-	 * 信息服务中心的月报填报界面
+	 * 获取信息服务中心的月报填报界面
 	 * @param model
 	 * @return
 	 */

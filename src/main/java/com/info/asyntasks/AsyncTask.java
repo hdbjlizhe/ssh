@@ -11,7 +11,7 @@ import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Component;
 
 import com.info.domain.entity.FtpBaseFile;
-import com.info.service.impl.FtpBaseFileService;
+import com.info.service.IFtpBaseFileService;
 import com.info.utils.FtpBaseFileUtil;
 
 @Component
@@ -53,7 +53,7 @@ public class AsyncTask {
 	@Autowired
 	FtpBaseFileUtil ftpBaseFileUtil;
 	@Autowired
-	private FtpBaseFileService ftpBaseFileService;
+	private IFtpBaseFileService ftpBaseFileService;
 	@Async
 	public Future<Boolean> syncFtpBase() throws Exception{
 		logger.info("同步FTP服务器开始...");

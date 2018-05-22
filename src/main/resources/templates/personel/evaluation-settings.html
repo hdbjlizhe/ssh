@@ -31,6 +31,25 @@
 					<li><a th:href="@{/personel}">人事服务</a></li>
 					<li class="active">考核规则设置</li>
 				</ol>
+				
+				
+				<form action="">
+					<!-- 每个季度的填报次数 -->
+					<label>考评互评提交后是否可修改：</label>
+					<div class="radio">
+					  <label>
+					    <input type="radio" name="optionsRadios" id="optionsRadios1" value="true" checked>
+					    	是
+					  </label>
+					</div>
+					<div class="radio">
+					  <label>
+					    <input type="radio" name="optionsRadios" id="optionsRadios2" value="false">
+					   	 	否
+					  </label>
+					</div>	
+				</form>
+				
 						
 				<form th:action="@{/personel/evaluationSettings}" method="post">
 					<table class="table table-bordered">

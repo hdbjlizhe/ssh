@@ -17,15 +17,16 @@ import com.info.domain.entity.EvaluationEmployee;
 import com.info.domain.entity.EvaluationMap;
 import com.info.domain.pojo.EvaluationResult;
 import com.info.domain.repository.DepartmentRepository;
-import com.info.domain.repository.EmployeeRepository;
 import com.info.domain.repository.EvaluationEmployeeRepository;
 import com.info.domain.repository.EvaluationMapRepository;
 import com.info.service.IEvaluationEmployeeService;
+import com.info.service.IEvaluationService;
+
 @Service
-public class EvaluationService implements IEvaluationEmployeeService {
+public class EvaluationEmployeeServiceImpl implements IEvaluationEmployeeService {
 	
 	
-	private static final Logger log = LoggerFactory.getLogger(EvaluationService.class);
+	private static final Logger log = LoggerFactory.getLogger(EvaluationEmployeeServiceImpl.class);
 
 	
 	@Autowired
@@ -42,6 +43,7 @@ public class EvaluationService implements IEvaluationEmployeeService {
 	 * @param id
 	 * @return
 	 */
+	@Override
 	public Optional<EvaluationEmployee> getEvaluationEmployeeById(Long id) {
 		return evaluationEmployeeRepository.findById(id);
 	}
@@ -53,6 +55,7 @@ public class EvaluationService implements IEvaluationEmployeeService {
 	 * @param employeesTo
 	 * @return
 	 */
+	@Override
 	public List<EvaluationEmployee> getBySeasonFromTo(String season,Employee employeeFrom, List<Employee> employeesTo) {
 		List<EvaluationEmployee> rltEEmployees=new ArrayList<EvaluationEmployee>();
 		for(Employee emp:employeesTo) {
@@ -77,6 +80,7 @@ public class EvaluationService implements IEvaluationEmployeeService {
 	 * @param evaluationEmployee
 	 * @return
 	 */
+	@Override
 	public EvaluationEmployee update(EvaluationEmployee evaluationEmployee) {
 		return evaluationEmployeeRepository.save(evaluationEmployee);	
 	}
@@ -85,6 +89,7 @@ public class EvaluationService implements IEvaluationEmployeeService {
 	 * 获取EvaluationEmployee的所有记录
 	 * @return
 	 */
+	@Override
 	public List<EvaluationEmployee> getAllEvaluationEmployee() {
 		return evaluationEmployeeRepository.findAll();
 	}
@@ -94,6 +99,7 @@ public class EvaluationService implements IEvaluationEmployeeService {
 	 * @param deptId
 	 * @return
 	 */
+	@Override
 	public List<EvaluationEmployee> getEvaluationEmployeesByObjectDepartment(Long deptId){
 		Department department=departmentRepository.getOne(deptId);
 		return evaluationEmployeeRepository.findEvaluationEmployeesByObjectDepartment(department);
@@ -105,17 +111,18 @@ public class EvaluationService implements IEvaluationEmployeeService {
 	 * @param deptId
 	 * @return
 	 */
+	@Override
 	public List<EvaluationEmployee> getEvaluationEmployeesByObjectDepartmentExcludeSelf(Employee loginEmoployee, Long deptId) {
 		Department department=departmentRepository.getOne(deptId);
 		return evaluationEmployeeRepository.findEvaluationEmployeesByObjectDepartmentExcludeSelf(loginEmoployee, department);
 	}
-	
-	
+		
 	/**
 	 * 排序函数
 	 * @param eEmployees
 	 * @return
 	 */
+	@Override
 	public List<List<EvaluationEmployee>> sortByObject(List<EvaluationEmployee> eEmployees){
 		Set<Employee> employees=new HashSet<Employee>();
 		for(EvaluationEmployee e:eEmployees) {
@@ -139,6 +146,7 @@ public class EvaluationService implements IEvaluationEmployeeService {
 	 * 获取所有人员的考核结果
 	 * @return
 	 */
+	@Override
 	public List<EvaluationResult> getAllEvaluationResult(){
 		List<EvaluationEmployee> evaluationEmployees=evaluationEmployeeRepository.findAll();
 		List<EvaluationMap> evaluationMaps=evaluationMapRepository.findAll();
@@ -196,6 +204,5 @@ public class EvaluationService implements IEvaluationEmployeeService {
 		}		
 		return evaluationResults;
 	}
-
 
 }

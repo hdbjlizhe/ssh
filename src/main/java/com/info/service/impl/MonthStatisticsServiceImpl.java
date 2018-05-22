@@ -16,10 +16,11 @@ import com.info.domain.dto.MonthStatisticsSecurityDTO;
 import com.info.domain.dto.MonthStatisticsWebsiteDTO;
 import com.info.domain.entity.MonthStatistics;
 import com.info.domain.repository.MonthStatisticsRepository;
+import com.info.service.IMonthStatisticsService;
 import com.info.utils.DateAndTimeUtil;
 
 @Service
-public class MonthStatisticsService {
+public class MonthStatisticsServiceImpl implements IMonthStatisticsService {
 	@Autowired
 	private MonthStatisticsRepository monthStatisticsRepository;
 	
@@ -51,8 +52,9 @@ public class MonthStatisticsService {
 		}
 		return monthStatistics;
 	}
+	
 	/**
-	 * 获取给定月份的前一个月份数据
+	 * 获取给定月份的前一个月份的“信息服务中心工作数据”
 	 * @return
 	 */
 	public MonthStatistics findPreOneByMonth(String month) {
@@ -72,7 +74,11 @@ public class MonthStatisticsService {
 		return monthStatistics;
 	}
 			
-	//更新party
+	/**
+	 * 更新“信息服务中心统计数据”中党务相关的数据
+	 * @param dto
+	 * @return
+	 */
 	public MonthStatistics updateParty(MonthStatisticsPartyDTO dto) {
 		MonthStatistics monthStatistics=monthStatisticsRepository.getOne(dto.getId());
 		monthStatistics.setPartyStudy(dto.getPartyStudy());
@@ -80,20 +86,35 @@ public class MonthStatisticsService {
 		monthStatistics.setPartyActivity(dto.getPartyActivity());
 		return monthStatisticsRepository.save(monthStatistics);
 	}
-	//更新OfficeDoc
+	
+	/**
+	 * 更新“信息服务中心统计数据”中公文往来相关的数据
+	 * @param dto
+	 * @return
+	 */
 	public MonthStatistics updateOffice(MonthStatisticsOfficeDTO dto) {
 		MonthStatistics monthStatistics=monthStatisticsRepository.getOne(dto.getId());
 		monthStatistics.setDocDepart(dto.getDocDepart());
 		monthStatistics.setDocOffice(dto.getDocOffice());
 		return monthStatisticsRepository.save(monthStatistics);
 	}
-	//更新例会Affairs
+	
+	/**
+	 * 更新“信息服务中心统计数据”中例会Affairs
+	 * @param dto
+	 * @return
+	 */
 	public MonthStatistics updateAffairs(MonthStatisticsAffairsDTO dto) {
 		MonthStatistics monthStatistics=monthStatisticsRepository.getOne(dto.getId());
 		monthStatistics.setAffairs(dto.getAffairs());
 		return monthStatisticsRepository.save(monthStatistics);
 	}
-	//更新news
+	
+	/**
+	 * 更新“信息服务中心统计数据”中news
+	 * @param dto
+	 * @return
+	 */
 	public MonthStatistics updateNews(MonthStatisticsNewsDTO dto) {
 		MonthStatistics monthStatistics=monthStatisticsRepository.getOne(dto.getId());
 		monthStatistics.setWebchatOriginal(dto.getWebchatOriginal());
@@ -106,7 +127,12 @@ public class MonthStatisticsService {
 		monthStatistics.setNewsWebsite(dto.getNewsWebsite());
 		return monthStatisticsRepository.save(monthStatistics);
 	}
-	//更新Website
+	
+	/**
+	 * 更新“信息服务中心统计数据”中Website
+	 * @param dto
+	 * @return
+	 */
 	public MonthStatistics updateWebsite(MonthStatisticsWebsiteDTO dto) {
 		MonthStatistics monthStatistics=monthStatisticsRepository.getOne(dto.getId());
 		monthStatistics.setWebsiteProfile(dto.getWebsiteProfile());
@@ -117,7 +143,12 @@ public class MonthStatisticsService {
 		monthStatistics.setWebsiteInfo(dto.getWebsiteInfo());
 		return monthStatisticsRepository.save(monthStatistics);
 	}
-	//更新民投nongovern
+	
+	/**
+	 * 更新“信息服务中心统计数据”中民投nongovern
+	 * @param dto
+	 * @return
+	 */
 	public MonthStatistics updateNongovern(MonthStatisticsNongovernDTO dto) {
 		MonthStatistics monthStatistics=monthStatisticsRepository.getOne(dto.getId());
 		monthStatistics.setNongovernAuthoritylicense(dto.getNongovernAuthoritylicense());
@@ -128,20 +159,35 @@ public class MonthStatisticsService {
 		monthStatistics.setNongovernMarketAccess(dto.getNongovernMarketAccess());
 		return monthStatisticsRepository.save(monthStatistics);
 	}
-	//更新maintenance
+	
+	/**
+	 * 更新“信息服务中心统计数据”中maintenance
+	 * @param dto
+	 * @return
+	 */
 	public MonthStatistics updateMaintenance(MonthStatisticsMaintenanceDTO dto) {
 		MonthStatistics monthStatistics=monthStatisticsRepository.getOne(dto.getId());
 		monthStatistics.setMaintenanceHardware(dto.getMaintenanceHardware());
 		monthStatistics.setMaintenanceSoftware(dto.getMaintenanceSoftware());
 		return monthStatisticsRepository.save(monthStatistics);
 	}
-	//更新fbaseNew
+	
+	/**
+	 * 更新“信息服务中心统计数据”中fbaseNew
+	 * @param dto
+	 * @return
+	 */
 	public MonthStatistics updateFbaseNew(MonthStatisticsFbaseNewDTO dto) {
 		MonthStatistics monthStatistics=monthStatisticsRepository.getOne(dto.getId());
 		monthStatistics.setFbaseNew(dto.getFbaseNew());
 		return monthStatisticsRepository.save(monthStatistics);
 	}
-	//更新Security
+	
+	/**
+	 * 更新“信息服务中心统计数据”中Security
+	 * @param dto
+	 * @return
+	 */
 	public MonthStatistics updateSecurity(MonthStatisticsSecurityDTO dto) {
 		MonthStatistics monthStatistics=monthStatisticsRepository.getOne(dto.getId());
 		monthStatistics.setSecurityAttackBlock(dto.getSecurityAttackBlock());
@@ -153,7 +199,12 @@ public class MonthStatisticsService {
 		monthStatistics.setSecurityWebsiteTrouble(dto.getSecurityWebsiteTrouble());
 		return monthStatisticsRepository.save(monthStatistics);
 	}
-	//更新photo
+	
+	/**
+	 * 更新“信息服务中心统计数据”中photo
+	 * @param dto
+	 * @return
+	 */
 	public MonthStatistics updatePhoto(MonthStatisticsPhotoDTO dto) {
 		MonthStatistics monthStatistics=monthStatisticsRepository.getOne(dto.getId());
 		monthStatistics.setPhotoActivity(dto.getPhotoActivity());

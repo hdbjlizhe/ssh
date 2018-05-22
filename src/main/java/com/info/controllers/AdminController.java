@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.info.asyntasks.AsyncTask;
 import com.info.domain.entity.Resource;
-import com.info.service.impl.ResourceService;
+import com.info.service.IResourceService;
 
 import java.util.List;
 
@@ -24,8 +24,13 @@ public class AdminController {
 	private AsyncTask asyncTask;
 	
 	@Autowired
-	private ResourceService resourceService;
+	private IResourceService resourceService;
 	
+	/**
+	 * 获取后台管理员页面
+	 * @param model
+	 * @return
+	 */
 	@GetMapping("/admin")
 	public String Admin(Model model) {
 		List<Resource> resources=resourceService.findAll();
@@ -33,6 +38,10 @@ public class AdminController {
 		return "admin/admin";
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	@RequestMapping("/syncftp")
 	public String syncFtp(){
 		Future<Boolean> aFuture;

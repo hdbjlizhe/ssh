@@ -42,11 +42,11 @@
 	</tr>
 	<tr th:each="statistic,iterStat:${statistics}">
 		<td><p th:text="${statistic.department.departmentName}"></p></td>
-		<td><p th:text="${statistic.webchat}"></td>
-		<td><p th:text="${statistic.weibo}"></td>
-		<td><p th:text="${statistic.toutiao}"></td>
-		<td><p th:text="${statistic.website}"></td>
-		<td><p th:text="${statistic.newsboard}"></td>
+		<td><p th:text="${statistic.webchat}" th:name="|departStatistics[${iterStat}].webchat|"></td>
+		<td><p th:text="${statistic.weibo}" th:name="|departStatistics[${iterStat}].weibo|"></td>
+		<td><p th:text="${statistic.toutiao}" th:name="|departStatistics[${iterStat}].toutiao|"></td>
+		<td><p th:text="${statistic.website}" th:name="|departStatistics[${iterStat}].website|"></td>
+		<td><p th:text="${statistic.newsboard}" th:name="|departStatistics[${iterStat}].newsboard|"></td>
 		<td><p ></td>
 	</tr>
 </table>
@@ -55,4 +55,63 @@
 
 <div th:include="fregment/footer::body"></div>
 </body>
+
+<script type="text/javascript">
+$(document).ready(
+		function() {
+			//用户名修改事件
+			debugger;
+			var name = $('p').attr("name");//获取当前变化的控件name
+			var endIndex = name.indexOf("]");
+			var preName = name.substring(0,endIndex + 1);
+			var webchat = preName+ '.webchat';
+			var weibo = preName+ '.weibo';
+			var toutiao = preName	+ '.toutiao';
+			var website = preName+ '.website';
+			var newsboard = preName+ '.newsboard';
+
+			var sum = preName+ '.sum';
+
+			var strWebchat = $(":input[name='"+ webchat+ "']").val();
+			var strWeibo = $(":input[name='"+ weibo+ "']")	.val();
+			var strToutiao = $(":input[name='"+ toutiao+ "']").val();
+			var strWebsite = $(":input[name='"+ website	+ "']").val();
+			var strNewsboard = $(":input[name='"+ newsboard+ "']").val();
+
+			var numWebchat = Number(strWebchat);
+			var numWeibo = Number(strWeibo);
+			var numToutiao = Number(strToutiao);
+			var numWebsite = Number(strWebsite);
+			var numNewsboard = Number(strNewsboard);
+			
+			if(numWebchat>10||numWebchat<0){
+				alert("输入的数据不正确！请修改");
+				$(":input[name='"+ morality+ "']").focus();
+				return;
+			}else if(numWeibo>10||numWeibo<0){
+				alert("输入的数据不正确！请修改");
+				$(":input[name='"+ ability+ "']").focus();
+				return;
+			}else if(numToutiao>20||numToutiao<0){
+				alert("输入的数据不正确！请修改");
+				$(":input[name='"+ diligence+ "']").focus();
+				return;
+			}else if(numWebsite>50||numWebsite<0){
+				alert("输入的数据不正确！请修改");
+				$(":input[name='"+ achievement+ "']").focus();
+				return;
+			}else if(numNewsboard>10||numNewsboard<0){
+				alert("输入的数据不正确！请修改");
+				$(":input[name='"+ honest+ "']").focus();
+				return;
+			}
+
+			$(":input[name='"+ sum+ "']").val(numWebchat
+									+ numWeibo
+									+ numToutiao
+									+ numWebsite
+									+ numNewsboard);
+		});
+</script>
+
 </html>

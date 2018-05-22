@@ -7,14 +7,14 @@ import org.springframework.stereotype.Service;
 
 import com.info.domain.entity.FtpBaseFile;
 import com.info.domain.repository.FtpBaseFileRepository;
+import com.info.service.IFtpBaseFileService;
 
 @Service
-public class FtpBaseFileService {
+public class FtpBaseFileServiceImpl implements IFtpBaseFileService {
 
 	@Autowired
 	private FtpBaseFileRepository ftpBaseFileRepository;
-	
-	
+		
 	//清空数据表
 	public void deleteAll(){		
 		ftpBaseFileRepository.deleteAll();		
