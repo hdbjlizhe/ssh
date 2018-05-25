@@ -30,4 +30,19 @@ public class OfficeDocUtil {
 	private final static int DOC_KIND_DISCUSSION_CASE=113;//议案	
 	private final static int DOC_KIND_LETTER=114;//函	
 	private final static int DOC_KIND_SUMMARY=115;//纪要
+	
+	public static String strArrayConnect(String[] strings) {
+		String strRlt=new String();
+		for(int i=0;i<strings.length;i++) {
+			if(strRlt.isEmpty())
+				strRlt=strings[i];
+			else
+				strRlt+=strings[i];
+		}
+		return strRlt;
+	}
+	
+	public static String[] strArraySplit(String string) {
+		return string.split(",");
+	}
 }

@@ -1,8 +1,5 @@
 package com.info.handler;
 
-import static org.hamcrest.CoreMatchers.instanceOf;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -33,14 +30,16 @@ public class WebExceptionHandler {
 		if (isAjax(request)) {
 			return response;
 		} else {
-			if(e instanceof CookieTheftException)
-			{
-				logger.info("CookieTheftException");
-			}
 			ModelAndView mav = new ModelAndView();
 			mav.addObject("exception", e);
 			mav.addObject("url", request.getRequestURL());
 			mav.setViewName(ERROR_VIEW);
+			if(e instanceof CookieTheftException)
+			{
+				logger.info("CookieTheftException");
+				mav.addObject("message","您的Cookie存在被盗风险，请检查！");
+			}
+			
 			return mav;
 		}
 
