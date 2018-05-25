@@ -24,8 +24,16 @@ i {	color: #5cb85c }
 	<div th:include="fregment/header::body"></div>
 
 	<div class="container-fluid">
+		<!-- 导航 -->
+		<ol class="breadcrumb">
+			<li class="active"><b>当前所在位置：</b></li>
+		    <li><a th:href="@{/index}">主页</a></li>
+		    <li><a>用户详细信息</a></li>
+		</ol>
+	
+	
+	
 		<div class="row">
-
 			<div class="col-md-2">
 				<table>
 					<tr>

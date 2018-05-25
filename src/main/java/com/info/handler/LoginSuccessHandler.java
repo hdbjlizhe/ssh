@@ -30,18 +30,18 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException,
             ServletException {
-        System.out.println(authentication);
+        log.info(authentication.toString());
 
-        System.out.println(authentication.getPrincipal());//用户对象
+        log.info(authentication.getPrincipal().toString());//用户对象
         //获得授权后可得到用户信息
         User user = (User) authentication.getPrincipal();
         //输出登录提示信息
-        System.out.println("用户名： " + user.getUsername());
-        System.out.println("用户密码： " + authentication.getCredentials());
-        System.out.println("角色列表："+authentication.getAuthorities());
-        System.out.println("IP信息 :"+authentication.getDetails());
-        System.out.println("是否被授权 :"+authentication.isAuthenticated());
-        System.out.println("Session:"+request.getSession().toString());
+        log.info("用户名： " + user.getUsername());
+        log.info("用户密码： " + authentication.getCredentials());
+        log.info("角色列表："+authentication.getAuthorities());
+        log.info("IP信息 :"+authentication.getDetails());
+        log.info("是否被授权 :"+authentication.isAuthenticated());
+        log.info("Session:"+request.getSession().toString());
 
         //登录成功后跳转到默认对应的页面
         String targetUrl = "/index";

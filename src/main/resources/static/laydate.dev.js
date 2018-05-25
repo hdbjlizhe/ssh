@@ -841,7 +841,7 @@ Dates.events = function(){
 };
 
 Dates.init = (function(){
-    Dates.use('need');
+    Dates.use('css');
     Dates.use(as[4] + config.defSkin, as[3]);
     Dates.skinLink = Dates.query('#'+as[3]);
 }());

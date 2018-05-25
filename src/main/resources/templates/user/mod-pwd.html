@@ -17,6 +17,13 @@
 <body>
 
 	<div th:include="fregment/header::body"></div>
+	
+	<!-- 导航 -->
+		<ol class="breadcrumb">
+			<li class="active"><b>当前所在位置：</b></li>
+		    <li><a th:href="@{/index}">主页</a></li>
+		    <li><a>修改密码</a></li>
+		</ol>
 
 	<div class="container" style="margin-top: 100px; margin-bottom: 100px">
 		<form

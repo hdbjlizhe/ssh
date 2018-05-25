@@ -1,3 +1,10 @@
+#
+#server:
+#  port: 8443
+#  ssl:
+#    key-store: classpath:zhelee.cn/Tomcat/zhelee.cn.jks
+#    key-store-password: 0m8932e2ua82fj
+#    key-store-type: jks
 #########################################################################
 #数据源配置
 #########################################################################
@@ -5,7 +12,7 @@ spring:
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/ssh?useSSL=false
+    url: jdbc:mysql://localhost:3306/ssh?useSSL=true
     username: root
     password: root
     tomcat:

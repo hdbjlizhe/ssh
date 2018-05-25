@@ -1,5 +1,8 @@
 package com.info.handler;
 
+import static org.hamcrest.CoreMatchers.instanceOf;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -8,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.security.web.authentication.rememberme.CookieTheftException;
 
 /**
  * 统一异常处理类
@@ -29,6 +33,10 @@ public class WebExceptionHandler {
 		if (isAjax(request)) {
 			return response;
 		} else {
+			if(e instanceof CookieTheftException)
+			{
+				logger.info("CookieTheftException");
+			}
 			ModelAndView mav = new ModelAndView();
 			mav.addObject("exception", e);
 			mav.addObject("url", request.getRequestURL());
