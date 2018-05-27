@@ -66,7 +66,7 @@ public class EvaluationEmployeeServiceImpl implements IEvaluationEmployeeService
 				tmpEvaluationEmployee.setSeason(season);
 				tmpEvaluationEmployee.setFromWhom(employeeFrom);
 				tmpEvaluationEmployee.setToWhom(emp);
-				tmpEvaluationEmployee=evaluationEmployeeRepository.save(tmpEvaluationEmployee);
+				//tmpEvaluationEmployee=evaluationEmployeeRepository.save(tmpEvaluationEmployee);
 			}else {
 				tmpEvaluationEmployee=optional.get();
 			}
@@ -205,4 +205,13 @@ public class EvaluationEmployeeServiceImpl implements IEvaluationEmployeeService
 		return evaluationResults;
 	}
 
+	
+	//
+	@Override
+	public boolean hasRecordBySeasonAndFromwhom(String season,Employee employee) {
+		if(evaluationEmployeeRepository.findBySeasonAndFromwhom(season,employee)!=null) {
+			return true;
+		}else
+			return false;
+	}
 }

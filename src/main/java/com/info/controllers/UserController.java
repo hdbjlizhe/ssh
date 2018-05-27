@@ -207,7 +207,7 @@ public class UserController {
     	return "user/phone-binding";
     }
     
-    @PostMapping("/user/phone/bindging")
+    @PostMapping("/user/phone/binding")
     public String phoneBinding(String mobile,HttpServletRequest request) {
     	//验证手机号
     	if(!mobile.matches(RegexUtil.REGEX_MOBILE)) {
@@ -219,6 +219,21 @@ public class UserController {
     		return "user/binding-success";
     	}
     }
+    
+    @GetMapping("/user/phone/update")
+    public String phoneUpdate() {
+    	return "user/phone-update";
+    }
+
+	@PostMapping("/user/phone/update")
+	public String phoneUpdate(String oldMobile,String newMobile,String checkMobile,HttpServletRequest request) {
+		if(!newMobile.equals(checkMobile))
+			return "redirect:/user/phone/update";
+		User user=userService.getLoginUser(request);
+		user.setMobile(newMobile);
+		userService.update(user);
+		return "user/binding-success";
+	}
     /********************************************************************************************************
      * 以下为Ajax
      * @param username

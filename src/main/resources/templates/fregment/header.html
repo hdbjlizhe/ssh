@@ -24,12 +24,14 @@
 				<button type="button" class="navbar-toggle collapsed"
 					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
 					aria-controls="navbar">
-					<span class="sr-only">Toggle navigation</span> <span
-						class="icon-bar"></span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span>
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
 				</button>
-				<a th:href="@{/}"><img class="nav navbar-nav" th:src="@{/imgs/zhelee_logo_flat.png}"/></a>
-				<a class="navbar-brand" th:href="@{/}" th:text="#{msg.brand}">信息服务中心</a>
+				<span><a class="navbar-brand" th:href="@{/}" th:text="#{msg.brand}">信息服务中心</a></span>
+				<span><img class="nav navbar-nav" th:src="@{/imgs/zhelee_logo_flat.png}"/></span>
+				
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">

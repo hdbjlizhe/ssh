@@ -4,6 +4,14 @@
 <meta charset="UTF-8">
 <title>人事管理</title>
 <meta th:include="fregment/top::head">
+<style type="text/css">
+.btn-opacity{
+	background:rgba(256, 256, 256, 1); 
+	filter:alpha(opacity=50); 
+	-moz-opacity:0.5; 
+	opacity:0.5;
+}
+</style>
 </head>
 <body>
 	<!-- 顶部目录 -->
@@ -51,15 +59,15 @@
 					<li class="list-group-item"><a
 						th:href="@{/personel/evaluationSettings}"><span
 							class="glyphicon glyphicon-asterisk" aria-hidden="true"></span> 
-							考评规则设置（限人事干部）</a></li>
+							规则设置（限人事干部）</a></li>
 					<li class="list-group-item"><a
 						th:href="@{/personel/evaluationDept}"><span
 							class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
-							查询全部（限局领导）</a></li>
+							全部查询（限局领导）</a></li>
 					<li class="list-group-item"><a
 						th:href="@{/personel/evaluationQuery}"><span
 							class="glyphicon glyphicon-check" aria-hidden="true"></span>
-							查询本部门（限处领导）</a></li>
+							部门查询（限处领导）</a></li>
 				</ul>
 			</div>
 
@@ -80,7 +88,7 @@
 							<p>(登录用户)</p>
 							<p style="color:white;">登录用户均可填报</p>
 							<p>
-								<a class="btn btn-default btn-lg" th:href="@{/personel/evaluationFill}" role="button">进入</a>
+								<a class="btn btn-default btn-lg btn-opacity" th:href="@{/personel/evaluationFill}" role="button"><span class="glyphicon glyphicon-log-in"></span></a>
 							</p>
 						</div>
 					</div>
@@ -90,27 +98,27 @@
 							<p>(人事干部)</p>
 							<p style="color:white">考评对象、考评人、比重</p>
 							<p>
-								<a class="btn btn-default btn-lg" th:href="@{/personel/evaluationSettings}" role="button">进入</a>
+								<a class="btn btn-default btn-lg btn-opacity" th:href="@{/personel/evaluationSettings}" role="button"><span class="glyphicon glyphicon-log-in"></span></a>
 							</p>
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="jumbotron"style="background-image: url('/imgs/personel_evaluation_green.png');background-size: cover;">
-							<h2 style="color:white">查询结果</h2>
+							<h2 style="color:white">查询平台</h2>
 							<p>(限局领导)</p>
 							<p style="color:white">局领导查询全部考评结果</p>
 							<p>
-								<a class="btn btn-default btn-lg" th:href="@{/personel/evaluationDept}" role="button">进入</a>
+								<a class="btn btn-default btn-lg btn-opacity" th:href="@{/personel/evaluationDept}" role="button"><span class="glyphicon glyphicon-log-in"></span></a>
 							</p>
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="jumbotron" style="background-image: url('/imgs/personel_evaluation_orange.png');background-size: cover;">
-							<h2 style="color:white;">查询结果</h2>
+							<h2 style="color:white;">查询平台</h2>
 							<p>(限处室领导)</p>
 							<p style="color:white;">查询本部门考评结果</p>
 							<p>
-								<a class="btn btn-default btn-lg" th:href="@{/personel/evaluationQuery}" role="button">进入</a>
+								<a class="btn btn-default btn-lg btn-opacity" th:href="@{/personel/evaluationQuery}" role="button"><span class="glyphicon glyphicon-log-in"></span></a>
 							</p>
 						</div>
 					</div>

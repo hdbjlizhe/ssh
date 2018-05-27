@@ -72,6 +72,8 @@ logging:
 #########################################################################
 message:
   welcome: 欢迎
+  evaluation: 
+    update: false
 mail: 
   from: 
     addr: hdbjlizhe@163.com   #邮件发送地址

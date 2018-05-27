@@ -44,7 +44,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
         log.info("Session:"+request.getSession().toString());
 
         //登录成功后跳转到默认对应的页面
-        String targetUrl = "/index";
+        String targetUrl = "/user/details";
         for (GrantedAuthority grantedAuthority : authentication.getAuthorities()) {
             String roleName = grantedAuthority.getAuthority();
             switch (roleName){

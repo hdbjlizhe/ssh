@@ -32,10 +32,9 @@
 					<li class="active">考核规则设置</li>
 				</ol>
 				
-				
-				<form action="">
+				<form action="" class="form-inline">
 					<!-- 每个季度的填报次数 -->
-					<label>考评互评提交后是否可修改：</label>
+					<label>1.提交后是否可修改：</label>
 					<div class="radio">
 					  <label>
 					    <input type="radio" name="optionsRadios" id="optionsRadios1" value="true" checked>
@@ -48,9 +47,10 @@
 					   	 	否
 					  </label>
 					</div>	
+					<button type="submit" class="btn btn-success">提交</button>
 				</form>
 				
-						
+				<br>		
 				<form th:action="@{/personel/evaluationSettings}" method="post">
 					<table class="table table-bordered">
 						<thead>

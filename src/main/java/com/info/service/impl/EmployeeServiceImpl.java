@@ -80,7 +80,7 @@ public class EmployeeServiceImpl implements IEmployeeService {
 
 		List<Employee> rltEmployees = new ArrayList<Employee>();
 
-		int weight = employee.getDuty().getWeight();
+		int weight = employee.getDuty().getWeight();//获取职务权重
 
 		List<EvaluationMap> tmpEvaluationMaps = new ArrayList<EvaluationMap>();
 		List<EvaluationMap> evaluationMaps = evaluationMapRepository.findAll();
@@ -95,8 +95,9 @@ public class EmployeeServiceImpl implements IEmployeeService {
 			if (evaluation.isDepartDivided()) {// 区分部门的情况，按部门查找
 				rltEmployees.addAll(employeeRepository.findByDepartmentAndDutyAndFormal(employee.getDepartment(),
 						evaluation.getObject(), evaluation.isExcludInformal()));
-				if(!evaluation.isIncludingSelf())
-					rltEmployees.remove(employee);
+				if(!evaluation.isIncludingSelf()) {//是否包含自己
+					rltEmployees.remove(employee);//删除自己
+				}
 			} else {// 不区分部门的情况下，就按职务查找
 				List<Department> depts = departmentRepository.findByDeputyBureau(employee);
 				if (depts.size()> 1) {// 副局长

@@ -5,91 +5,70 @@
 <meta charset=UTF-8 />
 <meta th:include="fregment/top::head">
 <title>个人信息维护</title>
-<style type="text/css">
-.form-part {
-	background: rgba(92, 184, 92, 0.1);
-	padding-top: 20px;
-	padding-bottom: 1px;
-	padding-left: 20px;
-	padding-right: 20px;
-	border-radius: 5px;
-	border: solid 1px #5cb85c;
-}
 
-i {	color: #5cb85c }
-</style>
 </head>
 
 <body>
 	<div th:include="fregment/header::body"></div>
 
-	<div class="container-fluid">
+	<div class="container">
 		<!-- 导航 -->
 		<ol class="breadcrumb">
 			<li class="active"><b>当前所在位置：</b></li>
 		    <li><a th:href="@{/index}">主页</a></li>
 		    <li><a>用户详细信息</a></li>
 		</ol>
-	
-	
-	
+
 		<div class="row">
-			<div class="col-md-2">
-				<table>
+			<div class="col-sm-4">
+				<table class="table table-bordered">
+					<caption><h4>登录用户<small class="text-danger">(登录信息可修改)</small></h4></caption>
 					<tr>
-						<td class="text-center"><img alt=""
-							th:src="@{/portrait/portrait-default.png}"></td>
-					</tr>
-					<tr>
-						<td><b><p class="text-left"
-									th:text="#{msg.user.username}">用户：</p></b></td>
-					</tr>
-					<tr>
-						<td><i><p class="text-left" th:text="${user.username}"></p></i></td>
-					</tr>
-					<tr>
-						<td><b><p class="text-left"
-									th:text="#{msg.user.password}">密码：</p></b></td>
-					</tr>
-					<tr>
-						<td class="text-left"><i><a class="text-left"
-								th:href="@{/user/pwd/mod}" style="color: #5cb85c;">修改密码</a></i></td>
-					</tr>
-					<tr>
-						<td><b><p class="text-left" th:text="#{msg.user.email}">邮箱：</p></b></td>
-					</tr>
-					<tr>
-						<td><i><p class="text-left" th:text="${user.email}"></p></i></td>
-					</tr>
-					<tr>
-						<td><b><p class="text-left" th:text="#{msg.user.mobile}">手机：</p></b></td>
-					</tr>
-					<tr>
-						<td>
-							<i>
-								<p class="text-left" th:if="${user.mobile}!=null" th:text="${user.mobile}"></p>
-								<p class="text-left" th:if="${user.mobile}==null"><a th:href="@{/user/phone/binding}">绑定手机号</a></p>					
-							</i>
+						<td class="text-center active" colspan="2">
+							<img alt=""	th:src="@{/portrait/portrait-default.png}" style="height:206px;">
 						</td>
 					</tr>
 					<tr>
-						<td><b><p class="text-left" th:text="#{msg.user.status}">状态：</p></b></td>
+						<td class="text-left active" th:text="#{msg.user.username}">用户：</td>
+						<td class="text-left" th:text="${user.username}">用户名</td>
 					</tr>
 					<tr>
-						<td><i><p class="text-left"
-									th:text="${user.enabled!='false'?'正常':'不可用'}"></p></i></td>
+						<td class="text-left active" th:text="#{msg.user.password}">密码：</td>
+						<td class="text-left"><i><a class="text-left" th:href="@{/user/pwd/mod}" style="color: #5cb85c;">修改密码</a></i></td>
+					</tr>
+					<tr>
+						<td class="text-left active" th:text="#{msg.user.email}">邮箱：</td>
+						<td class="text-left" th:text="${user.email}"></td>
+					</tr>
+					<tr>
+						<td class="text-left active" th:text="#{msg.user.mobile}">手机：</td>
+						<td>
+
+							<span class="text-left" th:if="${user.mobile}!=null" th:text="${user.mobile}"></span>
+							<span><i><a th:if="${user.mobile}!=null" th:href="@{/user/phone/update}" style="color: #5cb85c;">修改手机号</a></i></span>
+							<sapn class="text-left" th:if="${user.mobile}==null"><a th:href="@{/user/phone/binding}" style="color: #5cb85c;">绑定手机号</a></span>					
+
+						</td>
+					</tr>
+					<tr>
+						<td class="text-left active" th:text="#{msg.user.status}">状态：</td>
+						<td class="text-left" th:text="${user.enabled!='false'?'正常':'不可用'}"></td>
 					</tr>
 
 				</table>
 
 			</div>
 			
-			<div class="col-md-8 ">
-				<form class="form-part" th:action="@{/personel/employees/mod}" method="post">
-					<table class="table table-condensed">
-						<caption><h3>详细信息</h3><input name="id" type="hidden" th:value="${employee.id}"></caption>			
+			<div class="col-sm-8">
+				<form class="form" th:action="@{/personel/employees/mod}" method="post">
+					<table class="table table-bordered">
+						<caption>
+							<input name="id" type="hidden" th:value="${employee.id}">
+							<input name="createTime" type="hidden" class="form-control" th:value="${#dates.format(employee.createTime,'yyyy-MM-dd')}" readonly="readonly">
+							<h4>详细信息<small class="text-danger">(个人信息暂不对个人开放修改，如需修改请联系人事处)</small></h4>
+						</caption>			
 						<tr>		
-							<td class="text-right">部门</td>
+							<td class="text-right active">部门</td>
 							<td>
 								<select name="department" class="form-control" th:value="${employee.department}">
 									<option value="">请选择部门</option>
@@ -97,23 +76,20 @@ i {	color: #5cb85c }
 										th:value="${department.id}" th:text="${department.departmentName}"
 										th:selected="${employee.department.id == department.id}"></option>
 								</select>
-							</td>
-						</tr>
-						<tr>		
-							<td class="text-right">姓名</td>
+							</td>		
+							<td class="text-right active">姓名</td>
 							<td><input name="name" type="text" th:value="${employee.name}" class="form-control"></td>
 						</tr>
 						<tr>
-							<td class="text-right">是否正式编制</td>
+							<td class="text-right active">是否正式编制</td>
 							<td><select name="isFormal" class="form-control"
 								th:field="${employee.isFormal}">
 									<option value="true" th:selected="${employee.isFormal==true}">正式人员</option>					
 									<option value="false" th:selected="${employee.isFormal==false}">工勤人员</option>
 								</select>
 							</td>
-						</tr>
-						<tr>
-							<td class="text-right">性别</td>
+
+							<td class="text-right active">性别</td>
 							<td><select name="isFemale" class="form-control" th:field="${employee.isMale}">
 									<option value="true" th:selected="${employee.isMale==true}">男</option>
 									<option value="false" th:selected="${employee.isMale==false}">女</option>
@@ -121,7 +97,7 @@ i {	color: #5cb85c }
 							</td>
 						</tr>
 						<tr>
-							<td class="text-right">民族</td>
+							<td class="text-right active">民族</td>
 							<td><select name="nation" class="form-control" th:value="${employee.nation}">
 									<option value="">请选择民族</option>
 									<option th:each="nation:${nations}" th:value="${nation.id}"
@@ -130,15 +106,14 @@ i {	color: #5cb85c }
 								</select>
 							
 							</td>
-						</tr>
-						<tr>
-							<td class="text-right">生日</td>
+
+							<td class="text-right active">生日</td>
 							<td><input name="birthday" class="form-control" type="text" id="birthday"
 								th:value="${#dates.format(employee.birthday,'yyyy-MM-dd')}">
 							</td>
 						</tr>
 						<tr>
-							<td class="text-right">党团</td>
+							<td class="text-right active">党团</td>
 							<td>
 								<select name="party" class="form-control" th:value="${employee.party}">
 									<option value="">请选择党团</option>
@@ -147,24 +122,22 @@ i {	color: #5cb85c }
 										th:selected="${employee.party == party}"></option>
 								</select>
 							</td>
-						</tr>
-						<tr>
-							<td class="text-right">党团时间</td>
+
+							<td class="text-right active">党团时间</td>
 							<td><input name="partyTime" class="form-control" type="text" id="partyTime"
 								th:value="${#dates.format(employee.partyTime,'yyyy-MM-dd')}"></td>
 						</tr>
 						<tr>
-							<td class="text-right">参加工作时间</td>
+							<td class="text-right active">参加工作时间</td>
 							<td><input name="jobStartTime" class="form-control" type="text" id="jobStartTime"
 								th:value="${#dates.format(employee.jobStartTime,'yyyy-MM-dd')}"></td>
-						</tr>
-						<tr>
-							<td class="text-right">调入本单位时间</td>
+						
+							<td class="text-right active">调入本单位时间</td>
 							<td><input name="entryTime" class="form-control" type="text" id="entryTime"
 								th:value="${#dates.format(employee.entryTime,'yyyy-MM-dd')}"></td>
 						</tr>
 						<tr>
-							<td class="text-right">职务</td>
+							<td class="text-right active">职务</td>
 							<td>
 							<select name="duty" class="form-control" th:value="${employee.duty}">
 									<option value="">请选择职务</option>
@@ -173,15 +146,14 @@ i {	color: #5cb85c }
 										th:selected="${employee.duty == duty}"></option>
 								</select>
 							</td>
-						</tr>
-						<tr>
-							<td class="text-right">职务时间</td>
+						
+							<td class="text-right active">职务时间</td>
 							<td><input name="dutyTime" class="form-control" type="text" id="dutyTime"
 								th:value="${#dates.format(employee.dutyTime,'yyyy-MM-dd')}">
 							</td>
 						</tr>
 						<tr>
-							<td class="text-right">职级</td>
+							<td class="text-right active">职级</td>
 							<td>
 								<select name="rank" class="form-control" th:value="${employee.rank}">
 									<option value="" th:selected="${employee.rank==null}">请选择职级</option>
@@ -189,14 +161,13 @@ i {	color: #5cb85c }
 										th:selected="${employee.rank.id}==${rank.id}"></option>
 								</select>
 							</td>
-						</tr>
-						<tr>
-							<td class="text-right">职级时间</td>
+						
+							<td class="text-right active">职级时间</td>
 							<td><input name="rankTime" class="form-control" type="text" id="rankTime"
 								th:value="${#dates.format(employee.rankTime,'yyyy-MM-dd')}"></td>
 						</tr>
 						<tr>
-							<td class="text-right">全日制学历</td>
+							<td class="text-right active">全日制学历</td>
 							<td>
 								<select name="fullTimeEdu" class="form-control" th:value="${employee.fullTimeEdu}">
 									<option value="">请选择全日制学历</option>
@@ -205,9 +176,8 @@ i {	color: #5cb85c }
 										th:selected="${employee.fullTimeEdu == fullTimeEdu}"></option>
 								</select>
 							</td>
-						</tr>
-						<tr>
-							<td class="text-right">在职学历</td>
+						
+							<td class="text-right active">在职学历</td>
 							<td>
 								<select name="inServiceEdu" class="form-control" th:value="${employee.inServiceEdu}">
 									<option value="">请选择在职学历</option>
@@ -217,20 +187,18 @@ i {	color: #5cb85c }
 								</select>
 							</td>
 						</tr>
-						<tr>
-							<td class="text-right">创建时间</td>
-							<td><input name="createTime" type="text" class="form-control" th:value="${#dates.format(employee.createTime,'yyyy-MM-dd')}" readonly="readonly"></td>
-						</tr>
-						<tr>
-							<td colspan="2" class="text-center"><input type="submit" value="提交" class="btn btn-success" disabled="disabled"></td>
-						</tr>
 					</table>
 				</form>
-				<br>
-				<form class="form-part" th:action="@{/personel/employees/experience/mod}" method="post">
-					<table class="table  table-condensed">
+			</div><!-- end of col-md-10 -->
+			<br>		 
+		</div><!-- row -->
+		
+		<br>
+		<div class="row">
+				<form th:action="@{/personel/employees/experience/mod}" method="post">
+					<table class="table table-bordered">
 						<caption th:value="#{msg.user.experience}">工作经历(不超过10条)</caption>
-						<tr id="title">
+						<tr id="title" class="active">
 							<td>开始时间</td><td>结束时间</td><td>工作内容</td><td>备注</td>
 						</tr>
 						<tr th:each="experience,iterState:${experiences}" th:id="|experience_${iterState.index}|">
@@ -252,9 +220,8 @@ i {	color: #5cb85c }
 					</table>
 				</form>	
 			</div>
-
-		</div>
-		<!-- row -->
+				
+		
 	</div>
 	<!-- container-fluid -->
 	

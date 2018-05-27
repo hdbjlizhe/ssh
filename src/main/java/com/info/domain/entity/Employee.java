@@ -1,5 +1,7 @@
 package com.info.domain.entity;
 
+import static org.hamcrest.CoreMatchers.instanceOf;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -248,5 +250,15 @@ public class Employee implements Serializable{
 				+ fullTimeEdu + ", inServiceEdu=" + inServiceEdu + ", createTime=" + createTime + "]";
 	}
 	
-
+	@Override
+	public boolean equals(Object obj) {
+		if(obj instanceof Employee) {
+			Employee employee=(Employee)obj;
+			if(this.getId().equals(employee.getId()))
+				return true;
+			else
+				return false;
+		}else
+			return false;
+	}
 }

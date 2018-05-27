@@ -25,4 +25,6 @@ public interface IEvaluationEmployeeService {
 
 	Optional<EvaluationEmployee> getEvaluationEmployeeById(Long id);
 
+	boolean hasRecordBySeasonAndFromwhom(String season,Employee employee);
+
 }

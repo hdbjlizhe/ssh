@@ -18,14 +18,17 @@
 
 	<div th:include="fregment/header::body"></div>
 	
-	<!-- 导航 -->
+	<div class="container">
+		<!-- 导航 -->
 		<ol class="breadcrumb">
-			<li class="active"><b>当前所在位置：</b></li>
+			<li class="active"><b>当前所在位置：</b></li>		
 		    <li><a th:href="@{/index}">主页</a></li>
+		    <li><a th:href="@{/user/details}">用户信息</a></li>
 		    <li><a>修改密码</a></li>
 		</ol>
-
-	<div class="container" style="margin-top: 100px; margin-bottom: 100px">
+	
+		<!-- 修改密码Form -->
+		<div class="row" style="margin-top:100px;margin-bottom:100px;">
 		<form
 			class="col-sm-offset-4 col-sm-4 col-sm-offset-4 form form-horizontal"
 			th:action="@{/user/pwd/mod}" method="post">
@@ -35,21 +38,21 @@
 			<div class="form-group">
 				<label class="col-sm-3 control-label">原密码：</label>
 				<div class="col-sm-9">
-					<input class="form-control" type="text" name="oldpwd">
+					<input class="form-control" type="password" name="oldpwd">
 				</div>
 			</div>
 
 			<div class="form-group">
 				<label class="col-sm-3 control-label">新密码：</label>
 				<div class="col-sm-9">
-					<input class="form-control" type="text" name="newpwd">
+					<input class="form-control" type="password" name="newpwd">
 				</div>
 			</div>
 
 			<div class="form-group">
 				<label class="col-sm-3 control-label">新密码：</label>
 				<div class="col-sm-9">
-					<input class="form-control" type="text" name="newpwdcheck">
+					<input class="form-control" type="password" name="newpwdcheck">
 				</div>
 			</div>
 
@@ -57,6 +60,7 @@
 				<input class="btn btn-success" type="submit" value="提交修改">
 			</div>
 		</form>
+		</div><!-- end of row -->
 	</div>
 
 	<div th:include="fregment/footer::body"></div>

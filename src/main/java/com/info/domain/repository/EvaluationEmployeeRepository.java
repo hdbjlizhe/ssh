@@ -13,6 +13,9 @@ import java.util.List;
 import java.util.Optional;
 
 public interface EvaluationEmployeeRepository extends JpaRepository<EvaluationEmployee, Long> {
+	
+	@Query("FROM EvaluationEmployee e WHERE e.season=:season AND e.fromWhom=:employee")
+	List<EvaluationEmployee> findBySeasonAndFromwhom(@Param("season") String season,@Param("employee") Employee employee);
 
 	@Query("FROM EvaluationEmployee e WHERE e.season=:season AND e.fromWhom=:fromWhom AND e.toWhom=:toWhom")
 	Optional<EvaluationEmployee> findBySeasonFromTo(

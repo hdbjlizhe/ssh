@@ -42,6 +42,7 @@ import com.info.utils.DateAndTimeUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -90,7 +91,7 @@ public class PersonelController {
 	/***********************************************************************************************
 	 * 
 	 ************************************************************************************************/
-	
+
 	/**
 	 * 互评填报的页面
 	 * @param model
@@ -114,8 +115,12 @@ public class PersonelController {
 		model.addAttribute("season",season);
 		model.addAttribute("evaluationEmployees", evaluationEmployees);
 		model.addAttribute("message","");
+		model.addAttribute("isFilled",false);
 		return "personel/evaluation-fill";
 	}
+	
+	@Value("${message.evaluation.update}")
+	private String evaluationUpdate; 
 	
 	/**
 	 * 	此函数为Ajax函数
@@ -131,6 +136,9 @@ public class PersonelController {
 		}
 		//获取登录用户
 		Employee employee=employeeService.getLoginEmployee(request);
+		//判断登录用户是否提交过数据，如果提交过，不可再提交，如果没提交，可提交
+		if(!Boolean.parseBoolean(evaluationUpdate) && evaluationEmployeeService.hasRecordBySeasonAndFromwhom(evaluationEmployees.getEvaluationEmployees().get(0).getSeason(),employee))
+			return "personel/evaluation-fill-error";
 		//数据存储
 		for(EvaluationEmployee evaluationEmployee:evaluationEmployees.getEvaluationEmployees()) {
 			evaluationEmployee.setFromWhom(employee);
